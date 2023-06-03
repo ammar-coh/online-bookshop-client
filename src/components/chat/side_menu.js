@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { socket } from "../../socket";
 import { chatFromDBSaga } from "../../redux/actions/index";
 import Button from "@material-ui/core/Button";
-
+import { clearChat } from "../../redux/actions/index"; //"../src/redux/actions/index";
 import {
   deepOrange,
   deepPurple,
@@ -146,13 +146,14 @@ function ChatSideMenu({
       participant: user.user.id,
       receiver: data.id,
     };
+    dispatch(clearChat())
     setRoomID(room_id);
     setIsActive(data.index);
     setCurrentChat(data.displayName);
     dispatch(chatFromDBSaga(dataObjectForFetchChatAPI));
     setRecepientId(data?.id);
   };
-
+// console.log("Side_menu rooomID check", roomID)
   return (
     <div className={classes.root}>
       <div className={classes.userInfo}>

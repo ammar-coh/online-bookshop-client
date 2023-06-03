@@ -95,6 +95,7 @@ function Chatroom() {
       setList(allUserList);
     });
   };
+  // console.log("rom", roomID)
   useEffect(() => {
     localStorage.getItem("authorization") && allUsers();
   }, []);

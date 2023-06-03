@@ -1,20 +1,36 @@
-const initialState = [];
+
+const initialState = {
+  roomID: null,
+  messages: []
+};
 
 export const chat = (state = initialState, actions) => {
   switch (actions.type) {
-   
+
     case "receive":
-      console.log("cjhed", actions.type)
-      state = [...state, actions.data];
+      console.log("cjhed", actions.data)
+      state = {
+        roomID: actions.data.roomID,
+        messages: actions.data.messages
+      }
+
+      // state = [...state, actions.data];
       return state;
 
     case "chat from DB":
-      state = [...state, actions.data];
-      state = actions.data.data.messages;
+      console.log("chat from DB Reducer", actions.data.data)
+      state = {
+        roomID: actions.data.data.roomID,
+        messages: actions.data.data.messages
+      }
+      // actions.data.data.messages;
       return state;
 
     case "clearChatRoom":
-      state = [];
+      state = {
+        roomID: null,
+        messages: []
+      };
       return state;
 
     default:
