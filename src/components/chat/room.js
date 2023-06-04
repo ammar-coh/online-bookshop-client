@@ -2,6 +2,9 @@ import React, { useRef, useEffect, createRef } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+
+// import Context from "../../context";
+
 const useStyles = makeStyles((theme) => ({
   root: { display: "grid" },
   sender: {
@@ -38,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const showMessages = () => {};
+const showMessages = () => { };
 
 function ChatConversation({ roomID }) {
   const classes = useStyles();
@@ -46,31 +49,33 @@ function ChatConversation({ roomID }) {
   const messages = useSelector((state) => state.chat);
   const [roomIDMatch, setRoomIDMatch] = useState(false);
   const chatContainerRef = useRef(null);
+  const [display_messages , setDisplayMessages] = useState([])
+  // const { roomID } = useContext(Context);
   // const messagesRef = createRef(<HTMLDivElement></HTMLDivElement>);
-  const scrollToBottom = () => {
-    chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-  };
+  // const scrollToBottom = () => {
+  //   chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+  // };
+  // useEffect(() => {
+  //   scrollToBottom();
+  // }, [messages,roomID]);
+  // console.log('messages', messages.messages)
+  // console.log("roomID in chat room ", roomID,)
+  // console.log("display_message",display_messages)
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-console.log('messages', messages)
+    if (messages.roomID == roomID) {
+      setDisplayMessages(messages.messages)
+      setRoomIDMatch(true)
+    } else {
+      setRoomIDMatch(true)
+    }
+  }, [messages, roomID]);
 
-  // useEffect(() => {
-  //   if(!!messages?.length){
-  //     if (!!chatContainerRef?.current?.scrollIntoView)
-  //       chatContainerRef.current.scrollIntoView({ behavior: "smooth" });
-  //   }
-  // }, [messages]);
-  // useEffect(() => {
-  //   // Accessing the DOM node using the ref
-  //   if (!!messagesRef?.current?.scrollIntoView) {
-  //     messagesRef.current.scrollIntoView({ behavior: "smooth" });
-  //   } // console.log(messagesDiv);
-  // }, [messages]);
   return (
+    // <div></div>
     <div className={classes.root} ref={chatContainerRef}>
-      {messages.map((i) =>
-        messages.length != 0 && user?.user?.displayName == i.author ? (
+      {roomIDMatch ?
+       display_messages.map((i) =>
+        display_messages.length != 0 && user?.user?.displayName == i.author ? (
           <div className={classes.sender}>
             <div className={classes.senderText}>{i.message}</div>
           </div>
@@ -82,7 +87,7 @@ console.log('messages', messages)
             </div>
           </div>
         )
-      )}
+      ) : null}
       {/* <div  /> */}
     </div>
   );

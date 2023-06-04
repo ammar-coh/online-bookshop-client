@@ -25,6 +25,7 @@ function App() {
   const counts = useSelector((state) => state.checkout);
   const uname = useSelector((state) => state.user_login.details);
   const user = useSelector((state) => state.user_login.details);
+  // console.log("socked id app js " , socket.id)
   useEffect(() => {
     user?.user ? setUserAvailable(true) : setUserAvailable(false);
   }, [user?.user]);
@@ -49,11 +50,16 @@ function App() {
     setIsOpen(!isOpen);
   };
   useEffect(() => {
+    socket.emit('setUserId', {userId:uname?.user?.id});
+
+  }, []);
+  useEffect(() => {
     socket.on("notification_message", async (data) => {
-      console.log("notification messge received", data);
+      // console.log("notification messge received", data);
       // await dispatch(notification(data));
     });
-  }, []);
+  }, [uname]);
+
   return (
     <div className="app">
       {

@@ -67,9 +67,9 @@ const ChatTypingArea = ({
     }
   };
   const notifiactions = async (data) => {
-    console.log("norification funct", data);
+    // console.log("norification funct", data);
     if (data.recepient_status == false) {
-      console.log("notifications ready", data.recepient_status);
+      // console.log("notifications ready", data.recepient_status);
       socket.emit("notification_channel", {
         message: data,
         userID:  user?.user?.id,
@@ -82,8 +82,7 @@ const ChatTypingArea = ({
 
   useEffect(() => {
     socket.on("receive_message", async (data) => {
-      console.log("receiver message side", data);
-      setReceiveMessage((prevMessages) => [...prevMessages, data.message]);
+      // console.log("receiver message side", data);
       await dispatch(chat(data));
       await setRecepientStatus(data.recepient_status);
       await notifiactions(data);
@@ -92,8 +91,7 @@ const ChatTypingArea = ({
 
   useEffect(() => {
     socket.on("notification_message", async (data) => {
-      console.log("notification messge received", data);
-      // await dispatch(notification(data));
+      // console.log("notification messge received", data);
     });
   }, []);
 

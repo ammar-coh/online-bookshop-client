@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { getUser, getProductsToCartSaga } from "./redux/actions/index";
 import { makeStyles } from "@material-ui/core/styles";
 import ItemContainer from "./ItemContainer";
@@ -10,6 +10,7 @@ import AddProduct from "./addProduct";
 import Chatroom from  "./components/chat/index"               
 import Del from "./Del";
 import Chat from "./chat";
+import Context from "./context";
 
 const useStyles = makeStyles({
   root: {
@@ -22,6 +23,22 @@ const useStyles = makeStyles({
 });
 
 function Product({ setUserAvailable, socket }) {
+  const {
+    roomID,
+    setRoomID,
+    currentChat,
+    setCurrentChat,
+    isActive,
+    setIsActive,
+    list,
+    setList,
+    recepient_id,
+    setRecepientId,
+    recepient_status,
+    setRecepientStatus,
+  } = useContext(Context);
+  // console.log("rom", roomID)
+
   const dispatch = useDispatch();
   const uname = useSelector((state) => state.user_login.details);
   useEffect(() => {
