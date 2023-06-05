@@ -1,10 +1,4 @@
 import { call, put, delay } from "redux-saga/effects";
-import {
-  requestDestroyProduct,
-  requestGetProduct,
-  requestUpdateProduct,
-  requestCreateProduct,
-} from "../requests/productDetails";
 import { chatFromDB } from "../../actions/index";
 import { requestGetRoomChat, requestCreateChatRoom } from "../requests/chat";
 
@@ -34,4 +28,3 @@ export function* handleGetChatFromDB(action) {
   }
 }
 
-//console.log(handleGetUser)

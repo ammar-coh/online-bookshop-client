@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useLocation } from "react-router-dom";
 import ChatSideMenu from "./side_menu";
@@ -74,7 +74,6 @@ const useStyles = makeStyles({
 });
 function Chatroom() {
   const classes = useStyles();
-  const location = useLocation();
   const {
     roomID,
     setRoomID,
@@ -88,6 +87,7 @@ function Chatroom() {
     setRecepientId,
     recepient_status,
     setRecepientStatus,
+    notification_open
   } = useContext(Context);
   const allUsers = () => {
     axios.get(`http://localhost:8081/users/userList`).then((response) => {
@@ -98,16 +98,9 @@ function Chatroom() {
   // console.log("rom", roomID)
   useEffect(() => {
     localStorage.getItem("authorization") && allUsers();
-  }, []);
-  const shouldHideScrollbar = location.pathname === "/chatroom";
+  }, [ notification_open]);
 
-  //   window.addEventListener("scroll", handleScroll);
 
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, []);
-  // console.log("handleScroll", isSticky);
   return (
     <div className={classes.root}>
       <div className={classes.list}>
@@ -124,7 +117,6 @@ function Chatroom() {
       <div className={classes.coversationContainer}>
         <div
           className={classes.receiverInfo}
-          // style={isSticky ? { position: "fixed", top: 0 } : {}}
         >
           {/* <Divider /> */}
           <ContactInfo currentChat={currentChat} />
