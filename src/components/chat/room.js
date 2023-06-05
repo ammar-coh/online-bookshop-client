@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 
-// import Context from "../../context";
 
 const useStyles = makeStyles((theme) => ({
   root: { display: "grid" },
@@ -41,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const showMessages = () => { };
 
 function ChatConversation({ roomID }) {
   const classes = useStyles();
@@ -50,17 +48,7 @@ function ChatConversation({ roomID }) {
   const [roomIDMatch, setRoomIDMatch] = useState(false);
   const chatContainerRef = useRef(null);
   const [display_messages , setDisplayMessages] = useState([])
-  // const { roomID } = useContext(Context);
-  // const messagesRef = createRef(<HTMLDivElement></HTMLDivElement>);
-  // const scrollToBottom = () => {
-  //   chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-  // };
-  // useEffect(() => {
-  //   scrollToBottom();
-  // }, [messages,roomID]);
-  // console.log('messages', messages.messages)
-  // console.log("roomID in chat room ", roomID,)
-  // console.log("display_message",display_messages)
+ 
   useEffect(() => {
     if (messages.roomID == roomID) {
       setDisplayMessages(messages.messages)
@@ -71,7 +59,6 @@ function ChatConversation({ roomID }) {
   }, [messages, roomID]);
 
   return (
-    // <div></div>
     <div className={classes.root} ref={chatContainerRef}>
       {roomIDMatch ?
        display_messages.map((i) =>
@@ -88,7 +75,6 @@ function ChatConversation({ roomID }) {
           </div>
         )
       ) : null}
-      {/* <div  /> */}
     </div>
   );
 }

@@ -36,7 +36,6 @@ export function* addProductsToCart(action) {
 }
 
 export function* deleteProductsFromCart(action) {
-  //const [data]= action
   try {
     const response = yield call(requestDeleteProductsFromCart, action.data);
     const { data } = response;

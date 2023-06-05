@@ -48,7 +48,6 @@ const ChatTypingArea = ({
   const user = useSelector((state) => state.user_login.details);
   const messages = useSelector((state) => state.chat);
   //   console.log('messages', messages)
-  console.log("recipient notifiactions", recepient_status);
   const sendMessage = async () => {
     if (message !== "") {
       const messageData = {
@@ -56,6 +55,7 @@ const ChatTypingArea = ({
         author: user?.user?.displayName,
         message: message,
         author_id: user?.user?.id,
+        displayName: user?.user?.displayName,
         recepient_id: recepient_id,
         recepient_status: true,
         time:
@@ -64,16 +64,23 @@ const ChatTypingArea = ({
           new Date(Date.now()).getMinutes(),
       };
       await socket.emit("send_message", messageData);
+
     }
+
   };
+  const clearInput = () => {
+    console.log("clear input")
+    setMessage("")
+  }
+
   const notifiactions = async (data) => {
-    // console.log("norification funct", data);
-    if (data.recepient_status == false) {
+    if (data.receipent_status
+      .recepient_status == false) {
       // console.log("notifications ready", data.recepient_status);
       socket.emit("notification_channel", {
-        message: data,
-        userID:  user?.user?.id,
-        participant : data.recepient_id,
+        message: data.receipent_status,
+        userID: data?.receipent_status?.author_id,
+        participant: data?.receipent_status?.recepient_id,
       });
     } else {
       console.log("notification not sending");
@@ -82,22 +89,18 @@ const ChatTypingArea = ({
 
   useEffect(() => {
     socket.on("receive_message", async (data) => {
-      // console.log("receiver message side", data);
       await dispatch(chat(data));
-      await setRecepientStatus(data.recepient_status);
+      await setRecepientStatus(data?.recepient_status?.receipent_status);
       await notifiactions(data);
     });
   }, []);
 
-  useEffect(() => {
-    socket.on("notification_message", async (data) => {
-      // console.log("notification messge received", data);
-    });
-  }, []);
+
 
   return (
     <div className={classes.typingArea}>
       <TextField
+      value={message}
         className={classes.inputField}
         variant="outlined"
         placeholder="Type a message..."
@@ -108,7 +111,10 @@ const ChatTypingArea = ({
       <Button
         className={classes.sendButton}
         variant="contained"
-        onClick={sendMessage}
+        onClick={() => {
+          sendMessage()
+          clearInput()
+        }}
       >
         <SendIcon />
       </Button>

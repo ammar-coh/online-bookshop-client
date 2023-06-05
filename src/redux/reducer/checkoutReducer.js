@@ -20,15 +20,12 @@ export const checkoutreducer = (state = initialState, actions) => {
       }
       return state;
     case "addToCartReducer":
-      //console.warn('reducer',actions)
       let updated;
       state = actions.data.data;
       return state;
 
-    //console.log("last reducer cart",state)
 
     case "removeFromCartReducer":
-      // var index= state.indexOf(actions.data.delete)
       state = actions.data;
       return state;
 

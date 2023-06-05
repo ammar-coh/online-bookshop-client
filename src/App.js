@@ -14,51 +14,63 @@ import ProtectedAllRoute from "./routes/protected";
 import ScrollToTop from "./scrollToTop";
 import { socket } from "./socket";
 import { Provider } from "./context";
-
-// import { FaWindows } from 'react-icons/fa';
+import { notification_real_time } from './redux/actions/index'
+import { delete_notification } from './redux/actions/index'
 
 function App() {
   const dispatch = useDispatch();
-  const [isConnected, setIsConnected] = useState(socket.connected);
-  const [fooEvents, setFooEvents] = useState([]);
   const [userAvailble, setUserAvailable] = useState(false);
-  const counts = useSelector((state) => state.checkout);
   const uname = useSelector((state) => state.user_login.details);
   const user = useSelector((state) => state.user_login.details);
-  // console.log("socked id app js " , socket.id)
+  const messages = useSelector((state) => state.chat);
+
   useEffect(() => {
     user?.user ? setUserAvailable(true) : setUserAvailable(false);
   }, [user?.user]);
 
+  //
   useEffect(() => {
     localStorage.getItem("authorization") && dispatch(getUser());
   }, [uname?.user?.displayName]);
 
+  //
   useEffect(() => {
     localStorage.getItem("authorization") &&
       dispatch(
         sign_in_reducer(JSON.parse(localStorage.getItem("for_reducer")))
       );
   }, []);
+
+  //
+  useEffect(async () => {
+    let user_id = await JSON.parse(localStorage.getItem("for_reducer"))
+    socket.on('connect', () => {
+    });
+    socket.emit('setUserId', { userId: await user_id?.user?.id });
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+  //
   useEffect(() => {
     localStorage.getItem("authorization") && dispatch(getProductsToCartSaga());
   }, [uname?.user?.displayName]);
 
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleChat = () => {
-    setIsOpen(!isOpen);
-  };
-  useEffect(() => {
-    socket.emit('setUserId', {userId:uname?.user?.id});
-
-  }, []);
+  //
   useEffect(() => {
     socket.on("notification_message", async (data) => {
-      // console.log("notification messge received", data);
-      // await dispatch(notification(data));
+      await dispatch(notification_real_time(data))
     });
-  }, [uname]);
+  }, [uname, messages.messages]);
+
+  //
+  useEffect(() => {
+    socket.on("notification_delete", async (data) => {
+
+      await dispatch(delete_notification(data))
+    });
+  }, [uname, messages.messages]);
 
   return (
     <div className="app">

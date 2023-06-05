@@ -119,7 +119,6 @@ function ChatSideMenu({
   };
 
   const joinChatRoom = async (data) => {
-    console.log("contact from side menu ", data);
     let id = [data.displayName, user.user.displayName];
     let sortedID = id.sort();
     const firstID = await list?.userList.filter(function (i) {
@@ -152,8 +151,11 @@ function ChatSideMenu({
     setCurrentChat(data.displayName);
     dispatch(chatFromDBSaga(dataObjectForFetchChatAPI));
     setRecepientId(data?.id);
+    await socket.emit("delete_notification_message", {
+      userID: user?.user?.id,
+      sender_id:  data?.id
+    });
   };
-// console.log("Side_menu rooomID check", roomID)
   return (
     <div className={classes.root}>
       <div className={classes.userInfo}>

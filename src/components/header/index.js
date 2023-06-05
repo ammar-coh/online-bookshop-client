@@ -15,6 +15,7 @@ import { clearChat } from "../../redux/actions/index"; //"../src/redux/actions/i
 import Chat_Notifications from "./chat_notification";
 import Context from "../../context";
 import axios from "axios";
+import { socket } from "../../socket";
 
 const useStyles = makeStyles({
   root: {
@@ -77,7 +78,17 @@ function Header({ setUserAvailable }) {
     isActive,
     setIsActive,
     recepient_status,
+    notification_open,
+    setNotificationOpen
   } = useContext(Context);
+  const leaveAllRooms = async (data) => {
+    await socket.emit("leave_private_room", {
+      roomID: data.roomID,
+      userID: data.userID,
+    });
+    setRoomID(null)
+
+  }
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.pageYOffset > 0);
@@ -98,7 +109,7 @@ function Header({ setUserAvailable }) {
   };
   useEffect(() => {
     localStorage.getItem("authorization") && allUsers();
-  }, []);
+  }, [notification_open]);
   return (
     <div
       className={classes.root}
@@ -111,6 +122,7 @@ function Header({ setUserAvailable }) {
             dispatch(clearChat());
             setIsActive(false);
             setCurrentChat("");
+            leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
           }}
         >
           <Link className={classes.home_link} to="/">
@@ -133,6 +145,7 @@ function Header({ setUserAvailable }) {
           setIsActive={setIsActive}
           list={list}
           recepient_status={recepient_status}
+          setNotificationOpen={setNotificationOpen}
         />
       </div>
 
@@ -148,6 +161,9 @@ function Header({ setUserAvailable }) {
               localStorage.removeItem("cart");
               localStorage.removeItem("for_reducer");
               dispatch(clearChat());
+              setIsActive(null)
+              dispatch(clearChat());
+              setCurrentChat("")
               history.push("/login_page");
             }}
           >
