@@ -79,14 +79,16 @@ function Header({ setUserAvailable }) {
     setIsActive,
     recepient_status,
     notification_open,
-    setNotificationOpen
+    setNotificationOpen,
+    setRecepientId
   } = useContext(Context);
   const leaveAllRooms = async (data) => {
+
     await socket.emit("leave_private_room", {
       roomID: data.roomID,
       userID: data.userID,
     });
-    setRoomID(null)
+   
 
   }
   useEffect(() => {
@@ -146,6 +148,7 @@ function Header({ setUserAvailable }) {
           list={list}
           recepient_status={recepient_status}
           setNotificationOpen={setNotificationOpen}
+          setRecepientId={ setRecepientId}
         />
       </div>
 
@@ -155,6 +158,7 @@ function Header({ setUserAvailable }) {
             className={classes.sign_out}
             size="small"
             onClick={() => {
+              leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
               dispatch(sign_in_reducer({}));
               dispatch(resetCart());
               localStorage.removeItem("authorization");

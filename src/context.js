@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const Context = React.createContext();
 export const Provider = ({ children }) => {
   // Define the state and its initial value
-  const [roomID, setRoomID] = useState(null);
+  const [roomID, setRoomID] = useState("");
   const [currentChat, setCurrentChat] = useState("");
   const [isActive, setIsActive] = useState(null);
   const [list, setList] = useState([]);

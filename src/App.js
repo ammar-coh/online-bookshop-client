@@ -14,7 +14,7 @@ import ProtectedAllRoute from "./routes/protected";
 import ScrollToTop from "./scrollToTop";
 import { socket } from "./socket";
 import { Provider } from "./context";
-import { notification_real_time } from './redux/actions/index'
+import { notification_real_time, get_my_notifications_saga } from './redux/actions/index'
 import { delete_notification } from './redux/actions/index'
 
 function App() {
@@ -62,15 +62,21 @@ function App() {
     socket.on("notification_message", async (data) => {
       await dispatch(notification_real_time(data))
     });
-  }, [uname, messages.messages]);
+  }, [uname,messages.messages]);
 
   //
   useEffect(() => {
     socket.on("notification_delete", async (data) => {
-
+console.log("notification_delete",data)
       await dispatch(delete_notification(data))
     });
-  }, [uname, messages.messages]);
+  }, []);
+
+  //
+  useEffect(async() => {
+    let id = JSON.parse(localStorage.getItem("for_reducer"))
+   dispatch(get_my_notifications_saga(id?.user?.id))
+  }, []);
 
   return (
     <div className="app">

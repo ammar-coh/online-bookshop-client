@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@material-ui/core/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { socket } from "../../socket";
-import {  useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { chatFromDBSaga } from "../../redux/actions/index";
 import {
   deepOrange,
@@ -44,7 +44,8 @@ function Chat_Notifications({
   setCurrentChat,
   setIsActive,
   list,
-  setNotificationOpen
+  setNotificationOpen,
+  setRecepientId
 }) {
   const classes = useStyles();
   const history = useHistory();
@@ -106,12 +107,13 @@ function Chat_Notifications({
       return i.displayName == sortedID[1];
     });
     let room_id = await firstID[0]?.id.concat(secondID[0]?.id);
-    if (roomID != null) {
-      await socket.emit("leave_private_room", { roomID: roomID, userID: user?.user?.id });
-    }
+
+    await socket.emit("leave_private_room", { roomID: roomID, userID: user?.user?.id });
+
 
     await socket.emit("private_room", {
       room_id: room_id,
+      userID: user?.user?.id,
       participant: data?.sender_id,
     });
     const dataObjectForFetchChatAPI = {
@@ -122,6 +124,7 @@ function Chat_Notifications({
     setIsActive(index);
     setCurrentChat(data.displayName);
     dispatch(chatFromDBSaga(dataObjectForFetchChatAPI));
+    setRecepientId(data?.sender_id)
     history.push("/chatroom");
     setShowUserNotifications(false);
     await socket.emit("delete_notification_message", {
@@ -177,7 +180,6 @@ function Chat_Notifications({
                       displayName: content.displayName,
                       index: index,
                       sender_id: content.author_id,
-
                     })
                     //function
                   }

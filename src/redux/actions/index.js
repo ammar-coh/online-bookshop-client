@@ -37,7 +37,12 @@ export const chatFromDB = (data) => {
         data: data
     };
 }
-
+export const get_my_notifications_saga = (data) => {
+    return {
+        type: 'get_my_notifications_saga',
+        data: data
+    };
+}
 export const notification_real_time = (data) => {
     return {
         type: 'notification_real_time',

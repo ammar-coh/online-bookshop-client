@@ -16,8 +16,13 @@ export const notification = (state = initialState, actions) => {
       return state;
 
     case "notificationDB":
-      state = [...state, actions.data];
-      state = actions.data.data.messages;
+      console.log("notification from get api", actions.data)
+      state = {
+        recipient_id: actions.data.recipient_id,
+        notifications: actions.data.notification.messages,
+        total_notifications: actions.data.notification.total
+      }
+
       return state;
     case "delete_notification":
       state = {
