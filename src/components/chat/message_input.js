@@ -43,11 +43,8 @@ const ChatTypingArea = ({
 }) => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
-  const [receiveMessage, setReceiveMessage] = useState([]);
   const classes = useStyles();
   const user = useSelector((state) => state.user_login.details);
-  const messages = useSelector((state) => state.chat);
-  //   console.log('messages', messages)
   const sendMessage = async () => {
     if (message !== "") {
       const messageData = {
@@ -69,7 +66,6 @@ const ChatTypingArea = ({
 
   };
   const clearInput = () => {
-    console.log("clear input")
     setMessage("")
   }
 
@@ -89,6 +85,7 @@ const ChatTypingArea = ({
 
   useEffect(() => {
     socket.on("receive_message", async (data) => {
+      console.log("receive_message",data )
       await dispatch(chat(data));
       await setRecepientStatus(data?.recepient_status?.receipent_status);
       await notifiactions(data);

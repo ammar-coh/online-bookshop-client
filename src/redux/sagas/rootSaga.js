@@ -3,6 +3,7 @@ import {handleGetUser,updateInfo,deleteInfo,addItemInfo} from './handlers/produc
 import {postSign_In,postSign_Up,getSign_In} from './handlers/user_login';
 import {addProductsToCart,getProductsToCartSaga,deleteProductsFromCart } from './handlers/user_cart';
 import {handleGetChatFromDB,handleCreateChatRoom} from './handlers/chatFromDB'
+import {handleGetMyNotifications} from './handlers/notfication'
 
 // import {getUser,updateUser} from '../actions/index';
 //import {updateUser} from '../actions/index'
@@ -21,6 +22,7 @@ import {handleGetChatFromDB,handleCreateChatRoom} from './handlers/chatFromDB'
    yield takeLatest('removeFromCartSaga',deleteProductsFromCart)
    yield takeLatest('chatFromDBSaga',handleGetChatFromDB)
    yield takeLatest('createChatRoom',handleCreateChatRoom)
+   yield takeLatest('get_my_notifications_saga', handleGetMyNotifications)
 
 }
 export  function* rootSaga() {
