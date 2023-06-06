@@ -145,6 +145,7 @@ function ChatSideMenu({
       participant: user.user.id,
       receiver: data.id,
     };
+    localStorage.setItem("roomID",room_id)
     dispatch(clearChat())
     setRoomID(room_id);
     setIsActive(data.index);

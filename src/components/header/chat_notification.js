@@ -24,7 +24,9 @@ import {
   brown,
 } from "@mui/material/colors";
 const useStyles = makeStyles({
-  root: {},
+  root: {
+    padding: "0px 15px",
+  },
   chatNotification: {},
   notificationMailIcon: { color: "white" },
   notification_badge: {},
@@ -53,7 +55,6 @@ function Chat_Notifications({
   const user = useSelector((state) => state.user_login.details);
   const dispatch = useDispatch();
   const my_notifications = useSelector((state) => state.notification)
-// console.log("my_notifications", my_notifications)
   const finalUpdatedArray = list?.userList?.filter(function (i) {
     return i.displayName !== user?.user?.displayName;
   });
@@ -120,6 +121,7 @@ function Chat_Notifications({
       roomID: room_id,
       participant: user?.user?.id,
     };
+    localStorage.setItem("roomID", room_id)
     setRoomID(room_id);
     setIsActive(index);
     setCurrentChat(data.displayName);
@@ -162,7 +164,7 @@ function Chat_Notifications({
           {" "}
           <Badge
             // className={classes.chatNotification}
-            badgeContent={my_notifications.recipient_id == user?.user?.id ? my_notifications.total_notifications : 10}
+            badgeContent={my_notifications.recipient_id == user?.user?.id ? my_notifications.total_notifications : 0}
             color="error"
           >
             <MailIcon className={classes.notificationMailIcon} />

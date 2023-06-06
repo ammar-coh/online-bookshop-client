@@ -12,10 +12,8 @@ const useStyles = makeStyles({
     justifyContent: "center",
     top: "0px",
     width: "100%",
-    padding: "10px",
+    padding: "0px 0px 19px 0px",
     border: "none",
-    // border:"1px solid white",
-
     "&:hover": {
       border: " none",
     },
@@ -26,7 +24,6 @@ const useStyles = makeStyles({
     marginLeft: "0px",
     marginTop: "10px",
 
-    // width: "100px",
   },
   count: {
     marginTop: "0px",

@@ -1,16 +1,8 @@
-import React from "react";
 import CheckoutContainer from "./CheckoutContainer";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Subtotal from "./Subtotal";
-import Changecontainer from "./Changecontainer";
-import {
-  getUser,
-  sign_in_reducer,
-  getProductsToCartSaga,
-  getSign_In,
-  sign_in_saga,
-} from "./redux/actions";
+import {socket} from './socket'
 
 const useStyles = makeStyles({
   main: {},
@@ -57,10 +49,9 @@ const useStyles = makeStyles({
 function Checkout() {
   const classes = useStyles();
   const counts = useSelector((state) => state.checkout);
-  console.log("almost there", counts);
-  const dispatch = useDispatch();
-  // let removeDuplicate = [...counts.products.reduce((map, obj)=> map.set(obj.id, obj), new Map()).values()]
-  // console.log("duplicate",removeDuplicate)
+
+
+
 
   return (
     <div className={classes.main}>

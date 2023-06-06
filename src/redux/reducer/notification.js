@@ -16,7 +16,6 @@ export const notification = (state = initialState, actions) => {
       return state;
 
     case "notificationDB":
-      console.log("notification from get api", actions.data)
       state = {
         recipient_id: actions.data.recipient_id,
         notifications: actions.data.notification.messages,
