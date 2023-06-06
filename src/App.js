@@ -2,7 +2,7 @@ import "./App.css";
 import Product from "./product";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import {
   getUser,
   sign_in_reducer,
@@ -78,7 +78,14 @@ function App() {
     localStorage.getItem("authorization") && dispatch(get_my_notifications_saga(id?.user?.id))
   }, [uname]);
 
- 
+
+  //
+  useEffect(() => {
+    let roomID = localStorage.getItem("roomID")
+    let userID = JSON.parse(localStorage.getItem("for_reducer"))
+    socket.emit("leave_private_room", { roomID, userID: userID?.user?.id });
+  }, []);
+
 
   return (
     <div className="app">

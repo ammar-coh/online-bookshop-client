@@ -4,11 +4,9 @@ import { requestGetMyNotifications } from "../requests/notification";
 
 
 export function* handleGetMyNotifications(action) {
-    console.log("getting my notifications from database", action.data )
     try {
         const response = yield call(requestGetMyNotifications, action.data);
         const { data } = response;
-        console.log("response_my_notification", data)
         if (data.status == true) {
             yield put( notificationDB(data.data));
         }

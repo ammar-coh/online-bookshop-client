@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
-import { Route, Link, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Cart from "./Cart";
 import Sign_in from "./sign_in";
@@ -42,14 +42,20 @@ const useStyles = makeStyles({
     margin: "auto",
   },
   chatNotificationContainer: {
-    padding: "13px",
-    // border: "1px solid white",
+    display: "flex",
+    padding: "14px 0px 13px 0px",
+    width: "100%",
+    justifyContent: "center"
   },
-  // chatNotification:{color:"red"},
   notificationMailIcon: { color: "white" },
+  sign_in_container: {
+    width: "100%",
+    display:"flex",
+    justifyContent:"center"
 
+  },
   signOutButtonContainer: {
-    justifyContent: "center",
+    justifyContent: "flex-start",
     width: "100%",
     padding: "20px",
     display: "flex",
@@ -57,9 +63,15 @@ const useStyles = makeStyles({
   homeIconMainContainer: {
     width: "100%",
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-end",
     padding: "20px",
   },
+  cart_icon: {
+    display: "flex",
+    justifyContent: "center",
+    width: "100%"
+  },
+
 });
 
 function Header({ setUserAvailable }) {
@@ -134,8 +146,21 @@ function Header({ setUserAvailable }) {
           </Link>
         </Button>
       </div>
-      <Sign_in />
-      <Cart />
+      <div className={classes.sign_in_container}>
+        <Sign_in />
+      </div>
+      <div className={classes.cart_icon}>
+        <Button
+          onClick={() => {
+            dispatch(clearChat());
+            setIsActive(false);
+            setCurrentChat("");
+            leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
+          }}>
+          <Cart />
+        </Button>
+      </div>
+
       <div className={classes.chatNotificationContainer}>
         <Chat_Notifications
           roomID={roomID}
@@ -163,6 +188,7 @@ function Header({ setUserAvailable }) {
               localStorage.removeItem("authorization");
               localStorage.removeItem("cart");
               localStorage.removeItem("for_reducer");
+              localStorage.removeItem("roomID")
               dispatch(clearChat());
               setIsActive(null)
               dispatch(clearChat());

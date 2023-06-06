@@ -38,9 +38,7 @@ function Product({ setUserAvailable, socket }) {
   useEffect(() => {
     localStorage.getItem("authorization") && dispatch(getUser());
   }, []);
-  useEffect(async () => {
-    socket.emit('disconnect',{roomID});
-  }, []);
+ 
   return (
     <div>
       <Header setUserAvailable={setUserAvailable} />
