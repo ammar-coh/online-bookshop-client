@@ -2,7 +2,7 @@ import "./App.css";
 import Product from "./product";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import {
   getUser,
   sign_in_reducer,
@@ -60,23 +60,25 @@ function App() {
   //
   useEffect(() => {
     socket.on("notification_message", async (data) => {
-      await dispatch(notification_real_time(data))
+      dispatch(notification_real_time(data))
     });
-  }, [uname,messages.messages]);
+  }, [uname, messages?.messages]);
 
   //
   useEffect(() => {
     socket.on("notification_delete", async (data) => {
-console.log("notification_delete",data)
-      await dispatch(delete_notification(data))
+      console.log("notification_delete", data)
+      dispatch(delete_notification(data))
     });
   }, []);
 
   //
-  useEffect(async() => {
+  useEffect(async () => {
     let id = JSON.parse(localStorage.getItem("for_reducer"))
-   dispatch(get_my_notifications_saga(id?.user?.id))
-  }, []);
+    localStorage.getItem("authorization") && dispatch(get_my_notifications_saga(id?.user?.id))
+  }, [uname]);
+
+ 
 
   return (
     <div className="app">

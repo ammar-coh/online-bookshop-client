@@ -11,7 +11,7 @@ import Chatroom from  "./components/chat/index"
 import Del from "./Del";
 import Chat from "./chat";
 import Context from "./context";
-
+import {socket} from './socket'
 const useStyles = makeStyles({
   root: {
     display: "flex",
@@ -23,20 +23,7 @@ const useStyles = makeStyles({
 });
 
 function Product({ setUserAvailable, socket }) {
-  const {
-    roomID,
-    setRoomID,
-    currentChat,
-    setCurrentChat,
-    isActive,
-    setIsActive,
-    list,
-    setList,
-    recepient_id,
-    setRecepientId,
-    recepient_status,
-    setRecepientStatus,
-  } = useContext(Context);
+  const {roomID} = useContext(Context);
   // console.log("rom", roomID)
 
   const dispatch = useDispatch();
@@ -51,7 +38,9 @@ function Product({ setUserAvailable, socket }) {
   useEffect(() => {
     localStorage.getItem("authorization") && dispatch(getUser());
   }, []);
-
+  useEffect(async () => {
+    socket.emit('disconnect',{roomID});
+  }, []);
   return (
     <div>
       <Header setUserAvailable={setUserAvailable} />

@@ -7,7 +7,6 @@ import Cart from "./Cart";
 import Sign_in from "./sign_in";
 import {
   sign_in_reducer,
-  addToCartReducer,
   resetCart,
 } from "../../redux/actions";
 import { AiOutlineHome } from "react-icons/ai";
@@ -88,7 +87,7 @@ function Header({ setUserAvailable }) {
       roomID: data.roomID,
       userID: data.userID,
     });
-   
+
 
   }
   useEffect(() => {
@@ -148,7 +147,7 @@ function Header({ setUserAvailable }) {
           list={list}
           recepient_status={recepient_status}
           setNotificationOpen={setNotificationOpen}
-          setRecepientId={ setRecepientId}
+          setRecepientId={setRecepientId}
         />
       </div>
 
