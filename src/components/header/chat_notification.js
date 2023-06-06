@@ -53,7 +53,7 @@ function Chat_Notifications({
   const user = useSelector((state) => state.user_login.details);
   const dispatch = useDispatch();
   const my_notifications = useSelector((state) => state.notification)
-
+// console.log("my_notifications", my_notifications)
   const finalUpdatedArray = list?.userList?.filter(function (i) {
     return i.displayName !== user?.user?.displayName;
   });
@@ -162,7 +162,7 @@ function Chat_Notifications({
           {" "}
           <Badge
             // className={classes.chatNotification}
-            badgeContent={my_notifications.recipient_id == user?.user?.id ? my_notifications.total_notifications : 0}
+            badgeContent={my_notifications.recipient_id == user?.user?.id ? my_notifications.total_notifications : 10}
             color="error"
           >
             <MailIcon className={classes.notificationMailIcon} />
