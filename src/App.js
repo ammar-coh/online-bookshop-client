@@ -8,14 +8,17 @@ import {
   sign_in_reducer,
   getProductsToCartSaga,
 } from "./redux/actions";
-import Login_page from "./login_page";
-import Sign_up from "./sign_up";
+import Login_page from "./components/login/index";
+import Sign_up from "./components/register/index";
 import ProtectedAllRoute from "./routes/protected";
 import ScrollToTop from "./scrollToTop";
 import { socket } from "./socket";
 import { Provider } from "./context";
 import { notification_real_time, get_my_notifications_saga } from './redux/actions/index'
 import { delete_notification } from './redux/actions/index'
+
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -95,7 +98,6 @@ function App() {
             <Switch>
               <Route path="/login_page" exact component={Login_page} />
               <Route path="/sign_up" exact component={Sign_up} />
-
               {user.user && (
                 <ProtectedAllRoute
                   user={user}

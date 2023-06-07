@@ -74,7 +74,7 @@ const useStyles = makeStyles({
 
 });
 
-function Header({ setUserAvailable }) {
+function Header() {
   const classes = useStyles();
   const [list, setList] = useState([]);
   const dispatch = useDispatch();

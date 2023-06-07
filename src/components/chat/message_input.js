@@ -72,7 +72,6 @@ const ChatTypingArea = ({
   const notifiactions = async (data) => {
     if (data.receipent_status
       .recepient_status == false) {
-      // console.log("notifications ready", data.recepient_status);
       socket.emit("notification_channel", {
         message: data.receipent_status,
         userID: data?.receipent_status?.author_id,
@@ -85,7 +84,6 @@ const ChatTypingArea = ({
 
   useEffect(() => {
     socket.on("receive_message", async (data) => {
-      console.log("receive_message",data )
       await dispatch(chat(data));
       await setRecepientStatus(data?.recepient_status?.receipent_status);
       await notifiactions(data);
