@@ -1,16 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@mui/material/Avatar";
-import { useSelector} from "react-redux";
-import {
-  deepOrange,
-  deepPurple,
-  green,
-  blue,
-  red,
-  yellow,
-  brown,
-} from "@mui/material/colors";
+import { useSelector } from "react-redux";
+import Context from "../../context";
+
 const useStyles = makeStyles({
   root: {
     display: "grid",
@@ -19,27 +12,40 @@ const useStyles = makeStyles({
   },
 
   userInfo: {
-    // border: "1px solid purple",
     zIndex: 1,
     display: "flex",
     padding: "10px",
     gap: "15px",
   },
   userAvatar: {
-    // border: "2px solid orange ",
     zIndex: 1,
+    "& .css-1tluy43-MuiAvatar-root": {
+      color: "#ffffff",
+      backgroundColor: "#333533",
+    }
   },
   userName: {
-    // border: "2px solid black",
     width: "100%",
-    color: "#1e88e5",
-    fontWeight: "bold",
+    color: "#ffffff",
+    fontFamily: "Montserrat, sans-se",
+    fonySize: "16px",
     zIndex: 1,
   },
+  welcomeMessage: {
+    display: "flex",
+    justifyContent: "center",
+    padding:" 0px 10px 25px 10px",
+  },
+  welcomeMessageText: {
+    fontFamily: "Montserrat, sans-se",
+    fontSize: "20px",
+    color:"#ffffff"
+ }
 });
 function ContactInfo({ currentChat }) {
   const classes = useStyles();
   const user = useSelector((state) => state.user_login.details);
+  const { isActive } = useContext(Context);
 
   const userName = () => {
     let userNameStr = currentChat;
@@ -50,41 +56,10 @@ function ContactInfo({ currentChat }) {
     let userNameStr2 = arr.join(" ");
     return userNameStr2;
   };
-  const assignColor = () => {
-    let number = Math.floor(Math.random() * 9);
-    switch (number) {
-      case 0:
-        return deepOrange;
-        break;
-      case 1:
-        return deepPurple;
-        break;
-      case 2:
-        return red;
-        break;
-      case 3:
-        return brown;
-        break;
-      case 4:
-        return yellow;
-        break;
-      case 5:
-        return green;
-        break;
-      case 6:
-        return blue;
-        break;
-      case 7:
-        return red;
-        break;
 
-      default:
-        return "none";
-    }
-  };
   return (
     <div className={classes.root}>
-      <div className={classes.userInfo}>
+      {isActive != null ? <div className={classes.userInfo}>
         <div className={classes.userAvatar}>
           {" "}
           <Avatar sx={{ bgcolor: "#bdbdbd" }}>
@@ -96,7 +71,12 @@ function ContactInfo({ currentChat }) {
         ) : (
           <div>N/A</div>
         )}
-      </div>
+      </div> :
+        <div className={classes.welcomeMessage}>
+          <span className={classes.welcomeMessageText}>Welcome to Book Club!
+          </span>
+        </div>}
+
     </div>
   );
 }

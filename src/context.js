@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-
-// Create a new context
 const Context = React.createContext();
 export const Provider = ({ children }) => {
-  // Define the state and its initial value
   const [roomID, setRoomID] = useState("");
   const [currentChat, setCurrentChat] = useState("");
   const [isActive, setIsActive] = useState(null);
@@ -32,5 +29,4 @@ const[notification_open, setNotificationOpen] = useState(false)
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
-// Export the context and a custom hook for consuming the context
 export default Context;

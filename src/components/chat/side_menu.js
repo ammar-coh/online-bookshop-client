@@ -25,39 +25,43 @@ const useStyles = makeStyles({
     display: "flex",
     padding: "10px",
     gap: "15px",
+    "& .css-2miw2m-MuiAvatar-root":{
+      color:"#d22129"
+    }
   },
-  userAvatar: {},
+  userAvatar: { color:"#d22129"},
   userName: {
+    fontFamily: "Montserrat, sans-se",
+    fontSize: "16px",
     width: "100%",
-    color: "#1e88e5",
-    fontWeight: "bold",
+    fontWeight: 500,
+    color: "#ffffff"
   },
 
   list: {
-    //  border: "1px solid orange",
     display: "grid",
   },
 
   userInfoList: {
-    // border: "2px solid purple",
     display: "flex",
     padding: "10px 10px 10px 4px",
     gap: "15px",
     marginRight: "auto",
+   
   },
   userAvatarList: {
-    // border: "2px solid blue ",
   },
   userNameList: {
-    // border: "2px solid red",
     width: "100%",
-    // color: "#1e88e5",
-    fontWeight: "bold",
+    display: "flex",
+    fontFamily: "Montserrat, sans-se",
+    fontSize: "16px",
   },
   button: {
-    // border:"2px solid black",
-    width: "fit-content",
-    borderEndEndRadius: "100%",
+    width: "100%",
+    "&.MuiButton-root": {
+      textTransform: "none"
+    }
   },
 });
 function ChatSideMenu({
@@ -81,7 +85,16 @@ function ChatSideMenu({
     let userNameStr2 = arr.join(" ");
     return userNameStr2;
   };
-
+  const listUsers = ({ name }) => {
+    let list_name = name;
+    let arr = list_name.split(" ");
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
+    }
+    let name2 = arr.join(" ");
+    console.log("name2", name2)
+    return name2;
+  };
   const finalUpdatedArray = list?.userList?.filter(function (i) {
     return i.displayName !== user?.user?.displayName;
   });
@@ -145,7 +158,7 @@ function ChatSideMenu({
       participant: user.user.id,
       receiver: data.id,
     };
-    localStorage.setItem("roomID",room_id)
+    localStorage.setItem("roomID", room_id)
     dispatch(clearChat())
     setRoomID(room_id);
     setIsActive(data.index);
@@ -154,15 +167,16 @@ function ChatSideMenu({
     setRecepientId(data?.id);
     await socket.emit("delete_notification_message", {
       userID: user?.user?.id,
-      sender_id:  data?.id
+      sender_id: data?.id
     });
   };
+
   return (
     <div className={classes.root}>
       <div className={classes.userInfo}>
         <div className={classes.userAvatar}>
           {" "}
-          <Avatar sx={{ bgcolor: "#FF9900" }}>
+          <Avatar sx={{ bgcolor: "#ffffff" }}>
             {user.user.displayName.charAt(0).toUpperCase()}
           </Avatar>
         </div>
@@ -185,21 +199,24 @@ function ChatSideMenu({
             className={classes.button}
             style={
               finalUpdatedArray[isActive] == i
-                ? { backgroundColor: "#1e88e5", color: "white" }
-                : { backgroundColor: "#f5f5f5", color: "#1e88e5" }
+                ? { backgroundColor: "#ffffff", color: "#d22129" }
+                : { backgroundColor: "#d22129", color: "#ffffff" }
             }
           >
             <div className={classes.userInfoList}>
               <div className={classes.userAvatarList}>
                 {" "}
-                <Avatar sx={{ bgcolor: assignColor()[500] }}>
+                <Avatar  style={
+              finalUpdatedArray[isActive] == i
+                ? { backgroundColor: "#333533", color: "#d22129" }
+                : { backgroundColor: "#333533", color: "#ffffff" }
+            }>
                   {i.displayName.charAt(0).toUpperCase()}
                 </Avatar>
               </div>
               {i.displayName ? (
                 <div className={classes.userNameList}>
-                  {i.displayName.charAt(0).toUpperCase() +
-                    i.displayName.slice(1)}
+                  {listUsers({ name: i.displayName })}
                 </div>
               ) : (
                 <div>N/A</div>
