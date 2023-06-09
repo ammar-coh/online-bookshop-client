@@ -3,10 +3,14 @@
 /* In the above example, the chat component is initially positioned offscreen (bottom: -400px). When the user clicks the "Toggle Chat" button, the isOpen state is toggled, which adds or removes the open class from the container div. The open class triggers the CSS transition, sliding the chat component up from the bottom of the screen.
 
 You can customize the styling and transition duration to fit your project's design. Additionally, you can add more chat UI elements and functionality as needed inside the chat-container div. */
+.app{
+  /* background-color:   #d0dde6; */
 
+  height:100vh
+}
 .app body {
   overflow-y: auto;
-  
+ 
   /* hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none;
   scrollbar-width: none;

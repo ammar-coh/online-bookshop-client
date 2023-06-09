@@ -8,11 +8,13 @@ import TextField from '@mui/material/TextField'
 import PersonIcon from '@mui/icons-material/Person';
 import KeyIcon from '@mui/icons-material/Key';
 import BadgeIcon from '@mui/icons-material/Badge';
+import { useForm, Controller } from "react-hook-form";
+import Error_Message from './reusable_components/ErrorMessage'
 const useStyles = makeStyles({
     login_container: {
-        backgroundImage: "url('https://img.freepik.com/free-psd/3d-render-sale-background-design_23-2149879177.jpg?w=1380&t=st=1686157808~exp=1686158408~hmac=ab2870a3778a8eb37831ee82e7bc1b1358fa2e4550e4a22c9dc26493a3331fa0')",
-        backgroundSize: "100% 100vh",
-        backgroundRepeat: "no-repeat",
+        // backgroundImage: "url('https://img.freepik.com/free-psd/3d-render-sale-background-design_23-2149879177.jpg?w=1380&t=st=1686157808~exp=1686158408~hmac=ab2870a3778a8eb37831ee82e7bc1b1358fa2e4550e4a22c9dc26493a3331fa0')",
+        // backgroundSize: "100% 100vh",
+        // backgroundRepeat: "no-repeat",
         fontFamily: 'Numans sans-serif',
         height: "100vh",
         alignContent: "center",
@@ -21,7 +23,9 @@ const useStyles = makeStyles({
     },
     root: {
         width: "450px",
-        backgroundColor: "rgba(0,0,0,0.5)",
+        backgroundColor: "#ffffff",
+        borderWidth: 0,
+        boxShadow: "rgba(25, 25, 25, 0.04) 0 0 1px 0, rgba(0, 0, 0, 0.1) 0 3px 4px 0",
         height: "370px",
         marginTop: "auto",
         marginBottom: "auto",
@@ -32,7 +36,7 @@ const useStyles = makeStyles({
         padding: "20px 20px 20px 20px"
     },
     container_header_signIn: {
-        color: "white",
+        color: "#333533",
         fontSize: "28px !important",
         fontFamily: 'Numans sans-serif',
         margin: "0px 0px"
@@ -50,19 +54,27 @@ const useStyles = makeStyles({
             backgroundColor: "white",
             borderTopLeftRadius: '0px',
             borderBottomLeftRadius: '0px',
+            borderTopRightRadius: '5px',
+            borderBottomRightRadius: '5px',
             outline: "0 0 0 0  !important",
             boxShadow: "0 0 0 0 !important",
             width: "86%",
+            border: "1px solid #e5e5e5",
+            borderColor: "#bbb!important",
+
         },
         "& .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input": {
             padding: "5px 4px"
         },
-        "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": { top: 0 , borderRadius:"none"}
+        "& .css-1d3z3hw-MuiOutlinedInput-notchedOutline": {
+            top: 0, borderRadius: "none",
+            borderStyle: "none"
+        }
     },
     input_pre_icon: {
         width: "50px",
-        backgroundColor: "#FFC312",
-        color: "black",
+        backgroundColor: "#d22129",
+        color: "#ffffff",
         border: "0 !important",
         display: "flex",
         justifyContent: "center",
@@ -71,8 +83,8 @@ const useStyles = makeStyles({
         borderBottomLeftRadius: '5px'
     },
     input_icon: {
-        backgroundColor: "#FFC312",
-        color: "black",
+        backgroundColor: "#d22129",
+        color: "#ffffff",
         border: "0 !important",
         fontSize: "20px"
     },
@@ -117,43 +129,21 @@ const useStyles = makeStyles({
         justifyContent: "center"
     },
     signInButton: {
-        width: "50%",
+        width: "100%",
         height: "40px",
-        backgroundColor: "#FFC312",
-        color: "#000000",
+        backgroundColor: "#d22129",
+        color: "#ffffff",
         cursor: "pointer",
         padding: "6px 12px",
         fontSize: "16px !important",
         fontFamily: ' sans-serif',
         textTransform: 'capitalize',
         "&:hover": {
-            color: "black",
-            backgroundColor: "white"
+            color: "#ffffff",
+            backgroundColor: "#333533"
         }
 
     },
-    sign_in: {
-
-        width: "180px",
-        // paddingLeft:"50px",
-        marginLeft: "117px",
-    },
-    email_heading: {
-        marginLeft: "100px",
-
-        width: "60px",
-        marginBottom: "1px",
-        marginTop: "-10px",
-
-    },
-    email: {
-        marginLeft: "100px",
-        marginTop: "-30px",
-
-
-    },
-
-
 
 });
 
@@ -164,10 +154,12 @@ function Sign_up() {
     const history = useHistory()
     const classes = useStyles();
     const dispatch = useDispatch();
-
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [username, setUsername] = useState()
+    const { register, handleSubmit, control, formState: { errors }, } = useForm({
+        criteriaMode: "all"
+    });
 
     const getEmail = (e) => {
         setEmail(e.target.value)
@@ -183,63 +175,134 @@ function Sign_up() {
     const current_user_email = email
     const current_user_password = password
     const current_user_name = username
-
+    const onSubmit = data => {
+        console.log(data);
+        dispatch(sign_up_saga({
+            email: current_user_email,
+            password: current_user_password,
+            user_name: current_user_name,
+            history
+        }))
+    }
 
     return (
-        <div className={classes.login_container}>
-            <div className={classes.root}>
-                <div className={classes.container_header}>
-                    <h3 className={classes.container_header_signIn}>Sign Up</h3>
+        <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={classes.login_container}>
+                <div className={classes.root}>
+                    <div className={classes.container_header}>
+                        <h3 className={classes.container_header_signIn}>Sign Up</h3>
+                    </div>
+                    <div className={classes.form}>
+                        <div className={classes.input_group}>
+                            <div className={classes.input_pre_icon}>
+                                <span className={classes.input_icon}>
+                                    <PersonIcon size="small" />
+                                </span>
+                            </div>
+                            <Controller name="email"
+                                control={control}
+                                defaultValue=""
+                                {...register('email', {
+                                    required: 'Please enter your email address',
+                                    pattern: {
+                                        value: /^\S+@\S+$/i,
+                                        message:   `Invalid Email =>  example "dave@gmail.com"`,
+                                    },
+                                })}
+                                render={({ field }) => (
+                                    < TextField
+                                        {...field}
+                                        // error={!!errors.email}
+                                        // helperText={errors.email ? errors.email.message : ''}
+                                        autoFocus={false}
+                                        placeholder="email"
+                                        className={classes.email}
+                                        onChange={(e) => {
+                                            field.onChange(e);
+                                            getEmail(e);
+                                        }}
+                                    // onChange={getEmail} 
+                                    />
+                                )} />
+                            <Error_Message errors={errors} name="email" />
+                        </div>
+                        <div className={classes.input_group}>
+                            <div className={classes.input_pre_icon}>
+                                <span className={classes.input_icon}>
+                                    <KeyIcon size="small" />
+                                </span>
+                            </div>
+                            <Controller name="password"
+                                control={control}
+                                defaultValue=""
+                                {...register('password', {
+                                    required: 'Please enter your password',
+                                    minLength: {
+                                        value: 8,
+                                        message: 'Password should be at least 8 characters long',
+                                    },
+                                })}
+                                render={({ field }) => (
+                                    <TextField
+                                        {...field}
+                                        type="password"
+                                        // error={!!errors.password}
+                                        // helperText={errors.password && errors.password.message}
+                                        placeholder="password"
+                                        className={classes.email}
+                                        onChange={(e) => {
+                                            field.onChange(e);
+                                            getPassword(e);
+                                        }}
+                                    />
+                                )}
+                            />
+                            <Error_Message errors={errors} name="password" />
+                        </div>
+                        <div className={classes.input_group}>
+                            <div className={classes.input_pre_icon}>
+                                <span className={classes.input_icon}>
+                                    <BadgeIcon size="small" />
+                                </span>
+                            </div>
+                            <Controller name="user name"
+                                control={control}
+                                defaultValue=""
+                                {...register('user name', {
+                                    required: 'Please enter your user name address',
+                                    pattern: {
+                                        message: 'Invalid Email',
+                                    },
+                                })}
+                                render={({ field }) => (
+                                    < TextField
+                                        {...field}
+                                        autoFocus={false}
+                                        placeholder="user name"
+                                        className={classes.email}
+                                        onChange={(e) => {
+                                            field.onChange(e);
+                                            getUserName(e);
+                                        }}
+                                    />
+                                )} />
+                            <Error_Message errors={errors} name="user name" />
+                        </div>
+                        <div className={classes.signInButton_container}>
+                            <Button
+                                type='submit'
+                                className={classes.signInButton}
+                                size="large"
+                            >
+                                Register
+                            </Button>
+                        </div>
+                    </div>
+
+
                 </div>
-                <div className={classes.form}>
-                    <div className={classes.input_group}>
-                        <div className={classes.input_pre_icon}>
-                            <span className={classes.input_icon}>
-                                <PersonIcon size="small" />
-                            </span>
-                        </div>
-                        <TextField autoFocus={false} placeholder="email" className={classes.email} onChange={getEmail} />
-                    </div>
-                    <div className={classes.input_group}>
-                        <div className={classes.input_pre_icon}>
-                            <span className={classes.input_icon}>
-                                <KeyIcon size="small" />
-                            </span>
-                        </div>
-                        <TextField placeholder="password" className={classes.email} onChange={getPassword} />
-                    </div>
-                    <div className={classes.input_group}>
-                        <div className={classes.input_pre_icon}>
-                            <span className={classes.input_icon}>
-                                <BadgeIcon size="small" />
-                            </span>
-                        </div>
-                        <TextField placeholder="user name" className={classes.email} onChange={getUserName} />
-                    </div>
-                    <div className={classes.signInButton_container}>
-                        <Button
-                            onClick={
-                                () => {
-                                    dispatch(sign_up_saga({
-                                        email: current_user_email,
-                                        password: current_user_password,
-                                        user_name: current_user_name,
-                                        history
-                                    }))
-                                }
-
-                            }
-                            className={classes.signInButton}
-                            size="large"
-                        >
-                            Register
-                        </Button>
-                    </div>
-                </div>
-
-
             </div>
-        </div>
+        </form>
     )
 }
 

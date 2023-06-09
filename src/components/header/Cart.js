@@ -1,11 +1,10 @@
 import React from "react";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
-
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 const useStyles = makeStyles({
   root: {
     display: "flex",
@@ -40,7 +39,14 @@ const useStyles = makeStyles({
     color: "white",
   },
 });
-
+const theme = createTheme({
+  palette: {
+    neutral: {
+      main: '#333533',
+      contrastText: '#ffffff',
+    },
+  },
+});
 function Cart() {
   const classes = useStyles();
   const counts = useSelector((state) => state.checkout);
@@ -48,9 +54,11 @@ function Cart() {
     <div className={classes.root}>
       <span className={classes.icon}>
         <Link className={classes.checkout_link} to="/checkout">
-          <Badge badgeContent={counts.totalItems} color="error">
+        <ThemeProvider theme={theme}>
+          <Badge badgeContent={counts.totalItems} color="neutral">
             <ShoppingCartIcon />
           </Badge>
+          </ThemeProvider>
         </Link>
       </span>
     </div>

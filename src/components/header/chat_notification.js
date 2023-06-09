@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { socket } from "../../socket";
 import { useHistory } from "react-router-dom";
 import { chatFromDBSaga } from "../../redux/actions/index";
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {
   deepOrange,
   deepPurple,
@@ -57,6 +58,14 @@ function Chat_Notifications({
   const my_notifications = useSelector((state) => state.notification)
   const finalUpdatedArray = list?.userList?.filter(function (i) {
     return i.displayName !== user?.user?.displayName;
+  });
+  const theme = createTheme({
+    palette: {
+      neutral: {
+        main: '#333533',
+        contrastText: '#ffffff',
+      },
+    },
   });
   const assignColor = () => {
     let number = Math.floor(Math.random() * 9);
@@ -162,13 +171,15 @@ function Chat_Notifications({
           setNotificationOpen((previous) => !previous)
         }}>
           {" "}
+          <ThemeProvider theme={theme}>
           <Badge
             // className={classes.chatNotification}
             badgeContent={my_notifications.recipient_id == user?.user?.id ? my_notifications.total_notifications : 0}
-            color="error"
+            color="neutral"
           >
             <MailIcon className={classes.notificationMailIcon} />
           </Badge>
+          </ThemeProvider>
         </Button>
       </div>
       {show_user_notifications ? (

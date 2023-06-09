@@ -8,6 +8,7 @@ const useStyles = makeStyles({
   root: {
     display: "flex",
     border: "none",
+    padding:"20px",
     "&:hover": {
       border: " none",
     },
@@ -19,6 +20,8 @@ const useStyles = makeStyles({
   },
   hello: {
     color: "white",
+  
+
   },
   login_link: {
     textDecoration: "none",
