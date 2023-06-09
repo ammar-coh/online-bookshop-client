@@ -18,7 +18,7 @@ import { socket } from "../../socket";
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor: "#131921",
+    backgroundColor:"#d22129",
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
@@ -31,9 +31,14 @@ const useStyles = makeStyles({
     display: "flex",
   },
   sign_out: {
-    backgroundColor: "#FF9900",
+    backgroundColor: "#ffffff",
+    color:"#333533",
     fontSize: "10px",
     height: "25px",
+    "&:hover": {
+      color: "#d22129",
+      backgroundColor: "white"
+  }
   },
   icon: {
     fontSize: "20px",

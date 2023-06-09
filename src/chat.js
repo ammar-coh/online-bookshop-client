@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import MessageIcon from "@mui/icons-material/Message";
-import { Route, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import axios from "axios";
 import Context from "./context";
 const useStyles = makeStyles({
-  root: { position: "absolute", right: "70px", color: "#FF9900" },
-  link: { textDecoration: "none", color: "#FF9900" },
+  root: {  position: "absolute", right: "135px", color: "#ffffff" },
+  link: { textDecoration: "none", color: "#ffffff" },
 });
 
 function Chat({}) {

@@ -1,5 +1,5 @@
 import "./App.css";
-import Product from "./product";
+import Home from "./components/home/index";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -16,9 +16,15 @@ import { socket } from "./socket";
 import { Provider } from "./context";
 import { notification_real_time, get_my_notifications_saga } from './redux/actions/index'
 import { delete_notification } from './redux/actions/index'
-
-
-
+import { makeStyles } from "@material-ui/core/styles";
+import 'antd/dist/reset.css';
+import "./index.css";
+const useStyles = makeStyles({
+  root: {
+   
+  },
+ 
+})
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +32,7 @@ function App() {
   const uname = useSelector((state) => state.user_login.details);
   const user = useSelector((state) => state.user_login.details);
   const messages = useSelector((state) => state.chat);
+  const classes = useStyles();
 
   useEffect(() => {
     user?.user ? setUserAvailable(true) : setUserAvailable(false);
@@ -103,7 +110,7 @@ function App() {
                   user={user}
                   setUserAvailable={setUserAvailable}
                   userAvailble={userAvailble}
-                  component={Product}
+                  component={Home}
                   socket={socket}
                   path="/"
                 />

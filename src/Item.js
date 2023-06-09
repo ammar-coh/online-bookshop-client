@@ -17,34 +17,97 @@ import { GrUpdate } from "react-icons/gr";
 const useStyles = makeStyles({
   root: {
     marginLeft: "0px",
-    width:"100%",
+    width: "100%",
     zIndex: 1,
+
+  },
+  mainContainer: {
+    display: "flex",
+    padding: "10px 5px",
+  },
+  image_container: {
+    padding:"0px 10px 0px 0px",
+    width:"30%",
+  }
+  ,
+  information_container: {
+    // border: "1px solid yellow",
+    display: "grid",
+    width:"70%",
+    "& .MuiCardContent-root": {
+      padding: "0px"
+    }
   },
   media: {
-    width: "90px",
-    height: "150px",
-    marginLeft: 27,
+    width: "100%",
+    height: "168px",
     zIndex: 2,
   },
   update: {
     fontSize: "10px",
     marginLeft: "124px",
     marginTop: "-32px",
-    color: "#FF9900",
+    color: "#FFC312",
     width: "26px",
   },
+  title_div: {
+    // border:"1px solid black",
+    height: "36px",
+    padding:"10px 0px 0px 0px"
+
+  },
+  title: { 
+    color:"#333533",
+    fontFamily:"Montserrat', sans-se",
+    fontWeight: 500,
+    fontSize:"14px"
+  },
+  author_div: {
+    // border:"1px solid black",
+    padding:"10px 0px 0px 0px"
+
+  },
+  author: {
+    color:"#383838",
+    fontFamily:"'Montserrat', sans-se",
+    fontSize:"13px"
+    
+  },
+  rating_div: {
+    // border: "1px solid black",
+    padding:"10px 0px 0px 0px"
+
+  },
+  price_div: {
+    // border: "1px solid black",
+    padding:"10px 0px 10px 0px"
+
+  },
+  price:{
+    color:"#000",
+    fontFamily:"'Montserrat', sans-se",
+    fontWeight: 700,
+    fontSize:"15px"
+  },
+  addtoCart_div: {
+    // border: "1px solid black",
+    "& .MuiCardActions-root": {
+      padding: "0px 0px 0px 0px"
+    }
+  },
+
   cart: {
-    backgroundColor: "#FF9900",
-    color: "#000000",
-    marginLeft: 42,
+    backgroundColor: "#d22129",
+    color: "#ffffff",
     fontSize: "10px",
     zIndex: 1,
+    "&:hover": {
+      color: "black",
+      backgroundColor: "white"
+    },
+    padding:"7px 5px"
   },
-  price: {
-    marginLeft: 15,
-    fontSize: "15px",
-    zIndex: 1,
-  },
+
   input: {
     width: "70px",
     marginTop: 5,
@@ -65,7 +128,7 @@ const colors = {
   grey: "#a9a9a9",
 };
 
-function Item({ id, image, price, rating, year }) {
+function Item({ id, image, price, rating, author, title }) {
   const user = useSelector((state) => state.user_login.details);
   const ratings = Array(5).fill(0);
   const [currentRating, setRating] = useState(0);
@@ -74,7 +137,6 @@ function Item({ id, image, price, rating, year }) {
   const handleRats = (value) => {
     setRats(value);
   };
-  // console.log(rats)
 
   const handleClickRat = (value) => {
     setRating(value);
@@ -86,113 +148,133 @@ function Item({ id, image, price, rating, year }) {
     setHoverValue(undefined);
   };
   const classes = useStyles();
-  //const dispatch = useDispatch();
   const [newPrice, setNewPrice] = useState();
   const dispatch = useDispatch();
   const dispatchTwo = useDispatch();
-  //  const details=useSelector((state)=>state.productDetails.details);
 
-  //console.log ('data',data)
   const getPrice = (event) => {
     setNewPrice(event.target.value);
   };
-  //console.warn('props',props)
 
-  //const dispatch=useDispatch()
-  //const add=useDispatch()
   var a = parseInt(newPrice);
-  //console.log('number',a)
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={image}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h7" component="h2">
-            {year}
-          </Typography>
+      <div className={classes.mainContainer}>
+        <div className={classes.image_container}>
+          <CardActionArea>
+            <CardMedia
+              className={classes.media}
+              image={image}
+              title="Contemplative Reptile"
+            />
+          </CardActionArea>
+        </div>
 
-          <div>
-            {rating >= 1
-              ? ratings.map((_, index) => {
-                  //   console.log("index", index);
-                  return (
-                    <FaStar
-                      key={index}
-                      style={{ cursor: "cursor", marginRight: 10 }}
-                      color={rating > index ? colors.orange : colors.grey}
-                      onClick={
-                        () =>
-                          dispatchTwo(
-                            updateUser({ ratings: index + 1, id: id })
-                          )
-                        //handleClickRat(index +1)
-                      }
-                      onHover={() => handleHover(index + 1)}
-                      onMouseLeave={handleMouseLeave}
-                    />
-                  );
-                })
-              : ratings.map((_, index) => {
-                  return (
-                    <FaStar
-                      key={index}
-                      style={{ cursor: "cursor", marginRight: 10 }}
-                      color={
-                        (currentRating || currentHoverValue) > index
-                          ? colors.orange
-                          : colors.grey
-                      }
-                      /*onClick={() => handleClickRat(index + 1)}*/
-                      onClick={() =>
-                        dispatchTwo(updateUser({ ratings: index + 1, id: id }))
-                      }
-                      onHover={() => handleHover(index + 1)}
-                      onMouseLeave={handleMouseLeave}
-                    />
-                  );
-                })}
-          </div>
 
-          <Typography
-            className={classes.price}
-            gutterBottom
-            variant="h7"
-            component="h2"
-          >
-            Price $ {price}
-          </Typography>
-          {/**  <Typography variant="body2" color="textSecondary" component="p">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>*/}
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button
-          onClick={() =>
-            dispatch(addToCartSaga({ id: user.user.id, product_id: id }))
-          }
-          className={classes.cart}
-          size="small"
-        >
-          Add to Cart
-        </Button>
-        {user.role == "admin" ? (
-          <BsTrash
-            onClick={() =>
-              dispatch(deleteDispatch({ id: user.user.id, product_id: id }))
-            }
-            className={classes.del}
-          />
-        ) : null}
-      </CardActions>
+        <div className={classes.information_container}>
+          <CardActionArea>
+            <CardContent>
+              <div className={classes.title_div}>
+                <Typography
+                  className={classes.title}
+                  variant="h7"
+                  component="h2"
+                >
+                  {title ? title : "No Title"}
+                </Typography>
+              </div>
+              <div className={classes.author_div}>
+                <Typography
+                  className={classes.author}
+                  variant="h7"
+                  component="h2"
+                >
+                  {author ? author : "Unknown"}
+                </Typography>
+              </div>
+              <div className={classes.rating_div}>
+                {rating >= 1
+                  ? ratings.map((_, index) => {
+                    return (
+                      <FaStar
+                        key={index}
+                        style={{ cursor: "cursor", marginRight: 10 }}
+                        color={rating > index ? colors.orange : colors.grey}
+                        onClick={
+                          () =>
+                            dispatchTwo(
+                              updateUser({ ratings: index + 1, id: id })
+                            )
+                        }
+                        onHover={() => handleHover(index + 1)}
+                        onMouseLeave={handleMouseLeave}
+                      />
+                    );
+                  })
+                  : ratings.map((_, index) => {
+                    return (
+                      <FaStar
+                        key={index}
+                        style={{ cursor: "cursor", marginRight: 10 }}
+                        color={
+                          (currentRating || currentHoverValue) > index
+                            ? colors.orange
+                            : colors.grey
+                        }
+                        /*onClick={() => handleClickRat(index + 1)}*/
+                        onClick={() =>
+                          dispatchTwo(updateUser({ ratings: index + 1, id: id }))
+                        }
+                        onHover={() => handleHover(index + 1)}
+                        onMouseLeave={handleMouseLeave}
+                      />
+                    );
+                  })}
 
-      {user.role == "admin" ? (
+              </div>
+
+              <div className={classes.price_div}>
+                <Typography
+                  className={classes.price}
+                  gutterBottom
+                  variant="h7"
+                  component="h2"
+                >
+                  Price $ {price}
+                </Typography>
+              </div>
+            </CardContent>
+
+
+            <div className={classes.addtoCart_div}>
+              <CardActions>
+                <Button
+                  onClick={() =>
+                    dispatch(addToCartSaga({ id: user.user.id, product_id: id }))
+                  }
+                  className={classes.cart}
+                  size="small"
+                >
+                  Add to Cart
+                </Button>
+                {user.role == "admin" ? (
+                  <BsTrash
+                    onClick={() =>
+                      dispatch(deleteDispatch({ id: user.user.id, product_id: id }))
+                    }
+                    className={classes.del}
+                  />
+                ) : null}
+              </CardActions>
+            </div>
+
+          </CardActionArea>
+
+        </div>
+      </div>
+
+      {/* {user.role == "admin" ? (
         <input
           className={classes.input}
           placeholder="update price"
@@ -214,7 +296,7 @@ function Item({ id, image, price, rating, year }) {
             }
           />
         ) : null}
-      </CardActions>
+      </CardActions> */}
 
       {/* Update price */}
     </Card>
