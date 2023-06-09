@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     },
     footer_p: {
         color: "#ffffff",
-        fontFamily: "Montserrat', sans-se",
+        fontFamily: "Montserrat, sans-se",
         fontSize: "12px",
         textAlign: "center",
         margin: "20px"

@@ -17,9 +17,12 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: "5px",
     borderBottomRightRadius: "5px",
     borderTopLeftRadius: "5px",
-    backgroundColor: "#f5f5f5",
-    color: "#212121",
+    backgroundColor: "#d22129",
+    color: "#FFFFFF",
+    fontFamily: "Montserrat, sans-se",
+    fontSize: "14px"
   },
+
   receiver: {
     textAlign: "right",
     padding: "10px 25px 10px 0px ",
@@ -35,8 +38,10 @@ const useStyles = makeStyles((theme) => ({
     borderBottomLeftRadius: "5px",
     borderTopRightRadius: "5px",
     float: "right",
-    color: "white",
-    backgroundColor: "#2196f3",
+    color: "#333533",
+    backgroundColor: "#f5f5f5",
+    fontFamily: "Montserrat, sans-se",
+    fontSize: "14px"
   },
 }));
 
@@ -47,8 +52,8 @@ function ChatConversation({ roomID }) {
   const messages = useSelector((state) => state.chat);
   const [roomIDMatch, setRoomIDMatch] = useState(false);
   const chatContainerRef = useRef(null);
-  const [display_messages , setDisplayMessages] = useState([])
- 
+  const [display_messages, setDisplayMessages] = useState([])
+
   useEffect(() => {
     if (messages.roomID == roomID) {
       setDisplayMessages(messages.messages)
@@ -61,20 +66,20 @@ function ChatConversation({ roomID }) {
   return (
     <div className={classes.root} ref={chatContainerRef}>
       {roomIDMatch ?
-       display_messages.map((i) =>
-        display_messages.length != 0 && user?.user?.displayName == i.author ? (
-          <div className={classes.sender}>
-            <div className={classes.senderText}>{i.message}</div>
-          </div>
-        ) : (
-          <div className={classes.receiver}>
-            {" "}
-            <div className={classes.receiverTextDiv}>
-              <div className={classes.receiverText}>{i.message}</div>
+        display_messages.map((i) =>
+          display_messages.length != 0 && user?.user?.displayName == i.author ? (
+            <div className={classes.sender}>
+              <div className={classes.senderText}>{i.message}</div>
             </div>
-          </div>
-        )
-      ) : null}
+          ) : (
+            <div className={classes.receiver}>
+              {" "}
+              <div className={classes.receiverTextDiv}>
+                <div className={classes.receiverText}>{i.message}</div>
+              </div>
+            </div>
+          )
+        ) : null}
     </div>
   );
 }

@@ -1,11 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import { makeStyles, createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { useLocation } from "react-router-dom";
+import { makeStyles, createMuiTheme} from "@material-ui/core/styles";
 import ChatSideMenu from "./side_menu";
 import ChatConversation from "./room";
 import ChatTypingArea from "./message_input";
 import ContactInfo from "./user_info";
-import Divider from "@mui/material/Divider";
 import Context from "../../context";
 import axios from "axios";
 
@@ -25,16 +23,15 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     padding: "20px 315px 60px 325px ",
     [theme.breakpoints.only('lg')]: {
-      padding: "20px 215px 60px 225px ",
+      padding: "20px 215px 20px 225px ",
     },
   },
 
   list: {
     width: "20%",
-    backgroundColor: "#f5f5f5",
+    backgroundColor: "#d22129",
     borderTopLeftRadius: "20px",
     borderBottomLeftRadius: "20px",
-    // height: "550px" /* Set the desired height for your scrollable container */,
     overflow: "auto",
     "&::-webkit-scrollbar": {
       width: "5px",
@@ -59,14 +56,15 @@ const useStyles = makeStyles((theme) => ({
       width: "70%",
 
     },
+    backgroundColor:"#d22129"
   },
   receiverInfo: {
-    // height: "fit-content",/
   },
 
   room: {
     zIndex: -1,
-    height: "57vh" /* Set the desired height for your scrollable container */,
+    backgroundColor:"#ffffff",
+    height: "57vh",
     overflowY: "auto",
     overflowX: "hidden",
     "&::-webkit-scrollbar": {
@@ -80,17 +78,17 @@ const useStyles = makeStyles((theme) => ({
       borderRadius: "12px",
     },
     [theme.breakpoints.only('lg')]: {
-      height: "47vh",
+      height: "56vh",
     },
   },
   roomContent: {
-    overflowY: "auto", // Enable vertical scrolling
-    maxHeight: "100%", // Ensure the content expands to fit the container
-    border: "1px solid #ccc",
+    overflowY: "auto",
+    maxHeight: "100%", 
     overflowWrap: "break-word",
   },
   chatBar: {
     padding: "30px 50px",
+    backgroundColor: "#303030",
     [theme.breakpoints.only('lg')]: {
       padding: "20px 10px",
     },
@@ -124,7 +122,6 @@ function Chatroom() {
       setList(allUserList);
     });
   };
-  // console.log("rom", roomID)
   useEffect(() => {
     localStorage.getItem("authorization") && allUsers();
   }, [notification_open]);
@@ -147,16 +144,14 @@ function Chatroom() {
         <div
           className={classes.receiverInfo}
         >
-          {/* <Divider /> */}
           <ContactInfo currentChat={currentChat} />
-          <Divider className={classes.divider} variant="middle" />
         </div>
 
         <div className={classes.room}>
           <div className={classes.roomContent}></div>
           <ChatConversation roomID={roomID} />{" "}
         </div>
-        <Divider />
+      
 
         <div className={classes.chatBar}>
           <ChatTypingArea

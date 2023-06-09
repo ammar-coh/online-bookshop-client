@@ -138,7 +138,7 @@ function Header() {
         <Button
           onClick={() => {
             dispatch(clearChat());
-            setIsActive(false);
+            setIsActive(null);
             setCurrentChat("");
             leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
           }}
@@ -158,7 +158,7 @@ function Header() {
         <Button
           onClick={() => {
             dispatch(clearChat());
-            setIsActive(false);
+            setIsActive(null);
             setCurrentChat("");
             leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
           }}>

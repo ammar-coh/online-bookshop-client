@@ -37,7 +37,6 @@ const useStyles = makeStyles({
     "& .css-h4y409-MuiList-root": { display: "grid" },
   },
   button: {
-    // border:"2px solid black",
     width: "fit-content",
   },
 });
@@ -173,7 +172,6 @@ function Chat_Notifications({
           {" "}
           <ThemeProvider theme={theme}>
           <Badge
-            // className={classes.chatNotification}
             badgeContent={my_notifications.recipient_id == user?.user?.id ? my_notifications.total_notifications : 0}
             color="neutral"
           >
@@ -194,7 +192,6 @@ function Chat_Notifications({
                       index: index,
                       sender_id: content.author_id,
                     })
-                    //function
                   }
                   className={classes.button}
                 >
@@ -203,9 +200,8 @@ function Chat_Notifications({
                       <Avatar sx={{ bgcolor: assignColor()[500] }}> {content.displayName.charAt(0).toUpperCase()} </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary={content.author}  //{userName()}
+                      primary={content.author} 
                       secondary={
-                        // <React.Fragment>
                         <Typography
                           sx={{ display: "inline" }}
                           component="span"
@@ -214,7 +210,6 @@ function Chat_Notifications({
                         >
                           {content.message}
                         </Typography>
-                        // </React.Fragment>
                       }
                     />
                   </ListItem>

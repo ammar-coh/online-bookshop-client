@@ -17,9 +17,6 @@ import { ErrorMessage } from "@hookform/error-message";
 
 const useStyles = makeStyles({
     login_container: {
-        // backgroundImage: "url('https://img.freepik.com/free-psd/3d-render-sale-background-design_23-2149879177.jpg?w=1380&t=st=1686157808~exp=1686158408~hmac=ab2870a3778a8eb37831ee82e7bc1b1358fa2e4550e4a22c9dc26493a3331fa0')",
-        // backgroundSize: "100% 100vh",
-        // backgroundRepeat: "no-repeat",
         fontFamily: 'Numans sans-serif',
         height: "100vh",
         alignContent: "center",
@@ -255,7 +252,7 @@ function Login_page() {
                                 render={({ field }) => (
                                     < TextField
                                         {...field}
-                                       autoFocus={false}
+                                        autoFocus={false}
                                         placeholder="email"
                                         className={classes.email}
                                         onChange={(e) => {
