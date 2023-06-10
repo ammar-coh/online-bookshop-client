@@ -20,7 +20,6 @@ export const user_login = (state = initialState, actions) => {
         details: actions.data,
       };
     case "sign_in_error_message":
-      console.log("error login", actions.data)
       return {
         details: actions.data,
       };
