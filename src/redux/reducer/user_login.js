@@ -1,10 +1,26 @@
 const initialState = {
-  details: [],
+  details: {
+    token: "",
+    user: {
+      id: "",
+      token: "",
+      displayName: "",
+      is_online: false,
+      role: "basic"
+    },
+    status: true,
+    message: ""
+  },
 };
 
 export const user_login = (state = initialState, actions) => {
   switch (actions.type) {
     case "sign_in_reducer":
+      return {
+        details: actions.data,
+      };
+    case "sign_in_error_message":
+      console.log("error login", actions.data)
       return {
         details: actions.data,
       };

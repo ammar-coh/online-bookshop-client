@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
 import { sign_in_saga } from "../../redux/actions/index";
 import { useHistory } from "react-router-dom";
@@ -192,6 +192,7 @@ const useStyles = makeStyles({
 function Login_page() {
     const history = useHistory();
     const classes = useStyles();
+    const user = useSelector((state) => state.user_login.details);
     const dispatch = useDispatch();
     const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
     const [email, setEmail] = useState();
@@ -220,7 +221,7 @@ function Login_page() {
         );
     }
 
-
+    console.log("user login status", user?.status)
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className={classes.login_container}>
@@ -233,6 +234,12 @@ function Login_page() {
                             <span className={classes.social_icon_span_instagram}><InstagramIcon className={classes.sm_icons} /></span>
                         </div>
                     </div>
+                    {user.status == false && user.message == "Please enter a correct email or create account first." ?
+                        <div style={{ display: "flex", justifyContent: "center" }}>
+                            <span className={classes.error_message}>
+                                {user.message}
+                            </span>
+                        </div> : null}
                     <div className={classes.form}>
                         <div className={classes.input_group}>
                             <div className={classes.input_pre_icon}>
@@ -274,6 +281,13 @@ function Login_page() {
                                 }}
                             />
                         </div>
+                        {user.status == false && user.message == "Please enter a correct password" ?
+                            <div style={{ display: "flex", justifyContent: "center", paddingBottom: "10px" }}>
+                                <span className={classes.error_message}>
+                                    {user.message}
+                                </span>
+                            </div> : null}
+
                         <div className={classes.input_group}>
                             <div className={classes.input_pre_icon}>
                                 <span className={classes.input_icon}>

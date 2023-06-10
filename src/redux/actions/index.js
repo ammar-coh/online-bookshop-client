@@ -216,3 +216,11 @@ export const sign_in_reducer = (data) => {
         data: data
     }
 }
+export const sign_in_error_message = (data) => {
+    // console.log("redd",data)
+    return {
+        type: "sign_in_error_message",
+        data: data
+    }
+}
+

@@ -98,38 +98,7 @@ function ChatSideMenu({
   const finalUpdatedArray = list?.userList?.filter(function (i) {
     return i.displayName !== user?.user?.displayName;
   });
-  const assignColor = () => {
-    let number = Math.floor(Math.random() * 9);
-    switch (number) {
-      case 0:
-        return deepOrange;
-        break;
-      case 1:
-        return deepPurple;
-        break;
-      case 2:
-        return red;
-        break;
-      case 3:
-        return brown;
-        break;
-      case 4:
-        return yellow;
-        break;
-      case 5:
-        return green;
-        break;
-      case 6:
-        return blue;
-        break;
-      case 7:
-        return red;
-        break;
-
-      default:
-        return "none";
-    }
-  };
+  
 
   const joinChatRoom = async (data) => {
     let id = [data.displayName, user.user.displayName];
