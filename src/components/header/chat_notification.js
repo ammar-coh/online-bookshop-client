@@ -15,29 +15,38 @@ import { socket } from "../../socket";
 import { useHistory } from "react-router-dom";
 import { chatFromDBSaga } from "../../redux/actions/index";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {
-  deepOrange,
-  deepPurple,
-  green,
-  blue,
-  red,
-  yellow,
-  brown,
-} from "@mui/material/colors";
+
 const useStyles = makeStyles({
   root: {
     padding: "0px 15px",
+    width: "100%"
   },
   chatNotification: {},
   notificationMailIcon: { color: "white" },
-  notification_badge: {},
+  notification_badge: { width: "100%" },
   notification_list: {
     position: "absolute",
     zIndex: 9999,
-    "& .css-h4y409-MuiList-root": { display: "grid" },
+    width: "19%",
+    "& .css-h4y409-MuiList-root": { display: "grid", },
   },
   button: {
-    width: "fit-content",
+    width: "100%",
+    textTransform: "none",
+    "&:hover": {
+      backgroundColor: "rgb (247 ,249 249)",
+      color: "#333533"
+    },
+    "& .css-10hburv-MuiTypography-root": {
+      fontSize: "15px",
+      fontWeight:700,
+      fontFamily: "Montserrat, sans-se"
+    },
+    "& .css-1phucj-MuiTypography-root":{
+      fontSize: "15px",
+      fontFamily: "Montserrat, sans-se",
+      color:"#536471",
+    }
   },
 });
 function Chat_Notifications({
@@ -66,37 +75,15 @@ function Chat_Notifications({
       },
     },
   });
-  const assignColor = () => {
-    let number = Math.floor(Math.random() * 9);
-    switch (number) {
-      case 0:
-        return deepOrange;
-        break;
-      case 1:
-        return deepPurple;
-        break;
-      case 2:
-        return red;
-        break;
-      case 3:
-        return brown;
-        break;
-      case 4:
-        return yellow;
-        break;
-      case 5:
-        return green;
-        break;
-      case 6:
-        return blue;
-        break;
-      case 7:
-        return red;
-        break;
-
-      default:
-        return "none";
+  const listUsers = ({ name }) => {
+    let list_name = name;
+    let arr = list_name.split(" ");
+    for (var i = 0; i < arr.length; i++) {
+      arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
     }
+    let name2 = arr.join(" ");
+    console.log("name2", name2)
+    return name2;
   };
   const joinChatRoom = async (data) => {
     let index;
@@ -171,12 +158,12 @@ function Chat_Notifications({
         }}>
           {" "}
           <ThemeProvider theme={theme}>
-          <Badge
-            badgeContent={my_notifications.recipient_id == user?.user?.id ? my_notifications.total_notifications : 0}
-            color="neutral"
-          >
-            <MailIcon className={classes.notificationMailIcon} />
-          </Badge>
+            <Badge
+              badgeContent={my_notifications.recipient_id == user?.user?.id ? my_notifications.total_notifications : 0}
+              color="primary"
+            >
+              <MailIcon className={classes.notificationMailIcon} />
+            </Badge>
           </ThemeProvider>
         </Button>
       </div>
@@ -197,10 +184,10 @@ function Chat_Notifications({
                 >
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
-                      <Avatar sx={{ bgcolor: assignColor()[500] }}> {content.displayName.charAt(0).toUpperCase()} </Avatar>
+                      <Avatar style={{ backgroundColor: "#d22129", color: "#ffffff" }}> {content.displayName.charAt(0).toUpperCase()} </Avatar>
                     </ListItemAvatar>
                     <ListItemText
-                      primary={content.author} 
+                      primary={listUsers({ name: content.author })}
                       secondary={
                         <Typography
                           sx={{ display: "inline" }}

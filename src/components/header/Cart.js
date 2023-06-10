@@ -42,7 +42,7 @@ const useStyles = makeStyles({
 const theme = createTheme({
   palette: {
     neutral: {
-      main: '#333533',
+      main: '#d22129',
       contrastText: '#ffffff',
     },
   },
@@ -55,7 +55,7 @@ function Cart() {
       <span className={classes.icon}>
         <Link className={classes.checkout_link} to="/checkout">
         <ThemeProvider theme={theme}>
-          <Badge badgeContent={counts.totalItems} color="neutral">
+          <Badge badgeContent={counts.totalItems} color="primary">
             <ShoppingCartIcon />
           </Badge>
           </ThemeProvider>
