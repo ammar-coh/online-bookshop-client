@@ -221,7 +221,6 @@ function Login_page() {
         );
     }
 
-    console.log("user login status", user?.status)
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className={classes.login_container}>

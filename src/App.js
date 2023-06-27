@@ -105,7 +105,7 @@ function App() {
             <Switch>
               <Route path="/login_page" exact component={Login_page} />
               <Route path="/sign_up" exact component={Sign_up} />
-              {user.user && (
+              {user.user?.is_online == true && (
                 <ProtectedAllRoute
                   user={user}
                   setUserAvailable={setUserAvailable}
