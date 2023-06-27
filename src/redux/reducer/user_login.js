@@ -3,7 +3,6 @@ const initialState = {
     token: "",
     user: {
       id: "",
-      token: "",
       displayName: "",
       is_online: false,
       role: "basic"
