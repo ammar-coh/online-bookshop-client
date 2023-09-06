@@ -18,12 +18,12 @@ import { socket } from "../../socket";
 
 const useStyles = makeStyles({
   root: {
-    backgroundColor:"#d22129",
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
     zIndex: 3,
     height: "65px",
+    backgroundColor:"#333533"
   },
 
   home_link: {
