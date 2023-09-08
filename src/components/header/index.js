@@ -104,8 +104,6 @@ function Header() {
       roomID: data.roomID,
       userID: data.userID,
     });
-
-
   }
   useEffect(() => {
     const handleScroll = () => {
