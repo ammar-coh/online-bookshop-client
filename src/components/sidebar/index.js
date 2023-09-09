@@ -10,6 +10,8 @@ import { socket } from "../../socket";
 import { clearChat } from '../../redux/actions/index'
 import libertyBookslogo from '../../Assets/newlogoliberty-250x67 (1)-250x67.png'
 import Profile from './Profile'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Home from './home'
 const useStyles = makeStyles({
     root: {
         backgroundColor: "#d22129",
@@ -17,28 +19,19 @@ const useStyles = makeStyles({
         width: "100%",
         height: "100%",
     },
-    libertyBooks_logo:{},
-    homeIconMainContainer: {
-        width: "100%",
-        display: "flex",
-        justifyContent: "flex-start",
-        padding: " 15px 0px 0px 8px",
-      },
-      home_link: {
-        textDecoration: "none",
-        display: "flex",
-      },
-      icon: {
-        fontSize: "20px",
-        color: "white",
-        width: "20px",
-      },
-      admin_panel:{
+    libertyBooks_logo: {},
+    home:{
         padding: " 15px 20px",
-      },
-      user_profile:{
+
+    },
+    admin_panel: {
         padding: " 15px 20px",
-      }
+    },
+    user_profile: {
+        padding: " 15px 20px",
+    },
+  
+   
 })
 
 function Sidebar() {
@@ -60,35 +53,21 @@ function Sidebar() {
     const leaveAllRooms = async (data) => {
 
         await socket.emit("leave_private_room", {
-          roomID: data.roomID,
-          userID: data.userID,
+            roomID: data.roomID,
+            userID: data.userID,
         });
-    
-    
-      }
+
+
+    }
     return (
         <div className={classes.root}>
             <div className={classes.libertyBooks_logo}>
-                <img src ={libertyBookslogo}/>
+                <img src={libertyBookslogo} />
             </div>
-            <div className={classes.homeIconMainContainer}>
-                {" "}
-                <Button
-                    onClick={() => {
-                        dispatch(clearChat());
-                        setIsActive(null);
-                        setCurrentChat("");
-                        leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
-                    }}
-                >
-                    <Link className={classes.home_link} to="/">
-                        <div className={classes.icon}>
-                            {" "}
-                            <AiOutlineHome />
-                        </div>
-                    </Link>
-                </Button>
-            </div >
+          
+            <div className={classes.home}>
+                <Home/>
+            </div>
             <div className={classes.admin_panel}>
                 <Admin />
             </div>
