@@ -17,8 +17,6 @@ import CategoryIcon from '@mui/icons-material/Category';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 const useStyles = makeStyles({
     home_button: {
-        border: "1px solid white",
-
         textTransform: 'none',
         backgroundColor: "transparent",
         width: "100%",
@@ -34,7 +32,7 @@ const useStyles = makeStyles({
     homeMenu: {
         display: "block",
         backgroundColor: "white",
-        height:0,
+     
         transform:"none",
         transition: 'transform 0.3s ease-in-out',
 
@@ -66,7 +64,6 @@ const useStyles = makeStyles({
         transform: (props) => (!props.anchorEl ? null : "rotate(90deg)"),
     },
     home_text: {
-        border: "1px solid white",
         width: "100%",
         height: '34px',
         padding: "2px 130px 0px 0px",
