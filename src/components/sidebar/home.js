@@ -30,19 +30,23 @@ const useStyles = makeStyles({
         },
     },
     homeMenu: {
-        display: "block",
-        backgroundColor: "white",
-     
-        transform:"none",
-        transition: 'transform 0.3s ease-in-out',
+        display:"none",
+        transform: "none",
+  transitionTimingFunction: "ease-in-out",
+  transition: "0.3s",
+      
 
 
     },
     homeMenu2: {
         display: "block",
         backgroundColor: "red",
-        transform: (props) => (props.anchorEl ? "translateY(100%)" : "translateY(0%)"),
-
+        transform: (props) => (props.anchorEl ? "translateY(20%)" : "translateY(10%)"),
+        transition: "0.25s",
+        transitionTimingFnction: "ease-out",
+        
+        transform: "translateY(10%)",
+        opacity: 1
     
         },
     icon: {
@@ -128,10 +132,6 @@ function Home() {
                 className={classes.home_button}
                 onClick={handleClick}
             >
-                <div className={classes.home_icon}>
-                    < RoofingIcon />
-
-                </div>
                 <div className={classes.home_text}>
                     Home
                 </div>
@@ -140,7 +140,7 @@ function Home() {
                 </div>
             </Button>
        
-                <div className= {`${classes.homeMenu} ${!anchorEl ?'':  classes.homeMenu2 }`}>
+                <div className= {`${classes.homeMenu} ${anchorEl ? classes.homeMenu2 : '' }`}>
 
                     <div> <span>Home Page</span></div>
                     <div>  <span>Book Club</span></div>

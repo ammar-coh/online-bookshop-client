@@ -11,7 +11,8 @@ import { clearChat } from '../../redux/actions/index'
 import libertyBookslogo from '../../Assets/newlogoliberty-250x67 (1)-250x67.png'
 import Profile from './Profile'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import Home from './home'
+import Home from './home';
+import  MiniDrawer from './drawer'
 const useStyles = makeStyles({
     root: {
         backgroundColor: "#d22129",
@@ -61,7 +62,8 @@ function Sidebar() {
     }
     return (
         <div className={classes.root}>
-            <div className={classes.libertyBooks_logo}>
+            < MiniDrawer/>
+            {/* <div className={classes.libertyBooks_logo}>
                 <img src={libertyBookslogo} />
             </div>
           
@@ -73,7 +75,7 @@ function Sidebar() {
             </div>
             <div className={classes.user_profile}>
                 <Profile />
-            </div>
+            </div> */}
         </div>
     )
 }

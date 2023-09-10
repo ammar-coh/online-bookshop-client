@@ -50,10 +50,6 @@ function Profile() {
                 className={classes.profile_button}
                 onClick={handleClick}
             >
-                <div className={classes.user_icon}>
-                    <PersonOutlinedIcon />
-
-                </div>
                 <div className={classes.profile_text}>
                     My profile
                 </div>
