@@ -57,10 +57,6 @@ function Admin() {
                 className={classes.admin_button}
                 onClick={handleClick}
             >
-                <div className={classes.admin_icon}>
-                    <AdminPanelSettingsOutlinedIcon />
-
-                </div>
                 <div className={classes.admin_text}>
                     Admin
                 </div>

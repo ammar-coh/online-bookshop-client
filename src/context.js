@@ -8,7 +8,7 @@ export const Provider = ({ children }) => {
 const[ recepient_id, setRecepientId] = useState("")
 const [recepient_status,setRecepientStatus] = useState(true)
 const[notification_open, setNotificationOpen] = useState(false)
-
+const[sideBarCollapsed, setSideBarCollapsed] = useState(false)
 
   const contextValue = {
     roomID,
@@ -24,7 +24,9 @@ const[notification_open, setNotificationOpen] = useState(false)
     recepient_status,
     setRecepientStatus,
     notification_open,
-    setNotificationOpen
+    setNotificationOpen,
+    sideBarCollapsed,
+    setSideBarCollapsed
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
