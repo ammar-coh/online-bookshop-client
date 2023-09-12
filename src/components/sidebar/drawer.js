@@ -34,10 +34,14 @@ import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 const drawerWidth = 240;
 const useStyles = makeStyles({
     root: {
-
+        padding:"0px 0px",
     },
     main: {
-        backgroundColor: "#d22129",
+        backgroundColor: "#ffffff",
+        "&.css-7witow-MuiDrawer-docked .MuiDrawer-paper":{
+            backgroundColor: "#ffffff",
+            padding:"0px 0px",
+        }
 
     },
 
@@ -49,7 +53,12 @@ const useStyles = makeStyles({
         width: "100%"
     },
     sidebar_menu_list: {
-        backgroundColor: "#d22129",
+        backgroundColor: "#ffffff",
+        padding:"0px 0px",
+        "& .css-1m5i5w0-MuiButtonBase-root-MuiListItemButton-root":{
+            padding:"0px",
+         
+    }
     },
     listIcons: {
         padding: "0px",
@@ -167,7 +176,7 @@ export default function MiniDrawer() {
                                 }}
                             >
 
-                                <ListItemIcon
+                                {/* <ListItemIcon
                                     className={classes.listIcons}
                                     sx={{
                                         minWidth: 0,
@@ -176,7 +185,7 @@ export default function MiniDrawer() {
                                     }}
                                 >
                                     {index === 0 ? < RoofingIcon style={{ "color": "white" }} /> : index === 1 ? <AdminPanelSettingsOutlinedIcon style={{ "color": "white" }} /> : index === 2 ? <PersonOutlinedIcon style={{ "color": "white" }} /> : null}
-                                </ListItemIcon>
+                                </ListItemIcon> */}
 
 
                                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />

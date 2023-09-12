@@ -32,6 +32,7 @@ const useStyles = makeStyles({
     },
     sidebar_container: {
         width:(props)=>(!props.sideBarCollapsed? "3%":"20%"),
+        backgroundColor:"#ffffff"
     },
     book_container: {
         width: "22.2%!important",
