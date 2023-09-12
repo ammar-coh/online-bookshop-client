@@ -9,6 +9,13 @@ const[ recepient_id, setRecepientId] = useState("")
 const [recepient_status,setRecepientStatus] = useState(true)
 const[notification_open, setNotificationOpen] = useState(false)
 const[sideBarCollapsed, setSideBarCollapsed] = useState(false)
+const [selectedSideBarMenu, setSelectedSideBarMenu] = useState(null);
+const [homeSideBarActive,setHomeSideBarActive]= useState(null)
+const [adminbSideBarActive,setAdminSideBarActive]= useState(null)
+const [profileSideBarActive,setProfileSideBarActive]= useState(null)
+const [anchorElHome, setAnchorElHome] = React.useState(false);
+const [anchorElAdmin, setAnchorElAdmin] = useState(false);
+const [anchorElProfile, setAnchorElProfile] = useState(false);
 
   const contextValue = {
     roomID,
@@ -26,7 +33,17 @@ const[sideBarCollapsed, setSideBarCollapsed] = useState(false)
     notification_open,
     setNotificationOpen,
     sideBarCollapsed,
-    setSideBarCollapsed
+    setSideBarCollapsed,
+    selectedSideBarMenu,
+    setSelectedSideBarMenu,
+    homeSideBarActive,
+    setHomeSideBarActive,
+    adminbSideBarActive,
+    setAdminSideBarActive,
+    profileSideBarActive,setProfileSideBarActive,
+    anchorElHome, setAnchorElHome,
+    anchorElAdmin, setAnchorElAdmin,
+    anchorElProfile, setAnchorElProfile
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;

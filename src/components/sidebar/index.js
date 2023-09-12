@@ -15,7 +15,7 @@ import Home from './home';
 import  MiniDrawer from './drawer'
 const useStyles = makeStyles({
     root: {
-        backgroundColor: "#d22129",
+        backgroundColor: "#ffffff",
         // backgroundColor:"#0dd6b8",
         width: "100%",
         height: "100%",
