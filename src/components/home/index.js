@@ -13,6 +13,9 @@ import Chat from "../../chat";
 import Banner from './banner'
 import Sidebar from '../sidebar/index'
 import Context from '../../context'
+import Grid from '@mui/material/Grid';
+import Button from "@material-ui/core/Button";
+
 const useStyles = makeStyles({
     root: {
         display: "flex",
@@ -28,18 +31,21 @@ const useStyles = makeStyles({
         width: "100%",
     },
     header_content_side: {
-        width: (props)=>(!props.sideBarCollapsed?"97%":"80%")
+        width: "80%",
+        // width: (props) => (!props.sideBarCollapsed ? "97%" : "80%")
     },
     sidebar_container: {
-        width:(props)=>(!props.sideBarCollapsed? "3%":"20%"),
-        backgroundColor:"#ffffff"
+        display: "block",
+        // width: (props) => (!props.sideBarCollapsed ? "3%" : "20%"),
+        width: "20%",
+        backgroundColor: "#ffffff"
     },
     book_container: {
         width: "22.2%!important",
         minHeight: "208px",
     },
     footer: {
-        backgroundColor: "#333533",
+        backgroundColor: "#d22129",
         display: "flex",
         justifyContent: "center",
         paddingTop: "10px"
@@ -80,14 +86,14 @@ function Home({ setUserAvailable, socket }) {
         sideBarCollapsed,
         setSideBarCollapsed
     } = useContext(Context);
-    console.log("collaposed", sideBarCollapsed)
+    // console.log("collaposed", sideBarCollapsed)
     const dispatch = useDispatch();
     const uname = useSelector((state) => state.user_login.details);
     useEffect(() => {
         localStorage.getItem("authorization") && dispatch(getProductsToCartSaga());
     }, [uname?.user?.displayName]);
 
-    const classes = useStyles({sideBarCollapsed});
+    const classes = useStyles({ sideBarCollapsed });
     const details = useSelector((state) => state.productDetails.details);
 
     useEffect(() => {
@@ -98,6 +104,7 @@ function Home({ setUserAvailable, socket }) {
         <div>
             <div className={classes.main}>
                 <div className={classes.sidebar_container}>
+
                     <Sidebar />
                 </div>
                 <div className={classes.header_content_side}>
@@ -137,9 +144,9 @@ function Home({ setUserAvailable, socket }) {
                         <span>
                             <p className={classes.footer_p}>Copyright © 2023, Liberty Books, All Rights Reserved.</p>
                         </span>
-                        <span className={classes.chat}>
+                        {/* <span className={classes.chat}>
                             <Chat socket={socket} />
-                        </span>
+                        </span> */}
 
                     </div>
                 </div>

@@ -11,12 +11,12 @@ const[notification_open, setNotificationOpen] = useState(false)
 const[sideBarCollapsed, setSideBarCollapsed] = useState(false)
 const [selectedSideBarMenu, setSelectedSideBarMenu] = useState(null);
 const [homeSideBarActive,setHomeSideBarActive]= useState(null)
-const [adminbSideBarActive,setAdminSideBarActive]= useState(null)
+const [adminSideBarActive,setAdminSideBarActive]= useState(null)
 const [profileSideBarActive,setProfileSideBarActive]= useState(null)
 const [anchorElHome, setAnchorElHome] = React.useState(false);
 const [anchorElAdmin, setAnchorElAdmin] = useState(false);
 const [anchorElProfile, setAnchorElProfile] = useState(false);
-
+const [subMenuItemActiveState, setSubMenuItemActiveState]= useState("")
   const contextValue = {
     roomID,
     setRoomID,
@@ -38,12 +38,13 @@ const [anchorElProfile, setAnchorElProfile] = useState(false);
     setSelectedSideBarMenu,
     homeSideBarActive,
     setHomeSideBarActive,
-    adminbSideBarActive,
+    adminSideBarActive,
     setAdminSideBarActive,
     profileSideBarActive,setProfileSideBarActive,
     anchorElHome, setAnchorElHome,
     anchorElAdmin, setAnchorElAdmin,
-    anchorElProfile, setAnchorElProfile
+    anchorElProfile, setAnchorElProfile,
+    subMenuItemActiveState, setSubMenuItemActiveState
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
