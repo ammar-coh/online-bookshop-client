@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
@@ -14,90 +13,13 @@ import Context from '../../context'
 import { clearChat } from '../../redux/actions/index'
 import { socket } from '../../socket'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-const useStyles = makeStyles({
-   
-    Accordion: {
-        "&.MuiAccordion-root": {
-            width: '100%',
-            backgroundColor: "#FFFFFF",
-            color: "#333533",
-            padding: "10px 25px",
-            boxShadow: "none"
-        },
-    },
-    AccordionSummary: {
-        "&.MuiAccordionSummary-root": {
-            color: (props) => (props.anchorElProfile && props.profileSideBarActive != null ? "#d22129" : "#333533"),
-            fontFamily: "Montserrat, sans-se",
-            width: '100%',
-            backgroundColor: "#FFFFFF",
-            "&:hover": {
-                color: "#d22129",
-            },
-        }
-    },
-    KeyboardArrowRightIconDiv: {
-        color: (props) => (props.anchorElProfile && props.profileSideBarActive != null ? "#d22129" : "#333533"),
-        "&:hover": {
-            color: "#FFFFFF",
+import {useStylesProfile} from './style'
 
-        },
-    },
-    KeyboardArrowRightIcon: {
-
-        transform: (props) => (props.anchorElProfile && props.profileSideBarActive != null ? "rotate(-90deg)" : "rotate(0deg)"),
-    },
-    button_1: {
-        textTransform: 'none',
-        padding: "0px 0px",
-        width: "100%",
-        justifyContent: "start",
-        color: (props) => (props.anchorElProfile && props.ProfileSideBarActive != null && props.subMenuItemActiveState == 'profile' ? "#d22129" : "#333533"),
-        "&:hover": {
-            color: "#d22129",
-            backgroundColor: "#ffffff"
-        },
-    },
-    menuItem_1: {
-        "&.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root": {
-            color: (props) => (props.anchorElProfile && props.profileSideBarActive != null && props.subMenuItemActiveState == 'profile' ? "#d22129" : "#333533"),
-            "&:hover": {
-                color: "#d22129",
-                backgroundColor: "#ffffff"
-            },
-            padding: "5px 15px"
-        },
-    },
-
-    link_1: {
-        textDecoration: "none",
-        display: "flex",
-        color: (props) => (props.anchorElProfile && props.profileSideBarActive != null && props.subMenuItemActiveState == 'profile' ? "#d22129" : "#333533"),
-        "&:hover": {
-            color: "#d22129",
-            backgroundColor: "#ffffff"
-        },
-        width: "100%"
-    },
-    profile_text: {
-        width: "100%",
-        height: '34px',
-        padding: "2px 80px 0px 0px",
-    },
-
-})
 function Profile() {
     const {
         roomID,
-        setRoomID,
-        currentChat,
         setCurrentChat,
-        isActive,
         setIsActive,
-        recepient_status,
-        notification_open,
-        setNotificationOpen,
-        setRecepientId,
         selectedSideBarMenu,
         setSelectedSideBarMenu,
         setHomeSideBarActive,
@@ -111,7 +33,7 @@ function Profile() {
     } = useContext(Context);
     const dispatch = useDispatch();
 
-    const classes = useStyles({ anchorElProfile, profileSideBarActive, subMenuItemActiveState });
+    const classes = useStylesProfile({ anchorElProfile, profileSideBarActive, subMenuItemActiveState });
     const handleClick = (event) => {
         setAnchorElProfile((previous) => !previous);
     };
@@ -169,7 +91,7 @@ function Profile() {
                                 setSubMenuItemActiveState('profile')
                             }}>
                                     <Link className={classes.link_1} to={{
-                                    pathname: "/",
+                                    pathname: "/profile",
                                 }}>
                                 < LibraryBooksOutlinedIcon />
                                 Profile

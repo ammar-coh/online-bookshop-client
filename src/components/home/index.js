@@ -15,7 +15,8 @@ import Sidebar from '../sidebar/index'
 import Context from '../../context'
 import Grid from '@mui/material/Grid';
 import Button from "@material-ui/core/Button";
-
+import Profile from '../profile/index'
+import Books from '../books/index'
 const useStyles = makeStyles({
     root: {
         display: "flex",
@@ -114,6 +115,9 @@ function Home({ setUserAvailable, socket }) {
                         <Route path="/products/del" exact component={Del} />
                         <Route path="/checkout" exact component={checkout} />
                         <Route path="/chatroom" exact component={Chatroom} />
+                        <Route path="/profile" exact component={Profile} />
+                        <Route path="/books" exact component={Books} />
+
                         <div>
                             <div className={classes.banner}>
                                 <Banner />
