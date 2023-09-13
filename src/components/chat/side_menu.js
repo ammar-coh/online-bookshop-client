@@ -6,15 +6,7 @@ import { socket } from "../../socket";
 import { chatFromDBSaga } from "../../redux/actions/index";
 import Button from "@material-ui/core/Button";
 import { clearChat } from "../../redux/actions/index"; //"../src/redux/actions/index";
-import {
-  deepOrange,
-  deepPurple,
-  green,
-  blue,
-  red,
-  yellow,
-  brown,
-} from "@mui/material/colors";
+
 const useStyles = makeStyles({
   root: {
     display: "grid",

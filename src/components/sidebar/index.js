@@ -1,7 +1,6 @@
 import React  from 'react'
 import { makeStyles } from "@material-ui/core/styles";
 import  SideBar from './drawer'
-
 const useStyles = makeStyles({
     root: {
         backgroundColor: "#ffffff",
@@ -13,11 +12,7 @@ const useStyles = makeStyles({
         padding: " 15px 20px",
 
     },
-  
-  
-   
 })
-
 function Sidebar() {
     const classes = useStyles();
     return (
