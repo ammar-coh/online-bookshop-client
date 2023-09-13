@@ -30,35 +30,38 @@ import RoofingIcon from '@mui/icons-material/Roofing';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
 
-
+import Requestbook from './requestbook'
 const drawerWidth = 240;
 const useStyles = makeStyles({
     root: {
-        padding:"0px 0px",
+        padding: "0px 0px",
     },
     main: {
         backgroundColor: "#ffffff",
-        "&.css-7witow-MuiDrawer-docked .MuiDrawer-paper":{
+        "&.css-7witow-MuiDrawer-docked .MuiDrawer-paper": {
             backgroundColor: "#ffffff",
-            padding:"0px 0px",
+            padding: "0px 0px",
+            border: "2px solid black",
+            height: "auto",
+          
+
         }
 
     },
 
     Sidebar_header: {
         backgroundColor: "#d22129",
-
     },
     libertyBooks_logo: {
         width: "100%"
     },
     sidebar_menu_list: {
         backgroundColor: "#ffffff",
-        padding:"0px 0px",
-        "& .css-1m5i5w0-MuiButtonBase-root-MuiListItemButton-root":{
-            padding:"0px",
-         
-    }
+        padding: "0px 0px",
+        "& .css-1m5i5w0-MuiButtonBase-root-MuiListItemButton-root": {
+            padding: "0px",
+
+        }
     },
     listIcons: {
         padding: "0px",
@@ -73,12 +76,13 @@ const useStyles = makeStyles({
 })
 const openedMixin = (theme) => ({
     width: "20%",
-    backgroundColor: "#d22129",
+    height:"auto",
+    backgroundColor: "#ffffff",
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
     }),
-    overflowX: 'hidden',
+    // overflowX: 'hidden',
 });
 
 const closedMixin = (theme) => ({
@@ -86,7 +90,7 @@ const closedMixin = (theme) => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
     }),
-    overflowX: 'hidden',
+    // overflowX: 'hidden',
     width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up('sm')]: {
         width: `calc(${theme.spacing(8)} + 1px)`,
@@ -121,7 +125,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     }),
 );
 
-export default function MiniDrawer() {
+export default function SideBar() {
     const {
         roomID,
         setRoomID,
@@ -139,33 +143,28 @@ export default function MiniDrawer() {
 
     const classes = useStyles();
     const theme = useTheme();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
     const iconsArray = [<RoofingIcon />, <AdminPanelSettingsOutlinedIcon />, <PersonOutlinedIcon />]
     const handleDrawerOpen = () => {
         setOpen((previous) => !previous);
-        setSideBarCollapsed((previous) => !previous)
+        // setSideBarCollapsed((previous) => !previous)
     };
 
 
     return (
         <Box sx={{ display: 'flex' }}>
-          
 
-            <Drawer className={classes.main} variant="permanent" open={open}>
+
+            <Drawer className={classes.main} variant="permanent" open >
                 <DrawerHeader className={classes.Sidebar_header}>
-                    {!sideBarCollapsed ? null : <div className={classes.libertyBooks_logo}>
+                    <div className={classes.libertyBooks_logo}>
                         <img src={libertyBookslogo} />
-                    </div>}
-                    <IconButton onClick={handleDrawerOpen}>
-                        {!sideBarCollapsed ?
-                            <ChevronRightIcon style={{ color: "white", backgroundColor: "#333533", borderRadius: "50px" }} />
-                            : <ChevronLeftIcon style={{ "color": "white" }}
-                            />}
-                    </IconButton>
+                    </div>
+                  
                 </DrawerHeader>
                 <Divider />
                 <List className={classes.sidebar_menu_list}>
-                    {[<Home />, <Admin />, <Profile />].map((text, index) => (
+                    {[<Home />, <Admin />, <Profile />,<Requestbook/>].map((text, index) => (
                         <ListItem key={text} disablePadding sx={{ display: 'block' }}>
 
                             <ListItemButton
@@ -176,16 +175,7 @@ export default function MiniDrawer() {
                                 }}
                             >
 
-                                {/* <ListItemIcon
-                                    className={classes.listIcons}
-                                    sx={{
-                                        minWidth: 0,
-                                        mr: open ? 3 : 'auto',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {index === 0 ? < RoofingIcon style={{ "color": "white" }} /> : index === 1 ? <AdminPanelSettingsOutlinedIcon style={{ "color": "white" }} /> : index === 2 ? <PersonOutlinedIcon style={{ "color": "white" }} /> : null}
-                                </ListItemIcon> */}
+
 
 
                                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />

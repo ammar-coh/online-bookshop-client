@@ -19,15 +19,16 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
+import GroupsIcon from '@mui/icons-material/Groups';
 const useStyles = makeStyles({
     home_button: {
-        "&:hover":{
+        "&:hover": {
             color: "#FFFFFF",
             backgroundColor: "#d22129"
         },
         "& .MuiButton-text": {
             padding: "6px 0px",
-            "&:hover":{
+            "&:hover": {
                 color: "#FFFFFF",
                 backgroundColor: "#d22129"
             },
@@ -35,7 +36,7 @@ const useStyles = makeStyles({
         "& .MuiButton-label": {
             fontFamily: "Montserrat, sans-se",
             color: "#fff",
-            "&:hover":{
+            "&:hover": {
                 color: "#FFFFFF",
                 backgroundColor: "#d22129"
             },
@@ -68,68 +69,65 @@ const useStyles = makeStyles({
         border: "1px solid black"
     },
     Accordion: {
-        padding:"0px 0px",
-        width:"100%",
+        padding: "10px 25px",
+        width: "100%",
         "&.MuiAccordion-root": {
             backgroundColor: "#FFFFFF",
             color: "#333533",
             fontFamily: "Montserrat, sans-se",
-            "&:hover":{
-                color: "#FFFFFF",
-                backgroundColor: "#d22129"
-            },
-         
-         
-       
+            boxShadow: "none"
+
+
+
         },
     },
     AccordionSummary: {
         "&.MuiAccordionSummary-root": {
-            width:"100%",
-            backgroundColor: (props)=>(props.anchorElHome && props.homeSideBarActive !=null? "#d22129":"#ffffff"),
-            color: (props)=>(props.anchorElHome && props.homeSideBarActive !=null? "#FFFFFF":"#333533"),
+            width: "100%",
+            backgroundColor:"#ffffff",
+            color: (props) => (props.anchorElHome && props.homeSideBarActive != null ? "#d22129" : "#333533"),
             fontFamily: "Montserrat, sans-se",
-            "&:hover":{
-                color: "#FFFFFF",
-                backgroundColor: "#d22129"
+            "&:hover": {
+                color: "#d22129",
+                backgroundColor: "#FFFFFF"
             },
-          
-            },
-          
+
+        },
+
     },
-    AccordionDetails:{
+    AccordionDetails: {
         "&.MuiAccordionDetails-root": {
-            width:"100%",
-            backgroundColor:  (props)=>(props.anchorElHome && props.homeSideBarActive !=null? "#ffffff":"#ffffff"),
-            color: (props)=>(props.anchorElHome && props.homeSideBarActive !=null? "#333533":"#333533"),
+            width: "100%",
+            backgroundColor: (props) => (props.anchorElHome && props.homeSideBarActive != null ? "#ffffff" : "#ffffff"),
+            color: (props) => (props.anchorElHome && props.homeSideBarActive != null ? "#333533" : "#333533"),
             fontFamily: "Montserrat, sans-se",
-            "&:hover":{
+            "&:hover": {
                 color: "#333533",
                 backgroundColor: "#ffffff"
             },
-          
-            },
+
+        },
     },
     KeyboardArrowRightIconDiv: {
-        color:  (props)=>(props.anchorElHome && props.homeSideBarActive !=null? "#FFFFFF":"#333533"),
-     
-        "&:hover":{
-            color: "#FFFFFF",
-          
+        color: (props) => (props.anchorElHome && props.homeSideBarActive != null ? "#d22129" : "#333533"),
+
+        "&:hover": {
+            color: "#d22129",
+
         },
     },
     KeyboardArrowRightIcon: {
-        "&:hover":{
-            color: "#FFFFFF",
-          
+        "&:hover": {
+            color: "#d22129",
+
         },
-        "&.MuiAccordion-region":{
-            "&:hover":{
+        "&.MuiAccordion-region": {
+            "&:hover": {
                 color: "#FFFFFF",
                 backgroundColor: "#d22129"
             },
         },
-        transform: (props) => (props.anchorElHome && props.homeSideBarActive !=null  ? "rotate(-90deg)" : "rotate(0deg)"),
+        transform: (props) => (props.anchorElHome && props.homeSideBarActive != null ? "rotate(-90deg)" : "rotate(0deg)"),
     },
     home_text: {
         width: "100%",
@@ -141,33 +139,64 @@ const useStyles = makeStyles({
 
     },
     home_page: {
-        "&.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root":{
-            color: (props)=>(props.anchorElHome && props.homeSideBarActive !=null? "#d22129":"#333533"),
-            "&:hover":{
+        "&.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root": {
+            color: (props) => (props.anchorElHome && props.homeSideBarActive != null ? "#d22129" : "#333533"),
+            "&:hover": {
                 color: "#d22129",
                 backgroundColor: "#ffffff"
             },
-            padding:"5px 15px"
+            padding: "5px 15px"
         },
-     
+
     },
     home_link: {
         textDecoration: "none",
         display: "flex",
-        color: (props)=>(props.anchorElHome && props.homeSideBarActive !=null? "#d22129":"#333533"),
-        "&:hover":{
+        color: (props) => (props.anchorElHome && props.homeSideBarActive != null && props.subMenuItemActiveState == 'home_page' ? "#d22129" : "#333533"),
+        "&:hover": {
             color: "#d22129",
             backgroundColor: "#ffffff"
         },
-        width:"100%"
+        width: "100%"
     },
-    homeSidebarButton: {
+    secondItem: {
+        "&.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root": {
+            color: (props) => (props.anchorElHome && props.homeSideBarActive != null && props.subMenuItemActiveState == 'book_club' ? "#d22129" : "#333533"),
+            "&:hover": {
+                color: "#d22129",
+                backgroundColor: "#ffffff"
+            },
+            padding: "5px 15px"
+        },
+    },
+    button_1: {
         textTransform: 'none',
         padding: "0px 0px",
-        width:"100%",
-        justifyContent:"start",
-        color: (props)=>(props.anchorElHome && props.homeSideBarActive !=null? "#d22129":"#333533"),
-        "&:hover":{
+        width: "100%",
+        justifyContent: "start",
+        color: (props) => (props.anchorElHome && props.homeSideBarActive != null ? "#d22129" : "#333533"),
+        "&:hover": {
+            color: "#d22129",
+            backgroundColor: "#ffffff"
+        },
+    },
+    link_2: {
+        textDecoration: "none",
+        display: "flex",
+        color: (props) => (props.anchorElHome && props.homeSideBarActive != null && props.subMenuItemActiveState == 'book_club' ? "#d22129" : "#333533"),
+        "&:hover": {
+            color: "#d22129",
+            backgroundColor: "#ffffff"
+        },
+        width: "100%"
+    },
+    button_2: {
+        textTransform: 'none',
+        padding: "0px 0px",
+        width: "100%",
+        justifyContent: "start",
+        color: (props) => (props.anchorElHome && props.homeSideBarActive != null && props.subMenuItemActiveState == 'book_club' ? "#d22129" : "#333533"),
+        "&:hover": {
             color: "#d22129",
             backgroundColor: "#ffffff"
         },
@@ -193,10 +222,12 @@ function Home() {
         setAdminSideBarActive,
         setProfileSideBarActive,
         anchorElHome, setAnchorElHome,
-       setAnchorElAdmin,
-       setAnchorElProfile
+        setAnchorElAdmin,
+        setAnchorElProfile,
+        subMenuItemActiveState, setSubMenuItemActiveState
+
     } = useContext(Context);
-    const classes = useStyles({ anchorElHome, homeSideBarActive });
+    const classes = useStyles({ anchorElHome, homeSideBarActive, subMenuItemActiveState });
     const handleClick = (event) => {
         setAnchorElHome((previous) => !previous);
     };
@@ -222,125 +253,69 @@ function Home() {
     };
     return (
         <div>
-            {/* <Button
-                className={classes.home_button}
-                onClick={handleClick}
-            >
-                <div className={classes.home_text}>
-                    Home
-                </div>
-                <div className={classes.KeyboardArrowRightIconDiv}>
-                    <KeyboardArrowRightIcon className={classes.KeyboardArrowRightIcon} />
-                </div>
-            </Button> */}
-
-<Button style={{padding:"0px",textTransform:"none",width:"100%"}} onClick={handleClick}>
-            <Accordion
-                className={classes.Accordion}
-                expanded={selectedSideBarMenu === 'home'}
-                onChange={handleChange('home')}
-            >
-                <AccordionSummary
-                    expandIcon={
-                        <div className={classes.KeyboardArrowRightIconDiv}>
-                            < KeyboardArrowRightIcon className={classes.KeyboardArrowRightIcon} />
-                        </div>
-                  }
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                    className={classes.AccordionSummary}
+            <Button style={{ padding: "0px", textTransform: "none", width: "100%" }} onClick={handleClick}>
+                <Accordion
+                    className={classes.Accordion}
+                    expanded={selectedSideBarMenu === 'home'}
+                    onChange={handleChange('home')}
                 >
-                    <Typography>Home</Typography>
-                </AccordionSummary>
-                <AccordionDetails className={classes.AccordionDetails}>
-                    <div >
-
-
-                        <MenuItem  className={classes.home_page} onClick={handleClose} disableRipple>
-
-                            {" "}
-
-                            <Button
-                                className={classes.homeSidebarButton}
-                                onClick={() => {
-                                    dispatch(clearChat());
-                                    setIsActive(null);
-                                    setCurrentChat("");
-                                    leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
-                                }}
-                            >
-                                <Link className={classes.home_link} to="/">
-
-                                    {" "}
-                                    <CottageIcon />
-
-
-                                    Home page
-
-
-                                </Link>
-
-                            </Button>
-
-                        </MenuItem>
-
-                        <MenuItem onClick={handleClose} disableRipple>
-                            <CategoryIcon />
-                            Category page
-                        </MenuItem>
-
-                    </div>
-                    {/* <Menu
-                        anchorEl={anchorEl}
-                        open={open}
-                        onClose={handleClose}
-                        elevation={0}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'left',
-                        }}
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
+                    <AccordionSummary
+                        expandIcon={
+                            <div className={classes.KeyboardArrowRightIconDiv}>
+                                < KeyboardArrowRightIcon className={classes.KeyboardArrowRightIcon} />
+                            </div>
+                        }
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                        className={classes.AccordionSummary}
                     >
-                        <MenuItem onClick={handleClose} disableRipple>
-                            <div className={classes.homeIconMainContainer}>
+                        <RoofingIcon style={{padding:" 0px 5px", fontSize:"35px"}}/>
+                        <Typography style={{ padding:"8px 0px"}}>Home</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails className={classes.AccordionDetails}>
+                        <div >
+                            <MenuItem className={classes.home_page} onClick={handleClose} disableRipple>
                                 {" "}
                                 <Button
-                                    className={classes.homeSidebarButton}
+                                    className={classes.button_1}
                                     onClick={() => {
                                         dispatch(clearChat());
                                         setIsActive(null);
                                         setCurrentChat("");
                                         leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
+                                        setSubMenuItemActiveState('home_page')
                                     }}
                                 >
                                     <Link className={classes.home_link} to="/">
-                                        <div className={classes.icon}>
-                                            {" "}
-                                            <CottageIcon />
-                                        </div>
-                                        <div className={classes.home_page_text}>
-                                            Home page
-                                        </div>
-
+                                        {" "}
+                                        <CottageIcon />
+                                        Home page
                                     </Link>
-
                                 </Button>
-                            </div >
-                        </MenuItem>
-                        <MenuItem onClick={handleClose} disableRipple>
-                            <CategoryIcon />
-                            Category page
-                        </MenuItem>
+                            </MenuItem>
+                            <MenuItem className={classes.secondItem} onClick={handleClose} disableRipple>
+                                <Button className={classes.button_2} onClick={() => {
+                                    dispatch(clearChat());
+                                    setIsActive(null);
+                                    setCurrentChat("");
+                                    leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
+                                    setSubMenuItemActiveState('book_club')
+                                }}>
+                                    <Link className={classes.link_2} to={{
+                                        pathname: "/chatroom",
+                                    }}>
+                                        <GroupsIcon />
+                                        Book Club
+                                    </Link>
+                                </Button>
+                            </MenuItem>
 
-                    </Menu> */}
-                </AccordionDetails>
+                        </div>
+                    </AccordionDetails>
 
-            </Accordion>
+                </Accordion>
             </Button>
-        </div>
+        </div >
     )
 }
 
