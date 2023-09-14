@@ -17,34 +17,25 @@ const [anchorElHome, setAnchorElHome] = React.useState(false);
 const [anchorElAdmin, setAnchorElAdmin] = useState(false);
 const [anchorElProfile, setAnchorElProfile] = useState(false);
 const [subMenuItemActiveState, setSubMenuItemActiveState]= useState("")
+const [navBarRoute, setNavBarRoute]= useState("Home")
   const contextValue = {
-    roomID,
-    setRoomID,
-    currentChat,
-    setCurrentChat,
-    isActive,
-    setIsActive,
-    list,
-    setList,
-    recepient_id, 
-    setRecepientId,
-    recepient_status,
-    setRecepientStatus,
-    notification_open,
-    setNotificationOpen,
-    sideBarCollapsed,
-    setSideBarCollapsed,
-    selectedSideBarMenu,
-    setSelectedSideBarMenu,
-    homeSideBarActive,
-    setHomeSideBarActive,
-    adminSideBarActive,
-    setAdminSideBarActive,
+    roomID, setRoomID,
+    currentChat,setCurrentChat,
+    isActive, setIsActive,
+    list, setList,
+    recepient_id,  setRecepientId,
+    recepient_status, setRecepientStatus,
+    notification_open,setNotificationOpen,
+    sideBarCollapsed, setSideBarCollapsed,
+    selectedSideBarMenu, setSelectedSideBarMenu,
+    homeSideBarActive, setHomeSideBarActive,
+    adminSideBarActive,setAdminSideBarActive,
     profileSideBarActive,setProfileSideBarActive,
     anchorElHome, setAnchorElHome,
     anchorElAdmin, setAnchorElAdmin,
     anchorElProfile, setAnchorElProfile,
-    subMenuItemActiveState, setSubMenuItemActiveState
+    subMenuItemActiveState, setSubMenuItemActiveState,
+    navBarRoute, setNavBarRoute
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;

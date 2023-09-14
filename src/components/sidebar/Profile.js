@@ -17,19 +17,14 @@ import {useStylesProfile} from './style'
 
 function Profile() {
     const {
-        roomID,
-        setCurrentChat,
-        setIsActive,
-        selectedSideBarMenu,
-        setSelectedSideBarMenu,
-        setHomeSideBarActive,
-        setAdminSideBarActive,
-        setAnchorElHome,
-        setAnchorElAdmin,
-        profileSideBarActive, setProfileSideBarActive,
+        roomID,setCurrentChat,
+        setIsActive,selectedSideBarMenu,
+        setSelectedSideBarMenu,setHomeSideBarActive,
+        setAdminSideBarActive,setAnchorElHome,
+        setAnchorElAdmin,profileSideBarActive, setProfileSideBarActive,
         anchorElProfile, setAnchorElProfile,
-        subMenuItemActiveState, setSubMenuItemActiveState
-
+        subMenuItemActiveState, setSubMenuItemActiveState,
+        setNavBarRoute
     } = useContext(Context);
     const dispatch = useDispatch();
 
@@ -89,6 +84,7 @@ function Profile() {
                                 setCurrentChat("");
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                 setSubMenuItemActiveState('profile')
+                                setNavBarRoute("Profile")
                             }}>
                                     <Link className={classes.link_1} to={{
                                     pathname: "/profile",

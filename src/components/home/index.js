@@ -114,7 +114,7 @@ function Home({ setUserAvailable, socket }) {
                         <Route path="/products/add" exact component={AddProduct} />
                         <Route path="/products/del" exact component={Del} />
                         <Route path="/checkout" exact component={checkout} />
-                        <Route path="/chatroom" exact component={Chatroom} />
+                        <Route path="/book club" exact component={Chatroom} />
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/books" exact component={Books} />
 

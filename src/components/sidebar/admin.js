@@ -32,7 +32,8 @@ function Admin() {
         anchorElAdmin, setAnchorElAdmin,
         setAnchorElHome,
         setAnchorElProfile,
-        subMenuItemActiveState, setSubMenuItemActiveState
+        subMenuItemActiveState, setSubMenuItemActiveState,
+        setNavBarRoute
     } = useContext(Context);
     const dispatch = useDispatch();
     const classes = useStylesAdmin({ anchorElAdmin, adminSideBarActive, subMenuItemActiveState });
@@ -89,6 +90,7 @@ function Admin() {
                                 setCurrentChat("");
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                 setSubMenuItemActiveState('books')
+                                setNavBarRoute("Book Section")
                             }}>
                                 <Link className={classes.link_1} to={{
                                     pathname: "/books",

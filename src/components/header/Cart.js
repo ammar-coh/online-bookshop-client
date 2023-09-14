@@ -5,10 +5,11 @@ import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 const useStyles = makeStyles({
   root: {
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "start",
     top: "0px",
     width: "100%",
     padding: "0px 0px 19px 0px",
@@ -19,14 +20,14 @@ const useStyles = makeStyles({
   },
 
   icon: {
-    color: "white",
+    color: "#777d74",
     marginLeft: "0px",
     marginTop: "10px",
 
   },
   count: {
     marginTop: "0px",
-    color: "white",
+    color: "#777d74",
     textDecoration: "none",
     margin: "0px",
 
@@ -36,7 +37,7 @@ const useStyles = makeStyles({
   checkout_link: {
     textDecoration: "none",
     // border: "1px solid white",
-    color: "white",
+    color: "#777d74",
   },
 });
 const theme = createTheme({
@@ -54,10 +55,13 @@ function Cart() {
     <div className={classes.root}>
       <span className={classes.icon}>
         <Link className={classes.checkout_link} to="/checkout">
-        <ThemeProvider theme={theme}>
-          <Badge badgeContent={counts.totalItems} color="primary">
-            <ShoppingCartIcon />
-          </Badge>
+          <ThemeProvider theme={theme}>
+            <Badge
+              badgeContent={counts.totalItems}
+              color="error"
+              fontSize="small">
+              < ShoppingCartOutlinedIcon fontSize="small" />
+            </Badge>
           </ThemeProvider>
         </Link>
       </span>

@@ -31,8 +31,8 @@ function Home() {
         anchorElHome, setAnchorElHome,
         setAnchorElAdmin,
         setAnchorElProfile,
-        subMenuItemActiveState, setSubMenuItemActiveState
-
+        subMenuItemActiveState, setSubMenuItemActiveState,
+        setNavBarRoute
     } = useContext(Context);
     const classes = useStylesHome({ anchorElHome, homeSideBarActive, subMenuItemActiveState });
     const handleClick = (event) => {
@@ -91,6 +91,7 @@ function Home() {
                                         setCurrentChat("");
                                         leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                         setSubMenuItemActiveState('home_page')
+                                        setNavBarRoute("Home")
                                     }}
                                 >
                                     <Link className={classes.home_link} to="/">
@@ -107,9 +108,10 @@ function Home() {
                                     setCurrentChat("");
                                     leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                     setSubMenuItemActiveState('book_club')
+                                    setNavBarRoute("Book Club")
                                 }}>
                                     <Link className={classes.link_2} to={{
-                                        pathname: "/chatroom",
+                                        pathname: "/book club",
                                     }}>
                                         <GroupsIcon />
                                         Book Club

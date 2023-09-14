@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Badge from "@mui/material/Badge";
-import MailIcon from "@mui/icons-material/Mail";
 import Paper from "@mui/material/Paper";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import List from "@mui/material/List";
@@ -15,40 +13,8 @@ import { socket } from "../../socket";
 import { useHistory } from "react-router-dom";
 import { chatFromDBSaga } from "../../redux/actions/index";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const useStyles = makeStyles({
-  root: {
-    padding: "0px 15px",
-    width: "100%"
-  },
-  chatNotification: {},
-  notificationMailIcon: { color: "white" },
-  notification_badge: { width: "100%" },
-  notification_list: {
-    position: "absolute",
-    zIndex: 9999,
-    width: "19%",
-    "& .css-h4y409-MuiList-root": { display: "grid", },
-  },
-  button: {
-    width: "100%",
-    textTransform: "none",
-    "&:hover": {
-      backgroundColor: "rgb (247 ,249 249)",
-      color: "#333533"
-    },
-    "& .css-10hburv-MuiTypography-root": {
-      fontSize: "15px",
-      fontWeight:700,
-      fontFamily: "Montserrat, sans-se"
-    },
-    "& .css-1phucj-MuiTypography-root":{
-      fontSize: "15px",
-      fontFamily: "Montserrat, sans-se",
-      color:"#536471",
-    }
-  },
-});
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import {useStylesChatNotification} from './style'
 function Chat_Notifications({
   roomID,
   setRoomID,
@@ -58,7 +24,7 @@ function Chat_Notifications({
   setNotificationOpen,
   setRecepientId
 }) {
-  const classes = useStyles();
+  const classes = useStylesChatNotification();
   const history = useHistory();
   const [show_user_notifications, setShowUserNotifications] = useState(false);
   const user = useSelector((state) => state.user_login.details);
@@ -122,7 +88,7 @@ function Chat_Notifications({
     setCurrentChat(data.displayName);
     dispatch(chatFromDBSaga(dataObjectForFetchChatAPI));
     setRecepientId(data?.sender_id)
-    history.push("/chatroom");
+    history.push("/book club");
     setShowUserNotifications(false);
     await socket.emit("delete_notification_message", {
       userID: user?.user?.id,
@@ -155,14 +121,17 @@ function Chat_Notifications({
         <Button onClick={() => {
           openNotifications()
           setNotificationOpen((previous) => !previous)
-        }}>
+        }}
+        className={classes.button_1}
+        >
           {" "}
           <ThemeProvider theme={theme}>
             <Badge
               badgeContent={my_notifications.recipient_id == user?.user?.id ? my_notifications.total_notifications : 0}
-              color="primary"
+              color="error"
+              fontSize = "small"
             >
-              <MailIcon className={classes.notificationMailIcon} />
+              < MailOutlineIcon fontSize="small"  className={classes.notificationMailIcon} />
             </Badge>
           </ThemeProvider>
         </Button>
