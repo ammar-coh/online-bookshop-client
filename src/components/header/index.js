@@ -1,102 +1,36 @@
 import React, { useState, useEffect, useContext } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Cart from "./Cart";
-import Sign_in from "./sign_in";
-import {
-  sign_in_reducer,
-  resetCart,
-} from "../../redux/actions";
-import { AiOutlineHome } from "react-icons/ai";
 import { clearChat } from "../../redux/actions/index"; //"../src/redux/actions/index";
 import Chat_Notifications from "./chat_notification";
 import Context from "../../context";
 import axios from "axios";
 import { socket } from "../../socket";
-
-const useStyles = makeStyles({
-  root: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-    zIndex: 3,
-    height: "65px",
-    backgroundColor:"#333533"
-  },
-
-  home_link: {
-    textDecoration: "none",
-    display: "flex",
-  },
-  sign_out: {
-    backgroundColor: "#ffffff",
-    color:"#333533",
-    fontSize: "10px",
-    height: "25px",
-    "&:hover": {
-      color: "#d22129",
-      backgroundColor: "white"
-  }
-  },
-  icon: {
-    fontSize: "20px",
-    color: "white",
-    width: "20px",
-    margin: "auto",
-  },
-  chatNotificationContainer: {
-    display: "flex",
-    padding: "14px 0px 13px 0px",
-    width: "100%",
-    justifyContent: "center"
-  },
-  notificationMailIcon: { color: "white" },
-  sign_in_container: {
-    width: "100%",
-    display:"flex",
-    justifyContent:"center"
-
-  },
-  signOutButtonContainer: {
-    justifyContent: "flex-start",
-    width: "100%",
-    padding: "20px",
-    display: "flex",
-  },
-  homeIconMainContainer: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "flex-end",
-    padding: "20px",
-  },
-  cart_icon: {
-    display: "flex",
-    justifyContent: "center",
-    width: "100%"
-  },
-
-});
+import NavBarRoute from './headerNavTitle'
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
+import AccountMenu from './profile'
+import {useStylesIndex} from './style'
 
 function Header() {
-  const classes = useStyles();
+  const classes = useStylesIndex();
   const [list, setList] = useState([]);
   const dispatch = useDispatch();
-  const history = useHistory();
   const user = useSelector((state) => state.user_login.details);
   const [isSticky, setIsSticky] = useState(false);
+  let user_name = JSON.parse(localStorage.getItem("for_reducer"))
+  console.log("usernamelocal", user_name)
   const {
-    roomID,
-    setRoomID,
-    currentChat,
-    setCurrentChat,
-    isActive,
-    setIsActive,
+    roomID, setRoomID,
+    currentChat, setCurrentChat,
+    isActive, setIsActive,
     recepient_status,
-    notification_open,
-    setNotificationOpen,
-    setRecepientId
+    notification_open, setNotificationOpen,
+    setRecepientId,
+    navBarRoute, setNavBarRoute
   } = useContext(Context);
   const leaveAllRooms = async (data) => {
 
@@ -126,6 +60,8 @@ function Header() {
   useEffect(() => {
     localStorage.getItem("authorization") && allUsers();
   }, [notification_open]);
+
+
   return (
     <div
       className={classes.root}
@@ -133,79 +69,67 @@ function Header() {
     >
       <div className={classes.homeIconMainContainer}>
         {" "}
-        <Button
-          onClick={() => {
-            dispatch(clearChat());
-            setIsActive(null);
-            setCurrentChat("");
-            leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
-          }}
-        >
-          <Link className={classes.home_link} to="/">
-            <div className={classes.icon}>
-              {" "}
-              <AiOutlineHome />
-            </div>
-          </Link>
-        </Button>
+        <NavBarRoute />
       </div>
-      <div className={classes.sign_in_container}>
-        <Sign_in />
-      </div>
-      <div className={classes.cart_icon}>
-        <Button
-          onClick={() => {
-            dispatch(clearChat());
-            setIsActive(null);
-            setCurrentChat("");
-            leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
-          }}>
-          <Cart />
-        </Button>
-      </div>
-
-      <div className={classes.chatNotificationContainer}>
-        <Chat_Notifications
-          roomID={roomID}
-          setRoomID={setRoomID}
-          currentChat={currentChat}
-          setCurrentChat={setCurrentChat}
-          isActive={isActive}
-          setIsActive={setIsActive}
-          list={list}
-          recepient_status={recepient_status}
-          setNotificationOpen={setNotificationOpen}
-          setRecepientId={setRecepientId}
+      <div className={classes.searchBarDiv}>
+        <InputBase
+          className={classes.searchBar}
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="Search..."
+          inputProps={{ 'aria-label': 'search google maps' }}
+          startAdornment={<IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+            <SearchIcon />
+          </IconButton>}
         />
       </div>
-
-      <div className={classes.signOutButtonContainer}>
-        {Object.keys(user).length > 0 ? (
+      <div className={classes.headerThirdContainer}>
+        <div className={classes.chatNotificationContainer}>
+          <Chat_Notifications
+            roomID={roomID}
+            setRoomID={setRoomID}
+            currentChat={currentChat}
+            setCurrentChat={setCurrentChat}
+            isActive={isActive}
+            setIsActive={setIsActive}
+            list={list}
+            recepient_status={recepient_status}
+            setNotificationOpen={setNotificationOpen}
+            setRecepientId={setRecepientId}
+          />
+        </div>
+        <div className={classes.cartContainer}>
           <Button
-            className={classes.sign_out}
-            size="small"
-            onClick={() => {
-              leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
-              dispatch(sign_in_reducer({}));
-              dispatch(resetCart());
-              localStorage.removeItem("authorization");
-              localStorage.removeItem("cart");
-              localStorage.removeItem("for_reducer");
-              localStorage.removeItem("roomID")
-              dispatch(clearChat());
-              setIsActive(null)
-              dispatch(clearChat());
-              setCurrentChat("")
-              history.push("/login_page");
+          className={classes.cartButton}
+            style={{
+              padding: "0px 0px 0px 30px",
             }}
-          >
-            {" "}
-            Sign out{" "}
+            onClick={() => {
+              dispatch(clearChat());
+              setIsActive(null);
+              setCurrentChat("");
+              leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
+            }}>
+            <Cart />
           </Button>
-        ) : null}
+        </div>
+        <div className={classes.profile}>
+          <AccountMenu />
+        </div>
+        <div className={classes.userName}>
+          <span style={{
+            fontFamily: "Montserrat, sans-se",
+            fontSize: "18px",
+            color: "##333533",
+            fontWeight: 500
+          }}>
+            {user?.user?.displayName.replace(/\b\w/g, (match) => match.toUpperCase())}
+          </span>
+        </div>
       </div>
     </div>
   );
 }
 
 export default Header;
+
+
