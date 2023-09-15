@@ -33,11 +33,9 @@ const useStyles = makeStyles({
     },
     header_content_side: {
         width: "80%",
-        // width: (props) => (!props.sideBarCollapsed ? "97%" : "80%")
     },
     sidebar_container: {
         display: "block",
-        // width: (props) => (!props.sideBarCollapsed ? "3%" : "20%"),
         width: "20%",
         backgroundColor: "#ffffff"
     },
@@ -57,9 +55,7 @@ const useStyles = makeStyles({
         fontSize: "12px",
         textAlign: "center",
         margin: "20px"
-
     },
-
     banner: {
         justifyContent: "center",
         padding: "10px 340px",
@@ -69,23 +65,17 @@ const useStyles = makeStyles({
     chat: {
         padding: "10px 0px 0px 0px",
     }
-
 });
 
 function Home({ setUserAvailable, socket }) {
     const {
-        roomID,
-        setRoomID,
-        currentChat,
-        setCurrentChat,
-        isActive,
-        setIsActive,
+        roomID,setRoomID,
+        currentChat,setCurrentChat,
+        isActive,setIsActive,
         recepient_status,
-        notification_open,
-        setNotificationOpen,
+        notification_open,setNotificationOpen,
         setRecepientId,
-        sideBarCollapsed,
-        setSideBarCollapsed
+        sideBarCollapsed,setSideBarCollapsed
     } = useContext(Context);
     // console.log("collaposed", sideBarCollapsed)
     const dispatch = useDispatch();
