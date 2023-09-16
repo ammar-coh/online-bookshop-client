@@ -10,7 +10,7 @@ You can customize the styling and transition duration to fit your project's desi
 }
 .app body {
   overflow-y: auto;
- 
+ background-color: #fbfcff;;
   /* hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none;
   scrollbar-width: none;

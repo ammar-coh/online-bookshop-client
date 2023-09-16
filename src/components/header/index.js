@@ -22,7 +22,6 @@ function Header() {
   const user = useSelector((state) => state.user_login.details);
   const [isSticky, setIsSticky] = useState(false);
   let user_name = JSON.parse(localStorage.getItem("for_reducer"))
-  console.log("usernamelocal", user_name)
   const {
     roomID, setRoomID,
     currentChat, setCurrentChat,

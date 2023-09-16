@@ -33,6 +33,7 @@ const useStyles = makeStyles({
     },
     header_content_side: {
         width: "80%",
+        backgroundColor: "#fbfcff",
     },
     sidebar_container: {
         display: "block",
