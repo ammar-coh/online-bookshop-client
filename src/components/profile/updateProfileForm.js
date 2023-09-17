@@ -65,7 +65,6 @@ function InformationForm() {
                     </Grid>
                 </Grid>
             </Grid>
-
             <Grid className={classes.informationSection2}>
                 <Grid style={{ display: "block", width: "100%" }}>
                     <Typography>Last Name</Typography>

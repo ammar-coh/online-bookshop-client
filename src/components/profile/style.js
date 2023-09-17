@@ -10,7 +10,7 @@ const useStylesIndex = makeStyles({
     titleText: {
     },
     mainBox: {
-        height: "auto"
+        height: "auto",
     },
     box2: {
         // border:"1px solid black",
@@ -90,3 +90,21 @@ const useStylesInformation = makeStyles({
     },
 });
 export { useStylesInformation }
+
+const useStylesChangePassword = makeStyles({
+    mainBox: {
+        border:"1px solid black",
+        display:"flex",
+        justifyContent:"",
+        width:"100%",
+          padding: '0px 50px',
+    },
+    informationSection1: {
+        width: "50%",
+        border:"1px solid red",
+        // padding: '0px 50px',
+        height: "auto",
+        width:"100%",
+    },
+});
+export {useStylesChangePassword }

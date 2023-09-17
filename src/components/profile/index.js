@@ -17,13 +17,13 @@ import InputLabel from '@mui/material/InputLabel';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Avatar from '@mui/material/Avatar';
 import InformationForm from './updateProfileForm'
-
+import  ChangePassword from './changePassword'
 function Profile() {
   const [isUserImgSelected, setIsUserImgSelected] = useState(false);
   const dispatch = useDispatch();
   const [userProfileImg, setUserProfileImg] = useState();
   const [updateProfileLoading, setUpdateProfileLoading] = useState(false);
-  const [menuPersonalInformation, setMenuPersonalInformation] = useState(false)
+  const [menuPersonalInformation, setMenuPersonalInformation] = useState(true)
   const [menuChangePassword, setMenuChangePassword] = useState(false)
   const classes = useStylesIndex({ menuPersonalInformation, menuChangePassword })
   const { register, handleSubmit, control, formState: { errors }, } = useForm({
@@ -64,8 +64,8 @@ function Profile() {
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box style={{ padding: "90px 40px 200px 40px", height: "100vh" }}>
         <Box className={classes.mainBox}>
-          <Paper elevation={3} style={{ height: "100%" }} >
-            <Box className={classes.titleBox}>
+          <Paper elevation={3} style={{ height: "auto" }} >
+            {/* <Box className={classes.titleBox}>
               <Typography variant="h5" className={classes.titleText}>
                 <span
                   style={{
@@ -74,7 +74,7 @@ function Profile() {
                   Profile
                 </span>
               </Typography>
-            </Box>
+            </Box> */}
             <Divider />
             <Box className={classes.box4}>
               <Button
@@ -121,6 +121,8 @@ function Profile() {
                 </Grid>
               </Button>
             </Box>
+            {menuPersonalInformation? ( 
+              <div>
             <Box className={classes.box2}>
               <Grid className={classes.photoDiv}>
                 <Grid className={classes.photoHeading}>
@@ -168,7 +170,8 @@ function Profile() {
             </Box>
             <Box className={classes.box3}>
               <InformationForm />
-            </Box>
+            </Box></div>):
+            <ChangePassword/>}
           </Paper>
         </Box>
       </Box>
