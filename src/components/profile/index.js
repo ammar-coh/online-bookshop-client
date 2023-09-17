@@ -16,15 +16,27 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Avatar from '@mui/material/Avatar';
+import InformationForm from './updateProfileForm'
+
 function Profile() {
   const [isUserImgSelected, setIsUserImgSelected] = useState(false);
   const dispatch = useDispatch();
   const [userProfileImg, setUserProfileImg] = useState();
   const [updateProfileLoading, setUpdateProfileLoading] = useState(false);
-  const classes = useStylesIndex()
+  const [menuPersonalInformation, setMenuPersonalInformation] = useState(false)
+  const [menuChangePassword, setMenuChangePassword] = useState(false)
+  const classes = useStylesIndex({ menuPersonalInformation, menuChangePassword })
   const { register, handleSubmit, control, formState: { errors }, } = useForm({
     criteriaMode: "all"
   });
+  const handlePersonalInformationButton = () => {
+    setMenuPersonalInformation(true)
+    setMenuChangePassword(false)
+  }
+  const handleChangePassword = () => {
+    setMenuChangePassword(true)
+    setMenuPersonalInformation(false)
+  }
   const changeHandler = (event) => {
     const image = event.target.files[0];
     if (!image) {
@@ -64,18 +76,52 @@ function Profile() {
               </Typography>
             </Box>
             <Divider />
-            <Box className={classes.mainBox2}>
-              <Grid className={classes.informationSectionDiv} style={{ display: "block" }}>
-                <Grid style={{ display: "block" }}>
-                  <Typography>Email</Typography>
-                  <TextField label="Outlined" variant="outlined" />
+            <Box className={classes.box4}>
+              <Button
+             
+                className={classes.button1}
+                onClick={handlePersonalInformationButton}>
+                <Grid
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "50%",
+                    padding: "20px"
+                  }}>
+                  <Typography>
+                    <span
+                      style={{
+                        fontFamily: "Montserrat, sans-se",
+                      }}>
+                      Personal Information
+                    </span>
+                  </Typography>
                 </Grid>
-                <Grid>
-                  <Typography>User name</Typography>
-                  <TextField label="Filled" variant="filled" />
+              </Button>
+              <Button
+                className={classes.button2}
+                onClick={handleChangePassword}
+                disableHoverListener
+              >
+                <Grid
+                  style={{
+                    padding: "20px",
+                    width: "50%",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}>
+                  <Typography>
+                    <span
+                      style={{
+                        fontFamily: "Montserrat, sans-se",
+                      }}>
+                      Change Password
+                    </span>
+                  </Typography>
                 </Grid>
-
-              </Grid>
+              </Button>
+            </Box>
+            <Box className={classes.box2}>
               <Grid className={classes.photoDiv}>
                 <Grid className={classes.photoHeading}>
                   <Typography>
@@ -94,7 +140,7 @@ function Profile() {
                         URL.createObjectURL(userProfileImg) :
                         sample}
                       sx={{ width: "100%", height: "90%" }}
-                      // style={{ border: "1px solid green" }}
+                    // style={{ border: "1px solid green" }}
                     />
                     <Input
                       type='file'
@@ -103,13 +149,12 @@ function Profile() {
                       style={{ display: "none" }}
                       onChange={changeHandler}
                       id="profileImg"
-
                     />
                     <InputLabel htmlFor="profileImg" style={{
                       fontSize: "20px",
                       width: "100%",
                       padding: "0px 0px 0px 65px",
-                      marginTop:"-15px"
+                      marginTop: "-15px"
                     }}>
                       <CloudUploadIcon style={{
                         fontSize: "20px",
@@ -117,19 +162,12 @@ function Profile() {
                       }}
                       />
                     </InputLabel>
-                    {/* <img
-                      style={{ borderRadius: "70px", objectFit: "contain" }}
-                      src={isUserImgSelected ?
-                        URL.createObjectURL(userProfileImg) :
-                        sample}
-                      alt="Selected"
-                      width="100%"
-                      height="100%"
-                    /> */}
                   </Grid>
-
                 </Paper>
               </Grid>
+            </Box>
+            <Box className={classes.box3}>
+              <InformationForm />
             </Box>
           </Paper>
         </Box>
@@ -139,3 +177,7 @@ function Profile() {
 }
 
 export default Profile
+
+
+
+
