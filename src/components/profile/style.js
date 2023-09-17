@@ -1,7 +1,33 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStylesIndex = makeStyles({
-    root: {
+    submitButton:{
+        color:"#FFF",
+        backgroundColor:"#d22129",
+        textTransform:"none",
+        width:"100%",
+        "&:hover":{
+            color:"#fff",
+            backgroundColor:"#d22129",
+            boxShadow: "0 0px 5px rgba(210,33,41)"
+        }
+    },
+    box5:{
+        // border:"1px solid green",
+        display:'flex',
+        justifyContent:"flex-start",
+        padding:"0px 0px 0px 0px",
+        width:"100%"
+    },
+    cancelButton:{
+        color:"#333533",
+        backgroundColor:"#fff5f4",
+        textTransform:"none",
+        width:"100%",
+        "&:hover":{
+            color:"#d22129",
+            backgroundColor:"#fff5f4"
+        }
     },
     titleBox: {
         display: "flex",
@@ -78,14 +104,13 @@ const useStylesInformation = makeStyles({
     },
     informationSection1: {
         width: "50%",
-        // border:"1px solid black",
-        padding: '0px 50px',
+        padding: '0px 30px',
         height: "auto"
     },
     informationSection2: {
         width: "50%",
         // border:"1px solid blue",
-        padding: '0px 50px',
+        padding: '0px 30px',
         height: "auto"
     },
 });
@@ -98,6 +123,7 @@ const useStylesChangePassword = makeStyles({
         justifyContent:"",
         width:"100%",
           padding: '0px 50px',
+          height:"100%"
     },
     informationSection1: {
         width: "50%",
