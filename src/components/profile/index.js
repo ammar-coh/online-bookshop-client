@@ -17,7 +17,7 @@ import InputLabel from '@mui/material/InputLabel';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Avatar from '@mui/material/Avatar';
 import InformationForm from './updateProfileForm'
-import  ChangePassword from './changePassword'
+import ChangePassword from './changePassword'
 function Profile() {
   const [isUserImgSelected, setIsUserImgSelected] = useState(false);
   const dispatch = useDispatch();
@@ -78,7 +78,7 @@ function Profile() {
             <Divider />
             <Box className={classes.box4}>
               <Button
-             
+
                 className={classes.button1}
                 onClick={handlePersonalInformationButton}>
                 <Grid
@@ -121,57 +121,72 @@ function Profile() {
                 </Grid>
               </Button>
             </Box>
-            {menuPersonalInformation? ( 
+            {menuPersonalInformation ? (
               <div>
-            <Box className={classes.box2}>
-              <Grid className={classes.photoDiv}>
-                <Grid className={classes.photoHeading}>
-                  <Typography>
-                    Photo
-                  </Typography>
-                </Grid>
-                <Paper className={classes.photoPaper} variant="outlined" elevation={6} sx={{
-                  width: "100%",
-                  padding: "5px 5px 0px 5px",
-                  //  border:"1px solid blue"
-                }}>
-                  <Grid className={classes.photo} >
-                    <Avatar
-                      alt="Selected"
-                      src={isUserImgSelected ?
-                        URL.createObjectURL(userProfileImg) :
-                        sample}
-                      sx={{ width: "100%", height: "90%" }}
-                    // style={{ border: "1px solid green" }}
-                    />
-                    <Input
-                      type='file'
-                      name='profileImg'
-                      accept='image/*'
-                      style={{ display: "none" }}
-                      onChange={changeHandler}
-                      id="profileImg"
-                    />
-                    <InputLabel htmlFor="profileImg" style={{
-                      fontSize: "20px",
+                <Box className={classes.box2}>
+                  <Grid className={classes.photoDiv}>
+                    <Grid className={classes.photoHeading}>
+                      <Typography>
+                        Photo
+                      </Typography>
+                    </Grid>
+                    <Paper className={classes.photoPaper} variant="outlined" elevation={6} sx={{
                       width: "100%",
-                      padding: "0px 0px 0px 65px",
-                      marginTop: "-15px"
+                      padding: "5px 5px 0px 5px",
+                      //  border:"1px solid blue"
                     }}>
-                      <CloudUploadIcon style={{
-                        fontSize: "20px",
-                        borderRadius: "50%"
-                      }}
-                      />
-                    </InputLabel>
+                      <Grid className={classes.photo} >
+                        <Avatar
+                          alt="Selected"
+                          src={isUserImgSelected ?
+                            URL.createObjectURL(userProfileImg) :
+                            sample}
+                          sx={{ width: "100%", height: "90%" }}
+                        // style={{ border: "1px solid green" }}
+                        />
+                        <Input
+                          type='file'
+                          name='profileImg'
+                          accept='image/*'
+                          style={{ display: "none" }}
+                          onChange={changeHandler}
+                          id="profileImg"
+                        />
+                        <InputLabel htmlFor="profileImg" style={{
+                          fontSize: "20px",
+                          width: "100%",
+                          padding: "0px 0px 0px 65px",
+                          marginTop: "-15px"
+                        }}>
+                          <CloudUploadIcon style={{
+                            fontSize: "20px",
+                            borderRadius: "50%"
+                          }}
+                          />
+                        </InputLabel>
+                      </Grid>
+                    </Paper>
                   </Grid>
-                </Paper>
+                </Box>
+                <Box className={classes.box3}>
+                  <InformationForm />
+                </Box></div>) :
+              <ChangePassword />}
+            <Box className={classes.box5}>
+              <Grid style={{padding:"0px 0px 10px 70px",
+              width:"16%",
+              // border:"1px solid blue"
+              }}>
+                <Button className={classes.submitButton}>
+                  Submit
+                </Button>
+              </Grid>
+              <Grid style={{padding:"0px 0px 10px 50px",width:"15%"}}>
+                <Button className={classes.cancelButton}>
+                  Cancel
+                </Button>
               </Grid>
             </Box>
-            <Box className={classes.box3}>
-              <InformationForm />
-            </Box></div>):
-            <ChangePassword/>}
           </Paper>
         </Box>
       </Box>
