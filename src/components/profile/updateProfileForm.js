@@ -26,26 +26,29 @@ function InformationForm() {
                         padding: "0px 0px 5px 0px",
                     }}>First Name</Typography>
                     <TextField
-                        style={{ width: "100%" }}
+                        className={classes.textField}
+                        fullWidth
                     />
                 </Grid>
                 <Grid>
                     <Typography style={{ padding: "15px 0px 5px 0px" }}>User name</Typography>
                     <TextField
-                        style={{ width: "100%" }}
+                        className={classes.textField}
+                        fullWidth
                     />
                 </Grid>
                 <Grid style={{ display: "block", width: "100%" }}>
                     <Typography style={{ padding: "15px 0px 5px 0px" }}>Email</Typography>
                     <TextField
                         type="email"
-                        style={{ width: "100%" }} />
+                        className={classes.textField}
+                        fullWidth
+                    />
                 </Grid>
                 <Grid style={{ display: "block", width: "100%" }}>
                     <Typography style={{ padding: "15px 0px 5px 0px" }}>Gender:</Typography>
                     <Grid
                         style={{
-                            // border: "1px solid red",
                             display: "flex",
                             justifyContent: "flex-start",
                             padding: "0px"
@@ -71,7 +74,9 @@ function InformationForm() {
                 <Grid style={{ display: "block", width: "100%" }}>
                     <Typography style={{ padding: "0px 0px 5px 0px" }}>Last Name</Typography>
                     <TextField
-                        style={{ width: "100%" }} />
+                        className={classes.textField}
+                        fullWidth
+                    />
                 </Grid>
                 <Grid style={{ display: "block", width: "100%" }}>
                     <Typography style={{ padding: "15px 0px 5px 0px" }}>Country:</Typography>
@@ -84,7 +89,12 @@ function InformationForm() {
                         id="demo-simple-select"
                         // value={age}
                         // onChange={handleChange}
-                        style={{ width: "100%" }}
+                        fullWidth
+                        sx={{
+                            '& .MuiSelect-select': { border: '1px solid #333533' },
+                            "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" },
+                            "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" }
+                        }}
                     >
                         <MenuItem value={12 - 18}>12-18</MenuItem>
                         <MenuItem value={19 - 25}>19-25</MenuItem>

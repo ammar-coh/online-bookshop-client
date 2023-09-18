@@ -45,13 +45,13 @@ const useStyles = makeStyles({
         minHeight: "208px",
     },
     footer: {
-        backgroundColor: "#d22129",
+        backgroundColor: "#fbfcff",
         display: "flex",
         justifyContent: "center",
-        paddingTop: "10px"
+        paddingTop: "10px",
     },
     footer_p: {
-        color: "#ffffff",
+        color: "#333533",
         fontFamily: "Montserrat, sans-se",
         fontSize: "12px",
         textAlign: "center",
