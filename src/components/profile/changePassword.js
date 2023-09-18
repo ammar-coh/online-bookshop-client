@@ -41,7 +41,9 @@ function ChangePassword() {
     <Box className={classes.mainBox}>
       <Grid className={classes.informationSection1} style={{ display: "block" }}>
         <Grid style={{ display: "block", width: "100%" }}>
-          <Typography>Current Password:</Typography>
+          <Typography style={{
+            padding: "0px 0px 5px 0px",
+          }}>Current Password:</Typography>
           <TextField
             type={showCurrentPassword ? 'text' : 'password'}
             variant="outlined"
@@ -58,10 +60,10 @@ function ChangePassword() {
                 </InputAdornment>
               ),
             }}
-            style={{ width: "100%" }} />
+           className={classes.textField}/>
         </Grid>
         <Grid>
-          <Typography>New Password:</Typography>
+          <Typography style={{ padding: "15px 0px 5px 0px" }}>New Password:</Typography>
           <TextField
             style={{ width: "100%" }}
             type={showNewPassword ? 'text' : 'password'}
@@ -77,10 +79,11 @@ function ChangePassword() {
                   </IconButton>
                 </InputAdornment>
               ),
-            }} />
+            }}
+            className={classes.textField}/>
         </Grid>
         <Grid style={{ display: "block", width: "100%" }}>
-          <Typography>Confirm Password:</Typography>
+          <Typography style={{ padding: "15px 0px 5px 0px" }}>Confirm Password:</Typography>
           <TextField
             style={{ width: "100%" }}
             type={showConfirmPassword ? 'text' : 'password'}
@@ -96,7 +99,7 @@ function ChangePassword() {
                   </IconButton>
                 </InputAdornment>
               ),
-            }} />
+            }}            className={classes.textField}/>
         </Grid>
       </Grid>
     </Box>
