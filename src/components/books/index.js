@@ -1,19 +1,38 @@
-import React from 'react'
-
+import React, { useEffect, useContext, useState } from "react";
+import Grid from '@mui/material/Grid';
+import Button from "@material-ui/core/Button";
+import { useSelector, useDispatch } from "react-redux";
+import Context from '../../context'
+import { useStylesIndex } from './style'
+import { useForm, Controller } from "react-hook-form";
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Divider from '@mui/material/Divider';
+import AddBook from './addBook';
+import Table from './allBooksTable'
 function Books() {
+    const dispatch = useDispatch();
+    const classes = useStylesIndex()
+    const [addBook, setAddBook] = useState(false)
     return (
-        <div
-            style={{
-                border: "1px solid balck",
-                width: "100%",
-                textAlign: "center",
-                fontFamily: "Playfair Display ,serif",
-                fontSize: "20px",
-                fontWeight: "bolder",
-                height: "100vh"
-            }}>
-            Welcome to admin panel books sections
-        </div>
+        <Box sx={{ padding: "40px 20px 40px 20px", height: "100vh" }}>
+            <Paper elevation={3}>
+                <Grid className={classes.main}>
+                    {!addBook ? <Grid className={classes.addBooKButtonDiv}>
+                        <Button className={classes.addBooKButton} onClick={() => setAddBook((previous) => !previous)}>
+                            Add Book
+                        </Button>
+                    </Grid> : null}
+
+                    {addBook ?
+                        <Grid className={classes.addBookMain}><AddBook /></Grid>
+                        :
+                        <Grid className={classes.tableMain}><Table /></Grid>
+                    }
+                </Grid>
+            </Paper>
+        </Box>
     )
 }
 
