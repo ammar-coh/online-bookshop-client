@@ -18,6 +18,7 @@ const [anchorElAdmin, setAnchorElAdmin] = useState(false);
 const [anchorElProfile, setAnchorElProfile] = useState(false);
 const [subMenuItemActiveState, setSubMenuItemActiveState]= useState("")
 const [navBarRoute, setNavBarRoute]= useState("Home")
+const [allBooks, setAllBooks] = useState([])
   const contextValue = {
     roomID, setRoomID,
     currentChat,setCurrentChat,
@@ -35,7 +36,8 @@ const [navBarRoute, setNavBarRoute]= useState("Home")
     anchorElAdmin, setAnchorElAdmin,
     anchorElProfile, setAnchorElProfile,
     subMenuItemActiveState, setSubMenuItemActiveState,
-    navBarRoute, setNavBarRoute
+    navBarRoute, setNavBarRoute,
+    allBooks, setAllBooks
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
