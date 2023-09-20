@@ -122,7 +122,6 @@ const useStylesInformation = makeStyles({
     },
     informationSection2: {
         width: "50%",
-        // border:"1px solid blue",
         padding: '0px 30px',
         height: "auto"
     },
