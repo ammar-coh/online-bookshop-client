@@ -55,7 +55,6 @@ const useStylesTable = makeStyles({
    
     },
     dataGrid: {
-        border:"1px solid black",
         
     },
 

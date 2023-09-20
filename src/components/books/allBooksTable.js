@@ -51,8 +51,7 @@ function Table() {
   useEffect(() => {
     fetchAllBookData(setAllBooks, setRows, allBooks, setBookUpdate)
   }, [bookUpdated])
-  console.log("books", allBooks)
-  console.log("books", rows)
+  
   const handleEditClick = (id) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
   };
