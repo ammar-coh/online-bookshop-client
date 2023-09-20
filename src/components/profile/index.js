@@ -78,7 +78,6 @@ function Profile() {
             <Divider />
             <Box className={classes.box4}>
               <Button
-
                 className={classes.button1}
                 onClick={handlePersonalInformationButton}>
                 <Grid

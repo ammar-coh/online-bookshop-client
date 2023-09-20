@@ -16,7 +16,7 @@ function Books() {
     const classes = useStylesIndex()
     const [addBook, setAddBook] = useState(false)
     return (
-        <Box sx={{ padding: "40px 20px 40px 20px", height: "100vh" }}>
+        <Box sx={{ padding: "40px 20px 40px 20px", height: "100%" }}>
             <Paper elevation={3}>
                 <Grid className={classes.main}>
                     {!addBook ? <Grid className={classes.addBooKButtonDiv}>

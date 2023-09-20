@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
@@ -7,6 +8,7 @@ import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
 import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
 import {
   GridRowModes,
   DataGrid,
@@ -16,9 +18,11 @@ import {
 } from '@mui/x-data-grid';
 import { fetchAllBookData } from './api'
 import Context from '../../context'
-
+import { useStylesTable } from './style'
 
 function Table() {
+  const classes = useStylesTable()
+
   const { allBooks, setAllBooks } = useContext(Context);
   const initialRows = allBooks.map((book) => ({
     id: book._id,
@@ -28,7 +32,7 @@ function Table() {
     stock: book.stock
   }))
   const [rows, setRows] = React.useState(initialRows);
-  const [bookUpdated,setBookUpdate]= useState(false)
+  const [bookUpdated, setBookUpdate] = useState(false)
   const [rowModesModel, setRowModesModel] = React.useState({});
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
@@ -37,7 +41,7 @@ function Table() {
   };
 
   useEffect(() => {
-    fetchAllBookData(setAllBooks, setRows,allBooks,setBookUpdate )
+    fetchAllBookData(setAllBooks, setRows, allBooks, setBookUpdate)
   }, [bookUpdated])
   console.log("books", allBooks)
   console.log("books", rows)
@@ -76,21 +80,51 @@ function Table() {
   };
 
   const columns = [
-    { field: 'coverImage', headerName: 'Book Cover', width: 180, editable: true },
+    {
+      field: 'coverImage',
+      headerName: 'Book Cover',
+      headerClassName: 'super-app-theme--header',
+      headerAlign: 'center',
+      sortable: false,
+      width: 200,
+      editable: true,
+      renderCell: (params) => (
+        <Grid style={{ width: "100%" }} >
+          <img
+            style={{ width: "100%" }}
+            src={params.value} />
+        </Grid>
+      )
+
+    },
     {
       field: 'price',
       headerName: 'Price',
+      headerClassName: 'super-app-theme--header',
+      headerAlign: 'center',
+      sortable: false,
       type: 'number',
-      width: 80,
-      align: 'left',
-      headerAlign: 'left',
+    flex:1,
+      align: 'center',
       editable: true,
+      renderCell: (params) => (
+        <Grid className={classes.price}>
+          <Typography>
+            ${params.value}
+          </Typography>
+        </Grid>
+      )
     },
     {
       field: 'rating',
       headerName: 'Rating',
+      headerClassName: 'super-app-theme--header',
+      headerAlign: 'center',
+      align: 'center',
+      sortable: false,
       type: 'number',
-      width: 180,
+      flex:1,
+      // width: 180,
       editable: true,
       renderCell: (params) => (
         <Rating
@@ -104,15 +138,25 @@ function Table() {
     {
       field: 'stock',
       headerName: 'Inventory',
-      width: 220,
+      headerClassName: 'super-app-theme--header',
+      headerAlign: 'center',
+      flex:1,
+      // width: 220,
       editable: true,
+      sortable: false,
       type: 'number',
+      align: 'center',
+
     },
     {
       field: 'actions',
       type: 'actions',
+      headerClassName: 'super-app-theme--header',
+      headerAlign: 'center',
       headerName: 'Actions',
-      width: 100,
+      flex:1,
+      // width: 100,
+      align: 'center',
       cellClassName: 'actions',
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
@@ -155,17 +199,28 @@ function Table() {
       },
     },
   ];
-
+  const CustomHeader = () => {
+    return (
+      <Grid className="custom-header">
+        <span>price</span>
+      </Grid>
+    );
+  };
   return (
     <Box
       sx={{
-        height: "auto",
+        height: "100vh",
         width: '100%',
         '& .actions': {
           color: 'text.secondary',
         },
         '& .textPrimary': {
           color: 'text.primary',
+        },
+        '& .super-app-theme--header': {
+         padding :"0px 40px",
+         headerAlign: 'center',
+         width:"100%"
         },
       }}
     >
@@ -177,12 +232,14 @@ function Table() {
         onRowModesModelChange={handleRowModesModelChange}
         onRowEditStop={handleRowEditStop}
         processRowUpdate={processRowUpdate}
-        // slots={{
-        //   toolbar: EditToolbar,
-        // }}
+        rowHeight={220}
+        disableColumnMenu
+        disableRowSelectionOnClick
         slotProps={{
           toolbar: { setRows, setRowModesModel },
         }}
+        autoPageSize
+      
       />
     </Box>
   );
