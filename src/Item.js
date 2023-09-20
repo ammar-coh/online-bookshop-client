@@ -170,8 +170,6 @@ function Item({ id, image, price, rating, author, title }) {
             />
           </CardActionArea>
         </div>
-
-
         <div className={classes.information_container}>
           <CardActionArea>
             <CardContent>
