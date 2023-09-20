@@ -19,11 +19,25 @@ function Books() {
         <Box sx={{ padding: "40px 20px 40px 20px", height: "100%" }}>
             <Paper elevation={3}>
                 <Grid className={classes.main}>
-                    {!addBook ? <Grid className={classes.addBooKButtonDiv}>
-                        <Button className={classes.addBooKButton} onClick={() => setAddBook((previous) => !previous)}>
-                            Add Book
-                        </Button>
-                    </Grid> : null}
+                    {!addBook ?
+                        <Grid className={classes.tableHeader}>
+                            <Grid className={classes.heading}>
+                                <Typography
+                                    style={{
+                                        fontFamily: "Montserrat, sans-se",
+                                        fontWeight: 600,
+                                        fontSize: "22.4px",
+                                        padding:"0px 0px 0px 29px"
+                                    }}
+                                >Book List</Typography>
+                            </Grid>
+                            <Grid className={classes.addBooKButtonDiv}>
+                                <Button className={classes.addBooKButton} onClick={() => setAddBook((previous) => !previous)}>
+                                    Add Book
+                                </Button>
+                            </Grid>
+                        </Grid>
+                        : null}
 
                     {addBook ?
                         <Grid className={classes.addBookMain}><AddBook /></Grid>

@@ -12,17 +12,25 @@ import Typography from '@mui/material/Typography';
 import {
   GridRowModes,
   DataGrid,
-  GridToolbarContainer,
   GridActionsCellItem,
   GridRowEditStopReasons,
+  gridPageCountSelector,
+  GridPagination,
+  useGridApiContext,
+  useGridSelector,
 } from '@mui/x-data-grid';
 import { fetchAllBookData } from './api'
 import Context from '../../context'
 import { useStylesTable } from './style'
+import MuiPagination from '@mui/material/Pagination';
+
+
 
 function Table() {
   const classes = useStylesTable()
-
+ 
+  const [pageSize, setPageSize] = useState(5); // Initial page size
+  const [page, setPage] = useState(1)
   const { allBooks, setAllBooks } = useContext(Context);
   const initialRows = allBooks.map((book) => ({
     id: book._id,
@@ -78,7 +86,26 @@ function Table() {
   const handleRowModesModelChange = (newRowModesModel) => {
     setRowModesModel(newRowModesModel);
   };
-
+ 
+  function Pagination({ page, onPageChange, className }) {
+    const apiRef = useGridApiContext();
+    const pageCount = useGridSelector(apiRef, gridPageCountSelector);
+  
+    return (
+      <MuiPagination
+        color="error"
+        className={className}
+        count={pageCount}
+        page={page + 1}
+        onChange={(event, newPage) => {
+          onPageChange(event, newPage - 1);
+        }}
+      />
+    );
+  }
+  function CustomPagination(props) {
+    return <GridPagination ActionsComponent={Pagination} {...props} className={classes.paginationDefault} />;
+  }
   const columns = [
     {
       field: 'coverImage',
@@ -89,9 +116,9 @@ function Table() {
       width: 200,
       editable: true,
       renderCell: (params) => (
-        <Grid style={{ width: "100%" }} >
+        <Grid style={{ width: "100%", height: "100%" }} >
           <img
-            style={{ width: "100%" }}
+            style={{ width: "100%", height: "100%" }}
             src={params.value} />
         </Grid>
       )
@@ -104,7 +131,7 @@ function Table() {
       headerAlign: 'center',
       sortable: false,
       type: 'number',
-    flex:1,
+      flex: 1,
       align: 'center',
       editable: true,
       renderCell: (params) => (
@@ -123,7 +150,7 @@ function Table() {
       align: 'center',
       sortable: false,
       type: 'number',
-      flex:1,
+      flex: 1,
       // width: 180,
       editable: true,
       renderCell: (params) => (
@@ -140,7 +167,7 @@ function Table() {
       headerName: 'Inventory',
       headerClassName: 'super-app-theme--header',
       headerAlign: 'center',
-      flex:1,
+      flex: 1,
       // width: 220,
       editable: true,
       sortable: false,
@@ -154,7 +181,7 @@ function Table() {
       headerClassName: 'super-app-theme--header',
       headerAlign: 'center',
       headerName: 'Actions',
-      flex:1,
+      flex: 1,
       // width: 100,
       align: 'center',
       cellClassName: 'actions',
@@ -199,17 +226,13 @@ function Table() {
       },
     },
   ];
-  const CustomHeader = () => {
-    return (
-      <Grid className="custom-header">
-        <span>price</span>
-      </Grid>
-    );
-  };
   return (
     <Box
+      className={classes.dataGrid}
+
       sx={{
-        height: "100vh",
+        display: "block",
+        height: "100%",
         width: '100%',
         '& .actions': {
           color: 'text.secondary',
@@ -218,13 +241,16 @@ function Table() {
           color: 'text.primary',
         },
         '& .super-app-theme--header': {
-         padding :"0px 40px",
-         headerAlign: 'center',
-         width:"100%"
+          padding: "0px 40px",
+          headerAlign: 'center',
+          width: "100%"
         },
+
       }}
     >
+    
       <DataGrid
+
         rows={rows}
         columns={columns}
         editMode="row"
@@ -235,12 +261,25 @@ function Table() {
         rowHeight={220}
         disableColumnMenu
         disableRowSelectionOnClick
+        pagination
+        slots={{
+          pagination: CustomPagination,
+        }}
         slotProps={{
           toolbar: { setRows, setRowModesModel },
         }}
-        autoPageSize
       
+        initialState={{
+
+          pagination: { paginationModel: { pageSize: 5 } },
+        }}
+        pageSizeOptions={[5, 10, 25]}
+        className={classes.dataGrid}
+      
+       
       />
+    
+
     </Box>
   );
 }

@@ -65,16 +65,6 @@ function Profile() {
       <Box style={{ padding: "90px 40px 200px 40px", height: "100vh" }}>
         <Box className={classes.mainBox}>
           <Paper elevation={3} style={{ height: "auto" }} >
-            {/* <Box className={classes.titleBox}>
-              <Typography variant="h5" className={classes.titleText}>
-                <span
-                  style={{
-                    fontFamily: "Montserrat, sans-se",
-                  }}>
-                  Profile
-                </span>
-              </Typography>
-            </Box> */}
             <Divider />
             <Box className={classes.box4}>
               <Button
