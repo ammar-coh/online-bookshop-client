@@ -91,7 +91,14 @@ function InformationForm() {
                         // onChange={handleChange}
                         fullWidth
                         sx={{
-                            '& .MuiSelect-select': { border: '1px solid #333533' },
+                            '& .MuiSelect-select': {
+                                borderColor: 'rgba(0, 0, 0, 0.08)',
+                                borderStyle: "solid",
+                            },
+                            '& fieldset': {
+                                borderColor: 'rgba(0, 0, 0, 0.08)',
+                                borderStyle: "solid",
+                            },
                             "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" },
                             "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" }
                         }}

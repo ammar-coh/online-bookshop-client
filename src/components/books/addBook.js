@@ -13,7 +13,9 @@ import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Rating from '@mui/material/Rating';
+import Divider from '@mui/material/Divider';
 import sampleBookCover from '../../Assets/realistic-book-cover-mockup_125540-2173.avif'
+
 function AddBook() {
     const dispatch = useDispatch();
     const classes = useStylesAddBook()
@@ -43,6 +45,7 @@ function AddBook() {
                     Add New Book
                 </Typography>
             </Grid>
+            <Divider light />
             <Grid className={classes.addBookForm}>
                 <Grid style={{ display: "block", width: "100%" }}>
                     <Typography style={{
@@ -104,7 +107,7 @@ function AddBook() {
                                 src={isUserImgSelected ?
                                     URL.createObjectURL(userProfileImg) :
                                     sampleBookCover}
-                                style={{ width: "100%", height: "90%" }}
+                                style={{ width: "100%", height: "90%",padding:"12px" }}
                             />
                         </Grid>
                     </Grid>

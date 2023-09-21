@@ -27,7 +27,7 @@ const useStylesIndex = makeStyles({
     },
     tableMain: {
         // border:"1px solid black",
-        padding: "10px 30px 10px 30px",
+        padding: "10px 0px",
         height: "100%"
     }
 });
@@ -55,7 +55,7 @@ const useStylesTable = makeStyles({
    
     },
     dataGrid: {
-        
+        padding:"20px"
     },
 
 
@@ -102,7 +102,8 @@ const useStylesAddBook = makeStyles({
     textField: {
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
-                borderColor: '#333533',
+                borderColor: 'rgba(0, 0, 0, 0.08)',
+                borderStyle:"solid",
             },
             '&:hover fieldset': {
                 borderColor: '#d22129',

@@ -27,7 +27,7 @@ function Books() {
                                         fontFamily: "Montserrat, sans-se",
                                         fontWeight: 600,
                                         fontSize: "22.4px",
-                                        padding:"0px 0px 0px 29px"
+                                        padding: "0px 0px 0px 29px"
                                     }}
                                 >Book List</Typography>
                             </Grid>
@@ -38,7 +38,7 @@ function Books() {
                             </Grid>
                         </Grid>
                         : null}
-
+                    <Divider light />
                     {addBook ?
                         <Grid className={classes.addBookMain}><AddBook /></Grid>
                         :

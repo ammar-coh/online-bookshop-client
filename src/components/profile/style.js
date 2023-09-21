@@ -98,7 +98,8 @@ const useStylesIndex = makeStyles({
     textField: {
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
-                borderColor: '#333533',
+                borderColor: 'rgba(0, 0, 0, 0.08)',
+                borderStyle:"solid",
             },
             '&:hover fieldset': {
                 borderColor: '#d22129',
@@ -128,7 +129,8 @@ const useStylesInformation = makeStyles({
     textField: {
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
-                borderColor: '#333533',
+                borderColor: 'rgba(0, 0, 0, 0.08)',
+                borderStyle:"solid",
             },
             '&:hover fieldset': {
                 borderColor: '#d22129',
@@ -152,7 +154,8 @@ const useStylesChangePassword = makeStyles({
     textField: {
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
-                borderColor: '#333533',
+                borderColor: 'rgba(0, 0, 0, 0.08)',
+                borderStyle:"solid",
             },
             '&:hover fieldset': {
                 borderColor: '#d22129',
