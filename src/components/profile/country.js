@@ -8,9 +8,14 @@ export default function CountrySelect() {
     <Autocomplete
       style={{ width: "100%" }}
       id="country-select-demo"
-      sx={{ width: 300 ,'& .MuiSelect-select': { border: '1px solid #333533' },
-      "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" },
-      "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" }}}
+      sx={{
+        width: 300, '& .MuiSelect-select': {
+          borderColor: 'rgba(0, 0, 0, 0.08)',
+          borderStyle: "solid",
+        },
+        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" },
+        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" }
+      }}
       options={countries}
       autoHighlight
       getOptionLabel={(option) => option.label}
@@ -29,7 +34,10 @@ export default function CountrySelect() {
       renderInput={(params) => (
         <TextField
           sx={{
-            '& fieldset': {  borderColor: '#333533', '&:hover fieldset': {borderColor: '#d22129'},'&.Mui-focused fieldset': {borderColor: '#d22129'},},
+            '& fieldset': {
+              borderColor: 'rgba(0, 0, 0, 0.08)',
+              borderStyle: "solid", '&:hover fieldset': { borderColor: '#d22129' }, '&.Mui-focused fieldset': { borderColor: '#d22129' },
+            },
           }}
           {...params}
           inputProps={{

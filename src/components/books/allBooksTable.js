@@ -2,13 +2,12 @@ import React, { useEffect, useState, useContext } from "react";
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import {
   GridRowModes,
   DataGrid,
@@ -28,7 +27,7 @@ import MuiPagination from '@mui/material/Pagination';
 
 function Table() {
   const classes = useStylesTable()
- 
+
   const [pageSize, setPageSize] = useState(5); // Initial page size
   const [page, setPage] = useState(1)
   const { allBooks, setAllBooks } = useContext(Context);
@@ -51,8 +50,7 @@ function Table() {
   useEffect(() => {
     fetchAllBookData(setAllBooks, setRows, allBooks, setBookUpdate)
   }, [bookUpdated])
-  console.log("books", allBooks)
-  console.log("books", rows)
+
   const handleEditClick = (id) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
   };
@@ -86,11 +84,11 @@ function Table() {
   const handleRowModesModelChange = (newRowModesModel) => {
     setRowModesModel(newRowModesModel);
   };
- 
+
   function Pagination({ page, onPageChange, className }) {
     const apiRef = useGridApiContext();
     const pageCount = useGridSelector(apiRef, gridPageCountSelector);
-  
+
     return (
       <MuiPagination
         color="error"
@@ -113,10 +111,10 @@ function Table() {
       headerClassName: 'super-app-theme--header',
       headerAlign: 'center',
       sortable: false,
-      width: 200,
+      width: 140,
       editable: true,
       renderCell: (params) => (
-        <Grid style={{ width: "100%", height: "100%" }} >
+        <Grid style={{ width: "100%", height: "100%",padding:"12px" }} >
           <img
             style={{ width: "100%", height: "100%" }}
             src={params.value} />
@@ -195,6 +193,7 @@ function Table() {
               label="Save"
               sx={{
                 color: 'primary.main',
+
               }}
               onClick={handleSaveClick(id)}
             />,
@@ -210,14 +209,34 @@ function Table() {
 
         return [
           <GridActionsCellItem
-            icon={<EditIcon />}
+            icon={< EditOutlinedIcon
+              style={{
+                color: "#fff",
+                backgroundColor: "#d22129",
+                fontSize: "16px",
+                borderRadius: "5px",
+                lineHeight: "25px",
+                width: "20px",
+                height: "20px"
+              }}
+            />
+            }
             label="Edit"
             className="textPrimary"
             onClick={handleEditClick(id)}
             color="inherit"
           />,
           <GridActionsCellItem
-            icon={<DeleteIcon />}
+            icon={<DeleteOutlinedIcon
+              style={{
+                color: "#fff",
+                backgroundColor: "#d22129",
+                fontSize: "16px",
+                borderRadius: "5px",
+                lineHeight: "25px",
+                width: "20px",
+                height: "20px"
+              }} />}
             label="Delete"
             onClick={handleDeleteClick(id)}
             color="inherit"
@@ -229,7 +248,6 @@ function Table() {
   return (
     <Box
       className={classes.dataGrid}
-
       sx={{
         display: "block",
         height: "100%",
@@ -245,10 +263,9 @@ function Table() {
           headerAlign: 'center',
           width: "100%"
         },
-
       }}
     >
-    
+
       <DataGrid
 
         rows={rows}
@@ -268,17 +285,19 @@ function Table() {
         slotProps={{
           toolbar: { setRows, setRowModesModel },
         }}
-      
+
         initialState={{
 
           pagination: { paginationModel: { pageSize: 5 } },
         }}
         pageSizeOptions={[5, 10, 25]}
-        className={classes.dataGrid}
-      
-       
+        sx={{
+          "& .MuiDataGrid-row:hover": {
+            backgroundColor: "inherit" // Or 'transparent' or whatever color you'd like
+          }
+        }}
       />
-    
+
 
     </Box>
   );
