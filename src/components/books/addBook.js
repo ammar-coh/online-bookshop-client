@@ -41,7 +41,11 @@ function AddBook() {
     return (
         <Box className={classes.mainBox}>
             <Grid className={classes.headingAddBook}>
-                <Typography style={{ fontFamily: "Montserrat, sans-se" }}>
+                <Typography style={{ 
+                    fontFamily: "Montserrat, sans-se" ,
+                    fontSize:"22.4px", 
+                    fontWeight:600
+                    }}>
                     Add New Book
                 </Typography>
             </Grid>
@@ -64,7 +68,7 @@ function AddBook() {
                     />
                 </Grid>
                 <Grid>
-                    <Typography style={{ padding: "15px 0px 5px 0px" }}>Description</Typography>
+                    <Typography style={{ padding: "15px 0px 5px 0px" }}>Price</Typography>
                     <TextField
                         className={classes.textField}
                         fullWidth
@@ -80,20 +84,6 @@ function AddBook() {
                     // }}
                     />
                 </Grid>
-                <Grid>
-                    <Typography style={{ padding: "15px 0px 5px 0px" }}>Price</Typography>
-                    <TextField
-                        className={classes.textField}
-                        fullWidth
-                    />
-                </Grid>
-                <Grid style={{ display: "block", width: "100%" }}>
-                    <Typography style={{ padding: "15px 0px 5px 0px" }}>Stock</Typography>
-                    <TextField
-                        className={classes.textField}
-                        fullWidth
-                    />
-                </Grid>
                 <Grid className={classes.bookCover}>
                     <Grid className={classes.photoDiv}>
                         <Grid className={classes.photoHeading}>
@@ -107,7 +97,11 @@ function AddBook() {
                                 src={isUserImgSelected ?
                                     URL.createObjectURL(userProfileImg) :
                                     sampleBookCover}
-                                style={{ width: "100%", height: "90%",padding:"12px" }}
+                                style={{
+                                    width: "100%",
+                                    height: "90%",
+                                    padding: "12px 0px 12px 0px"
+                                }}
                             />
                         </Grid>
                     </Grid>
@@ -117,7 +111,7 @@ function AddBook() {
                                 type='file'
                                 name='coverImg'
                                 accept='image/*'
-                                style={{ display: "none" , }}
+                                style={{ display: "none", }}
                                 onChange={changeHandler}
                                 id="coverImg"
                             />
@@ -126,14 +120,33 @@ function AddBook() {
                                 padding: "15px 0px 0px 0px",
                             }}>
                                 <CloudUploadIcon style={{
-                                    fontSize: "50px",
+                                    fontSize: "10px",
                                     borderRadius: "10%",
-                                    padding:"0px"
+                                    padding: "0px",
+                                    color:"#d22129",
+                                    cursor:"pointer"
                                 }}
                                 />
                             </InputLabel>
                         </Grid>
                     </Grid>
+                </Grid>
+                <Grid style={{ width: "100%" }}>
+                    <Typography style={{ padding: "0px 0px 5px 0px" }}>Description</Typography>
+                    <TextField
+                        multiline
+                        rows={4}
+                        placeholder="What is this book about?"
+                        className={classes.textField}
+                        fullWidth
+                    />
+                </Grid>
+                <Grid style={{ display: "block", width: "100%" }}>
+                    <Typography style={{ padding: "15px 0px 5px 0px" }}>Stock</Typography>
+                    <TextField
+                        className={classes.textField}
+                        fullWidth
+                    />
                 </Grid>
             </Grid>
         </Box>
