@@ -57,9 +57,11 @@ const useStylesTable = makeStyles({
     dataGrid: {
         padding:"20px"
     },
-
-
-
+    uploadImage:{
+        display: "flex",
+        justifyContent: "center",
+        padding: "60px 0px 0px 0px",
+    }
 });
 export { useStylesTable }
 
@@ -75,7 +77,7 @@ const useStylesAddBook = makeStyles({
     },
     addBookForm: {
         // border:"1px solid red",
-        padding: "10px 15px"
+        padding: "10px 15px 25px 15px"
     },
     bookCover: {
         display: "flex",
@@ -84,20 +86,23 @@ const useStylesAddBook = makeStyles({
         width: "12%",
         padding: "15px 0px 5px 0px",
         display: "block",
-        height: "auto"
+        height: "auto",
+        // border:"1px solid red"
     },
     photoHeading: {
-        padding: "7px 0px"
+        padding: "7px 0px",
+        // border:"1px solid green"
     },
     photo: {
         width: "100%",
+        height:"auto",
         display: "block",
     },
     uploadImage: {
         width: "88%",
         display: "flex",
-        justifyContent: "end",
-        padding: "220px 0px 0px 0px"
+        justifyContent: "center",
+        padding: "60px 0px 0px 0px",
     },
     textField: {
         '& .MuiOutlinedInput-root': {

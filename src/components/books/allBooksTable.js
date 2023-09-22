@@ -8,6 +8,9 @@ import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
 import {
   GridRowModes,
   DataGrid,
@@ -16,20 +19,80 @@ import {
   gridPageCountSelector,
   GridPagination,
   useGridApiContext,
+  useGridApiRef,
   useGridSelector,
 } from '@mui/x-data-grid';
 import { fetchAllBookData } from './api'
 import Context from '../../context'
 import { useStylesTable } from './style'
 import MuiPagination from '@mui/material/Pagination';
+import { unstable_useEnhancedEffect as useEnhancedEffect } from '@mui/utils';
 
+
+function ImageEditInputCell(props) {
+  const { id, value, field, hasFocus } = props;
+  const apiRef = useGridApiContext();
+  const ref = React.useRef();
+  useEnhancedEffect(() => {
+    if (hasFocus && ref.current) {
+      const input = ref.current.querySelector(`input[value="${value}"]`);
+      input?.focus();
+    }
+  }, [hasFocus, value]);
+  const changeHandler = async (event, params) => {
+    const image = event.target.files[0];
+    if (!image) {
+      return false;
+    }
+    await apiRef.current.setEditCellValue({ id, field, value: window.URL.createObjectURL(event.target.files[0]) 
+    })
+  };
+  return (
+    <Grid  >
+      <img
+        alt="Selected"
+        src={typeof value == "string" ? value :
+          window.URL.createObjectURL(value)}
+        style={{
+          width: "100%",
+          height: "90%",
+          padding: "12px 12px 12px 12px"
+        }}
+      />
+      <Grid>
+        <Input
+          type='file'
+          name='coverImg'
+          accept='image/*'
+          style={{ display: "none", }}
+          onChange={changeHandler}
+          id="coverImg"
+        />
+        <InputLabel htmlFor="coverImg" style={{
+          width: "100%",
+          padding: "0px 0px 0px 0px",
+        }}>
+          <CloudUploadIcon style={{
+            fontSize: "10px",
+            borderRadius: "10%",
+            padding: "0px",
+            color: "#d22129",
+            cursor: "pointer"
+          }}
+          />
+        </InputLabel>
+      </Grid>
+    </Grid>
+  );
+}
+
+const renderImageEditInputCell = (params) => {
+  return <ImageEditInputCell {...params} />;
+};
 
 
 function Table() {
   const classes = useStylesTable()
-
-  const [pageSize, setPageSize] = useState(5); // Initial page size
-  const [page, setPage] = useState(1)
   const { allBooks, setAllBooks } = useContext(Context);
   const initialRows = allBooks.map((book) => ({
     id: book._id,
@@ -52,10 +115,13 @@ function Table() {
   }, [bookUpdated])
 
   const handleEditClick = (id) => () => {
+    console.log("isEditFunction", id)
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
   };
+  console.log("rowModelEdit", rowModesModel)
 
   const handleSaveClick = (id) => () => {
+    console.log("isSaveFunction", id)
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
   };
 
@@ -85,6 +151,7 @@ function Table() {
     setRowModesModel(newRowModesModel);
   };
 
+
   function Pagination({ page, onPageChange, className }) {
     const apiRef = useGridApiContext();
     const pageCount = useGridSelector(apiRef, gridPageCountSelector);
@@ -104,6 +171,7 @@ function Table() {
   function CustomPagination(props) {
     return <GridPagination ActionsComponent={Pagination} {...props} className={classes.paginationDefault} />;
   }
+
   const columns = [
     {
       field: 'coverImage',
@@ -113,14 +181,16 @@ function Table() {
       sortable: false,
       width: 140,
       editable: true,
-      renderCell: (params) => (
-        <Grid style={{ width: "100%", height: "100%",padding:"12px" }} >
+      renderCell: (params) =>
+      (
+        <Grid style={{ width: "100%", height: "100%", padding: "12px" }} >
           <img
-            style={{ width: "100%", height: "100%" }}
-            src={params.value} />
+            style={{ width: "100%", height: "90%" }}
+            src={params.value}
+            alt="Book Cover " />
         </Grid>
-      )
-
+      )  ,
+      renderEditCell: renderImageEditInputCell,
     },
     {
       field: 'price',
@@ -185,7 +255,6 @@ function Table() {
       cellClassName: 'actions',
       getActions: ({ id }) => {
         const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
-
         if (isInEditMode) {
           return [
             <GridActionsCellItem
@@ -245,6 +314,11 @@ function Table() {
       },
     },
   ];
+
+
+
+
+
   return (
     <Box
       className={classes.dataGrid}
@@ -265,9 +339,7 @@ function Table() {
         },
       }}
     >
-
       <DataGrid
-
         rows={rows}
         columns={columns}
         editMode="row"
