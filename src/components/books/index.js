@@ -10,13 +10,16 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
 import AddBook from './addBook';
-import Table from './allBooksTable'
+import Table from './allBooksTable';
+import Alerts from '.././alerts'
 function Books() {
+    const { alertOpen } = useContext(Context);
     const dispatch = useDispatch();
     const classes = useStylesIndex()
     const [addBook, setAddBook] = useState(false)
     return (
         <Box sx={{ padding: "40px 20px 40px 20px", height: "100%" }}>
+            {alertOpen ? <Alerts type message /> : null}
             <Paper elevation={3}>
                 <Grid className={classes.main}>
                     {!addBook ?
