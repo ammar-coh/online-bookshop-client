@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStylesIndex = makeStyles({
+    main: { width: "100%" },
     tableHeader: {
         display: "flex"
     },
@@ -28,7 +29,8 @@ const useStylesIndex = makeStyles({
     tableMain: {
         // border:"1px solid black",
         padding: "10px 0px",
-        height: "100%"
+        height: "100%",
+        width: "100%"
     }
 });
 export { useStylesIndex }
@@ -39,25 +41,75 @@ const useStylesTable = makeStyles({
         padding: "10px 30px 10px 30px",
         height: "100%"
     },
-    price: {
-        padding: "0px 30px 0px 30px"
+    author:{
+        margin:"auto"
     },
-    pagination:{border:"1px solid red"},
-    paginationDefault:{
+    paragraph2: {
+        display: "-webkit-box",
+        textAlign: "center",
+        margin: "0px",
+        //    width:"100%",
+        //    whiteSpace: 'pre-wrap',
+        //    overFlow: 'hidden',
+        wordBreak: 'break-all',
+        '-webkit-line-clamp': 6,
+        '-webkit-box-orient': 'vertical',
+        fontSize: "16px",
+        fontFamily: "Montserrat, sans-se",
+    },
+    paragraph: {
+        //  "&.css-ahj2mt-MuiTypography-root":{
+        //     overFlow:"hidden"
+        //  }
+    },
+    category: {
+        padding: "0px 30px 0px 30px",
+        fontSize: "16px",
+        fontFamily: "Montserrat, sans-se",
+        margin:"auto"
+    },
+    description: {
+        width: "100%",
+        height: "auto",
+        whiteSpace: 'normal',
+        margin:"auto"
+
+    },
+    title: {
+        padding: "0px 30px 0px 30px",
+        margin:"auto"
+    },
+    rating:{
+        margin:"auto"
+    },
+    price: {
+        padding: "0px 30px 0px 30px",
+        margin:"auto"
+
+    },
+    grid:{
+        margin:  "auto"
+    },
+    pagination: { border: "1px solid red" },
+    paginationDefault: {
         // border:"1px solid red",
-        '&.css-rtrcn9-MuiTablePagination-root .MuiTablePagination-selectLabel':{
-            margin:"0px"
+        '&.css-rtrcn9-MuiTablePagination-root .MuiTablePagination-selectLabel': {
+            margin: "0px"
         },
-        '& .css-levciy-MuiTablePagination-displayedRows':{
-            margin:"0px",
-           
+        '& .css-levciy-MuiTablePagination-displayedRows': {
+            margin: "0px",
+
         }
-   
+
     },
     dataGrid: {
-        padding:"20px"
+        width: "100%",
+        padding: "0px 5px"
     },
-    uploadImage:{
+    stock:{
+        margin:"auto"
+    },
+    uploadImage: {
         display: "flex",
         justifyContent: "center",
         padding: "60px 0px 0px 0px",
@@ -95,7 +147,7 @@ const useStylesAddBook = makeStyles({
     },
     photo: {
         width: "100%",
-        height:"auto",
+        height: "auto",
         display: "block",
     },
     uploadImage: {
@@ -108,7 +160,7 @@ const useStylesAddBook = makeStyles({
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
                 borderColor: 'rgba(0, 0, 0, 0.08)',
-                borderStyle:"solid",
+                borderStyle: "solid",
             },
             '&:hover fieldset': {
                 borderColor: '#d22129',

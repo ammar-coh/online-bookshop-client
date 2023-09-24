@@ -19,6 +19,11 @@ const [anchorElProfile, setAnchorElProfile] = useState(false);
 const [subMenuItemActiveState, setSubMenuItemActiveState]= useState("")
 const [navBarRoute, setNavBarRoute]= useState("Home")
 const [allBooks, setAllBooks] = useState([])
+const[alertOpen,setAlertOpen] = useState(false)
+const[alertContent,setAlertContent] = useState({
+  type:"",
+  message:","
+})
   const contextValue = {
     roomID, setRoomID,
     currentChat,setCurrentChat,
@@ -37,7 +42,9 @@ const [allBooks, setAllBooks] = useState([])
     anchorElProfile, setAnchorElProfile,
     subMenuItemActiveState, setSubMenuItemActiveState,
     navBarRoute, setNavBarRoute,
-    allBooks, setAllBooks
+    allBooks, setAllBooks,
+    alertOpen,setAlertOpen,
+    alertContent,setAlertContent
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
