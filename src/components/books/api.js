@@ -63,16 +63,37 @@ const updateBook = (bookId, data) => {
         url: `http://localhost:8081/book/list/${bookId}`, // Replace with your PUT endpoint
         headers: {
             Authorization: ` ${localStorage.getItem('authorization')}`, // Use the appropriate header format
-           
+            'Content-Type': 'multipart/form-data', 
         },
         data: data, // The data you want to send in the request body
     });
 };
 
-export const bookUpdated = async (bookId,updatedRow,alertContent,setAlertContent,setAlertOpen, ) => {
+export const bookUpdated = async (bookId, updatedRow, cover, setCover, alertContent, setAlertContent, setAlertOpen,) => {
     try {
-         const data =  updatedRow
-        const response = await updateBook(bookId,data)
+        const bookData = updatedRow
+        console.log("bookData",bookData)
+        const data = new FormData();
+        const imageObject = cover.find(item => item.id === bookId);
+
+        if (imageObject) {
+            const index = cover.indexOf(imageObject);
+            if (index !== -1) { cover.splice(index, 1); }
+            data.append('image',imageObject.image )
+        }  
+       
+        console.log('Extracted Object:', imageObject);
+        console.log('Updated cover Array:', cover);
+        for (const [key, value] of Object.entries(bookData)) {
+            if (value !== null && value !== undefined) {
+              data.append(key, value);
+            }
+          }
+          data.forEach((value, key) => {
+            console.log(key, value);
+          });
+          console.log("datafd",data)
+        const response = await updateBook(bookId, data)
         if (response.status == 200 && response.data.status == true) {
             setAlertContent({ ...alertContent, type: "success", message: 'Information Saved!' })
             setAlertOpen(true)

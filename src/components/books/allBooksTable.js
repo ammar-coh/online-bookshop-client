@@ -21,16 +21,15 @@ import ImageEditInputCell from './imageEditInput'
 import RatingEditInputCell from './ratingEditInput'
 import Pagination from './customPagination'
 const renderImageEditInputCell = (params) => {
+ 
   return <ImageEditInputCell {...params} />;
 };
-
-
 const renderRatingEditCell = (params) => {
   return < RatingEditInputCell {...params} />
 }
 
 function Table() {
-  const { alertContent, setAlertContent, setAlertOpen } = useContext(Context);
+  const { alertContent, setAlertContent, setAlertOpen, cover, setCover } = useContext(Context);
   const classes = useStylesTable()
   const { allBooks, setAllBooks } = useContext(Context);
   const initialRows = allBooks.map((book) => ({
@@ -46,9 +45,7 @@ function Table() {
   }))
   const [rows, setRows] = React.useState(initialRows);
   const [bookListUpdated, setBookListUpdate] = useState(false)
-  const [bookUpdate, setBookUpdate] = useState(false)
   const [rowModesModel, setRowModesModel] = React.useState({});
-  const [rowUpdate, setRowUpdate] = useState({})
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
       event.defaultMuiPrevented = true;
@@ -75,7 +72,6 @@ function Table() {
     }
   };
   const handleDeleteClick = (id) => async () => {
-    console.log("check  ID ", id)
     try {
       await bookRemoved(id, setRows, rows, alertContent, setAlertContent, setAlertOpen)
     }
@@ -100,7 +96,7 @@ function Table() {
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow};
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    bookUpdated(newRow.id, updatedRow, alertContent, setAlertContent, setAlertOpen)
+    bookUpdated(newRow.id, updatedRow,cover, setCover, alertContent, setAlertContent, setAlertOpen)
     return updatedRow;
   };
 
@@ -396,10 +392,7 @@ function Table() {
             backgroundColor: "inherit" // Or 'transparent' or whatever color you'd like
           }
         }}
-
       />
-
-
     </Box>
   );
 }
