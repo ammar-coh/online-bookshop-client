@@ -24,6 +24,7 @@ const[alertContent,setAlertContent] = useState({
   type:"",
   message:","
 })
+const [cover, setCover] = useState([])
   const contextValue = {
     roomID, setRoomID,
     currentChat,setCurrentChat,
@@ -44,7 +45,8 @@ const[alertContent,setAlertContent] = useState({
     navBarRoute, setNavBarRoute,
     allBooks, setAllBooks,
     alertOpen,setAlertOpen,
-    alertContent,setAlertContent
+    alertContent,setAlertContent,
+    cover, setCover
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
