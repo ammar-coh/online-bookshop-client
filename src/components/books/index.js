@@ -9,7 +9,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Divider from '@mui/material/Divider';
-import AddBook from './addBook';
+import AddBook from './New Book/addBookMain';
 import Table from './allBooksTable';
 import Alerts from '.././alerts'
 function Books() {

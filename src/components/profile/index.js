@@ -115,14 +115,14 @@ function Profile() {
                 <Box className={classes.box2}>
                   <Grid className={classes.photoDiv}>
                     <Grid className={classes.photoHeading}>
-                      <Typography>
+                      <Typography align='center'>
                         Photo
                       </Typography>
                     </Grid>
                     <Paper className={classes.photoPaper} variant="outlined" elevation={6} sx={{
                       width: "100%",
                       padding: "5px 5px 0px 5px",
-                      //  border:"1px solid blue"
+                      //  border:""
                     }}>
                       <Grid className={classes.photo} >
                         <Avatar
@@ -145,11 +145,14 @@ function Profile() {
                           fontSize: "20px",
                           width: "100%",
                           padding: "0px 0px 0px 65px",
-                          marginTop: "-15px"
+                          marginTop: "-15px",
                         }}>
-                          <CloudUploadIcon style={{
+                          <CloudUploadIcon 
+                          className={classes.uploadIcon}
+                          style={{
                             fontSize: "20px",
-                            borderRadius: "50%"
+                            borderRadius: "50%",
+                            // color:"#d22129",
                           }}
                           />
                         </InputLabel>
@@ -166,7 +169,7 @@ function Profile() {
               width:"16%",
               // border:"1px solid blue"
               }}>
-                <Button className={classes.submitButton}>
+                <Button type ="submit" className={classes.submitButton}>
                   Submit
                 </Button>
               </Grid>
