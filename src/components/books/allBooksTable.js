@@ -358,6 +358,9 @@ function Table() {
             overflow: "hidden",
           }
         },
+        '& .css-1sqcvb9-MuiDataGrid-root .MuiDataGrid-row:not(.MuiDataGrid-row--dynamicHeight)>.MuiDataGrid-cell':{
+          whiteSpace:"wrap"
+        }
 
       }}
     >

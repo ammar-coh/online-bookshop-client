@@ -13,7 +13,6 @@ const useStylesIndex = makeStyles({
         }
     },
     box5: {
-        // border:"1px solid green",
         display: 'flex',
         justifyContent: "flex-start",
         padding: "0px 0px 0px 0px",
@@ -59,10 +58,9 @@ const useStylesIndex = makeStyles({
     },
     photoDiv: {
         width: "12%",
-        // border:"1px solid red",
         padding: "0px 33px 00px 33px",
         display: "block",
-        height: "auto"
+        height: "auto",
     },
     photo: {
         width: "100%",
@@ -74,6 +72,12 @@ const useStylesIndex = makeStyles({
         padding: "0px",
         width: "100%",
         height: "auto"
+    },
+    uploadIcon:{
+        "&:hover":{
+            color:"#d22129",
+            cursor:"pointer"
+        },
     },
     button1: {
         textTransform: "none",

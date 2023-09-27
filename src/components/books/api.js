@@ -72,18 +72,13 @@ const updateBook = (bookId, data) => {
 export const bookUpdated = async (bookId, updatedRow, cover, setCover, alertContent, setAlertContent, setAlertOpen,) => {
     try {
         const bookData = updatedRow
-        console.log("bookData",bookData)
         const data = new FormData();
         const imageObject = cover.find(item => item.id === bookId);
-
         if (imageObject) {
             const index = cover.indexOf(imageObject);
             if (index !== -1) { cover.splice(index, 1); }
             data.append('image',imageObject.image )
         }  
-       
-        console.log('Extracted Object:', imageObject);
-        console.log('Updated cover Array:', cover);
         for (const [key, value] of Object.entries(bookData)) {
             if (value !== null && value !== undefined) {
               data.append(key, value);
@@ -107,14 +102,36 @@ export const bookUpdated = async (bookId, updatedRow, cover, setCover, alertCont
 }
 
 
-//   const requestPostProduct = (data) => {
-//     return axios.request({
-//       method: 'post',
-//       url: 'http://localhost:8081/book/create', // Replace with your POST endpoint
-//       headers: {
-//         Authorization: `Bearer ${localStorage.getItem('authorization')}`, // Use the appropriate header format
-//         'Content-Type': 'application/json', // Set the content type if sending JSON data
-//       },
-//       data: data, // The data you want to send in the request body
-//     });
-//   };
+  const newBook = (data) => {
+    return axios.request({
+      method: 'post',
+      url: 'http://localhost:8081/book/list', // Replace with your POST endpoint
+      headers: {
+        Authorization: `${localStorage.getItem('authorization')}`, // Use the appropriate header format
+        'Content-Type': 'multipart/form-data',
+      },
+      data: data, // The data you want to send in the request body
+    });
+  };
+
+
+
+  export const bookAdded = async (data, alertContent, setAlertContent, setAlertOpen, reset,setUserProfileImg,setIsUserImgSelected) => {
+    console.log("data final", data)
+    try {
+        const response = await newBook(data)
+        if (response.status == 200 && response.data.status == true) {
+            setAlertContent({ ...alertContent, type: "success", message: 'New Book in Inventory Added!' })
+            setAlertOpen(true)
+            reset();
+            setIsUserImgSelected(false)
+         
+          
+        }
+    }
+    catch (error) {
+        console.error("API Error:", error);
+        setAlertContent({ ...alertContent, type: "error", message: error.message })
+        setAlertOpen(true)
+    }
+}
