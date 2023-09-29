@@ -1,6 +1,6 @@
 import {takeLatest,all} from 'redux-saga/effects';
 import {handleGetUser,updateInfo,deleteInfo,addItemInfo} from './handlers/productDetails';
-import {postSign_In,postSign_Up,getSign_In} from './handlers/user_login';
+import {postSign_In,postSign_Up,getSign_In,postSign_Out} from './handlers/user_login';
 import {addProductsToCart,getProductsToCartSaga,deleteProductsFromCart } from './handlers/user_cart';
 import {handleGetChatFromDB,handleCreateChatRoom} from './handlers/chatFromDB'
 import {handleGetMyNotifications} from './handlers/notfication'
@@ -16,6 +16,7 @@ import {handleGetMyNotifications} from './handlers/notfication'
     yield takeLatest('add',addItemInfo)
     yield takeLatest('getSign_In', getSign_In)
     yield takeLatest('sign_in_saga', postSign_In)
+    yield takeLatest('sign_out_saga', postSign_Out)
     yield takeLatest('sign_up_saga', postSign_Up)
    yield takeLatest('getProductsToCartSaga',getProductsToCartSaga)
    yield takeLatest('addToCartSaga',addProductsToCart)

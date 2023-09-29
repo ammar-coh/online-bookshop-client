@@ -32,7 +32,8 @@ function Home() {
         setAnchorElAdmin,
         setAnchorElProfile,
         subMenuItemActiveState, setSubMenuItemActiveState,
-        setNavBarRoute
+        setNavBarRoute,
+        setCurrentChatAvatar,
     } = useContext(Context);
     const classes = useStylesHome({ anchorElHome, homeSideBarActive, subMenuItemActiveState });
     const handleClick = (event) => {
@@ -89,6 +90,7 @@ function Home() {
                                         dispatch(clearChat());
                                         setIsActive(null);
                                         setCurrentChat("");
+                                        setCurrentChatAvatar("")
                                         leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                         setSubMenuItemActiveState('home_page')
                                         setNavBarRoute("Home")

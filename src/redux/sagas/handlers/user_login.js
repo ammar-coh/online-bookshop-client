@@ -1,5 +1,5 @@
 import { call, put, delay } from "redux-saga/effects";
-import { requestPostSign_In, requestPostSign_Up } from "../requests/user_login";
+import { requestPostSign_In, requestPostSign_Up,requestPostSign_Out } from "../requests/user_login";
 import { sign_in_reducer, sign_in_error_message } from "../../actions/index";
 import { socket } from "../../../socket";
 
@@ -25,6 +25,7 @@ export function* postSign_In(action) {
    
     socket.emit("setUserId", { userId: data.user.id });
     localStorage.setItem("for_reducer", JSON.stringify(response.data));
+    localStorage.setItem("userInfo", JSON.stringify(response.data.user));
     localStorage.setItem("authorization", response.data.token);
     yield put(sign_in_reducer(data));
     if (data.status) {
@@ -35,6 +36,14 @@ export function* postSign_In(action) {
     if(!error.response.data.status){
       yield put(sign_in_error_message(error.response.data));
     }
+  }
+}
+export function* postSign_Out(action) {
+  console.log("logout habdler", action.data)
+  try {
+     yield call(requestPostSign_Out, action.data.user.id);
+  } catch (error) {
+    console.log(error.response.data);
   }
 }
 export function* getSign_In(action) {

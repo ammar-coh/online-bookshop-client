@@ -95,7 +95,6 @@ export const addToCartSaga = (data) => {
     }
 }
 export const addToCartReducer = (data) => {
-    // console.warn('actions',data)
     return {
         type: 'addToCartReducer',
         data: data
@@ -105,7 +104,6 @@ export const addToCartReducer = (data) => {
 
 
 export const removeFromCartSaga = (data) => {
-    //console.warn('actions',data)
     return {
         type: 'removeFromCartSaga',
         data: data
@@ -115,7 +113,6 @@ export const removeFromCartSaga = (data) => {
 }
 
 export const removeFromCartReducer = (data) => {
-    //console.warn('actions',data)
     return {
         type: 'removeFromCartReducer',
         data: data
@@ -125,7 +122,6 @@ export const removeFromCartReducer = (data) => {
 }
 
 export const resetCart = (data) => {
-    //console.warn('actions',data)
     return {
         type: 'resetCart',
         data: data
@@ -149,7 +145,6 @@ export const setUser = (details) => {
 }
 
 export const updateUser = (data) => {
-    console.log(data, 'upppp')
     return {
         type: 'update',
         data: data
@@ -200,6 +195,12 @@ export const sign_up_saga = (data) => {
 export const sign_in_saga = (data) => {
     return {
         type: "sign_in_saga",
+        data: data
+    }
+}
+export const sign_out_saga = (data) => {
+    return {
+        type: "sign_out_saga",
         data: data
     }
 }

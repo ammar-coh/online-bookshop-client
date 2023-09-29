@@ -12,20 +12,32 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
-import { clearChat } from "../../redux/actions/index"; //"../src/redux/actions/index";
+import { clearChat, sign_out_saga } from "../../redux/actions/index"; //"../src/redux/actions/index";
 import Context from "../../context";
 import { socket } from "../../socket";
 import Button from "@material-ui/core/Button";
 import { useStylesProfile } from './style'
+import sample from '../../Assets/867d7f81-d66f-465c-8bb2-17a212dd9919.jpg'
+
 import {
     sign_in_reducer,
     resetCart,
 } from "../../redux/actions"
-export default function AccountMenu() {
+import { StyledBadge } from './style'
+import Grid from '@mui/material/Grid';
+export default function AccountMenu({ profileUpdate, setProfileUpdate }) {
+    const userLocal = JSON.parse(localStorage.getItem("userInfo"))
     const classes = useStylesProfile();
     const history = useHistory();
     const dispatch = useDispatch();
-    const { roomID, setCurrentChat, setIsActive,setSubMenuItemActiveState,setNavBarRoute } = useContext(Context);
+    const {
+        roomID,
+        setCurrentChat,
+        setIsActive,
+        setSubMenuItemActiveState,
+        setNavBarRoute,
+        setCurrentChatAvatar
+    } = useContext(Context);
     const user = useSelector((state) => state.user_login.details);
     const leaveAllRooms = async (data) => {
         await socket.emit("leave_private_room", {
@@ -43,22 +55,32 @@ export default function AccountMenu() {
     };
     return (
         <div style={{ padding: "0px" }} >
-            <Box sx={{ display: 'flex', }}
+            <Box sx={{ display: 'flex' }}
             >
 
                 <Tooltip title="Account settings" style={{ padding: "0px" }}>
                     <IconButton
                         onClick={handleClick}
-                        size="small"
                         sx={{ ml: 2 }}
                         aria-controls={open ? 'account-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                         style={{ padding: "0px" }}
                     >
-                        <Avatar style={{ width: "50px", height: "50px" }}>M</Avatar>
+                        <StyledBadge
+                            overlap="circular"
+                            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                            variant="dot"
+                        >
+                            <Avatar sizes='large'
+                                sx={{
+                                    fontSize: '64px',
+                                }} src={userLocal.imageURL ? userLocal.imageURL : sample} />
+                        </StyledBadge>
                     </IconButton>
                 </Tooltip>
+
+
             </Box>
             <Menu
                 anchorEl={anchorEl}
@@ -96,21 +118,22 @@ export default function AccountMenu() {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem onClick={handleClose} className={classes.profileMenuItem}>
-                <Link className={classes.link_1} to={{
+                    <Link className={classes.link_1} to={{
                         pathname: "/profile",
                     }}>
-                <Button className={classes.profielButton} onClick={() => {
-                                dispatch(clearChat());
-                                setIsActive(null);
-                                setCurrentChat("");
-                                leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
-                                setSubMenuItemActiveState('profile')
-                                setNavBarRoute("Profile")
-                            }}>
-                
-                        <Avatar />Profile
-                  
-                    </Button>
+                        <Button className={classes.profielButton} onClick={() => {
+                            dispatch(clearChat());
+                            setIsActive(null);
+                            setCurrentChat("");
+                            setCurrentChatAvatar("")
+                            leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
+                            setSubMenuItemActiveState('profile')
+                            setNavBarRoute("Profile")
+                        }}>
+
+                            <Avatar />Profile
+
+                        </Button>
                     </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose} disabled={true}>
@@ -149,6 +172,8 @@ export default function AccountMenu() {
                             setIsActive(null)
                             dispatch(clearChat());
                             setCurrentChat("")
+                            setCurrentChatAvatar('')
+                            dispatch(sign_out_saga(user))
                             history.push("/login_page");
                         }}
                     >

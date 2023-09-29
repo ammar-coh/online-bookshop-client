@@ -17,11 +17,11 @@ const useStyles = makeStyles({
     display: "flex",
     padding: "10px",
     gap: "15px",
-    "& .css-2miw2m-MuiAvatar-root":{
-      color:"#d22129"
+    "& .css-2miw2m-MuiAvatar-root": {
+      color: "#d22129"
     }
   },
-  userAvatar: { color:"#d22129"},
+  userAvatar: { color: "#d22129" },
   userName: {
     fontFamily: "Montserrat, sans-se",
     fontSize: "16px",
@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     padding: "10px 10px 10px 4px",
     gap: "15px",
     marginRight: "auto",
-   
+
   },
   userAvatarList: {
   },
@@ -64,12 +64,14 @@ function ChatSideMenu({
   isActive,
   setIsActive,
   setRecepientId,
+  setCurrentChatAvatar
 }) {
+  const userLocal = JSON.parse(localStorage.getItem("userInfo"))
   const classes = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user_login.details);
   const userName = () => {
-    let userNameStr = user?.user?.displayName;
+    let userNameStr = userLocal?.displayName;
     let arr = userNameStr.split(" ");
     for (var i = 0; i < arr.length; i++) {
       arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
@@ -84,16 +86,15 @@ function ChatSideMenu({
       arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
     }
     let name2 = arr.join(" ");
-    console.log("name2", name2)
     return name2;
   };
   const finalUpdatedArray = list?.userList?.filter(function (i) {
-    return i.displayName !== user?.user?.displayName;
+    return i.displayName !== userLocal?.displayName;
   });
-  
+
 
   const joinChatRoom = async (data) => {
-    let id = [data.displayName, user.user.displayName];
+    let id = [data.displayName, userLocal.displayName];
     let sortedID = id.sort();
     const firstID = await list?.userList.filter(function (i) {
       return i.displayName == sortedID[0];
@@ -124,6 +125,7 @@ function ChatSideMenu({
     setRoomID(room_id);
     setIsActive(data.index);
     setCurrentChat(data.displayName);
+    setCurrentChatAvatar(data.image)
     dispatch(chatFromDBSaga(dataObjectForFetchChatAPI));
     setRecepientId(data?.id);
     await socket.emit("delete_notification_message", {
@@ -155,6 +157,7 @@ function ChatSideMenu({
                 displayName: i.displayName,
                 index: index,
                 id: i.id,
+                image: i.imageURL
               })
             }
             className={classes.button}
@@ -167,13 +170,13 @@ function ChatSideMenu({
             <div className={classes.userInfoList}>
               <div className={classes.userAvatarList}>
                 {" "}
-                <Avatar  style={
-              finalUpdatedArray[isActive] == i
-                ? { backgroundColor: "#333533", color: "#d22129" }
-                : { backgroundColor: "#333533", color: "#ffffff" }
-            }>
-                  {i.displayName.charAt(0).toUpperCase()}
-                </Avatar>
+                <Avatar style={
+                  finalUpdatedArray[isActive] == i
+                    ? { backgroundColor: "#333533", color: "#d22129" }
+                    : { backgroundColor: "#333533", color: "#ffffff" }
+                }
+                  src={i.imageURL} />
+
               </div>
               {i.displayName ? (
                 <div className={classes.userNameList}>

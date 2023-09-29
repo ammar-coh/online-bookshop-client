@@ -33,7 +33,8 @@ function Admin() {
         setAnchorElHome,
         setAnchorElProfile,
         subMenuItemActiveState, setSubMenuItemActiveState,
-        setNavBarRoute
+        setNavBarRoute,
+        setCurrentChatAvatar,
     } = useContext(Context);
     const dispatch = useDispatch();
     const classes = useStylesAdmin({ anchorElAdmin, adminSideBarActive, subMenuItemActiveState });
@@ -88,6 +89,7 @@ function Admin() {
                                 dispatch(clearChat());
                                 setIsActive(null);
                                 setCurrentChat("");
+                                setCurrentChatAvatar("")
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                 setSubMenuItemActiveState('books')
                                 setNavBarRoute("Book Section")
