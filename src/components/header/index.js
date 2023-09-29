@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Cart from "./Cart";
-import { clearChat } from "../../redux/actions/index"; //"../src/redux/actions/index";
+import { clearChat} from "../../redux/actions/index"; //"../src/redux/actions/index";
 import Chat_Notifications from "./chat_notification";
 import Context from "../../context";
 import axios from "axios";
@@ -13,15 +13,15 @@ import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountMenu from './profile'
-import {useStylesIndex} from './style'
+import { useStylesIndex } from './style'
 
 function Header() {
+  const userLocal = JSON.parse(localStorage.getItem("userInfo"))
   const classes = useStylesIndex();
   const [list, setList] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user_login.details);
   const [isSticky, setIsSticky] = useState(false);
-  let user_name = JSON.parse(localStorage.getItem("for_reducer"))
   const {
     roomID, setRoomID,
     currentChat, setCurrentChat,
@@ -29,6 +29,9 @@ function Header() {
     recepient_status,
     notification_open, setNotificationOpen,
     setRecepientId,
+    profileUpdate,
+    setProfileUpdate,
+    setCurrentChatAvatar,
     navBarRoute, setNavBarRoute
   } = useContext(Context);
   const leaveAllRooms = async (data) => {
@@ -59,8 +62,6 @@ function Header() {
   useEffect(() => {
     localStorage.getItem("authorization") && allUsers();
   }, [notification_open]);
-
-
   return (
     <div
       className={classes.root}
@@ -98,7 +99,7 @@ function Header() {
         </div>
         <div className={classes.cartContainer}>
           <Button
-          className={classes.cartButton}
+            className={classes.cartButton}
             style={{
               padding: "0px 0px 0px 30px",
             }}
@@ -106,13 +107,14 @@ function Header() {
               dispatch(clearChat());
               setIsActive(null);
               setCurrentChat("");
+              setCurrentChatAvatar("")
               leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
             }}>
             <Cart />
           </Button>
         </div>
         <div className={classes.profile}>
-          <AccountMenu />
+          <AccountMenu profileUpdate={profileUpdate} setProfileUpdate={setProfileUpdate} />
         </div>
         <div className={classes.userName}>
           <span style={{
@@ -121,7 +123,7 @@ function Header() {
             color: "##333533",
             fontWeight: 500
           }}>
-            {user?.user?.displayName.replace(/\b\w/g, (match) => match.toUpperCase())}
+            {userLocal?.displayName.replace(/\b\w/g, (match) => match.toUpperCase())}
           </span>
         </div>
       </div>

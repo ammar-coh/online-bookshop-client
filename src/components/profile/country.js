@@ -2,52 +2,69 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+export default function CountrySelect(props) {
+  const { Controller, control, register, errors, setValue } = props
+  const userDetailsStorage = JSON.parse(localStorage.getItem("userInfo"))
+  const defaultOption = !userDetailsStorage.country? countries.find(country => country.code === 'US'): countries.find(country=> country.label === userDetailsStorage.country)
 
-export default function CountrySelect() {
   return (
-    <Autocomplete
-      style={{ width: "100%" }}
-      id="country-select-demo"
-      sx={{
-        width: 300, '& .MuiSelect-select': {
-          borderColor: 'rgba(0, 0, 0, 0.08)',
-          borderStyle: "solid",
-        },
-        "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" },
-        "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" }
-      }}
-      options={countries}
-      autoHighlight
-      getOptionLabel={(option) => option.label}
-      renderOption={(props, option) => (
-        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-          <img
-            loading="lazy"
-            width="20"
-            src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-            srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-            alt=""
+    <Controller
+      render={({ field }) => (<Autocomplete
+        {...field}
+        style={{ width: "100%" }}
+        defaultValue={defaultOption}
+
+        onChange={(e,value) => {
+          console.log("xxcx",value.code)
+          field.onChange(value.label)
+        }}
+        id="country-select-demo"
+        sx={{
+          width: 300, '& .MuiSelect-select': {
+            borderColor: 'rgba(0, 0, 0, 0.08)',
+            borderStyle: "solid",
+          },
+          "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" },
+          "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#d22129" }
+        }}
+        options={countries}
+        autoHighlight
+        getOptionLabel={option => option.label}
+        getOptionSelected={(option, value) => option.value === value.value}
+        filterSelectedOptions
+        renderOption={(props, option) => (
+          <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+            <img
+              loading="lazy"
+              width="20"
+              src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
+              srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+              alt=""
+            />
+            {option.label} ({option.code}) +{option.phone}
+          </Box>
+        )}
+        renderInput={(params) => (
+          <TextField
+          
+            sx={{
+              '& fieldset': {
+                borderColor: 'rgba(0, 0, 0, 0.08)',
+                borderStyle: "solid", '&:hover fieldset': { borderColor: '#d22129' }, '&.Mui-focused fieldset': { borderColor: '#d22129' },
+              },
+            }}
+            {...params}
+            inputProps={{
+              ...params.inputProps,
+              autoComplete: 'new-password', // disable autocomplete and autofill
+            }}
           />
-          {option.label} ({option.code}) +{option.phone}
-        </Box>
-      )}
-      renderInput={(params) => (
-        <TextField
-          sx={{
-            '& fieldset': {
-              borderColor: 'rgba(0, 0, 0, 0.08)',
-              borderStyle: "solid", '&:hover fieldset': { borderColor: '#d22129' }, '&.Mui-focused fieldset': { borderColor: '#d22129' },
-            },
-          }}
-          {...params}
-          inputProps={{
-            ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
-          }}
-        />
-      )}
-    />
-  );
+        )}
+      />)}
+      name="country"
+      control={control}
+      // defaultValue={defaultOption}  
+      />)
 }
 
 // From https://bitbucket.org/atlassian/atlaskit-mk-2/raw/4ad0e56649c3e6c973e226b7efaeb28cb240ccb0/packages/core/select/src/data/countries.js
@@ -475,3 +492,6 @@ const countries = [
   { code: 'ZM', label: 'Zambia', phone: '260' },
   { code: 'ZW', label: 'Zimbabwe', phone: '263' },
 ];
+
+
+export {countries}

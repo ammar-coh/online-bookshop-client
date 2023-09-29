@@ -34,18 +34,19 @@ const useStyles = makeStyles({
   welcomeMessage: {
     display: "flex",
     justifyContent: "center",
-    padding:" 0px 10px 25px 10px",
+    padding: " 0px 10px 25px 10px",
   },
   welcomeMessageText: {
     fontFamily: "Montserrat, sans-se",
     fontSize: "20px",
-    color:"#ffffff"
- }
+    color: "#ffffff"
+  }
 });
-function ContactInfo({ currentChat }) {
+function ContactInfo({ currentChat, currentChatAvatar }) {
   const classes = useStyles();
   const user = useSelector((state) => state.user_login.details);
   const { isActive } = useContext(Context);
+  const userLocal = JSON.parse(localStorage.getItem("userInfo"))
 
   const userName = () => {
     let userNameStr = currentChat;
@@ -62,9 +63,7 @@ function ContactInfo({ currentChat }) {
       {isActive != null ? <div className={classes.userInfo}>
         <div className={classes.userAvatar}>
           {" "}
-          <Avatar sx={{ bgcolor: "#bdbdbd" }}>
-            {currentChat.charAt(0).toUpperCase()}
-          </Avatar>
+          <Avatar sx={{ bgcolor: "#bdbdbd" }} src = {currentChatAvatar}/>
         </div>
         {user.user.displayName ? (
           <div className={classes.userName}>{userName()}</div>

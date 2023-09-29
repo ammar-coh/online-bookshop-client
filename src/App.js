@@ -77,7 +77,6 @@ function App() {
   //
   useEffect(() => {
     socket.on("notification_delete", async (data) => {
-      console.log("notification_delete", data)
       dispatch(delete_notification(data))
     });
   }, []);

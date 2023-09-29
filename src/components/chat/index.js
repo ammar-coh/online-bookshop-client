@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { makeStyles, createMuiTheme} from "@material-ui/core/styles";
+import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
 import ChatSideMenu from "./side_menu";
 import ChatConversation from "./room";
 import ChatTypingArea from "./message_input";
@@ -56,14 +56,14 @@ const useStyles = makeStyles((theme) => ({
       width: "70%",
 
     },
-    backgroundColor:"#d22129"
+    backgroundColor: "#d22129"
   },
   receiverInfo: {
   },
 
   room: {
     zIndex: -1,
-    backgroundColor:"#ffffff",
+    backgroundColor: "#ffffff",
     height: "57vh",
     overflowY: "auto",
     overflowX: "hidden",
@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
   },
   roomContent: {
     overflowY: "auto",
-    maxHeight: "100%", 
+    maxHeight: "100%",
     overflowWrap: "break-word",
   },
   chatBar: {
@@ -106,6 +106,7 @@ function Chatroom() {
     setRoomID,
     currentChat,
     setCurrentChat,
+    currentChatAvatar, setCurrentChatAvatar,
     isActive,
     setIsActive,
     list,
@@ -138,20 +139,24 @@ function Chatroom() {
           setIsActive={setIsActive}
           list={list}
           setRecepientId={setRecepientId}
+          currentChatAvatar= {currentChatAvatar} 
+          setCurrentChatAvatar={setCurrentChatAvatar}
         />
       </div>
       <div className={classes.coversationContainer}>
         <div
           className={classes.receiverInfo}
         >
-          <ContactInfo currentChat={currentChat} />
+          <ContactInfo currentChat={currentChat}
+            currentChatAvatar={currentChatAvatar}
+            setCurrentChatAvatar={setCurrentChatAvatar} />
         </div>
 
         <div className={classes.room}>
           <div className={classes.roomContent}></div>
           <ChatConversation roomID={roomID} />{" "}
         </div>
-      
+
 
         <div className={classes.chatBar}>
           <ChatTypingArea

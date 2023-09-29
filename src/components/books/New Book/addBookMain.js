@@ -13,7 +13,7 @@ import AddBookField from './addBookField';
 import { bookAdded } from '../api';
 import { ErrorMessage } from "@hookform/error-message";
 function AddBook() {
-    const { alertContent, setAlertContent, setAlertOpen, cover, setCover } = useContext(Context);
+    const { alertContent, setAlertContent, setAlertOpen} = useContext(Context);
     const dispatch = useDispatch();
     const classes = useStylesAddBook()
     const [userProfileImg, setUserProfileImg] = useState();
@@ -27,7 +27,6 @@ function AddBook() {
         data.stock = data.stock !== '' ? parseInt(data.stock) : null;
         data.rating = data.rating !== '' ? parseInt(data.rating) : null
         data.description = data.description !== '' ? data.description : null
-        console.log(">>>>.", data);
         const fd = new FormData();
         for (const [key, value] of Object.entries(data)) {
             if (value !== null && value !== undefined) {

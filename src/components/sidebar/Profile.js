@@ -24,7 +24,8 @@ function Profile() {
         setAnchorElAdmin,profileSideBarActive, setProfileSideBarActive,
         anchorElProfile, setAnchorElProfile,
         subMenuItemActiveState, setSubMenuItemActiveState,
-        setNavBarRoute
+        setNavBarRoute,
+        setCurrentChatAvatar,
     } = useContext(Context);
     const dispatch = useDispatch();
 
@@ -82,6 +83,7 @@ function Profile() {
                                 dispatch(clearChat());
                                 setIsActive(null);
                                 setCurrentChat("");
+                                setCurrentChatAvatar("")
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                 setSubMenuItemActiveState('profile')
                                 setNavBarRoute("Profile")
