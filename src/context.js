@@ -27,6 +27,7 @@ export const Provider = ({ children }) => {
   })
   const [cover, setCover] = useState([])
   const [profileUpdate, setProfileUpdate] = useState({})
+  const[receieveMessage, setReceiveMessage] =useState(false)
   const contextValue = {
     roomID, setRoomID,
     currentChat, setCurrentChat,
@@ -50,7 +51,8 @@ export const Provider = ({ children }) => {
     alertContent, setAlertContent,
     cover, setCover,
     profileUpdate, setProfileUpdate,
-    currentChatAvatar, setCurrentChatAvatar
+    currentChatAvatar, setCurrentChatAvatar,
+    receieveMessage, setReceiveMessage
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;

@@ -69,7 +69,9 @@ function App() {
 
   //
   useEffect(() => {
+   
     socket.on("notification_message", async (data) => {
+      console.log("notification data", data)
       dispatch(notification_real_time(data))
     });
   }, [uname, messages?.messages]);

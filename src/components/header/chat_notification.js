@@ -19,6 +19,7 @@ function Chat_Notifications({
   roomID,
   setRoomID,
   setCurrentChat,
+  setCurrentChatAvatar,
   setIsActive,
   list,
   setNotificationOpen,
@@ -31,7 +32,7 @@ function Chat_Notifications({
   const dispatch = useDispatch();
   const my_notifications = useSelector((state) => state.notification)
   const finalUpdatedArray = list?.userList?.filter(function (i) {
-    return i.displayName !== user?.user?.displayName;
+    return i.userName !== user?.user?.userName;
   });
   const theme = createTheme({
     palette: {
@@ -48,7 +49,6 @@ function Chat_Notifications({
       arr[i] = arr[i].charAt(0).toUpperCase() + arr[i].slice(1);
     }
     let name2 = arr.join(" ");
-    console.log("name2", name2)
     return name2;
   };
   const joinChatRoom = async (data) => {
@@ -59,33 +59,21 @@ function Chat_Notifications({
         index = finalUpdatedArray.indexOf(user);
       }
     });
-
-    let id = [data.displayName, user.user.displayName];
-    let sortedID = id.sort();
-    const firstID = await list?.userList.filter(function (i) {
-      return i.displayName == sortedID[0];
-    });
-    const secondID = await list?.userList.filter(function (i) {
-      return i.displayName == sortedID[1];
-    });
-    let room_id = await firstID[0]?.id.concat(secondID[0]?.id);
-
     await socket.emit("leave_private_room", { roomID: roomID, userID: user?.user?.id });
-
-
     await socket.emit("private_room", {
-      room_id: room_id,
+      room_id: data.roomID,
       userID: user?.user?.id,
       participant: data?.sender_id,
     });
     const dataObjectForFetchChatAPI = {
-      roomID: room_id,
+      roomID: data.roomID,
       participant: user?.user?.id,
     };
-    localStorage.setItem("roomID", room_id)
-    setRoomID(room_id);
+    localStorage.setItem("roomID", data.roomID)
+    setRoomID(data.roomID);
     setIsActive(index);
     setCurrentChat(data.displayName);
+    setCurrentChatAvatar(data.image)
     dispatch(chatFromDBSaga(dataObjectForFetchChatAPI));
     setRecepientId(data?.sender_id)
     history.push("/book club");
@@ -110,7 +98,7 @@ function Chat_Notifications({
   }, []);
 
   const openNotifications = () => {
-    if (my_notifications.recipient_id == user?.user?.id) {
+    if (my_notifications?.recipient_id == user?.user?.id) {
       setShowUserNotifications((previous) => !previous);
     }
   };
@@ -144,19 +132,22 @@ function Chat_Notifications({
                 <Button
                   onClick={() =>
                     joinChatRoom({
+                      userName:content.authorUsername,
                       displayName: content.displayName,
                       index: index,
                       sender_id: content.author_id,
+                      image:content.imageURL,
+                      roomID:content.roomID
                     })
                   }
                   className={classes.button}
                 >
                   <ListItem alignItems="flex-start">
                     <ListItemAvatar>
-                      <Avatar style={{ backgroundColor: "#d22129", color: "#ffffff" }}> {content.displayName.charAt(0).toUpperCase()} </Avatar>
+                      <Avatar  src={content.imageURL}/> 
                     </ListItemAvatar>
                     <ListItemText
-                      primary={listUsers({ name: content.author })}
+                      primary={listUsers({ name: content.displayName })}
                       secondary={
                         <Typography
                           sx={{ display: "inline" }}

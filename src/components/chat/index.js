@@ -115,7 +115,9 @@ function Chatroom() {
     setRecepientId,
     recepient_status,
     setRecepientStatus,
-    notification_open
+    notification_open,
+    receieveMessage, setReceiveMessage
+
   } = useContext(Context);
   const allUsers = () => {
     axios.get(`http://localhost:8081/users/userList`).then((response) => {
@@ -127,7 +129,7 @@ function Chatroom() {
     localStorage.getItem("authorization") && allUsers();
   }, [notification_open]);
 
-
+  console.log("roomID_Chat", roomID)
   return (
     <div className={classes.root}>
       <div className={classes.list}>
@@ -139,7 +141,7 @@ function Chatroom() {
           setIsActive={setIsActive}
           list={list}
           setRecepientId={setRecepientId}
-          currentChatAvatar= {currentChatAvatar} 
+          currentChatAvatar={currentChatAvatar}
           setCurrentChatAvatar={setCurrentChatAvatar}
         />
       </div>
@@ -164,6 +166,9 @@ function Chatroom() {
             recepient_id={recepient_id}
             setRecepientStatus={setRecepientStatus}
             recepient_status={recepient_status}
+            receieveMessage={receieveMessage}
+            setReceiveMessage={setReceiveMessage}
+
           />
         </div>
       </div>

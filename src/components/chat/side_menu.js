@@ -89,32 +89,28 @@ function ChatSideMenu({
     return name2;
   };
   const finalUpdatedArray = list?.userList?.filter(function (i) {
-    return i.displayName !== userLocal?.displayName;
+    return i.userName !== userLocal?.userName;
   });
-
-
   const joinChatRoom = async (data) => {
-    let id = [data.displayName, userLocal.displayName];
+    let id = [data.userName, userLocal.userName];
     let sortedID = id.sort();
     const firstID = await list?.userList.filter(function (i) {
-      return i.displayName == sortedID[0];
+      return i.userName == sortedID[0];
     });
     const secondID = await list?.userList.filter(function (i) {
-      return i.displayName == sortedID[1];
+      return i.userName == sortedID[1];
     });
-    let room_id = await firstID[0].id.concat(secondID[0].id);
 
+    let room_id = await firstID[0].id.concat(secondID[0].id);
     await socket.emit("leave_private_room", {
       roomID: roomID,
       userID: user?.user?.id,
     });
-
     await socket.emit("private_room", {
       room_id: room_id,
       userID: user?.user?.id,
       participant: data?.id,
     });
-
     const dataObjectForFetchChatAPI = {
       roomID: room_id,
       participant: user.user.id,
@@ -133,7 +129,6 @@ function ChatSideMenu({
       sender_id: data?.id
     });
   };
-
   return (
     <div className={classes.root}>
       <div className={classes.userInfo}>
@@ -154,10 +149,11 @@ function ChatSideMenu({
           <Button
             onClick={() =>
               joinChatRoom({
-                displayName: i.displayName,
+                userName: i.userName,
                 index: index,
                 id: i.id,
-                image: i.imageURL
+                image: i.imageURL,
+                displayName: i.displayName
               })
             }
             className={classes.button}
