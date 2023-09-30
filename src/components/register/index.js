@@ -141,6 +141,15 @@ const useStyles = makeStyles({
         }
 
     },
+    error_message: {
+        color: "#d22129",
+        margin: "0px",
+        '&::before': {
+            content: '"⚠ "',
+            display: 'inline',
+            color: "#d22129",
+        },
+    }
 
 });
 
@@ -154,10 +163,10 @@ function Sign_up() {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [username, setUsername] = useState()
-    const { register, handleSubmit, control, formState: { errors }, } = useForm({
+    const { register, handleSubmit, control, formState: { errors }, setError, } = useForm({
         criteriaMode: "all"
     });
-
+    const [error400, setError400] = useState(null)
     const getEmail = (e) => {
         setEmail(e.target.value)
     }
@@ -168,20 +177,18 @@ function Sign_up() {
     const getUserName = (e) => {
         setUsername(e.target.value)
     }
-
-    const current_user_email = email
-    const current_user_password = password
-    const current_user_name = username
     const onSubmit = data => {
         console.log(data);
         dispatch(sign_up_saga({
-            email: current_user_email,
-            password: current_user_password,
-            user_name: current_user_name,
+            email: data.email,
+            password: data.password,
+            userName: data.userName,
+            displayName: data.displayName,
+            setError: setError,
             history
         }))
     }
-
+    console.log("errormess", errors.username)
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className={classes.login_container}>
@@ -190,6 +197,46 @@ function Sign_up() {
                         <h3 className={classes.container_header_signIn}>Sign Up</h3>
                     </div>
                     <div className={classes.form}>
+                        <div className={classes.input_group}>
+                            <div className={classes.input_pre_icon}>
+                                <span className={classes.input_icon}>
+                                    <BadgeIcon size="small" />
+                                </span>
+                            </div>
+                            <Controller name="userName"
+                                control={control}
+                                defaultValue=""
+                                {...register('userName', {
+                                    required: 'required',
+                                })}
+                                render={({ field }) => (
+                                    < TextField
+                                        {...field}
+                                        autoFocus={false}
+                                        placeholder="user name"
+                                        className={classes.email}
+                                        onChange={(e) => {
+                                            field.onChange(e);
+                                        }}
+                                    />
+                                )}
+                            />
+                            {errors.userName && errors.userName.type == 'custom'? <p className={classes.error_message}>{errors.userName.message}</p>:null}
+
+                            <Error_Message
+                                errors={errors}
+                                name="userName"
+                                render={({ messages }) => {
+                                    console.log("messages", messages);
+                                    return messages
+                                        ? Object.entries(messages).map(([type, message]) => (
+                                            <p className={classes.error_message} key={type}>{message}</p>
+                                        ))
+                                        : null;
+                                }} />
+
+
+                        </div>
                         <div className={classes.input_group}>
                             <div className={classes.input_pre_icon}>
                                 <span className={classes.input_icon}>
@@ -262,20 +309,20 @@ function Sign_up() {
                                     <BadgeIcon size="small" />
                                 </span>
                             </div>
-                            <Controller name="user name"
+                            <Controller name="displayName"
                                 control={control}
                                 defaultValue=""
-                                {...register('user name', {
-                                    required: 'Please enter your user name address',
+                                {...register('displayName', {
+                                    required: 'required',
                                     pattern: {
-                                        message: 'Invalid Email',
+                                        message: 'required',
                                     },
                                 })}
                                 render={({ field }) => (
                                     < TextField
                                         {...field}
                                         autoFocus={false}
-                                        placeholder="user name"
+                                        placeholder="name"
                                         className={classes.email}
                                         onChange={(e) => {
                                             field.onChange(e);
@@ -283,7 +330,7 @@ function Sign_up() {
                                         }}
                                     />
                                 )} />
-                            <Error_Message errors={errors} name="user name" />
+                            <Error_Message errors={errors} name="displayName" />
                         </div>
                         <div className={classes.signInButton_container}>
                             <Button

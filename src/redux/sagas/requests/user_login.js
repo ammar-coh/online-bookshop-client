@@ -7,7 +7,8 @@ export function requestPostSign_Up(data) {
     data: {
       email: data.email,
       password: data.password,
-      user_name: data.user_name,
+      userName: data.userName,
+      displayName: data.displayName
     },
   });
 }
@@ -16,7 +17,10 @@ export function requestPostSign_In(data) {
   return axios.request({
     method: "post",
     url: `${baseUrl}/users/login`,
-    data: { email: data.email, password: data.password },
+    data: {
+      email: data.email,
+      password: data.password,
+    },
   });
 }
 

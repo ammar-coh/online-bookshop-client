@@ -78,7 +78,6 @@ function Home({ setUserAvailable, socket }) {
         setRecepientId,
         sideBarCollapsed,setSideBarCollapsed
     } = useContext(Context);
-    // console.log("collaposed", sideBarCollapsed)
     const dispatch = useDispatch();
     const uname = useSelector((state) => state.user_login.details);
     useEffect(() => {

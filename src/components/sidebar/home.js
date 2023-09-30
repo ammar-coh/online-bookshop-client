@@ -20,6 +20,7 @@ function Home() {
     const dispatch = useDispatch();
     const {
         roomID,
+        setRoomID,
         setCurrentChat,
         setIsActive,
         selectedSideBarMenu,
@@ -87,13 +88,14 @@ function Home() {
                                 <Button
                                     className={classes.button_1}
                                     onClick={() => {
+                                        leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                         dispatch(clearChat());
                                         setIsActive(null);
                                         setCurrentChat("");
                                         setCurrentChatAvatar("")
-                                        leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                         setSubMenuItemActiveState('home_page')
                                         setNavBarRoute("Home")
+                                      
                                     }}
                                 >
                                     <Link className={classes.home_link} to="/">

@@ -8,6 +8,7 @@ export const notification = (state = initialState, actions) => {
   switch (actions.type) {
 
     case "notification_real_time":
+      console.log("notificattion reducer _realtime", actions.data.data.messages)
       state = {
         recipient_id: actions.data.recipient_id,
         notifications: actions.data.data.messages,

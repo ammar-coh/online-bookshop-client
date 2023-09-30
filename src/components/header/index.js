@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Cart from "./Cart";
-import { clearChat} from "../../redux/actions/index"; //"../src/redux/actions/index";
+import { clearChat } from "../../redux/actions/index"; //"../src/redux/actions/index";
 import Chat_Notifications from "./chat_notification";
 import Context from "../../context";
 import axios from "axios";
@@ -89,6 +89,7 @@ function Header() {
             setRoomID={setRoomID}
             currentChat={currentChat}
             setCurrentChat={setCurrentChat}
+            setCurrentChatAvatar={setCurrentChatAvatar}
             isActive={isActive}
             setIsActive={setIsActive}
             list={list}

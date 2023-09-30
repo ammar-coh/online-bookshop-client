@@ -6,7 +6,7 @@ import SendIcon from "@mui/icons-material/Send";
 import { socket } from "../../socket";
 import { useSelector, useDispatch } from "react-redux";
 import { chat } from "../../redux/actions/index";
-
+import Context from '../../context'
 const useStyles = makeStyles((theme) => ({
   typingArea: {
     display: "flex",
@@ -33,9 +33,9 @@ const useStyles = makeStyles((theme) => ({
     height: "40px",
     zIndex: 1,
     right: 28,
-    "&:hover":{
-      color:"#d22129",
-      backgroundColor:"#ffffff"
+    "&:hover": {
+      color: "#d22129",
+      backgroundColor: "#ffffff"
     }
   },
 }));
@@ -45,35 +45,13 @@ const ChatTypingArea = ({
   recepient_id,
   setRecepientStatus,
   recepient_status,
+  receieveMessage, 
+  setReceiveMessage
 }) => {
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
   const classes = useStyles();
   const user = useSelector((state) => state.user_login.details);
-  const sendMessage = async () => {
-    if (message !== "") {
-      const messageData = {
-        roomID: roomID,
-        author: user?.user?.displayName,
-        message: message,
-        author_id: user?.user?.id,
-        displayName: user?.user?.displayName,
-        recepient_id: recepient_id,
-        recepient_status: true,
-        time:
-          new Date(Date.now()).getHours() +
-          ":" +
-          new Date(Date.now()).getMinutes(),
-      };
-      await socket.emit("send_message", messageData);
-
-    }
-
-  };
-  const clearInput = () => {
-    setMessage("")
-  }
-
   const notifiactions = async (data) => {
     if (data.receipent_status
       .recepient_status == false) {
@@ -87,20 +65,49 @@ const ChatTypingArea = ({
     }
   };
 
+  const sendMessage = async () => {
+    if (message !== "") {
+      const messageData = {
+        roomID: roomID,
+        author: user?.user?.displayName,
+        authorUserName: user?.user?.userName,
+        authorImage:user?.user?.imageURL,
+        message: message,
+        author_id: user?.user?.id,
+        displayName: user?.user?.displayName,
+        recepient_id: recepient_id,
+        recepient_status: true,
+        time:
+          new Date(Date.now()).getHours() +
+          ":" +
+          new Date(Date.now()).getMinutes(),
+      };
+      await socket.emit("send_message", messageData);
+      setReceiveMessage(true)
+
+    }
+
+  };
+  const clearInput = () => {
+    setMessage("")
+  }
+
+
   useEffect(() => {
     socket.on("receive_message", async (data) => {
+      console.log("message?received", data)
       await dispatch(chat(data));
       await setRecepientStatus(data?.recepient_status?.receipent_status);
       await notifiactions(data);
     });
-  }, []);
+  }, [ receieveMessage]);
 
 
 
   return (
     <div className={classes.typingArea}>
       <TextField
-      value={message}
+        value={message}
         className={classes.inputField}
         variant="outlined"
         placeholder="Type a message..."
