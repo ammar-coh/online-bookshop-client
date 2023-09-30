@@ -62,7 +62,10 @@ function Home() {
     };
     return (
         <div>
-            <Button style={{ padding: "0px", textTransform: "none", width: "100%" }} onClick={handleClick}>
+            <Button 
+            disableRipple
+            style={{ padding: "0px", textTransform: "none", width: "100%" }} 
+            onClick={handleClick}>
                 <Accordion
                     className={classes.Accordion}
                     expanded={selectedSideBarMenu === 'home'}
@@ -95,7 +98,6 @@ function Home() {
                                         setCurrentChatAvatar("")
                                         setSubMenuItemActiveState('home_page')
                                         setNavBarRoute("Home")
-                                      
                                     }}
                                 >
                                     <Link className={classes.home_link} to="/">
