@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     display: "grid",
     gap: "50px 0px",
     zIndex: 1,
+    // border:"1px solid black"
   },
 
   userInfo: {
@@ -42,8 +43,8 @@ const useStyles = makeStyles({
     color: "#ffffff"
   }
 });
-function ContactInfo({ currentChat, currentChatAvatar }) {
-  const classes = useStyles();
+function ContactInfo({ currentChat, currentChatAvatar ,setRoomActive,roomActive }) {
+  const classes = useStyles({roomActive});
   const user = useSelector((state) => state.user_login.details);
   const { isActive } = useContext(Context);
   const userLocal = JSON.parse(localStorage.getItem("userInfo"))
