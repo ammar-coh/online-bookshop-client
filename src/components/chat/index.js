@@ -1,106 +1,16 @@
-import React, { useContext, useEffect } from "react";
-import { makeStyles, createMuiTheme } from "@material-ui/core/styles";
+import React, { useContext, useEffect, useState } from "react";
 import ChatSideMenu from "./side_menu";
 import ChatConversation from "./room";
 import ChatTypingArea from "./message_input";
 import ContactInfo from "./user_info";
 import Context from "../../context";
 import axios from "axios";
+import {useStylesIndex} from './style'
 
-const theme = createMuiTheme({
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 600,
-      md: 960,
-      lg: 1280,
-      xl: 1366, // Custom breakpoint for 1366x768
-    },
-  },
-});
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    padding: "20px 315px 60px 325px ",
-    [theme.breakpoints.only('lg')]: {
-      padding: "20px 215px 20px 225px ",
-    },
-  },
-
-  list: {
-    width: "20%",
-    backgroundColor: "#d22129",
-    borderTopLeftRadius: "20px",
-    borderBottomLeftRadius: "20px",
-    overflow: "auto",
-    "&::-webkit-scrollbar": {
-      width: "5px",
-    },
-    "&::-webkit-scrollbar-track": {
-      borderRadius: "10px",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      background: "#FF9900",
-      borderRadius: "12px",
-    },
-    [theme.breakpoints.only('lg')]: {
-      width: "30%",
-    },
-  },
-  coversationContainer: {
-    width: "80%",
-    boxShadow: "12px 2px 15px  #f5f5f5",
-    zIndex: 2,
-    paddingTop: "30px",
-    [theme.breakpoints.only('lg')]: {
-      width: "70%",
-
-    },
-    backgroundColor: "#d22129"
-  },
-  receiverInfo: {
-  },
-
-  room: {
-    zIndex: -1,
-    backgroundColor: "#ffffff",
-    height: "57vh",
-    overflowY: "auto",
-    overflowX: "hidden",
-    "&::-webkit-scrollbar": {
-      width: "5px",
-    },
-    "&::-webkit-scrollbar-track": {
-      borderRadius: "10px",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      background: "#FF9900",
-      borderRadius: "12px",
-    },
-    [theme.breakpoints.only('lg')]: {
-      height: "56vh",
-    },
-  },
-  roomContent: {
-    overflowY: "auto",
-    maxHeight: "100%",
-    overflowWrap: "break-word",
-  },
-  chatBar: {
-    padding: "30px 50px",
-    backgroundColor: "#303030",
-    [theme.breakpoints.only('lg')]: {
-      padding: "20px 10px",
-    },
-  },
-
-  divider: {
-    border: "60px solid black",
-  },
-}))
 
 function Chatroom() {
-  const classes = useStyles();
+  const [roomActive,setRoomActive] = useState(false) 
+  const classes = useStylesIndex({roomActive});
   const {
     roomID,
     setRoomID,
@@ -117,7 +27,6 @@ function Chatroom() {
     setRecepientStatus,
     notification_open,
     receieveMessage, setReceiveMessage
-
   } = useContext(Context);
   const allUsers = () => {
     axios.get(`http://localhost:8081/users/userList`).then((response) => {
@@ -129,7 +38,6 @@ function Chatroom() {
     localStorage.getItem("authorization") && allUsers();
   }, [notification_open]);
 
-  console.log("roomID_Chat", roomID)
   return (
     <div className={classes.root}>
       <div className={classes.list}>
@@ -143,6 +51,8 @@ function Chatroom() {
           setRecepientId={setRecepientId}
           currentChatAvatar={currentChatAvatar}
           setCurrentChatAvatar={setCurrentChatAvatar}
+          roomActive={roomActive}
+          setRoomActive= {setRoomActive}
         />
       </div>
       <div className={classes.coversationContainer}>
@@ -151,7 +61,9 @@ function Chatroom() {
         >
           <ContactInfo currentChat={currentChat}
             currentChatAvatar={currentChatAvatar}
-            setCurrentChatAvatar={setCurrentChatAvatar} />
+            setCurrentChatAvatar={setCurrentChatAvatar} 
+            roomActive={roomActive}
+            setRoomActive= {setRoomActive}/>
         </div>
 
         <div className={classes.room}>

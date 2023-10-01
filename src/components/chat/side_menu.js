@@ -6,17 +6,32 @@ import { socket } from "../../socket";
 import { chatFromDBSaga } from "../../redux/actions/index";
 import Button from "@material-ui/core/Button";
 import { clearChat } from "../../redux/actions/index"; //"../src/redux/actions/index";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import SearchIcon from '@mui/icons-material/Search';
+import DirectionsIcon from '@mui/icons-material/Directions';
 
 const useStyles = makeStyles({
   root: {
     display: "grid",
-    gap: "50px 0px",
+    gap: "5px 0px",
+    // border: "1px solid red "
   },
 
   userInfo: {
     display: "flex",
-    padding: "10px",
+    padding: "20px 10px 10px 10px",
     gap: "15px",
+    backgroundColor: "#f0f2f5",
+    height: "auto",
     "& .css-2miw2m-MuiAvatar-root": {
       color: "#d22129"
     }
@@ -24,7 +39,7 @@ const useStyles = makeStyles({
   userAvatar: { color: "#d22129" },
   userName: {
     fontFamily: "Montserrat, sans-se",
-    fontSize: "16px",
+    fontSize: "10px",
     width: "100%",
     fontWeight: 500,
     color: "#ffffff"
@@ -32,13 +47,16 @@ const useStyles = makeStyles({
 
   list: {
     display: "grid",
+    // border: "1px solid black",
   },
 
   userInfoList: {
     display: "flex",
-    padding: "10px 10px 10px 4px",
+    padding: "10px 0px 10px 4px",
     gap: "15px",
     marginRight: "auto",
+    cursor: "pointer",
+    // border: "1px solid black",
 
   },
   userAvatarList: {
@@ -47,7 +65,10 @@ const useStyles = makeStyles({
     width: "100%",
     display: "flex",
     fontFamily: "Montserrat, sans-se",
-    fontSize: "16px",
+    fontSize: "20px",
+    // border:"1px solid black",
+    padding: "15px",
+
   },
   button: {
     width: "100%",
@@ -55,6 +76,17 @@ const useStyles = makeStyles({
       textTransform: "none"
     }
   },
+  listButton: {
+    "&.css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root": {
+      backgroundColor: 'none',
+      borderRadius: "5px",
+      "&:hover": {
+        backgroundColor: '#f5f6f6',
+      },
+    },
+
+    borderRadius: "5px",
+  }
 });
 function ChatSideMenu({
   list,
@@ -64,7 +96,8 @@ function ChatSideMenu({
   isActive,
   setIsActive,
   setRecepientId,
-  setCurrentChatAvatar
+  setCurrentChatAvatar,
+  setRoomActive
 }) {
   const userLocal = JSON.parse(localStorage.getItem("userInfo"))
   const classes = useStyles();
@@ -124,6 +157,7 @@ function ChatSideMenu({
     setCurrentChatAvatar(data.image)
     dispatch(chatFromDBSaga(dataObjectForFetchChatAPI));
     setRecepientId(data?.id);
+    setRoomActive(true)
     await socket.emit("delete_notification_message", {
       userID: user?.user?.id,
       sender_id: data?.id
@@ -132,22 +166,31 @@ function ChatSideMenu({
   return (
     <div className={classes.root}>
       <div className={classes.userInfo}>
-        <div className={classes.userAvatar}>
-          {" "}
-          <Avatar sx={{ bgcolor: "#ffffff" }}>
-            {user.user.displayName.charAt(0).toUpperCase()}
-          </Avatar>
-        </div>
-        {user.user.displayName ? (
-          <div className={classes.userName}>{userName()}</div>
-        ) : (
-          <div>N/A</div>
-        )}
+        <Paper
+          component="form"
+          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: "100%" }}
+        >
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Search..."
+            inputProps={{ 'aria-label': 'search google maps' }}
+            disabled
+          />
+          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+
+          <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+        </Paper>
       </div>
-      <div className={classes.list}>
+      <List className={classes.list} >
         {finalUpdatedArray?.map((i, index) => (
-          <Button
-            onClick={() =>
+          <ListItem className={classes.userInfoList} style={
+            finalUpdatedArray[isActive] == i
+              ? { backgroundColor: "#f0f2f5" }
+              : { backgroundColor: "#fff" }
+          }  >
+            <ListItemButton onClick={() =>
               joinChatRoom({
                 userName: i.userName,
                 index: index,
@@ -155,36 +198,36 @@ function ChatSideMenu({
                 image: i.imageURL,
                 displayName: i.displayName
               })
-            }
-            className={classes.button}
-            style={
-              finalUpdatedArray[isActive] == i
-                ? { backgroundColor: "#ffffff", color: "#d22129" }
-                : { backgroundColor: "#d22129", color: "#ffffff" }
-            }
-          >
-            <div className={classes.userInfoList}>
+            } className={classes.listButton}
+            >
               <div className={classes.userAvatarList}>
                 {" "}
-                <Avatar style={
-                  finalUpdatedArray[isActive] == i
-                    ? { backgroundColor: "#333533", color: "#d22129" }
-                    : { backgroundColor: "#333533", color: "#ffffff" }
-                }
-                  src={i.imageURL} />
+                <Avatar
+                  src={i.imageURL}
+                  onClick={() =>
+                    joinChatRoom({
+                      userName: i.userName,
+                      index: index,
+                      id: i.id,
+                      image: i.imageURL,
+                      displayName: i.displayName
+                    })
+                  } />
 
               </div>
               {i.displayName ? (
-                <div className={classes.userNameList}>
+                <div className={classes.userNameList}
+                >
                   {listUsers({ name: i.displayName })}
                 </div>
               ) : (
                 <div>N/A</div>
               )}
-            </div>
-          </Button>
+            </ListItemButton>
+          </ListItem>
+          // </Button>
         ))}
-      </div>
+      </List>
     </div>
   );
 }
