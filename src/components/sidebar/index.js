@@ -4,6 +4,7 @@ import  SideBar from './drawer'
 const useStyles = makeStyles({
     root: {
         backgroundColor: "#ffffff",
+        border:"none",
         width: "100%",
         height: "100%",
     },

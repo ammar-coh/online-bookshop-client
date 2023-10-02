@@ -100,7 +100,7 @@ function Header() {
         </div>
         <div className={classes.cartContainer}>
           <Button
-            className={classes.cartButton}
+            className={classes.s}
             style={{
               padding: "0px 0px 0px 30px",
             }}
@@ -121,7 +121,7 @@ function Header() {
           <span style={{
             fontFamily: "Montserrat, sans-se",
             fontSize: "18px",
-            color: "##333533",
+            color: "#fff",
             fontWeight: 500
           }}>
             {userLocal?.displayName.replace(/\b\w/g, (match) => match.toUpperCase())}

@@ -20,14 +20,14 @@ const useStyles = makeStyles({
   },
 
   icon: {
-    color: "#777d74",
+    color: "#fff",
     marginLeft: "0px",
     marginTop: "10px",
 
   },
   count: {
     marginTop: "0px",
-    color: "#777d74",
+    color: "#fff",
     textDecoration: "none",
     margin: "0px",
 
@@ -37,7 +37,7 @@ const useStyles = makeStyles({
   checkout_link: {
     textDecoration: "none",
     // border: "1px solid white",
-    color: "#777d74",
+    color: "#fff",
   },
 });
 const theme = createTheme({

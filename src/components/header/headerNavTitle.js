@@ -21,7 +21,7 @@ function NavBarRoute() {
                     <span>{navBarRoute}</span>
                 </Grid>
                 <Grid className={classes.breadcrumb}>
-                    <Breadcrumbs aria-label="breadcrumb" separator=">">
+                    <Breadcrumbs aria-label="breadcrumb"  style={{color:"#fff"}} separator=">">
                         <Link className={classes.link} to="/">
                             Home
                         </Link>
@@ -31,7 +31,7 @@ function NavBarRoute() {
                             return isLast ? (
                                 <Typography
                                     style={{
-                                        color: "#777d74",
+                                        color: "#fff",
                                         fontSize: "14px",
                                         fontFamily: "Montserrat, sans-se",
                                     }} key={name}>
@@ -39,7 +39,7 @@ function NavBarRoute() {
                                 </Typography>
                             ) : (
                                 <Link  style={{
-                                    color: "#777d74",
+                                    color: "#fff",
                                     fontSize: "14px",
                                     fontFamily: "Montserrat, sans-se",
                                 }} to={routeTo} key={name}>

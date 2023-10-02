@@ -26,8 +26,10 @@ const useStylesIndex = makeStyles({
       display: "flex",
       justifyContent: "space-between",
       zIndex: 3,
-      height: "65px",
-      backgroundColor: "#fbfcff"
+      // height: "67.49px",
+      // backgroundColor: "#fbfcff",
+      backgroundColor:"#d22129",
+      borderColor:"#d22129"
     },
     sign_out: {
       backgroundColor: "#ffffff",
@@ -48,24 +50,26 @@ const useStylesIndex = makeStyles({
     },
     chatNotificationContainer: {
       display: "flex",
-      padding: "14px 0px 0px 0px",
+      padding: "20px 0px 0px 0px",
       width: "25%",
       justifyContent: "flex-end",
+      // border:"1px solid #fff"
   
     },
     notificationMailIcon: {
-      color: "#777d74",
+      color: "#fff",
     },
     searchBarDiv: {
       width: "50%",
       display: "flex",
       justifyContent: "center",
       // border: "2px solid blue",
-      padding: "10px 120px 10px 120px",
+      padding: "17px 120px 0px 120px",
     },
     searchBar: {
       padding: "0 15px",
       width: "480px",
+      height:"40px",
       backgroundColor: "#ffffff",
       boxShadow: "  0 3px 10px rgb(0 0 0 / 0.2)",
       borderRadius: "5px",
@@ -77,33 +81,35 @@ const useStylesIndex = makeStyles({
     headerThirdContainer: {
       justifyContent: "flex-start",
       width: "30%",
-      padding: "0px 15px 10px 15px",
+      padding: "0px 15px 0px 15px",
       height: "auto",
       display: "flex",
-      // border: "2px solid green",
     },
     homeIconMainContainer: {
       width: "20%",
       display: "flex",
       justifyContent: "flex-start",
       padding: "4px 20px 0px 20px",
+      // border:"1px solid #fff"
     },
+   
     cartContainer: {
+      // border:"1px solid #fff",
       display: "flex",
       justifyContent: "dtart",
       width: "15%",
-      padding: "12px 5px 0px 0px",
+      padding: "13px 5px 0px 0px",
       '&:hover .cartButton': {
         backgroundColor: 'transparent', // Set the hover background color to transparent
       },
     },
     profile: {
       width: "19%",
-      padding: "2px 0px 0px 0px"
+      padding: "12px 12px 0px 12px",
     },
     userName: {
       width: "35%",
-      padding: "14px 5px 0px 0px",
+      padding: "22px 5px 0px 0px",
     }
   });
 
@@ -116,7 +122,7 @@ const useStylesHeaderNavTitle = makeStyles({
     },
     title: {
         fontFamily: "Montserrat, sans-se",
-        color: "#11141b",
+        color: "#fff",
         fontWeight: 500,
         fontFamily: "Roboto,sans-serif",
         textAlign: "start",
@@ -125,7 +131,7 @@ const useStylesHeaderNavTitle = makeStyles({
     },
     breadcrumb: {
         fontFamily: "Montserrat, sans-se",
-        color: "#11141b",
+        color: "#fff",
         fontWeight: 500,
         textAlign: "center",
         padding: "0px"
@@ -134,8 +140,8 @@ const useStylesHeaderNavTitle = makeStyles({
         textDecoration: "none",
         fontFamily: "Montserrat, sans-se",
         fontSize: "14px",
-        color: "#d22129",
-        padding: "0px 0px 5px 0px",
+        color: "#fff",
+        padding: "0px 0px 0px 0px",
     }
 
 
@@ -203,7 +209,7 @@ const useStylesChatNotification = makeStyles({
     root: {
     },
     chatNotification: {},
-    notificationMailIcon: { color: "#777d74",
+    notificationMailIcon: { color: "#fff",
   fontSize:"120px" },
     notification_badge: { width: "100%",
    },

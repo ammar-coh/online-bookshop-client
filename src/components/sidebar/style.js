@@ -17,7 +17,7 @@ const useStylesDrawer = makeStyles({
         backgroundColor: "#d22129",
     },
     libertyBooks_logo: {
-        width: "100%"
+        width: "100%",
     },
     sidebar_menu_list: {
         backgroundColor: "#ffffff",
