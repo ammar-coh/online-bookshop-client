@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     borderTopRightRadius: "5px",
     borderBottomRightRadius: "5px",
     borderTopLeftRadius: "5px",
-    backgroundColor: "#d22129",
+    backgroundColor: "#bcaaa4",
     color: "#FFFFFF",
     fontFamily: "Montserrat, sans-se",
     fontSize: "14px"

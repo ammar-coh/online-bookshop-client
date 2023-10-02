@@ -6,6 +6,7 @@ import ContactInfo from "./user_info";
 import Context from "../../context";
 import axios from "axios";
 import {useStylesIndex} from './style'
+import Paper from '@mui/material/Paper';
 
 
 function Chatroom() {
@@ -40,7 +41,10 @@ function Chatroom() {
 
   return (
     <div className={classes.root}>
-      <div className={classes.list}>
+      <Paper elevation={3} style={{width:"100%", display:"flex", borderRadius:"19px",
+      // border:"1px solid black"
+      }}>    
+          <div className={classes.list}>
         <ChatSideMenu
           setCurrentChat={setCurrentChat}
           roomID={roomID}
@@ -84,6 +88,7 @@ function Chatroom() {
           />
         </div>
       </div>
+      </Paper>
     </div>
   );
 }

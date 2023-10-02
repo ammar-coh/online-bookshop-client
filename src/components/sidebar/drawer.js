@@ -25,6 +25,7 @@ const openedMixin = (theme) => ({
     width: "20%",
     height: "auto",
     backgroundColor: "#ffffff",
+    border:"none",
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,

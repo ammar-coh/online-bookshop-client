@@ -27,10 +27,12 @@ const useStyles = makeStyles({
   },
   userName: {
     width: "100%",
-    color: "#ffffff",
+    // color: "#41525d",
+    color:"#333533",
     fontFamily: "Montserrat, sans-se",
     fonySize: "16px",
     zIndex: 1,
+    padding:"10px 0px 0px 0px"
   },
   welcomeMessage: {
     display: "flex",
@@ -40,7 +42,8 @@ const useStyles = makeStyles({
   welcomeMessageText: {
     fontFamily: "Montserrat, sans-se",
     fontSize: "20px",
-    color: "#ffffff"
+    color:"#333533"
+    // color: "#41525D"
   }
 });
 function ContactInfo({ currentChat, currentChatAvatar ,setRoomActive,roomActive }) {

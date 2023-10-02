@@ -30,11 +30,13 @@ const useStyles = makeStyles({
     display: "flex",
     padding: "20px 10px 10px 10px",
     gap: "15px",
-    backgroundColor: "#f0f2f5",
+    // backgroundColor: "#f0f2f5",
     height: "auto",
     "& .css-2miw2m-MuiAvatar-root": {
       color: "#d22129"
-    }
+    },
+    background:'#f0f0f0'
+
   },
   userAvatar: { color: "#d22129" },
   userName: {

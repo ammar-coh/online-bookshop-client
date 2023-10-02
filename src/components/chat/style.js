@@ -54,7 +54,8 @@ const theme = createMuiTheme({
         width: "70%",
   
       },
-      backgroundColor: "#f0f2f5"
+      // backgroundColor: "#f0f2f5",
+      background:'#f0f0f0'
     },
     receiverInfo: {
       // background:"#e0e0e0"
@@ -86,8 +87,8 @@ const theme = createMuiTheme({
       overflowWrap: "break-word",
     },
     chatBar: {
-      padding: "30px 50px",
-      backgroundColor: "#303030",
+      padding: "0px 200px",
+      backgroundColor: "#f0f0f0",
       [theme.breakpoints.only('lg')]: {
         padding: "20px 10px",
       },
