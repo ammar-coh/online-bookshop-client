@@ -85,7 +85,7 @@ function Home({ setUserAvailable, socket }) {
     }, [uname?.user?.displayName]);
 
     const classes = useStyles({ sideBarCollapsed });
-    const details = useSelector((state) => state.productDetails.details);
+    const details = useSelector((state) => state.books.details);
 
     useEffect(() => {
         localStorage.getItem("authorization") && dispatch(getBookList());

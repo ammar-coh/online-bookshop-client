@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import { changedMyMind } from "./changedMyMind";
 import { checkoutreducer } from "./checkoutReducer";
-import { productDetails } from "./productDetails.js";
+import { books } from "./book.js";
 import { chat } from './chat'
 import { user_login } from './user_login'
 import { notification } from './notification'
@@ -9,7 +9,7 @@ import { notification } from './notification'
 const reducer = combineReducers({
   checkout: checkoutreducer,
   changedMyMind: changedMyMind,
-  productDetails: productDetails,
+  books: books,
   user_login: user_login,
   chat: chat,
   notification: notification
