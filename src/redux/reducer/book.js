@@ -3,9 +3,10 @@ const initialState = {
   header: "Ammar",
 };
 
-export const productDetails = (state = initialState, actions) => {
+export const books = (state = initialState, actions) => {
   switch (actions.type) {
     case "set":
+      console.log("actions.data",actions)
       var check = {
         ...state,
         details: [...actions.details],
@@ -13,21 +14,24 @@ export const productDetails = (state = initialState, actions) => {
 
       return check;
 
-    case "updateDetails":
+    case "updateBookList":
       let findIndex = state.details.findIndex(
-        (item) => item.id === actions.data.id
+        (item) => item._id === actions.data._id
       );
-      let update = state.details.map(el => {
-        return el.id === actions.data.id ? { ...el, ...actions.data } : el
-      })
-      console.log("details new", update)
-      return {
-        ...state,
-        details: update
-
-
-      };
-
+      if (findIndex !== -1) {
+        // Create a new array with the updated object
+        const updatedArray = [
+          ...state.details.slice(0, findIndex),
+          actions.data,
+          ...state.details.slice(findIndex + 1)
+        ];
+    
+        // Update the state with the new array
+        const newState = { ...state, details: updatedArray };
+        return newState;
+      }
+    
+      return state;
     case "deleteDetails":
       var index = state.details.findIndex((i) => i.id === actions.data.id);
       var final = state.details.splice(index, 1);

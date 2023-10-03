@@ -131,9 +131,9 @@ export const resetCart = (data) => {
 }
 
 
-export const getUser = (data) => {
+export const getBookList = (data) => {
     return {
-        type: 'get',
+        type: 'getBookList',
         data: data
     }
 }
@@ -152,9 +152,9 @@ export const updateUser = (data) => {
 }
 
 
-export const updateUserDetails = (data) => {
+export const updateBookList = (data) => {
     return {
-        type: 'updateDetails',
+        type: 'updateBookList',
         data: data
     }
 }

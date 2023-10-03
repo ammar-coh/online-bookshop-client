@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import Box from '@mui/material/Box';
+import { useSelector, useDispatch } from "react-redux";
 import Grid from '@mui/material/Grid';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
@@ -20,6 +21,7 @@ import { useStylesTable } from './style'
 import ImageEditInputCell from './imageEditInput'
 import RatingEditInputCell from './ratingEditInput'
 import Pagination from './customPagination'
+import {updateBookList} from '../../redux/actions/index'
 const renderImageEditInputCell = (params) => {
  
   return <ImageEditInputCell {...params} />;
@@ -29,6 +31,7 @@ const renderRatingEditCell = (params) => {
 }
 
 function Table() {
+  const dispatch= useDispatch()
   const { alertContent, setAlertContent, setAlertOpen, cover, setCover } = useContext(Context);
   const classes = useStylesTable()
   const { allBooks, setAllBooks } = useContext(Context);
@@ -96,7 +99,7 @@ function Table() {
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow};
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    bookUpdated(newRow.id, updatedRow,cover, setCover, alertContent, setAlertContent, setAlertOpen)
+    bookUpdated(newRow.id, updatedRow,cover, alertContent, setAlertContent, setAlertOpen,updateBookList,dispatch)
     return updatedRow;
   };
 

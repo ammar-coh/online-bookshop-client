@@ -12,8 +12,8 @@ import Divider from '@mui/material/Divider';
 import AddBookField from './addBookField';
 import { bookAdded } from '../api';
 import { ErrorMessage } from "@hookform/error-message";
-function AddBook() {
-    const { alertContent, setAlertContent, setAlertOpen} = useContext(Context);
+function AddBook({setAddBook}) {
+    const { alertContent, setAlertContent, setAlertOpen } = useContext(Context);
     const dispatch = useDispatch();
     const classes = useStylesAddBook()
     const [userProfileImg, setUserProfileImg] = useState();
@@ -36,20 +36,25 @@ function AddBook() {
         fd.forEach((value, key) => {
             console.log(key, value);
         });
-        bookAdded(fd, alertContent, setAlertContent, setAlertOpen, reset, setUserProfileImg,setIsUserImgSelected)
+        bookAdded(fd, alertContent, setAlertContent, setAlertOpen, reset, setUserProfileImg, setIsUserImgSelected)
 
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Box className={classes.mainBox}>
-                <Grid className={classes.headingAddBook}>
-                    <Typography style={{
-                        fontFamily: "Montserrat, sans-se",
-                        fontSize: "22.4px",
-                        fontWeight: 600
-                    }}>
-                        Add New Book
-                    </Typography>
+                <Grid style={{ display: "flex" }}>
+                    <Grid className={classes.headingAddBook}>
+                        <Typography style={{
+                            fontFamily: "Montserrat, sans-se",
+                            fontSize: "22.4px",
+                            fontWeight: 600
+                        }}>
+                            Add New Book
+                        </Typography>
+                    </Grid>
+                    <Grid className={classes.backButtonDiv}>
+                        <Button  onClick={() => setAddBook((previous) => !previous)} className={classes.backButton}>Back</Button>
+                    </Grid>
                 </Grid>
                 <Divider light />
                 <Grid className={classes.addBookForm}>

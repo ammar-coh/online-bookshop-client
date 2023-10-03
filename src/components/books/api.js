@@ -69,7 +69,7 @@ const updateBook = (bookId, data) => {
     });
 };
 
-export const bookUpdated = async (bookId, updatedRow, cover, setCover, alertContent, setAlertContent, setAlertOpen,) => {
+export const bookUpdated = async (bookId, updatedRow, cover,alertContent, setAlertContent, setAlertOpen,updateBookList,dispatch) => {
     try {
         const bookData = updatedRow
         const data = new FormData();
@@ -87,11 +87,11 @@ export const bookUpdated = async (bookId, updatedRow, cover, setCover, alertCont
           data.forEach((value, key) => {
             console.log(key, value);
           });
-          console.log("datafd",data)
         const response = await updateBook(bookId, data)
         if (response.status == 200 && response.data.status == true) {
             setAlertContent({ ...alertContent, type: "success", message: 'Information Saved!' })
             setAlertOpen(true)
+            dispatch(updateBookList(response.data.book))
         }
     }
     catch (error) {
