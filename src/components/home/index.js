@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { getUser, getProductsToCartSaga } from "../../redux/actions/index";
+import {  getBookList , getProductsToCartSaga } from "../../redux/actions/index";
 import { makeStyles } from "@material-ui/core/styles";
 import ItemContainer from "../../ItemContainer";
 import { useSelector, useDispatch } from "react-redux";
@@ -88,7 +88,7 @@ function Home({ setUserAvailable, socket }) {
     const details = useSelector((state) => state.productDetails.details);
 
     useEffect(() => {
-        localStorage.getItem("authorization") && dispatch(getUser());
+        localStorage.getItem("authorization") && dispatch(getBookList());
     }, []);
 
     return (

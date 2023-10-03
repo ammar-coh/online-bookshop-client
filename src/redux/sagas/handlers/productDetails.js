@@ -1,10 +1,10 @@
 import { call, put, delay } from 'redux-saga/effects';
 import { requestDestroyProduct, requestGetProduct, requestUpdateProduct, requestCreateProduct } from '../requests/productDetails';
-import { setUser, updateUserDetails, deleteDetails, addToReducer } from '../../actions/index';
+import { setUser, updateBookList, deleteDetails, addToReducer} from '../../actions/index';
 
 
 
-export function* handleGetUser() {
+export function* getBookList() {
 
   try {
     const response = yield call(requestGetProduct);
@@ -27,7 +27,7 @@ export function* updateInfo(action) {
       alert("authorized personnel only")
     }
     else {
-      yield put(updateUserDetails(response.data.data))
+      yield put(updateBookList(response.data.data))
     }
 
 

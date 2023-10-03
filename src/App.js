@@ -14,8 +14,8 @@ import ProtectedAllRoute from "./routes/protected";
 import ScrollToTop from "./scrollToTop";
 import { socket } from "./socket";
 import { Provider } from "./context";
-import { notification_real_time, get_my_notifications_saga } from './redux/actions/index'
-import { delete_notification } from './redux/actions/index'
+import { notification_real_time, get_my_notifications_saga, } from './redux/actions/index'
+import { delete_notification, getBookList  } from './redux/actions/index'
 import { makeStyles } from "@material-ui/core/styles";
 import 'antd/dist/reset.css';
 import "./index.css";
@@ -40,7 +40,7 @@ function App() {
 
   //
   useEffect(() => {
-    localStorage.getItem("authorization") && dispatch(getUser());
+    localStorage.getItem("authorization") && dispatch(getBookList());
   }, [uname?.user?.displayName]);
 
   //

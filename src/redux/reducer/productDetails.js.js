@@ -6,6 +6,7 @@ const initialState = {
 export const productDetails = (state = initialState, actions) => {
   switch (actions.type) {
     case "set":
+      console.log("actions.data",actions)
       var check = {
         ...state,
         details: [...actions.details],
@@ -13,20 +14,22 @@ export const productDetails = (state = initialState, actions) => {
 
       return check;
 
-    case "updateDetails":
+    case "updateBookList":
+      console.log("updated book", actions.data)
       let findIndex = state.details.findIndex(
         (item) => item.id === actions.data.id
       );
-      let update = state.details.map(el => {
-        return el.id === actions.data.id ? { ...el, ...actions.data } : el
-      })
-      console.log("details new", update)
-      return {
-        ...state,
-        details: update
+      console.log("index",findIndex)
+      console.log("state", state)
+       state.details.splice(findIndex,1,actions.data)
+      console.log("state_updated",state )
+    
+      // return {
+      //   ...state,
+      //   details: update
 
 
-      };
+      // };
 
     case "deleteDetails":
       var index = state.details.findIndex((i) => i.id === actions.data.id);

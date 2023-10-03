@@ -31,7 +31,8 @@ const useStylesIndex = makeStyles({
         padding: "10px 0px",
         height: "100%",
         width: "100%"
-    }
+    },
+  
 });
 export { useStylesIndex }
 
@@ -150,7 +151,7 @@ const useStylesAddBook = makeStyles({
     headingAddBook: {
         display: "flex",
         justifyContent: "left",
-        width: "100%",
+        width: "50%",
         padding: "20px"
     },
     addBookForm: {
@@ -203,6 +204,24 @@ const useStylesAddBook = makeStyles({
             display: 'inline',
             color: "#d22129",
         },
+    },
+    backButtonDiv:{
+        display:"flex",
+        justifyContent:"end",
+        width:"50%",
+        justifyContent: "flex-end",
+        padding: "20px 30px 10px 0px ",
+    },
+    backButton:{
+        backgroundColor: "#d22129",
+        color: "#fff",
+        textTransform: "none",
+        fontFamily: "Montserrat, sans-se",
+        "&:hover": {
+            backgroundColor: "#d22129",
+            color: "#fff",
+            boxShadow: "0 0px 5px rgba(210,33,41)"
+        }
     }
 
 

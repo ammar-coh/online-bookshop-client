@@ -43,7 +43,7 @@ function Books() {
                         : null}
                     <Divider light />
                     {addBook ?
-                        <Grid className={classes.addBookMain}><AddBook /></Grid>
+                        <Grid className={classes.addBookMain}><AddBook setAddBook={setAddBook} /></Grid>
                         :
                         <Grid className={classes.tableMain}><Table /></Grid>
                     }
