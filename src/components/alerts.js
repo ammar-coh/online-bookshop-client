@@ -7,16 +7,30 @@ import Button from '@mui/material/Button';
 import CloseIcon from '@mui/icons-material/Close';
 import { useEffect } from 'react';
 import Context from '../context'
-
+import Snackbar from '@mui/material/Snackbar';
 export default function Alerts() {
     const {setAlertOpen, alertContent, setAlertContent} = useContext(Context);
     const [open, setOpen] = React.useState(true);
     useEffect(()=>{
             setOpen(true)
     },[])
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+        setAlertContent({...alertContent, type:'',message:''})
+        setAlertOpen(false)
+      };
     return (
         <Box sx={{ width: '100%' }}>
-            <Collapse in={open}>
+            <Snackbar
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        open={open}
+        autoHideDuration={3000}
+        onClose={handleClose} // Adjust as needed
+      >
                 <Alert
                 severity={alertContent.type}
                     action={
@@ -26,7 +40,7 @@ export default function Alerts() {
                             size="small"
                             onClick={() => {
                                 setOpen(false);
-                                setOpen(false)
+                              
                                 setAlertContent({...alertContent, type:'',message:''})
                                 setAlertOpen(false)
                             }}
@@ -36,7 +50,7 @@ export default function Alerts() {
                     } sx={{ mb: 2 }} >
                    {alertContent.message}
                 </Alert>
-            </Collapse>
+                </Snackbar>
         </Box>
     );
 }

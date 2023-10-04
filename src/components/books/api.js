@@ -84,9 +84,6 @@ export const bookUpdated = async (bookId, updatedRow, cover,alertContent, setAle
               data.append(key, value);
             }
           }
-          data.forEach((value, key) => {
-            console.log(key, value);
-          });
         const response = await updateBook(bookId, data)
         if (response.status == 200 && response.data.status == true) {
             setAlertContent({ ...alertContent, type: "success", message: 'Information Saved!' })
