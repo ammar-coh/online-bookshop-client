@@ -12,8 +12,9 @@ import Divider from '@mui/material/Divider';
 import AddBookField from './addBookField';
 import { bookAdded } from '../api';
 import { ErrorMessage } from "@hookform/error-message";
+import Alerts from '../../alerts'
 function AddBook({setAddBook}) {
-    const { alertContent, setAlertContent, setAlertOpen } = useContext(Context);
+    const { alertOpen, alertContent, setAlertContent, setAlertOpen } = useContext(Context);
     const dispatch = useDispatch();
     const classes = useStylesAddBook()
     const [userProfileImg, setUserProfileImg] = useState();
@@ -40,6 +41,8 @@ function AddBook({setAddBook}) {
 
     }
     return (
+        <>
+        {alertOpen? <Alerts/>:null}
         <form onSubmit={handleSubmit(onSubmit)}>
             <Box className={classes.mainBox}>
                 <Grid style={{ display: "flex" }}>
@@ -195,6 +198,7 @@ function AddBook({setAddBook}) {
                 </Grid>
             </Box>
         </form>
+        </>
     )
 }
 
