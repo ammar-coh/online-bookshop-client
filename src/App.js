@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {
-  getUser,
   sign_in_reducer,
   getProductsToCartSaga,
 } from "./redux/actions";
@@ -15,15 +14,15 @@ import ScrollToTop from "./scrollToTop";
 import { socket } from "./socket";
 import { Provider } from "./context";
 import { notification_real_time, get_my_notifications_saga, } from './redux/actions/index'
-import { delete_notification, getBookList  } from './redux/actions/index'
+import { delete_notification, getBookList } from './redux/actions/index'
 import { makeStyles } from "@material-ui/core/styles";
 import 'antd/dist/reset.css';
 import "./index.css";
+import Loading from './components/loading'
 const useStyles = makeStyles({
   root: {
-   
   },
- 
+
 })
 
 function App() {
@@ -33,7 +32,6 @@ function App() {
   const user = useSelector((state) => state.user_login.details);
   const messages = useSelector((state) => state.chat);
   const classes = useStyles();
-
   useEffect(() => {
     user?.user ? setUserAvailable(true) : setUserAvailable(false);
   }, [user?.user]);
@@ -69,7 +67,7 @@ function App() {
 
   //
   useEffect(() => {
-   
+
     socket.on("notification_message", async (data) => {
       console.log("notification data", data)
       dispatch(notification_real_time(data))
@@ -97,35 +95,37 @@ function App() {
     socket.emit("leave_private_room", { roomID, userID: userID?.user?.id });
   }, []);
 
-
   return (
     <div className="app">
-      {
-        <Provider>
-          <Router>
-            <Switch>
-              <Route path="/login_page" exact component={Login_page} />
-              <Route path="/sign_up" exact component={Sign_up} />
-              {user.user?.is_online == true && (
-                <ProtectedAllRoute
-                  user={user}
-                  setUserAvailable={setUserAvailable}
-                  userAvailble={userAvailble}
-                  component={Home}
-                  socket={socket}
-                  path="/"
-                />
-              )}
+      <Provider>
+        <Router>
+          <Switch>
+            <Route path="/login_page" exact component={Login_page} />
+            <Route path="/sign_up" exact component={Sign_up} />
+            {user.user?.is_online == true && (
+              <ProtectedAllRoute
+                user={user}
+                setUserAvailable={setUserAvailable}
+                userAvailble={userAvailble}
+                component={Home}
+                socket={socket}
+                path="/"
+              />
+            )}
 
-              <Route path="*" component={Login_page} />
-              <ScrollToTop />
-            </Switch>
+            <Route path="*" exact component={Login_page} />
+
             <ScrollToTop />
-          </Router>
-        </Provider>
-      }
+          </Switch>
+          <ScrollToTop />
+        </Router>
+      </Provider>
+
     </div>
   );
 }
 
 export default App;
+// // render={(props) => (
+//   <Login_page loading={loading} setLoading={setLoading} {...props} />
+//   )}

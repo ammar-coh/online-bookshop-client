@@ -223,5 +223,12 @@ export const sign_in_error_message = (data) => {
         type: "sign_in_error_message",
         data: data
     }
+    
 }
-
+export const sign_out_reducer =(data)=>{
+        return {
+            type: "sign_out_reducer",
+            data: data
+        }
+    
+    }

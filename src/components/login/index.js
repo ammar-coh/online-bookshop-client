@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "@material-ui/core/Button";
 import { sign_in_saga } from "../../redux/actions/index";
@@ -14,10 +14,14 @@ import Checkbox from '@mui/material/Checkbox';
 import { useForm, Controller } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useStylesIndex } from './style'
-
+import Context from '../../context'
 
 function Login_page() {
-    const history = useHistory();
+  
+    const history = useHistory()
+    const {
+        loader,setLoader,
+    } = useContext(Context);
     const classes = useStylesIndex();
     const user = useSelector((state) => state.user_login.details);
     const dispatch = useDispatch();
@@ -31,10 +35,10 @@ function Login_page() {
                 email: data.email,
                 password: data.password,
                 history,
+                setLoader: setLoader
             })
         );
     }
-
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className={classes.login_container}>

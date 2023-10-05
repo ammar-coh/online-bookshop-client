@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 const Context = React.createContext();
 export const Provider = ({ children }) => {
+  const[loader,setLoader] = useState(false)
   const [roomID, setRoomID] = useState("");
   const [currentChat, setCurrentChat] = useState("");
   const [currentChatAvatar, setCurrentChatAvatar] = useState("");
@@ -29,6 +30,7 @@ export const Provider = ({ children }) => {
   const [profileUpdate, setProfileUpdate] = useState({})
   const[receieveMessage, setReceiveMessage] =useState(false)
   const contextValue = {
+    loader,setLoader,
     roomID, setRoomID,
     currentChat, setCurrentChat,
     isActive, setIsActive,
