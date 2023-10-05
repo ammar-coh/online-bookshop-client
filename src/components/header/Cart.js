@@ -58,7 +58,7 @@ function Cart() {
           <ThemeProvider theme={theme}>
             <Badge
               badgeContent={counts.totalItems}
-              color="error"
+              color="primary"
               fontSize="small">
               < ShoppingCartOutlinedIcon fontSize="small" />
             </Badge>

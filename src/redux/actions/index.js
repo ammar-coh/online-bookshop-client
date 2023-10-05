@@ -165,9 +165,9 @@ export const deleteDispatch = (data) => {
     }
 }
 
-export const deleteDetails = (data) => {
+export const deleteBookFromList = (data) => {
     return {
-        type: 'deleteDetails',
+        type: 'deleteBookFromList',
         data: data
     }
 }
@@ -179,9 +179,9 @@ export const addToSaga = (data) => {
         data: data
     }
 }
-export const addToReducer = (data) => {
+export const addBookToList = (data) => {
     return {
-        type: 'addDetails',
+        type: 'addBookToList',
         data: data
     }
 }

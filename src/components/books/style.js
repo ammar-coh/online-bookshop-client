@@ -105,7 +105,8 @@ const useStylesTable = makeStyles({
     },
     dataGrid: {
         width: "100%",
-        padding: "0px 5px"
+        padding: "0px 5px",
+        height:"100%"
     },
     stock: {
         margin: "auto"

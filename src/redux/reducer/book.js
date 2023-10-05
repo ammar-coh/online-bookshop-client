@@ -1,6 +1,5 @@
 const initialState = {
   details: [],
-  header: "Ammar",
 };
 
 export const books = (state = initialState, actions) => {
@@ -24,30 +23,22 @@ export const books = (state = initialState, actions) => {
           actions.data,
           ...state.details.slice(findIndex + 1)
         ];
-    
         // Update the state with the new array
         const newState = { ...state, details: updatedArray };
         return newState;
       }
-    
       return state;
-    case "deleteDetails":
-      var index = state.details.findIndex((i) => i.id === actions.data.id);
-      var final = state.details.splice(index, 1);
-      var newState = state.details;
 
-      return { details: [...state.details], header: "delete" };
-    case "addDetails":
-      console.log("initial state", state.details);
-      var item = actions.data;
-      var det = state.details;
-      console.log("det", det);
-      return { ...state, details: [...det, item], header: "added" };
+    case "deleteBookFromList":
+      var index = state.details.findIndex((i) => i._id === actions.data.payload);
+      state.details.splice(index, 1);
+      return { details: [...state.details]};
 
-
-
-
-    default:
+    case "addBookToList":
+      var newBook = actions.data;
+      var allBooks = state.details;
+      return { ...state, details: [...allBooks, newBook]};
+      default:
       return state;
   }
 };

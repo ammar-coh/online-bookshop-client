@@ -17,7 +17,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { ErrorMessage } from "@hookform/error-message";
 import { changeUserPassword } from './api'
-function ChangePassword() {
+function ChangePassword({setLoading}) {
   const {  alertContent, setAlertContent, setAlertOpen} = useContext(Context);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
@@ -40,7 +40,7 @@ function ChangePassword() {
   };
   const onSubmit = data => {
    const id = user.user.id
-    changeUserPassword(id,data, alertContent, setAlertContent, setAlertOpen)
+    changeUserPassword(id,data, alertContent, setAlertContent, setAlertOpen,setLoading)
 
    
   }

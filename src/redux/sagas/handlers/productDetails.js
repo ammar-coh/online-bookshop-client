@@ -1,6 +1,6 @@
 import { call, put, delay } from 'redux-saga/effects';
-import { requestDestroyProduct, requestGetProduct, requestUpdateProduct, requestCreateProduct } from '../requests/productDetails';
-import { setUser, updateBookList, deleteDetails, addToReducer} from '../../actions/index';
+import {  requestGetProduct, requestUpdateProduct } from '../requests/productDetails';
+import { setUser, updateBookList, } from '../../actions/index';
 
 
 
@@ -36,28 +36,6 @@ export function* updateInfo(action) {
   }
 }
 
-export function* deleteInfo(action) {
 
-  try {
-    const response = yield call(requestDestroyProduct, action.data)
-    console.log(response.data, "respon")
-    if (response.data == "nothing") {
-      alert("authorized personnel only")
-    } else {
-      yield put(deleteDetails(response.data))
-    }
 
-  } catch (error) {
 
-  }
-}
-
-export function* addItemInfo(action) {
-
-  try {
-    const response = yield call(requestCreateProduct, action.data);
-    yield put(addToReducer(response.data))
-  } catch (error) {
-
-  }
-}

@@ -44,7 +44,9 @@ function AddBookField({isUserImgSelected, setIsUserImgSelected, userProfileImg, 
                     <Controller
                         name="rating"
                         control={control}
-                        defaultValue=""
+                        {...register('rating', {
+                           required:"required"
+                        })}
                         render={({ field }) => (
                             <Rating
                                 {...field}
@@ -55,6 +57,18 @@ function AddBookField({isUserImgSelected, setIsUserImgSelected, userProfileImg, 
                             />
                         )}
                     />
+                       <ErrorMessage
+                           errors={errors}
+                           name="rating"
+                           render={({ messages }) => {
+                               console.log("messages", messages);
+                               return messages
+                                   ? Object.entries(messages).map(([type, message]) => (
+                                       <p className={classes.error_message} key={type}>{message}</p>
+                                   ))
+                                   : null;
+                           }}
+                       />
                 </Grid>
                 <Grid className={classes.bookCover}>
                     <Grid className={classes.photoDiv}>
@@ -119,7 +133,9 @@ function AddBookField({isUserImgSelected, setIsUserImgSelected, userProfileImg, 
                     <Controller
                         name="description"
                         control={control}
-                        defaultValue=""
+                        {...register('description', {
+                            required:"required"
+                         })}
                         render={({ field }) => (
                             <TextField
                                 {...field}
@@ -131,6 +147,18 @@ function AddBookField({isUserImgSelected, setIsUserImgSelected, userProfileImg, 
                             />
                         )}
                     />
+                     <ErrorMessage
+                           errors={errors}
+                           name="description"
+                           render={({ messages }) => {
+                               console.log("messages", messages);
+                               return messages
+                                   ? Object.entries(messages).map(([type, message]) => (
+                                       <p className={classes.error_message} key={type}>{message}</p>
+                                   ))
+                                   : null;
+                           }}
+                       />
 
                 </Grid>
                 <Grid style={{ display: "block", width: "100%" }}>
@@ -140,6 +168,7 @@ function AddBookField({isUserImgSelected, setIsUserImgSelected, userProfileImg, 
                         control={control}
                         defaultValue=""
                         {...register('stock', {
+                            required:"required",
                             pattern: {
                                 value: /^\d+$/,
                                 message: 'field requires number',
