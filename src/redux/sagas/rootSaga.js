@@ -1,5 +1,5 @@
 import { takeLatest, all } from 'redux-saga/effects';
-import { getBookList, updateInfo, deleteInfo, addItemInfo } from './handlers/productDetails';
+import { getBookList, updateInfo} from './handlers/productDetails';
 import { postSign_In, postSign_Up, getSign_In, postSign_Out } from './handlers/user_login';
 import { addProductsToCart, getProductsToCartSaga, deleteProductsFromCart } from './handlers/user_cart';
 import { handleGetChatFromDB, handleCreateChatRoom } from './handlers/chatFromDB'
@@ -13,8 +13,6 @@ function* watcherSaga() {
   //  yield takeLatest(updateUser,handleGetUser)
   yield takeLatest('getBookList', getBookList)
   yield takeLatest('update', updateInfo)
-  yield takeLatest('delete', deleteInfo)
-  yield takeLatest('add', addItemInfo)
   yield takeLatest('getSign_In', getSign_In)
   yield takeLatest('sign_in_saga', postSign_In)
   yield takeLatest('sign_out_saga', postSign_Out)

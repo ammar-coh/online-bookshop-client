@@ -7,17 +7,16 @@ const useStyles = makeStyles({
       width: "100%",
     display:"flex",
     justifyContent:"center",
-    padding:"340px"
+    padding: (props)=>(props.appScreenPadding && props.appScreenPadding == 'on'?"200px":"340px")
     },
   
   });
-function Loading() {
-const classes = useStyles()
+function Loading(props) {
+  const{appScreenPadding, appScreenSize} =props
+const classes = useStyles({appScreenPadding})
     return (
         <Stack spacing={2} direction="row"  className={classes.root}>
-
-            <CircularProgress color="error" size={100} />
-
+            <CircularProgress color="error" size={appScreenSize && appScreenSize =='true'?60:100} />
         </Stack>
     )
 }

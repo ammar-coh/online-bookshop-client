@@ -11,20 +11,23 @@ const updateUser = (userId, data) => {
     });
 };
 
-export const userUpdated = async (userId, data, setProfileUpdate, alertContent, setAlertContent, setAlertOpen,) => {
+export const userUpdated = async (userId, data, setProfileUpdate, alertContent, setAlertContent, setAlertOpen, setLoading) => {
     try {
+        setLoading(true)
         const response = await updateUser(userId, data)
         if (response.status == 200 && response.data.status == true) {
             localStorage.setItem("userInfo", JSON.stringify(response.data.user));
             setProfileUpdate(response.data.user)
             setAlertContent({ ...alertContent, type: "success", message: 'Profile updated!' })
             setAlertOpen(true)
+            setLoading(false)
         }
     }
     catch (error) {
         console.error("API Error:", error);
         setAlertContent({ ...alertContent, type: "error", message: error.message })
         setAlertOpen(true)
+        setLoading(false)
     }
 }
 
@@ -41,8 +44,9 @@ const updatePassword = (userId, data) => {
 };
 
 
-export const changeUserPassword = async (userId, password, alertContent, setAlertContent, setAlertOpen,) => {
+export const changeUserPassword = async (userId, password, alertContent, setAlertContent, setAlertOpen,setLoading) => {
     try {
+        setLoading(true)
         var data = {
             previousPassword: password.currentPassword,
             newPassword: password.newPassword
@@ -51,20 +55,20 @@ export const changeUserPassword = async (userId, password, alertContent, setAler
         if (response.status == 200 && response.data.status == true) {
             setAlertContent({ ...alertContent, type: "success", message: 'password changed!' })
             setAlertOpen(true)
+            setLoading(false)
         }
-
-
-
     }
     catch (error) {
         console.log("API Error:", error);
         if (error.response.status == 400) {
             setAlertContent({ ...alertContent, type: "error", message: error.response.data.message })
             setAlertOpen(true)
+            setLoading(false)
         }
         else {
             setAlertContent({ ...alertContent, type: "error", message: error.message })
             setAlertOpen(true)
+            setLoading(false)
         }
     }
 }

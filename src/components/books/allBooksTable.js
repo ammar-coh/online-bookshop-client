@@ -21,9 +21,11 @@ import { useStylesTable } from './style'
 import ImageEditInputCell from './imageEditInput'
 import RatingEditInputCell from './ratingEditInput'
 import Pagination from './customPagination'
-import {updateBookList} from '../../redux/actions/index'
+import { updateBookList,deleteBookFromList } from '../../redux/actions/index'
+import LinearProgress from '@mui/material/LinearProgress';
+import Loading from '../loading'
 const renderImageEditInputCell = (params) => {
- 
+
   return <ImageEditInputCell {...params} />;
 };
 const renderRatingEditCell = (params) => {
@@ -31,7 +33,7 @@ const renderRatingEditCell = (params) => {
 }
 
 function Table() {
-  const dispatch= useDispatch()
+  const dispatch = useDispatch()
   const { alertContent, setAlertContent, setAlertOpen, cover, setCover } = useContext(Context);
   const classes = useStylesTable()
   const { allBooks, setAllBooks } = useContext(Context);
@@ -54,8 +56,8 @@ function Table() {
       event.defaultMuiPrevented = true;
     }
   };
+  const [loading, setLoading] = useState(false)
 
-  
 
   useEffect(() => {
     fetchAllBookData(setAllBooks, setRows, allBooks, setBookListUpdate)
@@ -76,7 +78,7 @@ function Table() {
   };
   const handleDeleteClick = (id) => async () => {
     try {
-      await bookRemoved(id, setRows, rows, alertContent, setAlertContent, setAlertOpen)
+      await bookRemoved(id, setRows, rows, alertContent, setAlertContent, setAlertOpen, setLoading,dispatch,deleteBookFromList)
     }
     catch (error) {
       console.error(error);
@@ -97,9 +99,9 @@ function Table() {
   };
 
   const processRowUpdate = (newRow) => {
-    const updatedRow = { ...newRow};
+    const updatedRow = { ...newRow };
     setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    bookUpdated(newRow.id, updatedRow,cover, alertContent, setAlertContent, setAlertOpen,updateBookList,dispatch)
+    bookUpdated(newRow.id, updatedRow, cover, alertContent, setAlertContent, setAlertOpen, updateBookList, dispatch,setLoading)
     return updatedRow;
   };
 
@@ -110,6 +112,7 @@ function Table() {
   function CustomPagination(props) {
     return <GridPagination ActionsComponent={Pagination} {...props} className={classes.paginationDefault} />;
   }
+
   const width = 150
   const columns = [
     {
@@ -338,68 +341,77 @@ function Table() {
   ];
 
   return (
-
-    <Box
-      className={classes.dataGrid}
-      sx={{
-        display: "block",
-        height: "100%",
-        width: '100%',
-        '& .actions': {
-          color: 'text.secondary',
-        },
-        '& .textPrimary': {
-          color: 'text.primary',
-        },
-        '& .super-app-theme--header': {
-          padding: "0px 40px",
-          headerAlign: 'center',
-          // width: "100%"
-        },
-        '& .cover-des-cell': {
-          '& .css-ahj2mt-MuiTypography-root': {
-            overflow: "hidden",
-          }
-        },
-        '& .css-1sqcvb9-MuiDataGrid-root .MuiDataGrid-row:not(.MuiDataGrid-row--dynamicHeight)>.MuiDataGrid-cell':{
-          whiteSpace:"wrap"
-        }
-
-      }}
-    >
-
-      <DataGrid
+    <>
+      {loading ? <Loading appScreenPadding = 'on' appScreenSize='true' /> : <Box
         className={classes.dataGrid}
-        rows={rows}
-        columns={columns}
-        editMode="row"
-        rowModesModel={rowModesModel}
-        onRowModesModelChange={handleRowModesModelChange}
-        onRowEditStop={handleRowEditStop}
-        processRowUpdate={processRowUpdate}
-        rowHeight={220}
-        disableColumnMenu
-        disableRowSelectionOnClick
-        pagination
-        slots={{
-          pagination: CustomPagination,
-        }}
-        slotProps={{
-          toolbar: { setRows, setRowModesModel },
-        }}
-
-        initialState={{
-
-          pagination: { paginationModel: { pageSize: 5 } },
-        }}
-        pageSizeOptions={[5, 10, 25]}
         sx={{
-          "& .MuiDataGrid-row:hover": {
-            backgroundColor: "inherit" // Or 'transparent' or whatever color you'd like
+          display: "block",
+          // height: "100%",
+          width: '100%',
+          '& .actions': {
+            color: 'text.secondary',
+          },
+          '& .textPrimary': {
+            color: 'text.primary',
+          },
+          '& .super-app-theme--header': {
+            padding: "0px 40px",
+            headerAlign: 'center',
+            // width: "100%"
+          },
+          '& .cover-des-cell': {
+            '& .css-ahj2mt-MuiTypography-root': {
+              overflow: "hidden",
+            }
+          },
+          '& .css-1sqcvb9-MuiDataGrid-root .MuiDataGrid-row:not(.MuiDataGrid-row--dynamicHeight)>.MuiDataGrid-cell': {
+            whiteSpace: "wrap"
+          },
+          "& .css-5ir5xx-MuiLinearProgress-bar1": {
+            backgroundColor: "#d22129"
+          },
+          "& .css-1r8wrcl-MuiLinearProgress-bar2": {
+            backgroundColor: "#d22129"
           }
+
         }}
-      />
-    </Box>
-  );
+      >
+
+        <DataGrid
+          className={classes.dataGrid}
+          rows={rows}
+          columns={columns}
+          editMode="row"
+          rowModesModel={rowModesModel}
+          onRowModesModelChange={handleRowModesModelChange}
+          onRowEditStop={handleRowEditStop}
+          processRowUpdate={processRowUpdate}
+          rowHeight={220}
+          disableColumnMenu
+          disableRowSelectionOnClick
+          pagination
+          slots={{
+            pagination: CustomPagination,
+            loadingOverlay: LinearProgress,
+          }}
+          loading={allBooks.length > 0 ? false : true}
+          slotProps={{
+            toolbar: { setRows, setRowModesModel },
+          }}
+
+          initialState={{
+
+            pagination: { paginationModel: { pageSize: 5 } },
+          }}
+          pageSizeOptions={[5, 10, 25]}
+          sx={{
+            "& .MuiDataGrid-row:hover": {
+              backgroundColor: "inherit" // Or 'transparent' or whatever color you'd like
+            }
+          }}
+        />
+      </Box>}
+
+    </>);
 }
 export default Table
