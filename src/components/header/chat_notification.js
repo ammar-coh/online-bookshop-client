@@ -116,7 +116,7 @@ function Chat_Notifications({
           <ThemeProvider theme={theme}>
             <Badge
               badgeContent={my_notifications.recipient_id == user?.user?.id ? my_notifications.total_notifications : 0}
-              color="error"
+              color="primary"
               fontSize = "small"
             >
               < MailOutlineIcon fontSize="small"  className={classes.notificationMailIcon} />
