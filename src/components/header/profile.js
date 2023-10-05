@@ -162,7 +162,7 @@ export default function AccountMenu({ profileUpdate, setProfileUpdate }) {
                             </ListItemIcon>}
                         onClick={() => {
                             leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
-                            dispatch(sign_in_reducer({}));
+                            // dispatch(sign_in_reducer({}));
                             dispatch(resetCart());
                             localStorage.removeItem("authorization");
                             localStorage.removeItem("cart");

@@ -1,6 +1,6 @@
 import { call, put, delay } from "redux-saga/effects";
 import { requestPostSign_In, requestPostSign_Up, requestPostSign_Out } from "../requests/user_login";
-import { sign_in_reducer, sign_in_error_message } from "../../actions/index";
+import { sign_in_reducer, sign_in_error_message, sign_out_reducer } from "../../actions/index";
 import { socket } from "../../../socket";
 
 export function* postSign_Up(action) {
@@ -16,7 +16,7 @@ export function* postSign_Up(action) {
     } catch (error) {
       console.log(error.response.data.message);
       if (error.response.status == 400) {
-        setError( "userName", {type: "custom",message: error.response.data.message } )
+        setError("userName", { type: "custom", message: error.response.data.message })
 
       }
     }
@@ -26,9 +26,10 @@ export function* postSign_Up(action) {
 }
 export function* postSign_In(action) {
   try {
+    const { setLoader } = action.data
+    setLoader(true)
     const response = yield call(requestPostSign_In, action.data);
     const { data } = response;
-
     socket.emit("setUserId", { userId: data.user.id });
     localStorage.setItem("for_reducer", JSON.stringify(response.data));
     localStorage.setItem("userInfo", JSON.stringify(response.data.user));
@@ -36,6 +37,9 @@ export function* postSign_In(action) {
     yield put(sign_in_reducer(data));
     if (data.status) {
       action.data.history.push("/");
+    }
+    if (response.status == 200) {
+      setLoader(false)
     }
   } catch (error) {
     console.log(error.response.data);
@@ -47,7 +51,9 @@ export function* postSign_In(action) {
 export function* postSign_Out(action) {
   console.log("logout habdler", action.data)
   try {
-    yield call(requestPostSign_Out, action.data.user.id);
+    const response = yield call(requestPostSign_Out, action.data.user.id);
+    console.log("logit resposne", response.data)
+    yield put(sign_out_reducer(response.data))
   } catch (error) {
     console.log(error.response.data);
   }

@@ -7,7 +7,7 @@ const initialState = {
       is_online: false,
       role: "basic"
     },
-    status: true,
+    status: false,
     message: ""
   },
 };
@@ -18,6 +18,15 @@ export const user_login = (state = initialState, actions) => {
       return {
         details: actions.data,
       };
+      case "sign_in_error_message":
+        return {
+          details: actions.data,
+        };
+        case "sign_out_reducer":
+          return {
+            details: initialState.details
+          };
+      
     case "sign_in_error_message":
       return {
         details: actions.data,

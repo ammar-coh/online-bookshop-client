@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import {  getBookList , getProductsToCartSaga } from "../../redux/actions/index";
+import { getBookList, getProductsToCartSaga } from "../../redux/actions/index";
 import { makeStyles } from "@material-ui/core/styles";
 import ItemContainer from "../../ItemContainer";
 import { useSelector, useDispatch } from "react-redux";
@@ -17,6 +17,7 @@ import Grid from '@mui/material/Grid';
 import Button from "@material-ui/core/Button";
 import Profile from '../profile/index'
 import Books from '../books/index'
+import Loading from '../loading'
 const useStyles = makeStyles({
     root: {
         display: "flex",
@@ -70,13 +71,8 @@ const useStyles = makeStyles({
 
 function Home({ setUserAvailable, socket }) {
     const {
-        roomID,setRoomID,
-        currentChat,setCurrentChat,
-        isActive,setIsActive,
-        recepient_status,
-        notification_open,setNotificationOpen,
-        setRecepientId,
-        sideBarCollapsed,setSideBarCollapsed
+        loader, setloader,
+        sideBarCollapsed, setSideBarCollapsed
     } = useContext(Context);
     const dispatch = useDispatch();
     const uname = useSelector((state) => state.user_login.details);
@@ -92,7 +88,7 @@ function Home({ setUserAvailable, socket }) {
     }, []);
 
     return (
-        <div>
+        <div> {loader ? <Loading /> :
             <div className={classes.main}>
                 <div className={classes.sidebar_container}>
 
@@ -139,12 +135,13 @@ function Home({ setUserAvailable, socket }) {
                             <p className={classes.footer_p}>Copyright © 2023, Liberty Books, All Rights Reserved.</p>
                         </span>
                         {/* <span className={classes.chat}>
-                            <Chat socket={socket} />
-                        </span> */}
+                    <Chat socket={socket} />
+                </span> */}
 
                     </div>
                 </div>
-            </div>
+            </div>}
+
 
 
 

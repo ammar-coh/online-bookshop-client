@@ -6,7 +6,6 @@ const initialState = {
 export const books = (state = initialState, actions) => {
   switch (actions.type) {
     case "set":
-      console.log("actions.data",actions)
       var check = {
         ...state,
         details: [...actions.details],
