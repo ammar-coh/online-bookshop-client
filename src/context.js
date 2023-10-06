@@ -5,7 +5,7 @@ export const Provider = ({ children }) => {
   const [roomID, setRoomID] = useState("");
   const [currentChat, setCurrentChat] = useState("");
   const [currentChatAvatar, setCurrentChatAvatar] = useState("");
-  const [isActive, setIsActive] = useState(null);
+  const [isRoomActive, setIsRoomActive] = useState(null);
   const [list, setList] = useState([]);
   const [recepient_id, setRecepientId] = useState("")
   const [recepient_status, setRecepientStatus] = useState(true)
@@ -33,7 +33,7 @@ export const Provider = ({ children }) => {
     loader,setLoader,
     roomID, setRoomID,
     currentChat, setCurrentChat,
-    isActive, setIsActive,
+    isRoomActive, setIsRoomActive,
     list, setList,
     recepient_id, setRecepientId,
     recepient_status, setRecepientStatus,

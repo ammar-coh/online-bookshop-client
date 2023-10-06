@@ -18,20 +18,17 @@ export const user_login = (state = initialState, actions) => {
       return {
         details: actions.data,
       };
-      case "sign_in_error_message":
-        return {
-          details: actions.data,
-        };
-        case "sign_out_reducer":
-          return {
-            details: initialState.details
-          };
-      
+    case "updateProfile":
+      state.details.user = actions.data
+     return state
     case "sign_in_error_message":
       return {
         details: actions.data,
       };
-
+    case "sign_out_reducer":
+      return {
+        details: initialState.details
+      };
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -8,8 +8,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { chat } from "../../redux/actions/index";
 import Context from '../../context';
 import InputBase from '@mui/material/InputBase';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
 const useStyles = makeStyles((theme) => ({
   typingArea: {
     display: "flex",
@@ -56,6 +54,7 @@ const ChatTypingArea = ({
   receieveMessage,
   setReceiveMessage
 }) => {
+  const { isRoomActive } = useContext(Context);
   const dispatch = useDispatch();
   const [message, setMessage] = useState("");
   const classes = useStyles();
@@ -99,8 +98,6 @@ const ChatTypingArea = ({
   const clearInput = () => {
     setMessage("")
   }
-
-
   useEffect(() => {
     socket.on("receive_message", async (data) => {
       console.log("message?received", data)
@@ -109,68 +106,49 @@ const ChatTypingArea = ({
       await notifiactions(data);
     });
   }, [receieveMessage]);
-
-
-
   return (
-    <form
-  onSubmit={(e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-    sendMessage();
-    clearInput();
-  }}
->
-    <div className={classes.typingArea}>
-      <InputBase
-        onChange={(event) => {
-          setMessage(event.target.value);
-        }}
-        value={message}
-        // className={classes.searchBar}
-        className={classes.inputField}
-        sx={{
-          ml: 1, flex: 1, bgcolor: "#fff",
-          borderRadius: "25px", padding: "0px 0px 0px  10px"
-        }}
-        placeholder="type here..."
-        inputProps={{ 'aria-label': 'search google maps' }}
-        endAdornment={
-          <SendIcon
-            onClick={() => {
-              sendMessage()
-              clearInput()
-            }}
-            className={classes.sendButton}
-            variant="contained"
-            type="submit"
-            sx={{
-              p: '10px', width: '35px', // Set your desired width
-              height: '35px',
-            }}
-            aria-label="search">
-          </SendIcon>}
-      />
-      {/* <TextField
-        value={message}
-        className={classes.inputField}
-        variant="outlined"
-        placeholder="Type a message..."
-        onChange={(event) => {
-          setMessage(event.target.value);
-        }}
-      /> */}
-      {/* <Button
-        className={classes.sendButton}
-        variant="contained"
-        onClick={() => {
-          sendMessage()
-          clearInput()
+    <>
+      {isRoomActive != null ? <form
+        onSubmit={(e) => {
+          e.preventDefault(); // Prevent the default form submission behavior
+          sendMessage();
+          clearInput();
         }}
       >
-        <SendIcon />
-      </Button> */}
-    </div>
-    </form>
+        <div className={classes.typingArea}>
+          <InputBase
+            onChange={(event) => {
+              setMessage(event.target.value);
+            }}
+            value={message}
+            // className={classes.searchBar}
+            className={classes.inputField}
+            sx={{
+              ml: 1, flex: 1, bgcolor: "#fff",
+              borderRadius: "25px", padding: "0px 0px 0px  10px"
+            }}
+            placeholder="type here..."
+            inputProps={{ 'aria-label': 'search google maps' }}
+            endAdornment={
+              <SendIcon
+                onClick={() => {
+                  sendMessage()
+                  clearInput()
+                }}
+                className={classes.sendButton}
+                variant="contained"
+                type="submit"
+                sx={{
+                  p: '10px', width: '35px', // Set your desired width
+                  height: '35px',
+                }}
+                aria-label="search">
+              </SendIcon>}
+          />
+        </div>
+      </form> : null}
+
+    </>
   );
 };
 

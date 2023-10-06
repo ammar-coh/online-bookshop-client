@@ -144,9 +144,9 @@ export const setUser = (details) => {
     }
 }
 
-export const updateUser = (data) => {
+export const updateUserProfile = (data) => {
     return {
-        type: 'update',
+        type: 'updateProfile',
         data: data
     }
 }

@@ -22,7 +22,7 @@ function Home() {
         roomID,
         setRoomID,
         setCurrentChat,
-        setIsActive,
+        setIsRoomActive,
         selectedSideBarMenu,
         setSelectedSideBarMenu,
         homeSideBarActive,
@@ -93,7 +93,7 @@ function Home() {
                                     onClick={() => {
                                         leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                         dispatch(clearChat());
-                                        setIsActive(null);
+                                        setIsRoomActive(null);
                                         setCurrentChat("");
                                         setCurrentChatAvatar("")
                                         setSubMenuItemActiveState('home_page')
@@ -110,7 +110,7 @@ function Home() {
                             <MenuItem className={classes.secondItem} onClick={handleClose} disableRipple>
                                 <Button className={classes.button_2} onClick={() => {
                                     dispatch(clearChat());
-                                    setIsActive(null);
+                                    setIsRoomActive(null);
                                     setCurrentChat("");
                                     leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                     setSubMenuItemActiveState('book_club')

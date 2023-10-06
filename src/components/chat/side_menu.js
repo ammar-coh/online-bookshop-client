@@ -95,8 +95,8 @@ function ChatSideMenu({
   setCurrentChat,
   roomID,
   setRoomID,
-  isActive,
-  setIsActive,
+  isRoomActive,
+  setIsRoomActive,
   setRecepientId,
   setCurrentChatAvatar,
   setRoomActive
@@ -154,7 +154,7 @@ function ChatSideMenu({
     localStorage.setItem("roomID", room_id)
     dispatch(clearChat())
     setRoomID(room_id);
-    setIsActive(data.index);
+    setIsRoomActive(data.index);
     setCurrentChat(data.displayName);
     setCurrentChatAvatar(data.image)
     dispatch(chatFromDBSaga(dataObjectForFetchChatAPI));
@@ -188,7 +188,7 @@ function ChatSideMenu({
       <List className={classes.list} >
         {finalUpdatedArray?.map((i, index) => (
           <ListItem className={classes.userInfoList} style={
-            finalUpdatedArray[isActive] == i
+            finalUpdatedArray[isRoomActive] == i
               ? { backgroundColor: "#f0f2f5" }
               : { backgroundColor: "#fff" }
           }  >

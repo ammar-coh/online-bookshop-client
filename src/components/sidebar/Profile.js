@@ -18,7 +18,7 @@ import {useStylesProfile} from './style'
 function Profile() {
     const {
         roomID,setCurrentChat,
-        setIsActive,selectedSideBarMenu,
+        setIsRoomActive,selectedSideBarMenu,
         setSelectedSideBarMenu,setHomeSideBarActive,
         setAdminSideBarActive,setAnchorElHome,
         setAnchorElAdmin,profileSideBarActive, setProfileSideBarActive,
@@ -81,7 +81,7 @@ function Profile() {
                         <MenuItem onClick={handleClose} disableRipple className={classes.menuItem_1}>
                             <Button className={classes.button_1} onClick={() => {
                                 dispatch(clearChat());
-                                setIsActive(null);
+                                setIsRoomActive(null);
                                 setCurrentChat("");
                                 setCurrentChatAvatar("")
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })

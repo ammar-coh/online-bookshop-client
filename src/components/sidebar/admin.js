@@ -22,7 +22,7 @@ function Admin() {
     const {
         roomID,
         setCurrentChat,
-        setIsActive,
+        setIsRoomActive,
         selectedSideBarMenu,
         setSelectedSideBarMenu,
         setHomeSideBarActive,
@@ -87,7 +87,7 @@ function Admin() {
                         <MenuItem onClick={handleClose} disableRipple className={classes.menuItem_1}>
                             <Button className={classes.button_1} onClick={() => {
                                 dispatch(clearChat());
-                                setIsActive(null);
+                                setIsRoomActive(null);
                                 setCurrentChat("");
                                 setCurrentChatAvatar("")
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
@@ -105,7 +105,7 @@ function Admin() {
                         <MenuItem onClick={handleClose} disableRipple className={classes.menuItem_2} disabled={true}>
                             <Button className={classes.button_2} onClick={() => {
                                 dispatch(clearChat());
-                                setIsActive(null);
+                                setIsRoomActive(null);
                                 setCurrentChat("");
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                 setSubMenuItemActiveState('cat')
@@ -118,7 +118,7 @@ function Admin() {
                         <MenuItem onClick={handleClose} disableRipple className={classes.menuItem_3} disabled={true}>
                             <Button className={classes.button_3} onClick={() => {
                                 dispatch(clearChat());
-                                setIsActive(null);
+                                setIsRoomActive(null);
                                 setCurrentChat("");
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                 setSubMenuItemActiveState('author')

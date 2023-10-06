@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
-import { addToCartSaga, updateUser, deleteDispatch } from "./redux/actions";
+import { addToCartSaga, updateUserProfile, deleteDispatch } from "./redux/actions";
 import { FaStar } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { BsTrash } from "react-icons/bs";
@@ -202,7 +202,7 @@ function Item({ id, image, price, rating, author, title }) {
                         onClick={
                           () =>
                             dispatchTwo(
-                              updateUser({ ratings: index + 1, id: id })
+                              updateUserProfile({ ratings: index + 1, id: id })
                             )
                         }
                         onHover={() => handleHover(index + 1)}
@@ -222,7 +222,7 @@ function Item({ id, image, price, rating, author, title }) {
                         }
                         /*onClick={() => handleClickRat(index + 1)}*/
                         onClick={() =>
-                          dispatchTwo(updateUser({ ratings: index + 1, id: id }))
+                          dispatchTwo(updateUserProfile({ ratings: index + 1, id: id }))
                         }
                         onHover={() => handleHover(index + 1)}
                         onMouseLeave={handleMouseLeave}

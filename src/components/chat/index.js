@@ -18,8 +18,8 @@ function Chatroom() {
     currentChat,
     setCurrentChat,
     currentChatAvatar, setCurrentChatAvatar,
-    isActive,
-    setIsActive,
+    isRoomActive,
+    setIsRoomActive,
     list,
     setList,
     recepient_id,
@@ -49,8 +49,8 @@ function Chatroom() {
           setCurrentChat={setCurrentChat}
           roomID={roomID}
           setRoomID={setRoomID}
-          isActive={isActive}
-          setIsActive={setIsActive}
+          isRoomActive={isRoomActive}
+          setIsRoomActive={setIsRoomActive}
           list={list}
           setRecepientId={setRecepientId}
           currentChatAvatar={currentChatAvatar}

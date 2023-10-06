@@ -33,7 +33,7 @@ export default function AccountMenu({ profileUpdate, setProfileUpdate }) {
     const {
         roomID,
         setCurrentChat,
-        setIsActive,
+        setIsRoomActive,
         setSubMenuItemActiveState,
         setNavBarRoute,
         setCurrentChatAvatar
@@ -123,7 +123,7 @@ export default function AccountMenu({ profileUpdate, setProfileUpdate }) {
                     }}>
                         <Button className={classes.profielButton} onClick={() => {
                             dispatch(clearChat());
-                            setIsActive(null);
+                            setIsRoomActive(null);
                             setCurrentChat("");
                             setCurrentChatAvatar("")
                             leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
@@ -169,7 +169,7 @@ export default function AccountMenu({ profileUpdate, setProfileUpdate }) {
                             localStorage.removeItem("for_reducer");
                             localStorage.removeItem("roomID")
                             dispatch(clearChat());
-                            setIsActive(null)
+                            setIsRoomActive(null)
                             dispatch(clearChat());
                             setCurrentChat("")
                             setCurrentChatAvatar('')

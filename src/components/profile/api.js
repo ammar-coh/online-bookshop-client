@@ -11,7 +11,7 @@ const updateUser = (userId, data) => {
     });
 };
 
-export const userUpdated = async (userId, data, setProfileUpdate, alertContent, setAlertContent, setAlertOpen, setLoading) => {
+export const userUpdated = async (userId, data, setProfileUpdate, alertContent, setAlertContent, setAlertOpen, setLoading,dispatch,updateUserProfile) => {
     try {
         setLoading(true)
         const response = await updateUser(userId, data)
@@ -20,6 +20,7 @@ export const userUpdated = async (userId, data, setProfileUpdate, alertContent, 
             setProfileUpdate(response.data.user)
             setAlertContent({ ...alertContent, type: "success", message: 'Profile updated!' })
             setAlertOpen(true)
+            dispatch(updateUserProfile(response.data.user))
             setLoading(false)
         }
     }

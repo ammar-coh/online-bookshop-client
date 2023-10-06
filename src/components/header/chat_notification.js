@@ -20,7 +20,7 @@ function Chat_Notifications({
   setRoomID,
   setCurrentChat,
   setCurrentChatAvatar,
-  setIsActive,
+  setIsRoomActive,
   list,
   setNotificationOpen,
   setRecepientId
@@ -71,7 +71,7 @@ function Chat_Notifications({
     };
     localStorage.setItem("roomID", data.roomID)
     setRoomID(data.roomID);
-    setIsActive(index);
+    setIsRoomActive(index);
     setCurrentChat(data.displayName);
     setCurrentChatAvatar(data.image)
     dispatch(chatFromDBSaga(dataObjectForFetchChatAPI));
