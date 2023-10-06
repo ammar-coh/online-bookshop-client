@@ -43,13 +43,12 @@ const useStyles = makeStyles({
     fontFamily: "Montserrat, sans-se",
     fontSize: "20px",
     color:"#333533"
-    // color: "#41525D"
   }
 });
 function ContactInfo({ currentChat, currentChatAvatar ,setRoomActive,roomActive }) {
   const classes = useStyles({roomActive});
   const user = useSelector((state) => state.user_login.details);
-  const { isActive } = useContext(Context);
+  const { isRoomActive } = useContext(Context);
   const userLocal = JSON.parse(localStorage.getItem("userInfo"))
 
   const userName = () => {
@@ -64,7 +63,7 @@ function ContactInfo({ currentChat, currentChatAvatar ,setRoomActive,roomActive 
 
   return (
     <div className={classes.root}>
-      {isActive != null ? <div className={classes.userInfo}>
+      {isRoomActive != null ? <div className={classes.userInfo}>
         <div className={classes.userAvatar}>
           {" "}
           <Avatar sx={{ bgcolor: "#bdbdbd" }} src = {currentChatAvatar}/>

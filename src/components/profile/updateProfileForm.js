@@ -24,7 +24,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import Avatar from '@mui/material/Avatar';
 import { userUpdated } from './api'
 import sample from '../../Assets/867d7f81-d66f-465c-8bb2-17a212dd9919.jpg'
-
+import {updateUserProfile} from '../../redux/actions/index'
 function InformationForm({ setLoading}) {
     const { alertContent, setAlertContent, setAlertOpen, setProfileUpdate } = useContext(Context);
 
@@ -76,7 +76,7 @@ function InformationForm({ setLoading}) {
             }
         }
         const id = user.user.id
-        userUpdated(id, fd, setProfileUpdate, alertContent, setAlertContent, setAlertOpen, setLoading)
+        userUpdated(id, fd, setProfileUpdate, alertContent, setAlertContent, setAlertOpen, setLoading,dispatch,updateUserProfile)
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

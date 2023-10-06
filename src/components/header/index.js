@@ -25,7 +25,7 @@ function Header() {
   const {
     roomID, setRoomID,
     currentChat, setCurrentChat,
-    isActive, setIsActive,
+    isRoomActive, setIsRoomActive,
     recepient_status,
     notification_open, setNotificationOpen,
     setRecepientId,
@@ -90,8 +90,8 @@ function Header() {
             currentChat={currentChat}
             setCurrentChat={setCurrentChat}
             setCurrentChatAvatar={setCurrentChatAvatar}
-            isActive={isActive}
-            setIsActive={setIsActive}
+            isRoomActive={isRoomActive}
+            setIsRoomActive={setIsRoomActive}
             list={list}
             recepient_status={recepient_status}
             setNotificationOpen={setNotificationOpen}
@@ -106,7 +106,7 @@ function Header() {
             }}
             onClick={() => {
               dispatch(clearChat());
-              setIsActive(null);
+              setIsRoomActive(null);
               setCurrentChat("");
               setCurrentChatAvatar("")
               leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
