@@ -16,7 +16,7 @@ import Context from '../../context'
 import { clearChat } from '../../redux/actions/index'
 import { socket } from '../../socket'
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-import  {useStylesAdmin} from './style'
+import { useStylesAdmin } from './style'
 
 function Admin() {
     const {
@@ -26,6 +26,7 @@ function Admin() {
         selectedSideBarMenu,
         setSelectedSideBarMenu,
         setHomeSideBarActive,
+        activeSideBar,setActiveSideBar,
         adminSideBarActive,
         setAdminSideBarActive,
         setProfileSideBarActive,
@@ -35,9 +36,11 @@ function Admin() {
         subMenuItemActiveState, setSubMenuItemActiveState,
         setNavBarRoute,
         setCurrentChatAvatar,
+        setSelectedSideBarMenuHome,
+        setBookClubMenuItem
     } = useContext(Context);
     const dispatch = useDispatch();
-    const classes = useStylesAdmin({ anchorElAdmin, adminSideBarActive, subMenuItemActiveState });
+    const classes = useStylesAdmin({ anchorElAdmin, activeSideBar, adminSideBarActive, subMenuItemActiveState , activeSideBar});
     const handleClick = (event) => {
         setAnchorElAdmin((previous) => !previous);
     };
@@ -58,6 +61,8 @@ function Admin() {
         setProfileSideBarActive(null)
         setAnchorElHome(false)
         setAnchorElProfile(false)
+        setSelectedSideBarMenuHome(null)
+        setBookClubMenuItem(null)
     };
     return (
         <div>
@@ -93,6 +98,7 @@ function Admin() {
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                 setSubMenuItemActiveState('books')
                                 setNavBarRoute("Book Section")
+                                setActiveSideBar('books')
                             }}>
                                 <Link className={classes.link_1} to={{
                                     pathname: "/books",
@@ -109,6 +115,7 @@ function Admin() {
                                 setCurrentChat("");
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                 setSubMenuItemActiveState('cat')
+                                setActiveSideBar('cat')
                             }}>
                                 <InventoryOutlinedIcon />
                                 Cateogory List
@@ -122,6 +129,7 @@ function Admin() {
                                 setCurrentChat("");
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                 setSubMenuItemActiveState('author')
+                                setActiveSideBar('author')
                             }}>
                                 <PortraitOutlinedIcon />
                                 author

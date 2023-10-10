@@ -18,6 +18,7 @@ import Button from "@material-ui/core/Button";
 import Profile from '../profile/index'
 import Books from '../books/index'
 import Loading from '../loading'
+import CreateGroup from '../create group'
 const useStyles = makeStyles({
     root: {
         display: "flex",
@@ -103,6 +104,7 @@ function Home({ setUserAvailable, socket }) {
                         <Route path="/book club" exact component={Chatroom} />
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/books" exact component={Books} />
+                        <Route path="/create group" exact component={CreateGroup} />
 
                         <div>
                             <div className={classes.banner}>
