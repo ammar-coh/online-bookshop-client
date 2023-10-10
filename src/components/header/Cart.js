@@ -60,7 +60,8 @@ function Cart({
   setAnchorElProfile,
   setSubMenuItemActiveState,
   setBookClubMenuItem,
-  setNavBarRoute }) {
+  setNavBarRoute ,
+  setActiveSideBar ,}) {
 
   const classes = useStyles();
   const counts = useSelector((state) => state.checkout);
@@ -75,6 +76,7 @@ function Cart({
     setAnchorElProfile(null)
     setSubMenuItemActiveState(null)
     setBookClubMenuItem(null)
+    setActiveSideBar(null) 
     setNavBarRoute('Cart')
   }
   return (

@@ -42,6 +42,7 @@ function Header() {
     setAnchorElProfile,
     setSubMenuItemActiveState,
     setBookClubMenuItem,
+    setActiveSideBar, 
     setNavBarRoute
   } = useContext(Context);
   const leaveAllRooms = async (data) => {
@@ -131,7 +132,8 @@ function Header() {
               setAnchorElProfile={setAnchorElProfile}
               setSubMenuItemActiveState={setSubMenuItemActiveState}
               setBookClubMenuItem={setBookClubMenuItem}
-              setNavBarRoute={setNavBarRoute} />
+              setNavBarRoute={setNavBarRoute} 
+              setActiveSideBar={setActiveSideBar}/>
           </Button>
         </div>
         <div className={classes.profile}>
