@@ -32,7 +32,17 @@ function Header() {
     profileUpdate,
     setProfileUpdate,
     setCurrentChatAvatar,
-    navBarRoute, setNavBarRoute
+    setSelectedSideBarMenu,
+    setHomeSideBarActive,
+    setSelectedSideBarMenuHome,
+    setAdminSideBarActive,
+    setProfileSideBarActive,
+    setAnchorElHome,
+    setAnchorElAdmin,
+    setAnchorElProfile,
+    setSubMenuItemActiveState,
+    setBookClubMenuItem,
+    setNavBarRoute
   } = useContext(Context);
   const leaveAllRooms = async (data) => {
 
@@ -111,7 +121,17 @@ function Header() {
               setCurrentChatAvatar("")
               leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
             }}>
-            <Cart />
+            <Cart setSelectedSideBarMenu={setSelectedSideBarMenu}
+              setHomeSideBarActive={setHomeSideBarActive}
+              setSelectedSideBarMenuHome={setSelectedSideBarMenuHome}
+              setAdminSideBarActive={setAdminSideBarActive}
+              setProfileSideBarActive={setProfileSideBarActive}
+              setAnchorElHome={setAnchorElHome}
+              setAnchorElAdmin={setAnchorElAdmin}
+              setAnchorElProfile={setAnchorElProfile}
+              setSubMenuItemActiveState={setSubMenuItemActiveState}
+              setBookClubMenuItem={setBookClubMenuItem}
+              setNavBarRoute={setNavBarRoute} />
           </Button>
         </div>
         <div className={classes.profile}>

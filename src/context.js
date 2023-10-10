@@ -13,6 +13,9 @@ export const Provider = ({ children }) => {
   const [sideBarCollapsed, setSideBarCollapsed] = useState(false)
   const [selectedSideBarMenu, setSelectedSideBarMenu] = useState(null);
   const [homeSideBarActive, setHomeSideBarActive] = useState(null)
+  const [selectedSideBarMenuHome, setSelectedSideBarMenuHome] = useState(null)
+  const [activeSideBar,setActiveSideBar ] = useState(null)
+  const [bookClubMenuItem, setBookClubMenuItem] = useState(null)
   const [adminSideBarActive, setAdminSideBarActive] = useState(null)
   const [profileSideBarActive, setProfileSideBarActive] = useState(null)
   const [anchorElHome, setAnchorElHome] = React.useState(false);
@@ -29,6 +32,7 @@ export const Provider = ({ children }) => {
   const [cover, setCover] = useState([])
   const [profileUpdate, setProfileUpdate] = useState({})
   const[receieveMessage, setReceiveMessage] =useState(false)
+
   const contextValue = {
     loader,setLoader,
     roomID, setRoomID,
@@ -40,7 +44,9 @@ export const Provider = ({ children }) => {
     notification_open, setNotificationOpen,
     sideBarCollapsed, setSideBarCollapsed,
     selectedSideBarMenu, setSelectedSideBarMenu,
+    activeSideBar,setActiveSideBar ,
     homeSideBarActive, setHomeSideBarActive,
+    selectedSideBarMenuHome, setSelectedSideBarMenuHome,
     adminSideBarActive, setAdminSideBarActive,
     profileSideBarActive, setProfileSideBarActive,
     anchorElHome, setAnchorElHome,
@@ -54,7 +60,8 @@ export const Provider = ({ children }) => {
     cover, setCover,
     profileUpdate, setProfileUpdate,
     currentChatAvatar, setCurrentChatAvatar,
-    receieveMessage, setReceiveMessage
+    receieveMessage, setReceiveMessage,
+    bookClubMenuItem, setBookClubMenuItem
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;

@@ -13,23 +13,26 @@ import Context from '../../context'
 import { clearChat } from '../../redux/actions/index'
 import { socket } from '../../socket'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import {useStylesProfile} from './style'
+import { useStylesProfile } from './style'
 
 function Profile() {
     const {
-        roomID,setCurrentChat,
-        setIsRoomActive,selectedSideBarMenu,
-        setSelectedSideBarMenu,setHomeSideBarActive,
-        setAdminSideBarActive,setAnchorElHome,
-        setAnchorElAdmin,profileSideBarActive, setProfileSideBarActive,
+        roomID, setCurrentChat,
+        setIsRoomActive, selectedSideBarMenu,
+        setSelectedSideBarMenu, setHomeSideBarActive,
+        activeSideBar,setActiveSideBar,
+        setAdminSideBarActive, setAnchorElHome,
+        setAnchorElAdmin, profileSideBarActive, setProfileSideBarActive,
         anchorElProfile, setAnchorElProfile,
         subMenuItemActiveState, setSubMenuItemActiveState,
         setNavBarRoute,
         setCurrentChatAvatar,
+        setSelectedSideBarMenuHome,
+        setBookClubMenuItem
     } = useContext(Context);
     const dispatch = useDispatch();
 
-    const classes = useStylesProfile({ anchorElProfile, profileSideBarActive, subMenuItemActiveState });
+    const classes = useStylesProfile({ anchorElProfile, activeSideBar, profileSideBarActive, subMenuItemActiveState });
     const handleClick = (event) => {
         setAnchorElProfile((previous) => !previous);
     };
@@ -52,6 +55,8 @@ function Profile() {
         setProfileSideBarActive(panel)
         setAnchorElAdmin(false)
         setAnchorElHome(false)
+        setSelectedSideBarMenuHome(null)
+        setBookClubMenuItem(null)
     };
     return (
         <div>
@@ -73,9 +78,9 @@ function Profile() {
                         id="panel1a-header"
                         className={classes.AccordionSummary}
                     >
-                          <AccountCircleIcon style={{ padding: " 0px 5px", fontSize: "35px" }} />
+                        <AccountCircleIcon style={{ padding: " 0px 5px", fontSize: "35px" }} />
                         <Typography style={{ padding: "8px 0px" }}>My Profile</Typography>
-                       
+
                     </AccordionSummary>
                     <AccordionDetails>
                         <MenuItem onClick={handleClose} disableRipple className={classes.menuItem_1}>
@@ -87,12 +92,13 @@ function Profile() {
                                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
                                 setSubMenuItemActiveState('profile')
                                 setNavBarRoute("Profile")
+                                setActiveSideBar('profile')
                             }}>
-                                    <Link className={classes.link_1} to={{
+                                <Link className={classes.link_1} to={{
                                     pathname: "/profile",
                                 }}>
-                                < LibraryBooksOutlinedIcon />
-                                Profile
+                                    < LibraryBooksOutlinedIcon />
+                                    Profile
                                 </Link>
                             </Button>
                         </MenuItem>
