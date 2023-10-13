@@ -56,7 +56,7 @@ function BookPage() {
 
                     <Grid className={classes.description}>
                         <Typography variant="h6" style={{
-                            fontFamily:"Montserrat, sans-se",fontWeight:700}}>Description</Typography>
+                         height:"auto",    fontFamily:"Montserrat, sans-se",fontWeight:700}}>Description</Typography>
                         <Typography>{bookObject?.description}</Typography>
                     </Grid>
 

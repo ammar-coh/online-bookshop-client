@@ -39,17 +39,18 @@ function SearchResultsDisplay({ searchResult, setSearchResult, setSearchKey }) {
             document.removeEventListener('click', handleClickOutside);
         };
     }, []);
-    const link = () => {
-        setBookSearchResult(searchResult)
-        localStorage.setItem("bookSearch",JSON.stringify(searchResult))
+    const link = (id) => {
+        const findBookById = searchResult.filter((book) => book._id === id ?book:null)
+        setBookSearchResult(findBookById)
+        localStorage.setItem("bookSearch", JSON.stringify(findBookById))
         setSearchKey('')
         setSearchResult([])
     }
     return (
         <>
-        
+
             {searchResult.map((book, index) => (
-                <Link className={classes.link} to="/book page" onClick={link} >
+                <Link className={classes.link} to='/book page' onClick={()=>{link(book._id)}} >
                     <Card className={classes.root} ref={containerRef}>
                         <div className={classes.mainContainer}>
                             <div className={classes.image_container}>
@@ -70,7 +71,7 @@ function SearchResultsDisplay({ searchResult, setSearchResult, setSearchKey }) {
                                                 variant="h7"
                                                 component="h2"
                                             >
-                                                {book.title ? book.title : "No Title"}
+                                                {book.title ? book.title.replace(/\b\w/g, (match) => match.toUpperCase()) : "No Title"}
                                             </Typography>
                                         </div>
                                         <div className={classes.author_div}>
