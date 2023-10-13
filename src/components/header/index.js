@@ -58,8 +58,6 @@ function Header() {
   // Function to handle clicks outside the Card
   function handleClickOutside(event) {
     if (containerRef.current && !containerRef.current.contains(event.target)) {
-      setSearchKey('')
-      setSearchResult([])
       setErrorMessage(null)
     }
   }
