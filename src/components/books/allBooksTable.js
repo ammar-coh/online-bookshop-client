@@ -149,7 +149,7 @@ function Table() {
       (
         <Grid className={classes.title}>
           <Typography paragraph>
-            {params.value}
+            {params.value.replace(/\b\w/g, (match) => match.toUpperCase())}
           </Typography>
         </Grid>
       )

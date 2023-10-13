@@ -179,7 +179,7 @@ function Item({ id, image, price, rating, author, title }) {
                   variant="h7"
                   component="h2"
                 >
-                  {title ? title : "No Title"}
+                  {title ? title.replace(/\b\w/g, (match) => match.toUpperCase()) : "No Title"}
                 </Typography>
               </div>
               <div className={classes.author_div}>

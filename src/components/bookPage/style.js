@@ -41,7 +41,7 @@ const useStylesIndex = makeStyles({
         textAlign: "left",
         margin: "0px",
         textOverflow:"ellipsis",
-        '-webkit-line-clamp': 2,
+        '-webkit-line-clamp': 6,
         '-webkit-box-orient': 'vertical',
         fontSize: "13px",
         fontFamily: "Montserrat, sans-se",
