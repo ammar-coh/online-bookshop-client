@@ -36,7 +36,6 @@ const useStyles = makeStyles({
   },
   checkout_link: {
     textDecoration: "none",
-    // border: "1px solid white",
     color: "#fff",
   },
 });

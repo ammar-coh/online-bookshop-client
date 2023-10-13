@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext ,useRef} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
@@ -14,10 +14,18 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountMenu from './profile'
 import { useStylesIndex } from './style'
-
+import { fetchSearchResult } from './api'
+import SearchResultsDisplay from './searchDisplayWindow'
+import Loading from '../loading'
+import Card from "@material-ui/core/Card";
+import { Typography } from "@mui/material";
 function Header() {
   const userLocal = JSON.parse(localStorage.getItem("userInfo"))
-  const classes = useStylesIndex();
+  const [searchErrorMessage, setErrorMessage] = useState(null)
+  const [searchLoading, setSearchLoading] = useState(false)
+  const [searchResult, setSearchResult] = useState([])
+  const classes = useStylesIndex({ searchResult, searchLoading });
+  const [searchKey, setSearchKey] = useState('')
   const [list, setList] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user_login.details);
@@ -42,9 +50,29 @@ function Header() {
     setAnchorElProfile,
     setSubMenuItemActiveState,
     setBookClubMenuItem,
-    setActiveSideBar, 
+    setActiveSideBar,
     setNavBarRoute
   } = useContext(Context);
+
+  const containerRef = useRef(null);
+  // Function to handle clicks outside the Card
+  function handleClickOutside(event) {
+    if (containerRef.current && !containerRef.current.contains(event.target)) {
+      setSearchKey('')
+      setSearchResult([])
+      setErrorMessage(null)
+    }
+  }
+
+  // Attach click event listener when the component mounts
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
   const leaveAllRooms = async (data) => {
 
     await socket.emit("leave_private_room", {
@@ -73,84 +101,164 @@ function Header() {
   useEffect(() => {
     localStorage.getItem("authorization") && allUsers();
   }, [notification_open]);
+  const handleSearchChange = (e) => {
+    if (e.target.value !== '') {
+      setSearchKey(e.target.value);
+    }
+    else {
+      setSearchResult([])
+      setSearchKey('')
+      setErrorMessage(null)
+    }
+  }
+  const handleChange = () => {
+    if (searchKey !== '') {
+      fetchSearchResult(searchKey, setSearchResult, setSearchLoading, setErrorMessage)
+    }
+  }
+
   return (
-    <div
+    <form onSubmit={(e) => {
+      e.preventDefault(); // Prevent the default form submission behavior
+      handleChange()
+    }}
+    >   <div
       className={classes.root}
       style={isSticky ? { position: "fixed", top: 0, width: "100%" } : {}}
     >
-      <div className={classes.homeIconMainContainer}>
-        {" "}
-        <NavBarRoute />
-      </div>
-      <div className={classes.searchBarDiv}>
-        <InputBase
-          className={classes.searchBar}
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Search..."
-          inputProps={{ 'aria-label': 'search google maps' }}
-          startAdornment={<IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-            <SearchIcon />
-          </IconButton>}
-        />
-      </div>
-      <div className={classes.headerThirdContainer}>
-        <div className={classes.chatNotificationContainer}>
-          <Chat_Notifications
-            roomID={roomID}
-            setRoomID={setRoomID}
-            currentChat={currentChat}
-            setCurrentChat={setCurrentChat}
-            setCurrentChatAvatar={setCurrentChatAvatar}
-            isRoomActive={isRoomActive}
-            setIsRoomActive={setIsRoomActive}
-            list={list}
-            recepient_status={recepient_status}
-            setNotificationOpen={setNotificationOpen}
-            setRecepientId={setRecepientId}
-          />
+        <div className={classes.homeIconMainContainer}>
+          {" "}
+          <NavBarRoute />
         </div>
-        <div className={classes.cartContainer}>
-          <Button
-            className={classes.s}
-            style={{
-              padding: "0px 0px 0px 30px",
-            }}
-            onClick={() => {
-              dispatch(clearChat());
-              setIsRoomActive(null);
-              setCurrentChat("");
-              setCurrentChatAvatar("")
-              leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
-            }}>
-            <Cart setSelectedSideBarMenu={setSelectedSideBarMenu}
-              setHomeSideBarActive={setHomeSideBarActive}
-              setSelectedSideBarMenuHome={setSelectedSideBarMenuHome}
-              setAdminSideBarActive={setAdminSideBarActive}
-              setProfileSideBarActive={setProfileSideBarActive}
-              setAnchorElHome={setAnchorElHome}
-              setAnchorElAdmin={setAnchorElAdmin}
-              setAnchorElProfile={setAnchorElProfile}
-              setSubMenuItemActiveState={setSubMenuItemActiveState}
-              setBookClubMenuItem={setBookClubMenuItem}
-              setNavBarRoute={setNavBarRoute} 
-              setActiveSideBar={setActiveSideBar}/>
-          </Button>
-        </div>
-        <div className={classes.profile}>
-          <AccountMenu profileUpdate={profileUpdate} setProfileUpdate={setProfileUpdate} />
-        </div>
-        <div className={classes.userName}>
-          <span style={{
-            fontFamily: "Montserrat, sans-se",
-            fontSize: "18px",
-            color: "#fff",
-            fontWeight: 500
+        <div className={classes.searchBarDiv}>
+          <div>
+            <InputBase
+              onChange={(event) => {
+                handleSearchChange(event)
+              }}
+              value={searchKey}
+              className={classes.searchBar}
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search..."
+              inputProps={{ 'aria-label': 'search google maps' }}
+              startAdornment={
+                <IconButton type="submit"
+                  sx={{ p: '10px' }}
+                  aria-label="search">
+                  <SearchIcon onClick={handleChange} />
+                </IconButton>}
+            />
+          </div>
+          <div style={{
+            display: "flex",
+            position: "absolute",
+            zIndex: 9999,
+            width: "482px",
+            left: '127px',
+            borderTopLeftRadius: searchResult.length > 0 ? "0px" : null,
           }}>
-            {userLocal?.displayName.replace(/\b\w/g, (match) => match.toUpperCase())}
-          </span>
+            {searchLoading ?
+              <Card
+                style={{
+                  background: "#fff",
+                  display: "flex",
+                  position: "absolute",
+                  zIndex: 9999,
+                  width: "482px",
+                  left: '0px',
+                }}>
+                <Loading
+                  appScreenPadding="search" appScreenSize='true' />
+              </Card> :
+              searchErrorMessage != null ? <Card
+                style={{
+                  background: "#fff",
+                  display: "flex",
+                  position: "absolute",
+                  zIndex: 9999,
+                  width: "482px",
+                  left: '0px',
+                  justifyContent: "center",
+                  padding: "65px"
+                }}
+                ref={containerRef}>
+                <Typography
+                  style={{
+                    fontFamily: "Montserrat, sans-se",
+                    fontSize: "20px",
+                    color: "#d22129",
+                    fontWeight: 700
+                  }}>{searchErrorMessage}</Typography>
+              </Card> :
+                searchResult.length > 0 ?
+                  <SearchResultsDisplay
+                    searchResult={searchResult}
+                    setSearchResult={setSearchResult}
+                    setSearchKey={setSearchKey}
+                  />
+                  : null
+            }
+          </div>
+        </div>
+        <div className={classes.headerThirdContainer}>
+          <div className={classes.chatNotificationContainer}>
+            <Chat_Notifications
+              roomID={roomID}
+              setRoomID={setRoomID}
+              currentChat={currentChat}
+              setCurrentChat={setCurrentChat}
+              setCurrentChatAvatar={setCurrentChatAvatar}
+              isRoomActive={isRoomActive}
+              setIsRoomActive={setIsRoomActive}
+              list={list}
+              recepient_status={recepient_status}
+              setNotificationOpen={setNotificationOpen}
+              setRecepientId={setRecepientId}
+            />
+          </div>
+          <div className={classes.cartContainer}>
+            <Button
+              className={classes.s}
+              style={{
+                padding: "0px 0px 0px 30px",
+              }}
+              onClick={() => {
+                dispatch(clearChat());
+                setIsRoomActive(null);
+                setCurrentChat("");
+                setCurrentChatAvatar("")
+                leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
+              }}>
+              <Cart setSelectedSideBarMenu={setSelectedSideBarMenu}
+                setHomeSideBarActive={setHomeSideBarActive}
+                setSelectedSideBarMenuHome={setSelectedSideBarMenuHome}
+                setAdminSideBarActive={setAdminSideBarActive}
+                setProfileSideBarActive={setProfileSideBarActive}
+                setAnchorElHome={setAnchorElHome}
+                setAnchorElAdmin={setAnchorElAdmin}
+                setAnchorElProfile={setAnchorElProfile}
+                setSubMenuItemActiveState={setSubMenuItemActiveState}
+                setBookClubMenuItem={setBookClubMenuItem}
+                setNavBarRoute={setNavBarRoute}
+                setActiveSideBar={setActiveSideBar} />
+            </Button>
+          </div>
+          <div className={classes.profile}>
+            <AccountMenu profileUpdate={profileUpdate} setProfileUpdate={setProfileUpdate} />
+          </div>
+          <div className={classes.userName}>
+            <span style={{
+              fontFamily: "Montserrat, sans-se",
+              fontSize: "18px",
+              color: "#fff",
+              fontWeight: 500
+            }}>
+              {userLocal?.displayName.replace(/\b\w/g, (match) => match.toUpperCase())}
+            </span>
+          </div>
         </div>
       </div>
-    </div>
+    </form >
   );
 }
 

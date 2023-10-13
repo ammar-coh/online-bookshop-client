@@ -80,7 +80,6 @@ function InformationForm({ setLoading}) {
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-
             <Grid style={{ width: "100%", display: "block", }}>
                 <Grid style={{ height: "auto" }}>
                     <Box className={classes.box2}>

@@ -19,6 +19,7 @@ import Profile from '../profile/index'
 import Books from '../books/index'
 import Loading from '../loading'
 import CreateGroup from '../create group'
+import BookPage from '../bookPage/index'
 const useStyles = makeStyles({
     root: {
         display: "flex",
@@ -105,6 +106,7 @@ function Home({ setUserAvailable, socket }) {
                         <Route path="/profile" exact component={Profile} />
                         <Route path="/books" exact component={Books} />
                         <Route path="/create group" exact component={CreateGroup} />
+                        <Route path="/book page" exact component={BookPage} />
 
                         <div>
                             <div className={classes.banner}>

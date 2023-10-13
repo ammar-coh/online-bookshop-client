@@ -121,7 +121,6 @@ const ChatTypingArea = ({
               setMessage(event.target.value);
             }}
             value={message}
-            // className={classes.searchBar}
             className={classes.inputField}
             sx={{
               ml: 1, flex: 1, bgcolor: "#fff",
