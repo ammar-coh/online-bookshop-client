@@ -32,7 +32,7 @@ export const Provider = ({ children }) => {
   const [cover, setCover] = useState([])
   const [profileUpdate, setProfileUpdate] = useState({})
   const[receieveMessage, setReceiveMessage] =useState(false)
-
+const [bookSearchResult,setBookSearchResult] = useState([])
   const contextValue = {
     loader,setLoader,
     roomID, setRoomID,
@@ -61,7 +61,8 @@ export const Provider = ({ children }) => {
     profileUpdate, setProfileUpdate,
     currentChatAvatar, setCurrentChatAvatar,
     receieveMessage, setReceiveMessage,
-    bookClubMenuItem, setBookClubMenuItem
+    bookClubMenuItem, setBookClubMenuItem,
+    bookSearchResult,setBookSearchResult
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;

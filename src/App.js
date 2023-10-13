@@ -31,7 +31,6 @@ function App() {
   const uname = useSelector((state) => state.user_login.details);
   const user = useSelector((state) => state.user_login.details);
   const messages = useSelector((state) => state.chat);
-  const classes = useStyles();
   useEffect(() => {
     user?.user ? setUserAvailable(true) : setUserAvailable(false);
   }, [user?.user]);

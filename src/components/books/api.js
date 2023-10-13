@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-
-
 const getAllBooks = async (data) => {
     return await axios.request({
         method: 'get',
@@ -32,7 +30,6 @@ export const fetchAllBookData = async (setAllBooks, setRows, allBooks, setBookLi
 };
 
 const deleteBook = (bookId) => {
-    console.log("id at deleteBook function", bookId)
     return axios.request({
         method: 'delete',
         url: `http://localhost:8081/book/list/${bookId}`, // Include the product ID in the URL
@@ -62,7 +59,6 @@ export const bookRemoved = async (id, setRows, rows, alertContent, setAlertConte
         setLoading(false)
     }
 }
-
 
 const updateBook = (bookId, data) => {
     return axios.request({
