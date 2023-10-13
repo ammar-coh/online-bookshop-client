@@ -47,7 +47,6 @@ function Home() {
     const handleClose = () => {
         setAnchorElHome(false);
     };
-    console.log("anElHome", anchorElHome)
     const user = useSelector((state) => state.user_login.details);
 
     const leaveAllRooms = async (data) => {
