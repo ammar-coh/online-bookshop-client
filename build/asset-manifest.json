@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.852b3d06.css",
+    "main.js": "/static/js/main.31ab40d8.js",
+    "static/js/787.fec03637.chunk.js": "/static/js/787.fec03637.chunk.js",
+    "static/media/promotion_1.jpg": "/static/media/promotion_1.ba6a0cf7da9175ea86c7.jpg",
+    "static/media/promotion2.jpg": "/static/media/promotion2.f151a8b5092ddca3f0a4.jpg",
+    "static/media/promotion 3.jpg": "/static/media/promotion 3.94077932dc53c259aafb.jpg",
+    "static/media/realistic-book-cover-mockup_125540-2173.avif": "/static/media/realistic-book-cover-mockup_125540-2173.cf4619f0c181e4103ec8.avif",
+    "index.html": "/index.html",
+    "main.852b3d06.css.map": "/static/css/main.852b3d06.css.map",
+    "main.31ab40d8.js.map": "/static/js/main.31ab40d8.js.map",
+    "787.fec03637.chunk.js.map": "/static/js/787.fec03637.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.852b3d06.css",
+    "static/js/main.31ab40d8.js"
+  ]
+}
