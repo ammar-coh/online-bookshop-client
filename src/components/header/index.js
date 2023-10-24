@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext ,useRef} from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
@@ -100,8 +100,9 @@ function Header() {
     localStorage.getItem("authorization") && allUsers();
   }, [notification_open]);
   const handleSearchChange = (e) => {
+    setSearchKey(e.target.value);
     if (e.target.value !== '') {
-      setSearchKey(e.target.value);
+      fetchSearchResult(e.target.value, setSearchResult, setSearchLoading, setErrorMessage)
     }
     else {
       setSearchResult([])
