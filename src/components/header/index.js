@@ -20,6 +20,7 @@ import Loading from '../loading'
 import Card from "@material-ui/core/Card";
 import { Typography } from "@mui/material";
 function Header() {
+  const url = process.env.REACT_APP_BASE_URL
   const userLocal = JSON.parse(localStorage.getItem("userInfo"))
   const [searchErrorMessage, setErrorMessage] = useState(null)
   const [searchLoading, setSearchLoading] = useState(false)
@@ -91,7 +92,7 @@ function Header() {
   }, []);
 
   const allUsers = () => {
-    axios.get(`http://localhost:8081/users/userList`).then((response) => {
+    axios.get(`${url}users/userList`).then((response) => {
       const allUserList = response.data;
       setList(allUserList);
     });

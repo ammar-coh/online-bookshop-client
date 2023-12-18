@@ -1,9 +1,9 @@
 import axios from 'axios';
-
+const url = process.env.REACT_APP_BASE_URL
 const getAllBooks = async (data) => {
     return await axios.request({
         method: 'get',
-        url: 'http://localhost:8081/book/list',
+        url: `${url}book/list`,
         headers: { Authorization: ` ${localStorage.getItem('authorization')}` }
 
     })
@@ -32,7 +32,7 @@ export const fetchAllBookData = async (setAllBooks, setRows, allBooks, setBookLi
 const deleteBook = (bookId) => {
     return axios.request({
         method: 'delete',
-        url: `http://localhost:8081/book/list/${bookId}`, // Include the product ID in the URL
+        url: `${url}book/list/${bookId}`, // Include the product ID in the URL
         headers: { Authorization: ` ${localStorage.getItem('authorization')}` },
     });
 };
@@ -63,7 +63,7 @@ export const bookRemoved = async (id, setRows, rows, alertContent, setAlertConte
 const updateBook = (bookId, data) => {
     return axios.request({
         method: 'put',
-        url: `http://localhost:8081/book/list/${bookId}`, // Replace with your PUT endpoint
+        url: `${url}book/list/${bookId}`, // Replace with your PUT endpoint
         headers: {
             Authorization: ` ${localStorage.getItem('authorization')}`, // Use the appropriate header format
             'Content-Type': 'multipart/form-data',
@@ -108,7 +108,7 @@ export const bookUpdated = async (bookId, updatedRow, cover, alertContent, setAl
 const newBook = (data) => {
     return axios.request({
         method: 'post',
-        url: 'http://localhost:8081/book/list', // Replace with your POST endpoint
+        url: `${url}book/list`, // Replace with your POST endpoint
         headers: {
             Authorization: `${localStorage.getItem('authorization')}`, // Use the appropriate header format
             'Content-Type': 'multipart/form-data',
