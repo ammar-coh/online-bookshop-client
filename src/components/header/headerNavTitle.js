@@ -5,7 +5,7 @@ import Context from "../../context";
 import Grid from '@mui/material/Grid';
 import Button from "@material-ui/core/Button";
 import Box from '@mui/material/Box';
-import { useStylesHeaderNavTitle } from './style'
+import { useStylesHeaderNavTitle } from './headerNavTitleStyle'
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
 

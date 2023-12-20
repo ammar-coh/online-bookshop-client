@@ -13,13 +13,15 @@ import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountMenu from './profile'
-import { useStylesIndex } from './style'
+import { useStylesIndex } from './indexStyle'
 import { fetchSearchResult } from './api'
 import SearchResultsDisplay from './searchDisplayWindow'
 import Loading from '../loading'
 import Card from "@material-ui/core/Card";
 import { Typography } from "@mui/material";
+import { Diversity1 } from "@mui/icons-material";
 function Header() {
+  const url = process.env.REACT_APP_BASE_URL
   const userLocal = JSON.parse(localStorage.getItem("userInfo"))
   const [searchErrorMessage, setErrorMessage] = useState(null)
   const [searchLoading, setSearchLoading] = useState(false)
@@ -91,7 +93,7 @@ function Header() {
   }, []);
 
   const allUsers = () => {
-    axios.get(`http://localhost:8081/users/userList`).then((response) => {
+    axios.get(`${url}users/userList`).then((response) => {
       const allUserList = response.data;
       setList(allUserList);
     });
@@ -217,10 +219,7 @@ function Header() {
           </div>
           <div className={classes.cartContainer}>
             <Button
-              className={classes.s}
-              style={{
-                padding: "0px 0px 0px 30px",
-              }}
+             className={classes.cartContainerButton}
               onClick={() => {
                 dispatch(clearChat());
                 setIsRoomActive(null);
@@ -228,6 +227,7 @@ function Header() {
                 setCurrentChatAvatar("")
                 leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
               }}>
+                <div>
               <Cart setSelectedSideBarMenu={setSelectedSideBarMenu}
                 setHomeSideBarActive={setHomeSideBarActive}
                 setSelectedSideBarMenuHome={setSelectedSideBarMenuHome}
@@ -240,18 +240,15 @@ function Header() {
                 setBookClubMenuItem={setBookClubMenuItem}
                 setNavBarRoute={setNavBarRoute}
                 setActiveSideBar={setActiveSideBar} />
+                </div>
             </Button>
+          
           </div>
           <div className={classes.profile}>
             <AccountMenu profileUpdate={profileUpdate} setProfileUpdate={setProfileUpdate} />
           </div>
           <div className={classes.userName}>
-            <span style={{
-              fontFamily: "Montserrat, sans-se",
-              fontSize: "18px",
-              color: "#fff",
-              fontWeight: 500
-            }}>
+            <span className={classes.userNameText}>
               {userLocal?.displayName.replace(/\b\w/g, (match) => match.toUpperCase())}
             </span>
           </div>

@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 
 
 function Chatroom() {
+  const url = process.env.REACT_APP_BASE_URL
   const [roomActive,setRoomActive] = useState(false) 
   const classes = useStylesIndex({roomActive});
   const {
@@ -30,7 +31,7 @@ function Chatroom() {
     receieveMessage, setReceiveMessage
   } = useContext(Context);
   const allUsers = () => {
-    axios.get(`http://localhost:8081/users/userList`).then((response) => {
+    axios.get(`${url}users/userList`).then((response) => {
       const allUserList = response.data;
       setList(allUserList);
     });

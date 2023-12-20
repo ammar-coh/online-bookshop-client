@@ -16,7 +16,7 @@ import { clearChat, sign_out_saga } from "../../redux/actions/index"; //"../src/
 import Context from "../../context";
 import { socket } from "../../socket";
 import Button from "@material-ui/core/Button";
-import { useStylesProfile } from './style'
+import { useStylesProfile } from './profileStyle'
 import sample from '../../Assets/867d7f81-d66f-465c-8bb2-17a212dd9919.jpg'
 
 import {
@@ -54,11 +54,9 @@ export default function AccountMenu({ profileUpdate, setProfileUpdate }) {
         setAnchorEl(null);
     };
     return (
-        <div style={{ padding: "0px" }} >
-            <Box sx={{ display: 'flex' }}
-            >
-
-                <Tooltip title="Account settings" style={{ padding: "0px" }}>
+        <div className={classes.root}>
+            <Box sx={{ display: 'flex' }}>
+                <Tooltip title="Account settings" style={{ padding: "0px"}}>
                     <IconButton
                         onClick={handleClick}
                         sx={{ ml: 2 }}
