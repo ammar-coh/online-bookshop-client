@@ -6,39 +6,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-const useStyles = makeStyles({
-  root: {
-    display: "flex",
-    justifyContent: "start",
-    top: "0px",
-    width: "100%",
-    padding: "0px 0px 19px 0px",
-    border: "none",
-    "&:hover": {
-      border: " none",
-    },
-  },
-
-  icon: {
-    color: "#fff",
-    marginLeft: "0px",
-    marginTop: "10px",
-
-  },
-  count: {
-    marginTop: "0px",
-    color: "#fff",
-    textDecoration: "none",
-    margin: "0px",
-
-    width: "5px",
-    padding: "10px",
-  },
-  checkout_link: {
-    textDecoration: "none",
-    color: "#fff",
-  },
-});
+import {useStylesCart} from './cartStyle'
 const theme = createTheme({
   palette: {
     neutral: {
@@ -62,7 +30,7 @@ function Cart({
   setNavBarRoute ,
   setActiveSideBar ,}) {
 
-  const classes = useStyles();
+  const classes = useStylesCart();
   const counts = useSelector((state) => state.checkout);
   const handleChange = () => {
     setSelectedSideBarMenu(null)

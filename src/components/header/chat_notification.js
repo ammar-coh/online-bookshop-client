@@ -14,7 +14,7 @@ import { useHistory } from "react-router-dom";
 import { chatFromDBSaga } from "../../redux/actions/index";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import {useStylesChatNotification} from './style'
+import {useStylesChatNotification} from './chatNotificationStyle'
 function Chat_Notifications({
   roomID,
   setRoomID,
