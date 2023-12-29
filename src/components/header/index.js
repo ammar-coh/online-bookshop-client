@@ -218,15 +218,6 @@ function Header() {
             />
           </div>
           <div className={classes.cartContainer}>
-            <Button
-             className={classes.cartContainerButton}
-              onClick={() => {
-                dispatch(clearChat());
-                setIsRoomActive(null);
-                setCurrentChat("");
-                setCurrentChatAvatar("")
-                leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
-              }}>
                 <div>
               <Cart setSelectedSideBarMenu={setSelectedSideBarMenu}
                 setHomeSideBarActive={setHomeSideBarActive}
@@ -239,10 +230,13 @@ function Header() {
                 setSubMenuItemActiveState={setSubMenuItemActiveState}
                 setBookClubMenuItem={setBookClubMenuItem}
                 setNavBarRoute={setNavBarRoute}
-                setActiveSideBar={setActiveSideBar} />
+                setActiveSideBar={setActiveSideBar}
+                setIsRoomActive={setIsRoomActive}
+                roomID={roomID}
+                setCurrentChatAvatar={ setCurrentChatAvatar}
+                setCurrentChat={ setCurrentChat} 
+                leaveAllRooms={leaveAllRooms}/>
                 </div>
-            </Button>
-          
           </div>
           <div className={classes.profile}>
             <AccountMenu profileUpdate={profileUpdate} setProfileUpdate={setProfileUpdate} />

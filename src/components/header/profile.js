@@ -56,7 +56,7 @@ export default function AccountMenu({ profileUpdate, setProfileUpdate }) {
     return (
         <div className={classes.root}>
             <Box sx={{ display: 'flex' }}>
-                <Tooltip title="Account settings" style={{ padding: "0px"}}>
+                <Tooltip title="Account settings" style={{ padding: "0px" }}>
                     <IconButton
                         onClick={handleClick}
                         sx={{ ml: 2 }}
@@ -70,10 +70,9 @@ export default function AccountMenu({ profileUpdate, setProfileUpdate }) {
                             anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                             variant="dot"
                         >
-                            <Avatar sizes='large'
-                                sx={{
-                                    fontSize: '64px',
-                                }} src={userLocal.imageURL ? userLocal.imageURL : sample} />
+                            <Avatar
+                                className={classes.avatar}
+                                src={userLocal.imageURL ? userLocal.imageURL : sample} />
                         </StyledBadge>
                     </IconButton>
                 </Tooltip>

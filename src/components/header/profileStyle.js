@@ -1,24 +1,52 @@
 import { makeStyles, styled } from "@material-ui/core/styles";
 
-const useStylesProfile = makeStyles((theme)=>({
-    root: { padding: "0px", 
-[theme.breakpoints.between('md','lg')]: {
-    "& .css-1ge85tx-MuiButtonBase-root-MuiIconButton-root":{
-        margin:"auto"
-    }
-  },
-  [theme.breakpoints.between('lg','xl')]: {
-    "& .css-1ge85tx-MuiButtonBase-root-MuiIconButton-root":{
-        margin:0
-    }
-  },
-  [theme.breakpoints.up('xl')]: {
-    "& .css-1ge85tx-MuiButtonBase-root-MuiIconButton-root":{
-        margin:0
-    }
-  },
+const useStylesProfile = makeStyles((theme) => ({
+    root: {
+        padding: "0px",
+        [theme.breakpoints.between('sm', 'md')]: {
+            "& .css-1ge85tx-MuiButtonBase-root-MuiIconButton-root": {
+                margin: "auto"
+            }
+        },
+        [theme.breakpoints.between('md', 'lg')]: {
+            "& .css-1ge85tx-MuiButtonBase-root-MuiIconButton-root": {
+                margin: "auto"
+            }
+        },
+        [theme.breakpoints.between('lg', 'xl')]: {
+            "& .css-1ge85tx-MuiButtonBase-root-MuiIconButton-root": {
+                margin: 0
+            }
+        },
+        [theme.breakpoints.up('xl')]: {
+            "& .css-1ge85tx-MuiButtonBase-root-MuiIconButton-root": {
+                margin: 0
+            }
+        },
 
- },
+    },
+    avatar: {
+        "&.css-1wlk0hk-MuiAvatar-root": {
+            height: "40px",
+            width: "40px",
+            [theme.breakpoints.between('sm', 'md')]: {
+                height: "35px",
+                width: "35px",
+            },
+            [theme.breakpoints.between('md', 'lg')]: {
+                height: "40px",
+                width: "40px",
+            },
+            [theme.breakpoints.between('lg', 'xl')]: {
+                height: "40px",
+                width: "40px",
+            },
+            [theme.breakpoints.up('xl')]: {
+                height: "40px",
+                width: "40px",
+            },
+        },
+    },
     logutMenuItem: {
         "&.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root": {
             padding: "0px 5px"

@@ -1,12 +1,14 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import Badge from "@mui/material/Badge";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import {useStylesCart} from './cartStyle'
+import { useStylesCart } from './cartStyle';
+import Button from "@material-ui/core/Button";
+import {clearChat} from '../../redux/actions/index'
 const theme = createTheme({
   palette: {
     neutral: {
@@ -27,9 +29,15 @@ function Cart({
   setAnchorElProfile,
   setSubMenuItemActiveState,
   setBookClubMenuItem,
-  setNavBarRoute ,
-  setActiveSideBar ,}) {
-
+  setNavBarRoute,
+  setActiveSideBar,
+  setIsRoomActive,
+  roomID,
+  setCurrentChatAvatar,
+  setCurrentChat,
+  leaveAllRooms }) {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user_login.details);
   const classes = useStylesCart();
   const counts = useSelector((state) => state.checkout);
   const handleChange = () => {
@@ -43,23 +51,33 @@ function Cart({
     setAnchorElProfile(null)
     setSubMenuItemActiveState(null)
     setBookClubMenuItem(null)
-    setActiveSideBar(null) 
+    setActiveSideBar(null)
     setNavBarRoute('Cart')
   }
   return (
     <div className={classes.root}>
-      <span className={classes.icon}>
-        <Link className={classes.checkout_link} to="/checkout" onClick={handleChange}>
-          <ThemeProvider theme={theme}>
-            <Badge
-              badgeContent={counts.totalItems}
-              color="primary"
-              fontSize="small">
-              < ShoppingCartOutlinedIcon fontSize="small" />
-            </Badge>
-          </ThemeProvider>
-        </Link>
-      </span>
+      <Button
+        className={classes.cartContainerButton}
+        onClick={() => {
+          dispatch(clearChat());
+          setIsRoomActive(null);
+          setCurrentChat("");
+          setCurrentChatAvatar("")
+          leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
+        }}>
+        <span className={classes.icon}>
+          <Link className={classes.checkout_link} to="/checkout" onClick={handleChange}>
+            <ThemeProvider theme={theme}>
+              <Badge
+                badgeContent={counts.totalItems}
+                color="primary"
+                fontSize="small">
+                < ShoppingCartOutlinedIcon fontSize="small" />
+              </Badge>
+            </ThemeProvider>
+          </Link>
+        </span>
+      </Button>
     </div>
   );
 }
