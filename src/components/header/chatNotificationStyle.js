@@ -2,6 +2,9 @@ import { makeStyles, styled } from "@material-ui/core/styles";
 
 const useStylesChatNotification = makeStyles((theme)=>({
     root: {
+      [theme.breakpoints.between('sm','md')]: {
+        width:"100%"
+      },
         [theme.breakpoints.between('md','lg')]: {
           width:"100%"
         },
@@ -46,10 +49,15 @@ const useStylesChatNotification = makeStyles((theme)=>({
       }
     },
     button_1: {
+      // border:"1px solid #fff",
       justifyContent: 'end',
       padding: "4px 0px",
       '&:hover': {
         backgroundColor: 'transparent', // Set the hover background color to transparent
+      },
+      [theme.breakpoints.between('sm','md')]: {
+        minWidth:"100%",
+        justifyContent:"center"
       },
       [theme.breakpoints.between('md','lg')]: {
         minWidth:"100%",

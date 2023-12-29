@@ -1,6 +1,5 @@
 import React, { useEffect, useContext } from "react";
 import { getBookList, getProductsToCartSaga } from "../../redux/actions/index";
-import { makeStyles } from "@material-ui/core/styles";
 import ItemContainer from "../../ItemContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
@@ -20,56 +19,7 @@ import Books from '../books/index'
 import Loading from '../loading'
 import CreateGroup from '../create group'
 import BookPage from '../bookPage/index'
-const useStyles = makeStyles({
-    root: {
-        display: "flex",
-        padding: "50px",
-        flexWrap: "wrap",
-        gap: "31px",
-        zIndex: 2,
-        width: "100%",
-        marginLeft: "auto"
-    },
-    main: {
-        display: "flex",
-        width: "100%",
-    },
-    header_content_side: {
-        width: "80%",
-        backgroundColor: "#fbfcff",
-    },
-    sidebar_container: {
-        display: "block",
-        width: "20%",
-        backgroundColor: "#ffffff"
-    },
-    book_container: {
-        width: "22.2%!important",
-        minHeight: "208px",
-    },
-    footer: {
-        backgroundColor: "#fbfcff",
-        display: "flex",
-        justifyContent: "center",
-        paddingTop: "10px",
-    },
-    footer_p: {
-        color: "#333533",
-        fontFamily: "Montserrat, sans-se",
-        fontSize: "12px",
-        textAlign: "center",
-        margin: "20px"
-    },
-    banner: {
-        justifyContent: "center",
-        padding: "10px 340px",
-        width: "100%",
-        marginLeft: "auto"
-    },
-    chat: {
-        padding: "10px 0px 0px 0px",
-    }
-});
+import {useStyles} from './indexStyle'
 
 function Home({ setUserAvailable, socket }) {
     const {
