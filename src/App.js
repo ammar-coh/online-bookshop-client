@@ -18,7 +18,9 @@ import { delete_notification, getBookList } from './redux/actions/index'
 import { makeStyles } from "@material-ui/core/styles";
 import 'antd/dist/reset.css';
 import "./index.css";
-import Loading from './components/loading'
+import useSWR, { useSWRConfig } from 'swr'
+import useSWRSubscription from 'swr/subscription'
+
 const useStyles = makeStyles({
   root: {
   },
@@ -68,7 +70,6 @@ function App() {
   useEffect(() => {
 
     socket.on("notification_message", async (data) => {
-      console.log("notification data", data)
       dispatch(notification_real_time(data))
     });
   }, [uname, messages?.messages]);
@@ -93,7 +94,7 @@ function App() {
     let userID = JSON.parse(localStorage.getItem("for_reducer"))
     socket.emit("leave_private_room", { roomID, userID: userID?.user?.id });
   }, []);
-
+ 
   return (
     <div className="app">
       <Provider>

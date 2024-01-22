@@ -31,6 +31,10 @@ export function* postSign_In(action) {
     const response = yield call(requestPostSign_In, action.data);
     const { data } = response;
     socket.emit("setUserId", { userId: data.user.id });
+    socket.emit('join_login_room', {
+      user: data?.user?.userName,
+      id: data?.user?.id
+    });
     localStorage.setItem("for_reducer", JSON.stringify(response.data));
     localStorage.setItem("userInfo", JSON.stringify(response.data.user));
     localStorage.setItem("authorization", response.data.token);
@@ -49,10 +53,13 @@ export function* postSign_In(action) {
   }
 }
 export function* postSign_Out(action) {
-  console.log("logout habdler", action.data)
   try {
     const response = yield call(requestPostSign_Out, action.data.user.id);
-    console.log("logit resposne", response.data)
+    const { data } = response
+    socket.emit('leave_login_room', {
+      user: data?.user?.userName,
+      id: data?.user?.id
+    });
     yield put(sign_out_reducer(response.data))
   } catch (error) {
     console.log(error.response.data);

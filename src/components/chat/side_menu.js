@@ -1,95 +1,18 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@mui/material/Avatar";
 import { useSelector, useDispatch } from "react-redux";
 import { socket } from "../../socket";
 import { chatFromDBSaga } from "../../redux/actions/index";
-import Button from "@material-ui/core/Button";
 import { clearChat } from "../../redux/actions/index"; //"../src/redux/actions/index";
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import DirectionsIcon from '@mui/icons-material/Directions';
-
-const useStyles = makeStyles({
-  root: {
-    display: "grid",
-    gap: "5px 0px",
-    // border: "1px solid red "
-  },
-
-  userInfo: {
-    display: "flex",
-    padding: "20px 10px 10px 10px",
-    gap: "15px",
-    // backgroundColor: "#f0f2f5",
-    height: "auto",
-    "& .css-2miw2m-MuiAvatar-root": {
-      color: "#d22129"
-    },
-    background:'#f0f0f0'
-
-  },
-  userAvatar: { color: "#d22129" },
-  userName: {
-    fontFamily: "Montserrat, sans-se",
-    fontSize: "10px",
-    width: "100%",
-    fontWeight: 500,
-    color: "#ffffff"
-  },
-
-  list: {
-    display: "grid",
-    // border: "1px solid black",
-  },
-
-  userInfoList: {
-    display: "flex",
-    padding: "10px 0px 10px 4px",
-    gap: "15px",
-    marginRight: "auto",
-    cursor: "pointer",
-    // border: "1px solid black",
-
-  },
-  userAvatarList: {
-  },
-  userNameList: {
-    width: "100%",
-    display: "flex",
-    fontFamily: "Montserrat, sans-se",
-    fontSize: "20px",
-    // border:"1px solid black",
-    padding: "15px",
-
-  },
-  button: {
-    width: "100%",
-    "&.MuiButton-root": {
-      textTransform: "none"
-    }
-  },
-  listButton: {
-    "&.css-16ac5r2-MuiButtonBase-root-MuiListItemButton-root": {
-      backgroundColor: 'none',
-      borderRadius: "5px",
-      "&:hover": {
-        backgroundColor: '#f5f6f6',
-      },
-    },
-
-    borderRadius: "5px",
-  }
-});
+import { sideMenuStyles, StyledBadge } from './sideMenuStyle'
 function ChatSideMenu({
   list,
   setCurrentChat,
@@ -99,10 +22,11 @@ function ChatSideMenu({
   setIsRoomActive,
   setRecepientId,
   setCurrentChatAvatar,
-  setRoomActive
+  setRoomActive,
+  online_user,
 }) {
   const userLocal = JSON.parse(localStorage.getItem("userInfo"))
-  const classes = useStyles();
+  const classes = sideMenuStyles();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user_login.details);
   const userName = () => {
@@ -165,6 +89,11 @@ function ChatSideMenu({
       sender_id: data?.id
     });
   };
+
+  const onlineUser = finalUpdatedArray?.filter(function (user) {
+
+    return online_user.some(obj => obj.id == user.id)
+  })
   return (
     <div className={classes.root}>
       <div className={classes.userInfo}>
@@ -204,17 +133,25 @@ function ChatSideMenu({
             >
               <div className={classes.userAvatarList}>
                 {" "}
-                <Avatar
-                  src={i.imageURL}
-                  onClick={() =>
-                    joinChatRoom({
-                      userName: i.userName,
-                      index: index,
-                      id: i.id,
-                      image: i.imageURL,
-                      displayName: i.displayName
-                    })
-                  } />
+                <StyledBadge
+                  overlap="circular"
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                  variant="dot"
+                  userListID={i.id}
+                  onlineID={onlineUser}
+                >
+                  <Avatar
+                    src={i.imageURL}
+                    onClick={() =>
+                      joinChatRoom({
+                        userName: i.userName,
+                        index: index,
+                        id: i.id,
+                        image: i.imageURL,
+                        displayName: i.displayName
+                      })
+                    } />
+                </StyledBadge>
 
               </div>
               {i.displayName ? (

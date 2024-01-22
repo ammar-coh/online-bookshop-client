@@ -19,15 +19,16 @@ import Books from '../books/index'
 import Loading from '../loading'
 import CreateGroup from '../create group'
 import BookPage from '../bookPage/index'
-import {useStyles} from './indexStyle'
-
+import { useStyles } from './indexStyle'
 function Home({ setUserAvailable, socket }) {
     const {
-        loader, setloader,
-        sideBarCollapsed, setSideBarCollapsed
+        loader,
+        sideBarCollapsed,
+        online_user, setOnlineUser
     } = useContext(Context);
     const dispatch = useDispatch();
     const uname = useSelector((state) => state.user_login.details);
+    const user = useSelector((state) => state.user_login.details);
     useEffect(() => {
         localStorage.getItem("authorization") && dispatch(getProductsToCartSaga());
     }, [uname?.user?.displayName]);
@@ -38,7 +39,8 @@ function Home({ setUserAvailable, socket }) {
     useEffect(() => {
         localStorage.getItem("authorization") && dispatch(getBookList());
     }, []);
-
+  
+   
     return (
         <div> {loader ? <Loading /> :
             <div className={classes.main}>

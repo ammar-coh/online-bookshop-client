@@ -5,7 +5,8 @@ const initialState = {
       id: "",
       displayName: "",
       is_online: false,
-      role: "basic"
+      role: "basic",
+      userName:""
     },
     status: false,
     message: ""

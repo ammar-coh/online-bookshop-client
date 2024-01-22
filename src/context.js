@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 const Context = React.createContext();
 export const Provider = ({ children }) => {
-  const[loader,setLoader] = useState(false)
+  const [loader, setLoader] = useState(false)
   const [roomID, setRoomID] = useState("");
   const [currentChat, setCurrentChat] = useState("");
   const [currentChatAvatar, setCurrentChatAvatar] = useState("");
@@ -14,7 +14,7 @@ export const Provider = ({ children }) => {
   const [selectedSideBarMenu, setSelectedSideBarMenu] = useState(null);
   const [homeSideBarActive, setHomeSideBarActive] = useState(null)
   const [selectedSideBarMenuHome, setSelectedSideBarMenuHome] = useState(null)
-  const [activeSideBar,setActiveSideBar ] = useState(null)
+  const [activeSideBar, setActiveSideBar] = useState(null)
   const [bookClubMenuItem, setBookClubMenuItem] = useState(null)
   const [adminSideBarActive, setAdminSideBarActive] = useState(null)
   const [profileSideBarActive, setProfileSideBarActive] = useState(null)
@@ -31,10 +31,11 @@ export const Provider = ({ children }) => {
   })
   const [cover, setCover] = useState([])
   const [profileUpdate, setProfileUpdate] = useState({})
-  const[receieveMessage, setReceiveMessage] =useState(false)
-const [bookSearchResult,setBookSearchResult] = useState([])
+  const [receieveMessage, setReceiveMessage] = useState(false)
+  const [bookSearchResult, setBookSearchResult] = useState([])
+  const [online_user, setOnlineUser] = useState([])
   const contextValue = {
-    loader,setLoader,
+    loader, setLoader,
     roomID, setRoomID,
     currentChat, setCurrentChat,
     isRoomActive, setIsRoomActive,
@@ -44,7 +45,7 @@ const [bookSearchResult,setBookSearchResult] = useState([])
     notification_open, setNotificationOpen,
     sideBarCollapsed, setSideBarCollapsed,
     selectedSideBarMenu, setSelectedSideBarMenu,
-    activeSideBar,setActiveSideBar ,
+    activeSideBar, setActiveSideBar,
     homeSideBarActive, setHomeSideBarActive,
     selectedSideBarMenuHome, setSelectedSideBarMenuHome,
     adminSideBarActive, setAdminSideBarActive,
@@ -62,7 +63,8 @@ const [bookSearchResult,setBookSearchResult] = useState([])
     currentChatAvatar, setCurrentChatAvatar,
     receieveMessage, setReceiveMessage,
     bookClubMenuItem, setBookClubMenuItem,
-    bookSearchResult,setBookSearchResult
+    bookSearchResult, setBookSearchResult,
+    online_user, setOnlineUser
   };
 
   return <Context.Provider value={contextValue}>{children}</Context.Provider>;
