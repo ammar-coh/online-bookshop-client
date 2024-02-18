@@ -1,12 +1,13 @@
 import { makeStyles, styled } from "@material-ui/core/styles";
 const useStylesIndex = makeStyles((theme) => ({
   root: {
+    // border:"2px solid black",
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
     zIndex: 3,
     backgroundColor: "#d22129",
-    borderColor: "#d22129",
+    // borderColor: "#d22129",
   },
   sign_out: {
     backgroundColor: "#ffffff",

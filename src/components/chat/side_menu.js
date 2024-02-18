@@ -98,6 +98,7 @@ function ChatSideMenu({
     <div className={classes.root}>
       <div className={classes.userInfo}>
         <Paper
+          className={classes.searchBar}
           component="form"
           sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: "100%" }}
         >
@@ -107,7 +108,10 @@ function ChatSideMenu({
             inputProps={{ 'aria-label': 'search google maps' }}
             disabled
           />
-          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+          <Divider 
+          className={classes.divider}
+          // sx={{ height: 28, m: 0.5 }} 
+          orientation="vertical" />
 
           <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
             <SearchIcon />
@@ -142,6 +146,7 @@ function ChatSideMenu({
                 >
                   <Avatar
                     src={i.imageURL}
+                    className={classes.avatarList}
                     onClick={() =>
                       joinChatRoom({
                         userName: i.userName,

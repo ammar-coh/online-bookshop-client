@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -8,43 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { chat } from "../../redux/actions/index";
 import Context from '../../context';
 import InputBase from '@mui/material/InputBase';
-const useStyles = makeStyles((theme) => ({
-  typingArea: {
-    display: "flex",
-    alignItems: "center",
-    padding: "8px 120px 10px 120px",
-    position: "relative",
-  },
-  inputField: {
-    backgorundColor: "#fff",
-    flex: 1,
-
-    "& .MuiOutlinedInput-root": {
-      borderRadius: "25px 0px 0px 25px",
-      height: "40px",
-      backgroundColor: "#f5f5f5",
-      marginLeft: "10px",
-      foucus: "unset",
-    },
-  },
-  sendButton: {
-    backgroundColor: "#d22129",
-    fontSize: "20px",
-    color: "#ffffff",
-    borderRadius: "50%",
-    cursor: "pointer",
-    height: "40px",
-    zIndex: 1,
-    right: 28,
-    "&:hover": {
-      color: "#d22129",
-      backgroundColor: "#ffffff"
-    },
-    "& .makeStyles-sendButton-1405": {
-      backgorundColor: "#fff"
-    }
-  },
-}));
+import { useStyles } from './messageInputStyle'
 
 const ChatTypingArea = ({
   roomID,
@@ -116,34 +80,40 @@ const ChatTypingArea = ({
         }}
       >
         <div className={classes.typingArea}>
-          <InputBase
-            onChange={(event) => {
-              setMessage(event.target.value);
-            }}
-            value={message}
-            className={classes.inputField}
-            sx={{
-              ml: 1, flex: 1, bgcolor: "#fff",
-              borderRadius: "25px", padding: "0px 0px 0px  10px"
-            }}
-            placeholder="type here..."
-            inputProps={{ 'aria-label': 'search google maps' }}
-            endAdornment={
-              <SendIcon
-                onClick={() => {
-                  sendMessage()
-                  clearInput()
-                }}
-                className={classes.sendButton}
-                variant="contained"
-                type="submit"
-                sx={{
-                  p: '10px', width: '35px', // Set your desired width
-                  height: '35px',
-                }}
-                aria-label="search">
-              </SendIcon>}
-          />
+          <div className={classes.fieldDiv}>
+            <InputBase
+              onChange={(event) => {
+                setMessage(event.target.value);
+              }}
+              value={message}
+              className={classes.inputField}
+              sx={{
+                ml: 1, flex: 1, bgcolor: "#fff",
+                // borderRadius: "25px", 
+                padding: "0px 0px 0px  10px"
+              }}
+              placeholder="type here..."
+              inputProps={{ 'aria-label': 'search google maps' }}
+
+            />
+          </div>
+
+          <div className={classes.sendButtonDiv}>
+            <SendIcon
+              onClick={() => {
+                sendMessage()
+                clearInput()
+              }}
+              className={classes.sendButton}
+              variant="contained"
+              type="submit"
+              sx={{
+                p: '10px', width: '35px', // Set your desired width
+                height: '35px',
+              }}
+              aria-label="search">
+            </SendIcon>
+          </div>
         </div>
       </form> : null}
 

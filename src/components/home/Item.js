@@ -8,121 +8,13 @@ import Button from "@material-ui/core/Button";
 
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
-import { addToCartSaga, updateUserProfile, deleteDispatch } from "./redux/actions";
+import { addToCartSaga, updateUserProfile, deleteDispatch } from "../../redux/actions";
 import { FaStar } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { BsTrash } from "react-icons/bs";
 import { GrUpdate } from "react-icons/gr";
+import {useStyles} from './itemStyle'
 
-const useStyles = makeStyles({
-  root: {
-    marginLeft: "0px",
-    width: "100%",
-    zIndex: 1,
-
-  },
-  mainContainer: {
-    display: "flex",
-    padding: "10px 5px",
-  },
-  image_container: {
-    padding:"0px 10px 0px 0px",
-    width:"30%",
-  }
-  ,
-  information_container: {
-    // border: "1px solid yellow",
-    display: "grid",
-    width:"70%",
-    "& .MuiCardContent-root": {
-      padding: "0px"
-    }
-  },
-  media: {
-    width: "100%",
-    height: "168px",
-    zIndex: 2,
-  },
-  update: {
-    fontSize: "10px",
-    marginLeft: "124px",
-    marginTop: "-32px",
-    color: "#FFC312",
-    width: "26px",
-  },
-  title_div: {
-    // border:"1px solid black",
-    height: "36px",
-    padding:"10px 0px 0px 0px"
-
-  },
-  title: { 
-    color:"#333533",
-    fontFamily:"Montserrat', sans-se",
-    fontWeight: 500,
-    fontSize:"14px"
-  },
-  author_div: {
-    // border:"1px solid black",
-    padding:"10px 0px 0px 0px"
-
-  },
-  author: {
-    color:"#383838",
-    fontFamily:"'Montserrat', sans-se",
-    fontSize:"13px"
-    
-  },
-  rating_div: {
-    // border: "1px solid black",
-    padding:"10px 0px 0px 0px"
-
-  },
-  price_div: {
-    // border: "1px solid black",
-    padding:"10px 0px 10px 0px"
-
-  },
-  price:{
-    color:"#000",
-    fontFamily:"'Montserrat', sans-se",
-    fontWeight: 700,
-    fontSize:"15px"
-  },
-  addtoCart_div: {
-    // border: "1px solid black",
-    "& .MuiCardActions-root": {
-      padding: "0px 0px 0px 0px"
-    }
-  },
-
-  cart: {
-    backgroundColor: "#d22129",
-    color: "#ffffff",
-    fontSize: "10px",
-    zIndex: 1,
-    "&:hover": {
-      color: "black",
-      backgroundColor: "white"
-    },
-    padding:"7px 5px"
-  },
-
-  input: {
-    width: "70px",
-    marginTop: 5,
-    marginLeft: 52,
-
-    fontSize: "10px",
-  },
-  del: {
-    hover: {
-      "&:hover": {
-        cursor: "pointer",
-      },
-    },
-  },
-});
 const colors = {
   orange: "#FFBA5A",
   grey: "#a9a9a9",
@@ -197,7 +89,7 @@ function Item({ id, image, price, rating, author, title }) {
                     return (
                       <FaStar
                         key={index}
-                        style={{ cursor: "cursor", marginRight: 10 }}
+                        style={{ cursor: "cursor", marginRight: 5 }}
                         color={rating > index ? colors.orange : colors.grey}
                         onClick={
                           () =>

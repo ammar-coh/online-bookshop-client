@@ -1,6 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { getBookList, getProductsToCartSaga } from "../../redux/actions/index";
-import ItemContainer from "../../ItemContainer";
+import ItemContainer from "./ItemContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import Header from "../header/index";
