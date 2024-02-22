@@ -64,7 +64,7 @@ const useStylesIndex = makeStyles((theme) => ({
     [theme.breakpoints.between('sm', 'md')]: {
       padding: "15px 0px 0px 0px",
       width: "35%",
-      "& .css-piqts5-MuiInputBase-root": {
+      "& .MuiInputBase-root": {
         marginLeft: "0px"
       }
     },
@@ -111,7 +111,7 @@ const useStylesIndex = makeStyles((theme) => ({
     borderBottomRightRadius: (props) => (
       props.searchResult.length > 0
         || props.searchLoading ? "0px" : "5px"),
-    "& .css-yz9k0d-MuiInputBase-input": {
+    "& .MuiInputBase-root": {
       fontFamily: "Montserrat, sans-se",
       fontSize: "16px"
     }
