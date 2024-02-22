@@ -56,7 +56,7 @@ const useStylesHeaderNavTitle = makeStyles((theme)=>({
       },
     },
     breadcrumb:{
-  "& .css-1wuw8dw-MuiBreadcrumbs-separator":{
+  "& .MuiBreadcrumbs-separator":{
     color:"#fff",
     // border:"1px solid #fff"
   }},
