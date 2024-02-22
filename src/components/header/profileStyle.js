@@ -30,8 +30,8 @@ const useStylesProfile = makeStyles((theme) => ({
             height: "40px",
             width: "40px",
             [theme.breakpoints.between('sm', 'md')]: {
-                height: "35px",
-                width: "35px",
+                height: "25px",
+                width: "25px",
             },
             [theme.breakpoints.between('md', 'lg')]: {
                 height: "40px",

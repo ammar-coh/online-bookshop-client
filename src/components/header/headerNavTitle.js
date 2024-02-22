@@ -20,8 +20,11 @@ function NavBarRoute() {
                 <Grid className={classes.title}>
                     <span>{navBarRoute}</span>
                 </Grid>
-                <Grid className={classes.breadcrumb}>
-                    <Breadcrumbs aria-label="breadcrumb"  style={{color:"#fff"}} separator=">">
+                <Grid className={classes.breadcrumbDiv}>
+                    <Breadcrumbs aria-label="breadcrumb"  
+                    className={classes.breadcrumb}
+                    
+                     separator=">">
                         <Link className={classes.link} to="/">
                             Home
                         </Link>

@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux';
 import configureStore from './redux/store';
+import CssBaseline from '@mui/material/CssBaseline';
 import 'antd/dist/reset.css';
 import "./index.css";
 const store = configureStore()
@@ -12,6 +13,7 @@ const store = configureStore()
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+    <CssBaseline />
     <App />
     </Provider>
   </React.StrictMode>,

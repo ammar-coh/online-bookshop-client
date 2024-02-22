@@ -19,7 +19,21 @@ const useStylesChatNotification = makeStyles((theme)=>({
     chatNotification: {},
     notificationMailIcon: {
       color: "#fff",
-      fontSize: "120px"
+      fontSize: "1.5rem",
+      "&.css-i4bv87-MuiSvgIcon-root ":{
+        [theme.breakpoints.between('sm','md')]: {
+          fontSize: "16px" ,
+       },
+         [theme.breakpoints.between('md','lg')]: {
+           fontSize: "1.5rem",
+         },
+         [theme.breakpoints.between('lg','xl')]: {
+           fontSize: "1.5rem",
+         },
+         [theme.breakpoints.up('xl')]: {
+           fontSize: "1.5rem",
+         },
+      },
     },
     notification_badge: {
       width: "100%",

@@ -72,7 +72,7 @@ function Cart({
                 badgeContent={counts.totalItems}
                 color="primary"
                 fontSize="small">
-                < ShoppingCartOutlinedIcon fontSize="small" />
+                < ShoppingCartOutlinedIcon  className={classes.cartIcon} />
               </Badge>
             </ThemeProvider>
           </Link>

@@ -119,7 +119,7 @@ function Chat_Notifications({
               color="primary"
               fontSize = "small"
             >
-              < MailOutlineIcon fontSize="small"  className={classes.notificationMailIcon} />
+              < MailOutlineIcon   className={classes.notificationMailIcon} />
             </Badge>
           </ThemeProvider>
         </Button>
