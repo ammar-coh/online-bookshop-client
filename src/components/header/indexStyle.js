@@ -199,9 +199,9 @@ const useStylesIndex = makeStyles((theme) => ({
     [theme.breakpoints.between('sm', 'md')]: {
       padding: "12px 0px 0px 5px",
       width: "24%",
-      "&.css-4occqz":{
-        margin:0
-      }
+      // "&.css-4occqz":{
+      //   margin:0
+      // }
     },
     [theme.breakpoints.between('md', 'lg')]: {
       padding: "12px 0px 0px 0px",

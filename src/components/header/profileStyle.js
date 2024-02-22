@@ -4,29 +4,29 @@ const useStylesProfile = makeStyles((theme) => ({
     root: {
         padding: "0px",
         [theme.breakpoints.between('sm', 'md')]: {
-            "& .css-1ge85tx-MuiButtonBase-root-MuiIconButton-root": {
-                margin: "auto"
+            "& .MuiButtonBase-root ": {
+                margin: 0
             }
         },
         [theme.breakpoints.between('md', 'lg')]: {
-            "& .css-1ge85tx-MuiButtonBase-root-MuiIconButton-root": {
-                margin: "auto"
+            "& .MuiButtonBase-root": {
+                margin: 0
             }
         },
         [theme.breakpoints.between('lg', 'xl')]: {
-            "& .css-1ge85tx-MuiButtonBase-root-MuiIconButton-root": {
+            "& .MuiButtonBase-root": {
                 margin: 0
             }
         },
         [theme.breakpoints.up('xl')]: {
-            "& .css-1ge85tx-MuiButtonBase-root-MuiIconButton-root": {
+            "& .MuiButtonBase-root": {
                 margin: 0
             }
         },
 
     },
     avatar: {
-        "&.css-1wlk0hk-MuiAvatar-root": {
+        "&.MuiAvatar-root": {
             height: "40px",
             width: "40px",
             [theme.breakpoints.between('sm', 'md')]: {

@@ -63,7 +63,8 @@ export default function AccountMenu({ profileUpdate, setProfileUpdate }) {
                         aria-controls={open ? 'account-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
-                        style={{ padding: "0px" }}
+                        style={{ padding: "0px"  }}
+                        className={classes.profileAvatarButton}
                     >
                         <StyledBadge
                             overlap="circular"

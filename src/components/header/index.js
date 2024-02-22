@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import Button from "@material-ui/core/Button";
 import Cart from "./Cart";
-import { clearChat } from "../../redux/actions/index"; //"../src/redux/actions/index";
 import Chat_Notifications from "./chat_notification";
 import Context from "../../context";
 import axios from "axios";
@@ -19,7 +16,6 @@ import SearchResultsDisplay from './searchDisplayWindow'
 import Loading from '../loading'
 import Card from "@material-ui/core/Card";
 import { Typography } from "@mui/material";
-import { Diversity1 } from "@mui/icons-material";
 function Header() {
   const url = process.env.REACT_APP_BASE_URL
   const userLocal = JSON.parse(localStorage.getItem("userInfo"))

@@ -60,7 +60,7 @@ const useStylesCart = makeStyles((theme)=>({
         // border:"1px solid blue"
       },
       cartIcon:{
-        "&.css-i4bv87-MuiSvgIcon-root":{
+        "&.MuiSvgIcon-root":{
            [theme.breakpoints.between('sm', 'md')]: {
             fontSize:"18px"
         },
@@ -78,30 +78,33 @@ const useStylesCart = makeStyles((theme)=>({
       cartContainerButton: {
         // border:"1px solid #fff",
         width: "100%",
-        padding: "0px 0px 0px 30px",
-        justifyContent: "start",
-        [theme.breakpoints.between('sm', 'md')]: {
-          minWidth: "100%",
-          justifyContent: "center",
-          padding: "1px 0px 1px 0px",
-       
-        },
-        [theme.breakpoints.between('md', 'lg')]: {
-          minWidth: "100%",
-          justifyContent: "start",
-          padding: "0px 0px 0px 0px",
-        },
-        [theme.breakpoints.between('lg', 'xl')]: {
-          minWidth: "100%",
-          justifyContent: "start",
-          padding: "0px 0px 0px 10px",
-        },
-        [theme.breakpoints.up('xl')]: {
-          backgroundColor: 'transparent',
-          width: "100%",
+        "&.MuiButtonBase-root":{
           padding: "0px 0px 0px 30px",
-    
+          justifyContent: "start",
+          [theme.breakpoints.between('sm', 'md')]: {
+            minWidth: "100%",
+            justifyContent: "center",
+            padding: "1px 0px 1px 0px",
+         
+          },
+          [theme.breakpoints.between('md', 'lg')]: {
+            minWidth: "100%",
+            justifyContent: "start",
+            padding: "0px 0px 0px 0px",
+          },
+          [theme.breakpoints.between('lg', 'xl')]: {
+            minWidth: "100%",
+            justifyContent: "start",
+            padding: "0px 0px 0px 10px",
+          },
+          [theme.breakpoints.up('xl')]: {
+            backgroundColor: 'transparent',
+            width: "100%",
+            padding: "0px 0px 0px 30px",
+      
+          },
         },
+       
       }
   }));
   export { useStylesCart }
