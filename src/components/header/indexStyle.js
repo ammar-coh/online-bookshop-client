@@ -30,20 +30,24 @@ const useStylesIndex = makeStyles((theme) => ({
     display: "flex",
     padding: "20px 0px 0px 0px",
     width: "25%",
+    // border:"1px solid green",
     justifyContent: "flex-end",
     [theme.breakpoints.between('sm', 'md')]: {
       justifyContent: "center",
-      padding: "20px 0px 12px 0px",
+      padding: "14px 10px 12px 0px",
+      width:"20%"
     },
     [theme.breakpoints.between('md', 'lg')]: {
       padding: "20px 0px 0px 0px",
+      width: "20%",
     },
     [theme.breakpoints.between('lg', 'xl')]: {
       padding: "20px 0px 0px 0px",
+      width: "25%",
     },
     [theme.breakpoints.up('xl')]: {
       padding: "20px 0px 0px 0px",
-
+      width: "25%",
     },
 
   },
@@ -51,21 +55,22 @@ const useStylesIndex = makeStyles((theme) => ({
     color: "#fff",
   },
   searchBarDiv: {
+    // border:"1px solid #fff",
     position: "relative",
     width: "50%",
     display: "block",
     justifyContent: "center",
     padding: "17px 120px 0px 120px",
     [theme.breakpoints.between('sm', 'md')]: {
-      padding: "13px 0px 0px 0px",
-      width: "50%",
+      padding: "15px 0px 0px 0px",
+      width: "35%",
       "& .css-piqts5-MuiInputBase-root": {
         marginLeft: "0px"
       }
     },
     [theme.breakpoints.between('md', 'lg')]: {
       padding: "13px 40px 0px 40px",
-      width: "50%",
+      width: "40%",
     },
     [theme.breakpoints.between('lg', 'xl')]: {
       padding: "13px 60px 0px 60px",
@@ -83,7 +88,7 @@ const useStylesIndex = makeStyles((theme) => ({
     backgroundColor: "#ffffff",
     [theme.breakpoints.between('sm', 'md')]: {
       width: "100%",
-      height: "40px",
+      height: "25px",
     },
     [theme.breakpoints.between('md', 'lg')]: {
       width: "100%",
@@ -112,6 +117,7 @@ const useStylesIndex = makeStyles((theme) => ({
     }
   },
   headerThirdContainer: {
+    // border:"1px solid black",
     justifyContent: "flex-start",
     width: "30%",
     padding: "0px 15px 0px 15px",
@@ -119,31 +125,35 @@ const useStylesIndex = makeStyles((theme) => ({
     display: "flex",
     gap: "5px",
     [theme.breakpoints.between('sm', 'md')]: {
-      padding: "0px 15px 0px 15px",
-
+      padding: "0px 5px 0px 5px",
+      width: "25%",
     },
     [theme.breakpoints.between('md', 'lg')]: {
-      padding: "0px 15px 0px 15px",
-
+      padding: "0px 10px 0px 10px",
+      width: "30%",
     },
     [theme.breakpoints.between('lg', 'xl')]: {
       padding: "0px 15px 0px 15px",
+      width: "30%",
     },
     [theme.breakpoints.up('xl')]: {
       padding: "0px 15px 0px 15px",
+      width: "30%",
     },
   },
   homeIconMainContainer: {
-    // border:"1px solid #fff",
+    // border:"1px solid black",
     width: "20%",
     display: "flex",
     justifyContent: "flex-start",
     padding: "4px 20px 0px 20px",
     [theme.breakpoints.between('sm', 'md')]: {
-      width: "20%",
+      width: "40%",
+      padding: "4px 20px 0px 20px",
     },
     [theme.breakpoints.between('md', 'lg')]: {
-      width: "20%",
+      width: "30%",
+      padding: "8px 20px 0px 20px",
     },
     [theme.breakpoints.between('lg', 'xl')]: {
       padding: "8px 20px 0px 20px",
@@ -159,18 +169,19 @@ const useStylesIndex = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "start",
     width: "15%",
+    // border:"1px solid red",
     padding: "13px 5px 0px 0px",
     '&:hover .cartButton': {
       backgroundColor: 'transparent', // Set the hover background color to transparent
     },
     [theme.breakpoints.between('sm', 'md')]: {
-      padding: "20px 0px 0px 0px",
+      padding: "13px 5px 0px 0px",
       justifyContent: "center",
       width: "15%",
     },
     [theme.breakpoints.between('md', 'lg')]: {
       padding: "13px 0px 0px 0px",
-      width: "15%",
+      width: "13%",
     },
     [theme.breakpoints.between('lg', 'xl')]: {
       padding: "13px 0px 0px 0px",
@@ -183,17 +194,18 @@ const useStylesIndex = makeStyles((theme) => ({
   },
   profile: {
     width: "19%",
+    // border:"1px solid blue",
     padding: "12px 12px 0px 12px",
     [theme.breakpoints.between('sm', 'md')]: {
-      padding: "12px 5px 0px 0px",
+      padding: "12px 0px 0px 5px",
       width: "24%",
       "&.css-4occqz":{
         margin:0
       }
     },
     [theme.breakpoints.between('md', 'lg')]: {
-      padding: "12px 5px 0px 0px",
-      width: "19%",
+      padding: "12px 0px 0px 0px",
+      width: "25%",
       "&.css-4occqz":{
         margin:0
       }
@@ -211,8 +223,9 @@ const useStylesIndex = makeStyles((theme) => ({
     width: "35%",
     padding: "22px 5px 0px 0px",
     whiteSpace: 'nowrap',
+    // border:"1px solid yellow",
     [theme.breakpoints.between('sm', 'md')]: {
-      padding: "22px 0px 0px 3px",
+      padding: "16px 0px 0px 3px",
       width: "fit-content",
       whiteSpace: 'nowrap',
     },

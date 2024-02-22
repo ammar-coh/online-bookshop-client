@@ -59,6 +59,22 @@ const useStylesCart = makeStyles((theme)=>({
         color: "#fff",
         // border:"1px solid blue"
       },
+      cartIcon:{
+        "&.css-i4bv87-MuiSvgIcon-root":{
+           [theme.breakpoints.between('sm', 'md')]: {
+            fontSize:"18px"
+        },
+        [theme.breakpoints.between('md', 'lg')]: {
+          fontSize:"1.25rem"
+        },
+        [theme.breakpoints.between('lg', 'xl')]: {
+          fontSize:"1.25rem"
+        },
+        [theme.breakpoints.up('xl')]: {
+         fontSize:"1.25rem"
+        },},
+       
+      },
       cartContainerButton: {
         // border:"1px solid #fff",
         width: "100%",

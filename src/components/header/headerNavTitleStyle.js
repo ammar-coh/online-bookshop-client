@@ -4,8 +4,10 @@ const useStylesHeaderNavTitle = makeStyles((theme)=>({
     root: {
       width: "100%",
       padding: "0px 5px",
+      // border:"1px solid #fff"
     },
     title: {
+      // border:"1px solid green",
       fontFamily: "Montserrat, sans-se",
       color: "#fff",
       fontWeight: 500,
@@ -13,6 +15,13 @@ const useStylesHeaderNavTitle = makeStyles((theme)=>({
       textAlign: "start",
       lineHeight: 1.5,
       fontSize: "19.2px",
+      [theme.breakpoints.between('sm','md')]: {
+        fontSize: "16px"
+
+      },
+      [theme.breakpoints.between('md','lg')]: {
+        fontSize: "16px"
+      },
       [theme.breakpoints.between('lg','xl')]: {
         fontSize: "16px"
 
@@ -22,12 +31,21 @@ const useStylesHeaderNavTitle = makeStyles((theme)=>({
 
       },
     },
-    breadcrumb: {
+    breadcrumbDiv: {
       fontFamily: "Montserrat, sans-se",
       color: "#fff",
       fontWeight: 500,
       textAlign: "center",
       padding: "0px",
+      // border:"1px solid yellow",
+      display:"flex",
+      [theme.breakpoints.between('sm','md')]: {
+        fontSize: "14px"
+
+      },
+      [theme.breakpoints.between('md','lg')]: {
+        fontSize: "16px"
+      },
       [theme.breakpoints.between('lg','xl')]: {
         fontSize: "10px"
 
@@ -37,6 +55,12 @@ const useStylesHeaderNavTitle = makeStyles((theme)=>({
 
       },
     },
+    breadcrumb:{
+  "& .css-1wuw8dw-MuiBreadcrumbs-separator":{
+    color:"#fff",
+    // border:"1px solid #fff"
+  }},
+
     link: {
       textDecoration: "none",
       fontFamily: "Montserrat, sans-se",
@@ -44,6 +68,14 @@ const useStylesHeaderNavTitle = makeStyles((theme)=>({
       color: "#fff",
       padding: "0px 0px 0px 0px",
       padding: "0px",
+      // border:"1px solid blue",
+      [theme.breakpoints.between('sm','md')]: {
+        fontSize: "14px"
+
+      },
+      [theme.breakpoints.between('md','lg')]: {
+        fontSize: "16px"
+      },
       [theme.breakpoints.between('lg','xl')]: {
         fontSize: "13px"
 
