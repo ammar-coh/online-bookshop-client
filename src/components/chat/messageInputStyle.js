@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     },
     fieldDiv:{
       // border:"1px solid blue",
+      "&.css-1gingnh-MuiInputBase-root":{},
       [theme.breakpoints.between('sm', 'md')]: {
         width:"95%",
     },
@@ -45,6 +46,10 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up('xl')]: {
       width:"95%",
+      "&.css-1gingnh-MuiInputBase-root":{
+        width:"100%",
+        marginLeft:"0px"
+      }
     },
     },
     inputField: {
