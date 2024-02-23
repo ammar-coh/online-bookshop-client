@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Grid from '@mui/material/Grid';
 import Button from "@material-ui/core/Button";
 import Box from '@mui/material/Box';
-import {useStylesRequestBook} from './style'
+import { useStylesRequestBook } from './requestBookStyle'
 
 function Requestbook() {
   const dispatch = useDispatch();
@@ -12,13 +12,7 @@ function Requestbook() {
     <Box className={classes.root}>
       <Grid className={classes.main}>
         <Grid className={classes.text}>
-          <h3 style={{
-            width: "100%", fontSize: "30px",
-            textAlign: "center", fontFamily: 'Playfair Display ,serif',fontWeight:"bolder",
-            lineHeight: "35px",
-            
-          }}
-          > "Can't find what
+          <h3> "Can't find what
             <br></br>you are looking<br></br> for?"</h3>
         </Grid>
         <Grid className={classes.request}>

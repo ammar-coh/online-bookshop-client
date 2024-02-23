@@ -17,15 +17,27 @@ import Profile from './Profile';
 import RoofingIcon from '@mui/icons-material/Roofing';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import PersonOutlinedIcon from '@mui/icons-material/PersonOutlined';
-import { useStylesDrawer} from './style'
+import { useStylesDrawer } from './style'
 import Requestbook from './requestbook'
-const drawerWidth = 240;
-
+const drawerWidth = 200
 const openedMixin = (theme) => ({
     width: "20%",
+    [theme.breakpoints.between('sm', 'md')]: {
+        width: "25%",
+    },
+    [theme.breakpoints.between('md', 'lg')]: {
+        width: "25%",
+    },
+    [theme.breakpoints.between('lg', 'xl')]: {
+        width: "20%",
+    },
+    [theme.breakpoints.up('xl')]: {
+        width: "20%"
+    },
     height: "auto",
     backgroundColor: "#ffffff",
-    border:"none",
+    border: "none",
+    overFlowX:"hidden",
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -49,14 +61,17 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
-}));
+    backgroundColor: "#d22129",
+}))
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
-        width: drawerWidth,
         flexShrink: 0,
         whiteSpace: 'nowrap',
         boxSizing: 'border-box',
+        // "& .MuiDrawer-roo":{
+        //     width:"100%"
+        // },
         ...(open && {
             ...openedMixin(theme),
             '& .MuiDrawer-paper': openedMixin(theme),
@@ -74,31 +89,30 @@ export default function SideBar() {
     const [open, setOpen] = React.useState(true);
     const iconsArray = [<RoofingIcon />, <AdminPanelSettingsOutlinedIcon />, <PersonOutlinedIcon />]
     return (
-        <Box sx={{ display: 'flex' }}>
-            <Drawer className={classes.main} variant="permanent" open >
-                <DrawerHeader className={classes.Sidebar_header}>
-                    <div className={classes.libertyBooks_logo}>
-                        <img src={libertyBookslogo} />
-                    </div>
-                </DrawerHeader>
-                <Divider />
-                <List className={classes.sidebar_menu_list}>
-                    {[<Home />, <Admin />, <Profile />, <Requestbook />].map((text, index) => (
-                        <ListItem key={text} disablePadding sx={{ display: 'block' }}>
+        <Drawer variant="permanent" open >
+            <DrawerHeader  className={classes.header}>
+                <div className={classes.libertyBooks_logo}>
+                    <img src={libertyBookslogo} className={classes.img} />
+                </div>
+            </DrawerHeader>
+            <Divider />
+            <List className={classes.sidebar_menu_list}>
+                {[<Home />, <Admin />, <Profile />, <Requestbook />].map((text, index) => (
+                    <ListItem key={text} disablePadding sx={{ display: 'block' }}>
 
-                            <ListItemButton
-                                sx={{
-                                    minHeight: 48,
-                                    justifyContent: open ? 'initial' : 'center',
-                                    px: 2.5,
-                                }}
-                            >
-                                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
-            </Drawer>
-        </Box>
+                        <ListItemButton
+                            sx={{
+                                minHeight: 48,
+                                justifyContent: open ? 'initial' : 'center',
+                                px: 2.5,
+                            }}
+                        >
+                            <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+        </Drawer>
+
     );
 }

@@ -1,24 +1,65 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStylesDrawer = makeStyles({
-    root: {
-        padding: "0px 0px",
-    },
-    main: {
-        backgroundColor: "#ffffff",
-        "&.css-7witow-MuiDrawer-docked .MuiDrawer-paper": {
-            backgroundColor: "#ffffff",
-            padding: "0px 0px",
-            border: "2px solid black",
-            height: "auto",
-        }
-    },
-    Sidebar_header: {
-        backgroundColor: "#d22129",
+const useStylesDrawer = makeStyles((theme)=>({
+    header:{
+          // border:"1px solid green",
+        minHeight:"0px !important",
+            [theme.breakpoints.between('sm', 'md')]: {
+                height:"51.5px",
+            },
+            [theme.breakpoints.between('md', 'lg')]: {
+                height:"66.55px",
+                minHeight:"0px !important",
+            },
+            [theme.breakpoints.between('lg', 'xl')]: {
+                height:"67px",
+                minHeight:"0px !important",
+            },
+            [theme.breakpoints.up('xl')]: {
+                height:"67px",
+                minHeight:"0px !important",
+           
+            },
+        
+         
     },
     libertyBooks_logo: {
-        width: "100%",
+        // border:"1px solid green",
+        [theme.breakpoints.between('sm', 'md')]: {
+            width: "100%",
+            // border:"1px solid green"4
+        },
+        [theme.breakpoints.between('md', 'lg')]: {
+            width: "100%",
+        },
+        [theme.breakpoints.between('lg', 'xl')]: {
+            width: "100%",
+        },
+        [theme.breakpoints.up('xl')]: {
+            width: "100%",
+       
+        },
+       
     },
+    img:{
+        [theme.breakpoints.between('sm', 'md')]: {
+            width: "180px",
+            // height:"67px"
+
+        },
+        [theme.breakpoints.between('md', 'lg')]: {
+            width: "250px",
+            // height:"67px"
+        },
+        [theme.breakpoints.between('lg', 'xl')]: {
+           width:"250px",
+        // height:"67px"
+        },
+        [theme.breakpoints.up('xl')]: {
+            width: "250px"
+        },
+    },
+
     sidebar_menu_list: {
         backgroundColor: "#ffffff",
         padding: "0px 0px",
@@ -32,7 +73,7 @@ const useStylesDrawer = makeStyles({
             padding: "0px"
         }
     }
-})
+}))
 export { useStylesDrawer }
 
 
@@ -588,52 +629,3 @@ const useStylesProfile = makeStyles({
 
 export { useStylesProfile }
 
-const useStylesRequestBook = makeStyles({
-    root: {
-        display: "block",
-        height: "100%",
-        padding: "150px 60px",
-        justifyContent: "center",
-        overflowWrap: "break-word"
-    },
-    main: {
-        height: "auto",
-        padding: "0px 7.5px 50px",
-        backgroundColor: "#F6F6F6",
-        overflowWrap: "break-word",
-        width: "100%"
-    },
-    text: {
-        width: "100%",
-        justifyContent: "center",
-        overflowWrap: "break-word",
-        height: "auto",
-        padding: "40px 0px 0px"
-    },
-    request: {
-        width: "100%",
-        justifyContent: "center",
-        padding: "0px 0px 0px 0px",
-        fontFamily: 'Playfair Display ,serif',
-        lineHeight: "35px",
-        fontSize: "30px"
-    },
-    button_1: {
-        fontFamily: "Montserrat, sans-se",
-        justifyContent: "center",
-        border: "1px solid #d22129",
-        width: "100%",
-        backgroundColor: "#d22129",
-        color: "#ffffff",
-        textTransform: 'none',
-        padding: "16px 49px",
-        fontSize: "16px",
-        fontWeight: 600,
-        borderRadius: "5px",
-        minWidth: "130px",
-        '&:hover': {
-            backgroundColor: '#D22129',
-        },
-    }
-})
-export { useStylesRequestBook }

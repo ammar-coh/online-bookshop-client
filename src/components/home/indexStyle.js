@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     // backgroundColor: "#fbfcff",
     // border:'1px solid red',
     [theme.breakpoints.between('sm', 'md')]: {
-      width: "70%",
+      width: "75%",
     },
     [theme.breakpoints.between('md', 'lg')]: {
       width: "75%",
@@ -33,9 +33,10 @@ const useStyles = makeStyles((theme) => ({
   sidebar_container: {
     display: "block",
     width: "20%",
-    border:"1px solid orange",
+    // border:"1px solid orange",
+    overFlowX:"hidden",
     [theme.breakpoints.between('sm', 'md')]: {
-      width: "30%",
+      width: "25%",
     },
     [theme.breakpoints.between('md', 'lg')]: {
       width: "25%",
