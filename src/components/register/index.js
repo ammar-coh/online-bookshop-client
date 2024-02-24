@@ -188,7 +188,6 @@ function Sign_up() {
             history
         }))
     }
-    console.log("errormess", errors.username)
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className={classes.login_container}>

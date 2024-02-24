@@ -55,7 +55,6 @@ const ChatTypingArea = ({
       };
       await socket.emit("send_message", messageData);
       setReceiveMessage(true)
-
     }
 
   };

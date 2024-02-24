@@ -31,7 +31,6 @@ function ImageEditInputCell(props) {
         imageURLs.push(imageUrl);
       }
     }
-    console.log("imageUrls", imageURLs)
     await apiRef.current.setEditCellValue({
       id, field, value: imageURLs
     })

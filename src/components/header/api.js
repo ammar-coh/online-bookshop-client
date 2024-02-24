@@ -5,7 +5,7 @@ const url = process.env.REACT_APP_BASE_URL
 const getSearchResult = async (keyword) => {
     return await axios.request({
         method: 'get',
-        url: `${url}search/book/`,
+        url: `${url}/search/book/`,
         headers: { Authorization: ` ${localStorage.getItem('authorization')}` },
         params: {
             keyword: keyword,
