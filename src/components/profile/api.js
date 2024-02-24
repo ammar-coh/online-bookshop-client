@@ -3,7 +3,7 @@ const url = process.env.REACT_APP_BASE_URL
 const updateUser = (userId, data) => {
     return axios.request({
         method: 'put',
-        url: `${url}users/update/${userId}`, // Replace with your PUT endpoint
+        url: `${url}/users/update/${userId}`, // Replace with your PUT endpoint
         headers: {
             Authorization: ` ${localStorage.getItem('authorization')}`, // Use the appropriate header format
             'Content-Type': 'multipart/form-data',
@@ -37,7 +37,7 @@ export const userUpdated = async (userId, data, setProfileUpdate, alertContent, 
 const updatePassword = (userId, data) => {
     return axios.request({
         method: 'put',
-        url: `${url}users/change_password/${userId}`, // Replace with your PUT endpoint
+        url: `${url}/users/change_password/${userId}`, // Replace with your PUT endpoint
         headers: {
             Authorization: ` ${localStorage.getItem('authorization')}`, // Use the appropriate header format
         },

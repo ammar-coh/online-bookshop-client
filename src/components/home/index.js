@@ -24,7 +24,6 @@ function Home({ setUserAvailable, socket }) {
     const {
         loader,
         sideBarCollapsed,
-        online_user, setOnlineUser
     } = useContext(Context);
     const dispatch = useDispatch();
     const uname = useSelector((state) => state.user_login.details);
