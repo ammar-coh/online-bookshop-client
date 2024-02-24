@@ -5,7 +5,7 @@ const URL = process.env.REACT_APP_BASE_URL;
 
  export const socket = io(URL, {
     autoConnect: true,
-    withCredentials: true, // Include cookies in cross-origin requests
+   
     extraHeaders: {
         'Access-Control-Allow-Origin': '*',
         // Additional headers if required
