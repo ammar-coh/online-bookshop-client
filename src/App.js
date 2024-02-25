@@ -21,11 +21,7 @@ import "./index.css";
 import useSWR, { useSWRConfig } from 'swr'
 import useSWRSubscription from 'swr/subscription'
 
-const useStyles = makeStyles({
-  root: {
-  },
 
-})
 
 function App() {
   const dispatch = useDispatch();
