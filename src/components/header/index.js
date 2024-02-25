@@ -89,7 +89,7 @@ function Header() {
   }, []);
 
   const allUsers = () => {
-    axios.get(`${url}users/userList`).then((response) => {
+    axios.get(`${url}/users/userList`).then((response) => {
       const allUserList = response.data;
       setList(allUserList);
     });
