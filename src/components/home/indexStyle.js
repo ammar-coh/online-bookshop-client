@@ -4,11 +4,57 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     padding: "50px",
     flexWrap: "wrap",
+    // border:"1px solid blue",
     gap: "31px",
     zIndex: 2,
     width: "100%",
-    marginLeft: "auto"
+    padding:"50px 0px 50px 0px" ,
+
+   
+      [theme.breakpoints.between('sm', 'md')]: {
+        width:"100%",
+        gap:"50px",
+        padding:"50px 0px 50px 0px" ,
+      },
+      [theme.breakpoints.between('md', 'lg')]: {
+        width: "100%",
+        padding:"50px 50px 50px 0px" ,
+        gap:"10px"
+      },
+      [theme.breakpoints.between('lg', 'xl')]: {
+        width: "100%",
+        gap: "15px",
+        padding:"50px 50px 50px 0px" ,
+      },
+      [theme.breakpoints.up('xl')]: {
+        width: "100%",
+        padding:"50px 50px 50px 0px" ,
+        gap: "30px",
+      
+      },
+  
+    // marginLeft: "auto"
   },
+
+  book_container:{
+    border:"1px solid blue",
+    [theme.breakpoints.between('sm', 'md')]: {
+      width:"100%",
+      border:"1px solid blue"
+    },
+    [theme.breakpoints.between('md', 'lg')]: {
+      width: "100%",
+      border:"1px solid red"
+    },
+    [theme.breakpoints.between('lg', 'xl')]: {
+      border:"1px solid blue"
+    },
+    [theme.breakpoints.up('xl')]: {
+      width: "100%",
+      border:"1px solid blue"
+    },
+  },
+
   main: {
     display: "flex",
     width: "100%",
@@ -28,6 +74,37 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.up('xl')]: {
       width: "80%",
+    },
+  },
+  body:{
+    // border:"1px solid black",
+    [theme.breakpoints.between('sm', 'md')]: {
+      width: "100%",
+    },
+    [theme.breakpoints.between('md', 'lg')]: {
+      width: "100%",
+    },
+    [theme.breakpoints.between('lg', 'xl')]: {
+      width: "100%",
+    },
+    [theme.breakpoints.up('xl')]: {
+      width: "100%",
+    },
+  },
+  banner:{
+    border:"1px solid blue",
+    [theme.breakpoints.between('sm', 'md')]: {
+      width: "100%",
+    },
+    [theme.breakpoints.between('md', 'lg')]: {
+      width: "100%",
+      // padding: "10px"
+    },
+    [theme.breakpoints.between('lg', 'xl')]: {
+      width: "100%",
+    },
+    [theme.breakpoints.up('xl')]: {
+      width: "100%",
     },
   },
   sidebar_container: {

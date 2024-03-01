@@ -7,8 +7,6 @@ import Header from "../header/index";
 import checkout from "../../checkout";
 import AddProduct from "../../addProduct";
 import Chatroom from "../chat/index"
-import Del from "../../Del";
-import Chat from "../../chat";
 import Banner from './banner'
 import Sidebar from '../sidebar/index'
 import Context from '../../context'
@@ -51,7 +49,6 @@ function Home({ setUserAvailable, socket }) {
                     <Header setUserAvailable={setUserAvailable} />
                     <Switch>
                         <Route path="/products/add" exact component={AddProduct} />
-                        <Route path="/products/del" exact component={Del} />
                         <Route path="/checkout" exact component={checkout} />
                         <Route path="/book club" exact component={Chatroom} />
                         <Route path="/profile" exact component={Profile} />
@@ -59,14 +56,14 @@ function Home({ setUserAvailable, socket }) {
                         <Route path="/create group" exact component={CreateGroup} />
                         <Route path="/book page" exact component={BookPage} />
 
-                        <div>
-                            <div className={classes.banner}>
-                                <Banner />
+                        <div className={classes.body}>
+                            <div>
+                                <Banner  />
                             </div>
                             <div className={classes.root}>
                                 {details.length > 0 &&
                                     details.map((i) => (
-                                        <div className={classes.book_container}>
+                                        <div>
                                             <ItemContainer
                                                 image={i?.image}
                                                 price={i.price}
@@ -75,6 +72,7 @@ function Home({ setUserAvailable, socket }) {
                                                 rating={i.rating}
                                                 author={i?.author}
                                                 title={i?.title}
+                                                description={i?.description}
                                             />
                                         </div>
                                     ))}
