@@ -5,7 +5,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
-
+import { Route, Switch, Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
 import { addToCartSaga, updateUserProfile, deleteDispatch } from "../../redux/actions";
@@ -13,14 +13,14 @@ import { FaStar } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
 import { BsTrash } from "react-icons/bs";
 import { GrUpdate } from "react-icons/gr";
-import {useStyles} from './itemStyle'
+import { useStyles } from './itemStyle'
 
 const colors = {
   orange: "#FFBA5A",
   grey: "#a9a9a9",
 };
 
-function Item({ id, image, price, rating, author, title }) {
+function Item({ id, image, price, rating, author, title, description }) {
   const user = useSelector((state) => state.user_login.details);
   const ratings = Array(5).fill(0);
   const [currentRating, setRating] = useState(0);
@@ -49,8 +49,22 @@ function Item({ id, image, price, rating, author, title }) {
   };
 
   var a = parseInt(newPrice);
-
+  const link = () => {
+    const book = [
+      {
+        _id: id,
+        image: image,
+        price: price,
+        author: author,
+        description: description,
+        rating:rating,
+        title:title
+      }
+    ]
+    localStorage.setItem("bookSearch", JSON.stringify(book))
+  }
   return (
+
     <Card className={classes.root}>
       <div className={classes.mainContainer}>
         <div className={classes.image_container}>
@@ -66,13 +80,15 @@ function Item({ id, image, price, rating, author, title }) {
           <CardActionArea>
             <CardContent>
               <div className={classes.title_div}>
-                <Typography
-                  className={classes.title}
-                  variant="h7"
-                  component="h2"
-                >
-                  {title ? title.replace(/\b\w/g, (match) => match.toUpperCase()) : "No Title"}
-                </Typography>
+                <Link to="/book page" onClick={() => { link() }} className={classes.linkTitle} >
+                  <Typography
+                    className={classes.title}
+                    variant="h7"
+                    component="h2"
+                  >
+                    {title ? title.replace(/\b\w/g, (match) => match.toUpperCase()) : "No Title"}
+                  </Typography>
+                </Link>
               </div>
               <div className={classes.author_div}>
                 <Typography
@@ -163,32 +179,6 @@ function Item({ id, image, price, rating, author, title }) {
 
         </div>
       </div>
-
-      {/* {user.role == "admin" ? (
-        <input
-          className={classes.input}
-          placeholder="update price"
-          type="number"
-          onChange={getPrice}
-        />
-      ) : null}
-      <CardActions>
-        {user.role == "admin" ? (
-          <GrUpdate
-            className={classes.update}
-            onClick={() =>
-              dispatch(
-                updateUser({
-                  id: id,
-                  price: a,
-                })
-              )
-            }
-          />
-        ) : null}
-      </CardActions> */}
-
-      {/* Update price */}
     </Card>
   );
 }
