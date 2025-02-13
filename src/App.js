@@ -34,9 +34,9 @@ function App() {
   }, [user?.user]);
 
   //
-  useEffect(() => {
-    localStorage.getItem("authorization") && dispatch(getBookList());
-  }, [uname?.user?.displayName]);
+  // useEffect(() => {
+  //   localStorage.getItem("authorization") && dispatch(getBookList());
+  // }, [uname?.user?.displayName]);
 
   //
   useEffect(() => {

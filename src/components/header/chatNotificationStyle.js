@@ -2,36 +2,40 @@ import { makeStyles, styled } from "@material-ui/core/styles";
 
 const useStylesChatNotification = makeStyles((theme) => ({
   root: {
-    [theme.breakpoints.between('sm', 'md')]: {
-      width: "100%"
-    },
-    [theme.breakpoints.between('md', 'lg')]: {
-      width: "100%"
-    },
-    [theme.breakpoints.between('lg', 'xl')]: {
-      width: "100%"
-    },
-    [theme.breakpoints.up('xl')]: {
-      width: "100%",
-      padding: "0px 0px 0px 40px"
-    },
+    // border:'1px solid black',
+    // [theme.breakpoints.between('sm', 'md')]: {
+    //   width: "100%"
+    // },
+    // [theme.breakpoints.between('md', 'lg')]: {
+    //   width: "100%"
+    // },
+    // [theme.breakpoints.between('lg', 'xl')]: {
+    //   width: "100%"
+    // },
+    // [theme.breakpoints.up('xl')]: {
+    //   width: "100%",
+    //   // padding: "0px 0px 0px 40px"
+    // },
   },
   chatNotification: {},
   notificationMailIcon: {
     color: "#fff",
     fontSize: "1.5rem",
     "&.MuiSvgIcon-root ": {
+      [theme.breakpoints.between('xs','sm')]: {
+        fontSize: "18px",
+      },
       [theme.breakpoints.between('sm', 'md')]: {
         fontSize: "18px",
       },
       [theme.breakpoints.between('md', 'lg')]: {
-        fontSize: "1.5rem",
+        fontSize: "20px",
       },
       [theme.breakpoints.between('lg', 'xl')]: {
-        fontSize: "1.5rem",
+        fontSize: "20px",
       },
       [theme.breakpoints.up('xl')]: {
-        fontSize: "1.5rem",
+        fontSize: "20px",
       },
     },
   },

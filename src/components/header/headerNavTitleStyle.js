@@ -74,7 +74,7 @@ const useStylesHeaderNavTitle = makeStyles((theme)=>({
 
       },
       [theme.breakpoints.between('md','lg')]: {
-        fontSize: "16px"
+        fontSize: "12px"
       },
       [theme.breakpoints.between('lg','xl')]: {
         fontSize: "13px"

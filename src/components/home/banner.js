@@ -11,6 +11,7 @@ import Button from "@material-ui/core/Button";
 // import 'react-responsive-carousel/lib/styles/carousel.min.css'
 function Banner() {
     const classes = useStyles()
+    console.log("Banner rendered");
     return (
 
         <Grid

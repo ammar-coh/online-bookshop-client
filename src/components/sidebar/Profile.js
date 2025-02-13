@@ -15,7 +15,7 @@ import { socket } from '../../socket'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useStylesProfile } from './style'
 
-function Profile() {
+function ProfileSide() {
     const {
         roomID, setCurrentChat,
         setIsRoomActive, selectedSideBarMenu,
@@ -110,4 +110,4 @@ function Profile() {
     )
 }
 
-export default Profile
+export default ProfileSide

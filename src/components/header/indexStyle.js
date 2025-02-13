@@ -2,12 +2,14 @@ import { makeStyles, styled } from "@material-ui/core/styles";
 const useStylesIndex = makeStyles((theme) => ({
   root: {
     // border:"2px solid black",
-    width: "100%",
+    // width: "100%",
+    // width: "95.7vw",
     display: "flex",
     justifyContent: "space-between",
     zIndex: 3,
-    backgroundColor: "#d22129",
+    // backgroundColor: "#d22129",
     // borderColor: "#d22129",
+    boxShadow:'none'
   },
   sign_out: {
     backgroundColor: "#ffffff",
@@ -61,6 +63,7 @@ const useStylesIndex = makeStyles((theme) => ({
     display: "block",
     justifyContent: "center",
     padding: "17px 120px 0px 120px",
+   
     [theme.breakpoints.between('sm', 'md')]: {
       padding: "15px 0px 0px 0px",
       width: "35%",
@@ -86,17 +89,63 @@ const useStylesIndex = makeStyles((theme) => ({
     width: "480px",
     height: "40px",
     backgroundColor: "#ffffff",
+    [theme.breakpoints.between('xs','sm')]: {
+      width: "100%",
+      height: "32px",
+    },
     [theme.breakpoints.between('sm', 'md')]: {
       width: "100%",
-      height: "25px",
+      height: "32px",
     },
     [theme.breakpoints.between('md', 'lg')]: {
       width: "100%",
-      height: "40px",
+      height: "32px",
     },
     [theme.breakpoints.between('lg', 'xl')]: {
       width: "100%",
+      height: "34px",
+    },
+    [theme.breakpoints.up('xl')]: {
+      width: "480px",
       height: "40px",
+    },
+    boxShadow: "  0 3px 10px rgb(0 0 0 / 0.2)",
+    borderTopLeftRadius: (props) => (props.searchResult.length > 0 ? "5px" : "5px"),
+    borderTopRightRadius: (props) => (props.searchResult.length > 0 ? "5px" : "5px"),
+    borderBottomLeftRadius: (props) => (
+      props.searchResult.length > 0
+        || props.searchLoading ? "0px" : "5px"),
+    borderBottomRightRadius: (props) => (
+      props.searchResult.length > 0
+        || props.searchLoading ? "0px" : "5px"),
+    "& .MuiInputBase-root": {
+      fontFamily: "Montserrat, sans-se",
+      fontSize: "16px"
+    }
+  },
+  searchBarMobile:{
+    padding: "0 15px",
+    width: "480px",
+    height: "40px",
+    backgroundColor: "#ffffff",
+    [theme.breakpoints.between('xs','sm')]: {
+      width: "100%",
+      height: "32px",
+      "&.MuiInputBase-root": {
+        marginLeft: "0px"
+      }
+    },
+    [theme.breakpoints.between('sm', 'md')]: {
+      width: "100%",
+      height: "32px",
+    },
+    [theme.breakpoints.between('md', 'lg')]: {
+      width: "100%",
+      height: "32px",
+    },
+    [theme.breakpoints.between('lg', 'xl')]: {
+      width: "100%",
+      height: "34px",
     },
     [theme.breakpoints.up('xl')]: {
       width: "480px",

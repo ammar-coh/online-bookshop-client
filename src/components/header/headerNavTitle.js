@@ -17,41 +17,50 @@ function NavBarRoute() {
     return (
         <Box style={{ width: "100%" }}>
             <Grid className={classes.root}>
-                <Grid className={classes.title}>
-                    <span>{navBarRoute}</span>
-                </Grid>
-                <Grid className={classes.breadcrumbDiv}>
-                    <Breadcrumbs aria-label="breadcrumb"  
-                    className={classes.breadcrumb}
-                    
-                     separator=">">
+                <Box className={classes.title}>
+                    <Typography sx={{
+                        fontSize: {xs:'12px', md: '14px' }
+                    }}
+                    >{navBarRoute}</Typography>
+                </Box>
+                <Box className={classes.breadcrumbDiv}>
+                    <Breadcrumbs aria-label="breadcrumb"
+                        className={classes.breadcrumb}
+                        sx={{ fontSize: {  xs:'12px',md: '12px' } }}
+                        separator=">">
                         <Link className={classes.link} to="/">
-                            Home
+                            <Typography sx={{
+                                fontSize: { xs:'11px', md: '12px' }
+                            }}>Home</Typography>
                         </Link>
                         {pathnames.map((name, index) => {
                             const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`;
                             const isLast = index === pathnames.length - 1;
                             return isLast ? (
                                 <Typography
+                                    sx={{
+                                        fontSize: { xs:'11px', md: '12px' }
+                                    }}
                                     style={{
                                         color: "#fff",
-                                        fontSize: "14px",
                                         fontFamily: "Montserrat, sans-se",
                                     }} key={name}>
                                     {name}
                                 </Typography>
                             ) : (
-                                <Link  style={{
+                                <Link style={{
                                     color: "#fff",
-                                    fontSize: "14px",
                                     fontFamily: "Montserrat, sans-se",
                                 }} to={routeTo} key={name}>
-                                    {name}
+                                    <Typography sx={{ fontSize: { md: '12px' }, }}>
+                                        {name}
+                                    </Typography>
+
                                 </Link>
                             );
                         })}
                     </Breadcrumbs>
-                </Grid>
+                </Box>
             </Grid>
         </Box>
     )

@@ -18,6 +18,7 @@ import Loading from '../loading'
 import CreateGroup from '../create group'
 import BookPage from '../bookPage/index'
 import { useStyles } from './indexStyle'
+import Navigation from '../nav'
 function Home({ setUserAvailable, socket }) {
     const {
         loader,
@@ -34,20 +35,21 @@ function Home({ setUserAvailable, socket }) {
     const details = useSelector((state) => state.books.details);
 
     useEffect(() => {
-        localStorage.getItem("authorization") && dispatch(getBookList());
+        localStorage.getItem("authorization") && dispatch(getBookList({filter:{}}));
     }, []);
   
    
     return (
         <div> {loader ? <Loading /> :
             <div className={classes.main}>
-                <div className={classes.sidebar_container}>
+                {/* <div className={classes.sidebar_container}>
 
                     <Sidebar />
-                </div>
+                </div> */}
                 <div className={classes.header_content_side}>
-                    <Header setUserAvailable={setUserAvailable} />
-                    <Switch>
+                    {/* <Header setUserAvailable={setUserAvailable} /> */}
+                    <Navigation/>
+                    {/* <Switch>
                         <Route path="/products/add" exact component={AddProduct} />
                         <Route path="/checkout" exact component={checkout} />
                         <Route path="/book club" exact component={Chatroom} />
@@ -81,8 +83,8 @@ function Home({ setUserAvailable, socket }) {
 
 
 
-                        </div>
-                    </Switch>
+                        </div> 
+                    </Switch> */}
                     <div className={classes.footer}>
                         <span>
                             <p className={classes.footer_p}>Copyright © 2023, Liberty Books, All Rights Reserved.</p>
