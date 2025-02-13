@@ -7,6 +7,7 @@ const useStyles = makeStyles({
         border:"none",
         width: "100%",
         height: "100%",
+        border:"2px solid black"
     },
     libertyBooks_logo: {},
     home:{

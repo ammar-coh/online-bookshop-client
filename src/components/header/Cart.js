@@ -8,7 +8,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useStylesCart } from './cartStyle';
 import Button from "@material-ui/core/Button";
-import {clearChat} from '../../redux/actions/index'
+import { clearChat } from '../../redux/actions/index'
 const theme = createTheme({
   palette: {
     neutral: {
@@ -71,8 +71,18 @@ function Cart({
               <Badge
                 badgeContent={counts.totalItems}
                 color="primary"
-                fontSize="small">
-                < ShoppingCartOutlinedIcon  className={classes.cartIcon} />
+                // fontSize="small"
+                sx={{
+                  '& .MuiBadge-badge': {
+                    fontSize: {
+                      xs:'10px',
+                      sm:'10px',
+                      md: '10px'
+                    }
+                  }
+                }
+                }>
+                < ShoppingCartOutlinedIcon className={classes.cartIcon} />
               </Badge>
             </ThemeProvider>
           </Link>

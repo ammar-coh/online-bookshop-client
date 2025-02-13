@@ -4,14 +4,14 @@ import { setUser, updateBookList, } from '../../actions/index';
 
 
 
-export function* getBookList() {
-
+export function* getBookList(action) {
+console.log('data',action.data)
   try {
-    const response = yield call(requestGetProduct);
+    const response = yield call(requestGetProduct, action.data);
     const { data } = response
 
 
-    yield put(setUser(data))
+    yield put(setUser(data.data))
   } catch (error) {
     console.log(error)
   }

@@ -29,13 +29,17 @@ const useStylesProfile = makeStyles((theme) => ({
         "&.MuiAvatar-root": {
             height: "40px",
             width: "40px",
+            [theme.breakpoints.between('xs','sm')]: {
+                height: "22px",
+                width: "22px",
+              },
             [theme.breakpoints.between('sm', 'md')]: {
-                height: "25px",
-                width: "25px",
+                height: "28px",
+                width: "28px",
             },
             [theme.breakpoints.between('md', 'lg')]: {
-                height: "40px",
-                width: "40px",
+                height: "34px",
+                width: "34px",
             },
             [theme.breakpoints.between('lg', 'xl')]: {
                 height: "40px",

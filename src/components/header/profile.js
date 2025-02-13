@@ -73,6 +73,7 @@ export default function AccountMenu({ profileUpdate, setProfileUpdate }) {
                         >
                             <Avatar
                                 className={classes.avatar}
+                             
                                 src={userLocal.imageURL ? userLocal.imageURL : sample} />
                         </StyledBadge>
                     </IconButton>

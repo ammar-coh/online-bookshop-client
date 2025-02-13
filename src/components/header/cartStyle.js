@@ -5,22 +5,23 @@ const useStylesCart = makeStyles((theme)=>({
     root: {
       // border: " 1px solid orange",
         display: "flex",
-        justifyContent: "start",
-        top: "0px",
-        width: "100%",
-        padding: "0px 0px 19px 0px",
+        // justifyContent: "start",
+        alignItems:'center',
+        padding: "0px 0px 10px 0px",
+        // width: "100%",
+        // padding: "0px 0px 19px 0px",
         [theme.breakpoints.between('sm', 'md')]: {
           padding: "0px 0px 0px 0px",
         },
         [theme.breakpoints.between('md', 'lg')]: {
-          padding: "0px 0px 19px 0px",
+          padding: "0px 0px 10px 0px",
         },
-        [theme.breakpoints.between('lg', 'xl')]: {
-          padding: "0px 0px 19px 0px",
-        },
-        [theme.breakpoints.up('xl')]: {
-          padding: "0px 0px 19px 0px",
-        },
+        // [theme.breakpoints.between('lg', 'xl')]: {
+        //   padding: "0px 0px 19px 0px",
+        // },
+        // [theme.breakpoints.up('xl')]: {
+        //   padding: "0px 0px 19px 0px",
+        // },
         // border: "none",
         "&:hover": {
           border: " none",
@@ -31,6 +32,7 @@ const useStylesCart = makeStyles((theme)=>({
         color: "#fff",
         marginLeft: "0px",
         marginTop: "10px",
+        
         [theme.breakpoints.between('sm', 'md')]: {
           marginTop: "0px",
         },
@@ -61,17 +63,20 @@ const useStylesCart = makeStyles((theme)=>({
       },
       cartIcon:{
         "&.MuiSvgIcon-root":{
+          [theme.breakpoints.between('xs','sm')]: {
+            fontSize: "18px",
+          },
            [theme.breakpoints.between('sm', 'md')]: {
             fontSize:"18px"
         },
         [theme.breakpoints.between('md', 'lg')]: {
-          fontSize:"1.25rem"
+          fontSize:"20px"
         },
         [theme.breakpoints.between('lg', 'xl')]: {
-          fontSize:"1.25rem"
+          fontSize:"20px"
         },
         [theme.breakpoints.up('xl')]: {
-         fontSize:"1.25rem"
+         fontSize:"20px"
         },},
        
       },

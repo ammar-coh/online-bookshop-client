@@ -60,21 +60,22 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   header_content_side: {
-    width: "80%",
+    // width: "80%",
+    width:'100%',
     // backgroundColor: "#fbfcff",
     // border:'1px solid red',
-    [theme.breakpoints.between('sm', 'md')]: {
-      width: "75%",
-    },
-    [theme.breakpoints.between('md', 'lg')]: {
-      width: "75%",
-    },
-    [theme.breakpoints.between('lg', 'xl')]: {
-      width: "80%",
-    },
-    [theme.breakpoints.up('xl')]: {
-      width: "80%",
-    },
+    // [theme.breakpoints.between('sm', 'md')]: {
+    //   width: "75%",
+    // },
+    // [theme.breakpoints.between('md', 'lg')]: {
+    //   width: "75%",
+    // },
+    // [theme.breakpoints.between('lg', 'xl')]: {
+    //   width: "80%",
+    // },
+    // [theme.breakpoints.up('xl')]: {
+    //   width: "80%",
+    // },
   },
   body:{
     // border:"1px solid black",
@@ -110,7 +111,7 @@ const useStyles = makeStyles((theme) => ({
   sidebar_container: {
     display: "block",
     width: "20%",
-    // border:"1px solid orange",
+    border:"2px solid blue",
     overFlowX:"hidden",
     [theme.breakpoints.between('sm', 'md')]: {
       width: "25%",
