@@ -141,6 +141,27 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
+
+    '& .MuiListItem-root': {
+      // border: "1px solid red",
+      padding: '0px 0px 0px 10px'
+    },
+    overflowY: "auto", // Enable scrolling
+    "&::-webkit-scrollbar": {
+      width: "6px",
+      height: "6px",
+      backgroundColor: theme.palette.mode === "dark" ? "#262626" : "#F2F2F2",
+    },
+    "&::-webkit-scrollbar-track": {
+      WebkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.3)",
+      borderRadius: "10px",
+      backgroundColor: theme.palette.mode === "dark" ? "#262626" : "#F2F2F2",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      borderRadius: "10px",
+      WebkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.3)",
+      backgroundColor: theme.palette.mode === "dark" ? "#262626" : "#F2F2F2",
+    },
   },
   content: {
     width: '50%',
@@ -160,45 +181,72 @@ function ResponsiveDrawer(props) {
   };
   const user = useSelector((state) => state.user_login.details);
   const details = useSelector((state) => state.books.details);
-  console.log('details nav', details)
+
   const iconsArray = [<RoofingIcon />, <AdminPanelSettingsOutlinedIcon />, <PersonOutlinedIcon />]
+  // const drawer = (
+  //   <div>
+  //     <div className={classes.toolbar} />
+  //     <Divider />
+  //     <List sx={{
+  //       border: "1px solid red",
+  //       '&.MuiListItem-root': {
+  //         border: "1px solid red",
+  //       }
+  //     }}
+  //     >
+  //       {[<Home />, <Admin />, <ProfileSide />, <Requestbook />].map((text, index) => (
+  //         <ListItem key={index} sx={{
+  //           border: "3px solid red",
+
+  //         }}
+  //         >
+  //           <ListItemText sx={{
+  //             border: "1px solid red",
+
+  //           }} primary={text} />
+  //         </ListItem>
+  //           {index !== array.length - 1 && <Divider />}
+  //       ))}
+       
+  //     </List>
+     
+  //   </div>
+  // );
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <Divider />
-      {/* <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List> */}
-
-
-      <List >
-        {[<Home />, <Admin />, <ProfileSide />, <Requestbook />].map((text, index) => (
-          <ListItem key={text} disablePadding sx={{ display: 'block' }}>
-
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                // justifyContent: open ? 'initial' : 'center',
-                px: 2.5,
-              }}
-            >
-              <ListItemText primary={text} sx={{
-                //  opacity: open ? 1 : 0
-              }} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+      <List
+        sx={{
+          border: "1px solid red",
+          "&.MuiListItem-root": {
+            border: "1px solid red",
+          },
+        }}
+      >
+        {[<Home />, <Admin />, <ProfileSide />, <Requestbook />].map(
+          (text, index, array) => (
+            <React.Fragment key={index}>
+              <ListItem
+                sx={{
+                  border: "3px solid red",
+                }}
+              >
+                <ListItemText
+                  sx={{
+                    border: "1px solid red",
+                  }}
+                  primary={text}
+                />
+              </ListItem>
+              {index !== array.length - 1 && <Divider />} {/* Divider after every item except the last one */}
+            </React.Fragment>
+          )
+        )}
       </List>
-      <Divider />
-
     </div>
   );
-
+  
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
@@ -209,7 +257,7 @@ function ResponsiveDrawer(props) {
           <Box sx={{
             '& .MuiButtonBase-root': {
               // border: '1px solid #FFF',
-              marginBottom:{xs:'20px',sm:'0px'}
+              marginBottom: { xs: '20px', sm: '0px' }
             },
 
             display: 'flex',

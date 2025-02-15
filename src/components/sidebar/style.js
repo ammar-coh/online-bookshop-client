@@ -125,6 +125,7 @@ const useStylesHome = makeStyles({
         width: "100%",
         "&.MuiAccordion-root": {
             backgroundColor: "#FFFFFF",
+            border:'1px solid black',
             color: "#333533",
             fontFamily: "Montserrat, sans-se",
             boxShadow: "none"

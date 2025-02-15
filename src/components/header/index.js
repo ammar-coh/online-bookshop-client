@@ -68,10 +68,6 @@ function Header() {
           width: "calc(100% - 53px)", // Apply only on screens ≤ 375px
         },
           xs:'calc(100% - 44px)',sm:'100%'}
-        // width:'100px'
-        // width: '100vw',  // Ensures it stays within the viewport
-        // margin: 0,      // Removes any unwanted spacing
-        // overflow: 'hidden' // Prevents overflow
       }}>
 
         {/* Left Section - Navbar Route */}

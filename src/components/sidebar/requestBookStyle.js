@@ -82,7 +82,7 @@ const useStylesRequestBook = makeStyles((theme)=>({
         backgroundColor: "#d22129",
         color: "#ffffff",
         textTransform: 'none',
-        padding: "16px 49px",
+        padding: '4px 14px',
         fontSize: "16px",
         fontWeight: 600,
         borderRadius: "5px",
@@ -105,8 +105,8 @@ const useStylesRequestBook = makeStyles((theme)=>({
          width: "100%",
         },
         [theme.breakpoints.up('xl')]: {
-            fontSize: "16px",
-            height:"58.5px",
+            fontSize: "12px",
+            // height:"28.5px",
             width: "100%",
   },}
         
