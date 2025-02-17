@@ -126,7 +126,7 @@ export const bookUpdated = async (bookId, updatedRow, cover, alertContent, setAl
 const newBook = (data) => {
     return axios.request({
         method: 'post',
-        url: `${url}/book/list`, // Replace with your POST endpoint
+        url: `${url}/book/list/add`, // Replace with your POST endpoint
         headers: {
             Authorization: `${localStorage.getItem('authorization')}`, // Use the appropriate header format
             'Content-Type': 'multipart/form-data',
@@ -136,6 +136,7 @@ const newBook = (data) => {
 };
 export const bookAdded = async (data, alertContent, setAlertContent, setAlertOpen, reset, setUserProfileImg, setIsUserImgSelected, setLoading, dispatch, addBookToList) => {
     try {
+        console.log(data,'data category')
         setLoading(true)
         const response = await newBook(data)
         if (response.status == 200 && response.data.status == true) {

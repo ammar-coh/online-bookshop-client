@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -10,6 +10,8 @@ import { useStylesCart } from './cartStyle';
 import Button from "@material-ui/core/Button";
 import { clearChat } from '../../redux/actions/index'
 import PropTypes from 'prop-types';
+import IconButton from '@material-ui/core/IconButton';
+import Checkout from '../../checkout';
 
 const theme = createTheme({
   palette: {
@@ -42,7 +44,15 @@ function Cart({
   const user = useSelector((state) => state.user_login.details);
   const classes = useStylesCart();
   const counts = useSelector((state) => state.checkout);
-  const handleChange = () => {
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const handleCartOpen = () => {
+    dispatch(clearChat());
+    setIsRoomActive?.(null);
+    setCurrentChat?.("");
+    setCurrentChatAvatar?.("");
+    leaveAllRooms?.({ roomID: roomID, userID: user?.user?.id });
+    setIsCartOpen(true);
     setSelectedSideBarMenu?.(null);
     setHomeSideBarActive?.(null);
     setSelectedSideBarMenuHome?.(null);
@@ -55,25 +65,24 @@ function Cart({
     setBookClubMenuItem?.(null);
     setActiveSideBar?.(null);
     setNavBarRoute?.('Cart');
-  }
+  };
+
+  const handleCartClose = () => {
+    setIsCartOpen(false);
+  };
+
   return (
-    <div className={classes.root}>
-      <Button
-        className={classes.cartContainerButton}
-        onClick={() => {
-          dispatch(clearChat());
-          setIsRoomActive?.(null);
-          setCurrentChat?.("");
-          setCurrentChatAvatar?.("")
-          leaveAllRooms?.({ roomID: roomID, userID: user?.user?.id })
-        }}>
-        <span className={classes.icon}>
-          <Link className={classes.checkout_link} to="/checkout" onClick={handleChange}>
+    <>
+      <div className={classes.root}>
+        <Button
+          className={classes.cartContainerButton}
+          onClick={handleCartOpen}
+        >
+          <span className={classes.icon}>
             <ThemeProvider theme={theme}>
               <Badge
                 badgeContent={counts.totalItems}
                 color="primary"
-                // fontSize="small"
                 sx={{
                   '& .MuiBadge-badge': {
                     fontSize: {
@@ -82,15 +91,20 @@ function Cart({
                       md: '10px'
                     }
                   }
-                }
-                }>
-                < ShoppingCartOutlinedIcon className={classes.cartIcon} />
+                }}
+              >
+                <ShoppingCartOutlinedIcon className={classes.cartIcon} />
               </Badge>
             </ThemeProvider>
-          </Link>
-        </span>
-      </Button>
-    </div>
+          </span>
+        </Button>
+      </div>
+
+      <Checkout 
+        open={isCartOpen} 
+        onClose={handleCartClose}
+      />
+    </>
   );
 }
 

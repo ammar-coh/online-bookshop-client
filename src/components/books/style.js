@@ -32,7 +32,7 @@ const useStylesIndex = makeStyles({
         height: "100%",
         width: "100%"
     },
-  
+
 });
 export { useStylesIndex }
 
@@ -54,7 +54,7 @@ const useStylesTable = makeStyles({
         fontSize: "16px",
         fontFamily: "Montserrat, sans-se",
     },
-    paragraph: {    },
+    paragraph: {},
     category: {
         padding: "0px 30px 0px 30px",
         fontSize: "16px",
@@ -74,7 +74,7 @@ const useStylesTable = makeStyles({
         display: "-webkit-box",
         textAlign: "center",
         margin: "0px",
-      
+
         '-webkit-line-clamp': 6,
         '-webkit-box-orient': 'vertical',
         fontSize: "16px",
@@ -106,7 +106,7 @@ const useStylesTable = makeStyles({
     dataGrid: {
         width: "100%",
         padding: "0px 5px",
-        height:"100%"
+        height: "100%"
     },
     stock: {
         margin: "auto"
@@ -187,6 +187,7 @@ const useStylesAddBook = makeStyles({
         '& .MuiOutlinedInput-root': {
             '& fieldset': {
                 borderColor: 'rgba(0, 0, 0, 0.08)',
+                // borderColor: 'red' ,
                 borderStyle: "solid",
             },
             '&:hover fieldset': {
@@ -197,6 +198,38 @@ const useStylesAddBook = makeStyles({
             },
         },
     },
+    selectField: {
+    
+        "& .MuiOutlinedInput-notchedOutline": {
+            borderColor: 'rgba(0, 0, 0, 0.08)',
+        },
+       
+        '& .MuiOutlinedInput-root': {
+        
+            '& fieldset': {
+                borderColor: 'rgba(0, 0, 0, 0.08)',
+                borderStyle: "solid",
+            },
+            '&:hover fieldset': {
+                borderColor: '#d22129',
+            },
+            '&.Mui-focused fieldset': {
+                borderColor: '#d22129',
+            },
+        },
+        '& .MuiSelect-outlined': {
+            padding: '10.5px 14px',
+            '&.Mui-focused fieldset': {
+                borderColor: '#d22129',
+            },
+        },
+        '& .MuiSelect-select': {
+            borderColor: 'rgba(0, 0, 0, 0.08)',
+            '&.Mui-focused fieldset': {
+                borderColor: '#d22129',
+            },
+        }
+    },
     error_message: {
         color: "#d22129",
         margin: "0px",
@@ -206,14 +239,14 @@ const useStylesAddBook = makeStyles({
             color: "#d22129",
         },
     },
-    backButtonDiv:{
-        display:"flex",
-        justifyContent:"end",
-        width:"50%",
+    backButtonDiv: {
+        display: "flex",
+        justifyContent: "end",
+        width: "50%",
         justifyContent: "flex-end",
         padding: "20px 30px 10px 0px ",
     },
-    backButton:{
+    backButton: {
         backgroundColor: "#d22129",
         color: "#fff",
         textTransform: "none",

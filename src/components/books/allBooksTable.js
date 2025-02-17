@@ -65,21 +65,30 @@ function Table() {
     const signal = controller.signal;
   
     const fetchData = async () => {
-      const books = await fetchAllBookData(signal);
-      await setAllBooks(books.data || []); // ✅ Ensure it's always an array
-      let array = (allBooks || []).map((book) => ({
-        id: book?._id || "",
-        coverImage: book?.image || "",
-        price: book?.price || 0,
-        rating: book?.rating || 0,
-        stock: book?.stock || 0,
-        title: book?.title || "Unknown",
-        category: book?.category || "Uncategorized",
-        author: book?.author || "Unknown",
-        description: book?.description || "No description available"
-      }));
-      setRows(array || []);
-      setBookListUpdate(false);
+      try {
+        const books = await fetchAllBookData(signal);
+        const booksData = books.data || [];
+        setAllBooks(booksData);
+        
+        const array = booksData.map((book) => ({
+          id: book?._id || "",
+          coverImage: book?.image || "",
+          price: book?.price || 0,
+          rating: book?.rating || 0,
+          stock: book?.stock || 0,
+          title: book?.title || "Unknown",
+          category: book?.category || "Uncategorized",
+          author: book?.author || "Unknown",
+          description: book?.description || "No description available"
+        }));
+        
+        setRows(array);
+        setBookListUpdate(false);
+      } catch (error) {
+        if (!signal.aborted) {
+          console.error('Error fetching books:', error);
+        }
+      }
     };
   
     fetchData();
@@ -89,7 +98,7 @@ function Table() {
     };
   }, [bookListUpdated]);
   
-
+console.log(rows)
 
   const handleEditClick = (id) => () => {
     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
