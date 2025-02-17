@@ -29,7 +29,29 @@ function Header() {
   const [list, setList] = useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user_login.details);
-  const { roomID, setRoomID, currentChat, setCurrentChat, isRoomActive, setIsRoomActive, recepient_status, setNotificationOpen, setRecepientId } = useContext(Context);
+  const {
+    roomID, setRoomID,
+    currentChat, setCurrentChat,
+    isRoomActive, setIsRoomActive,
+    recepient_status,
+    notification_open, setNotificationOpen,
+    setRecepientId,
+    profileUpdate,
+    setProfileUpdate,
+    setCurrentChatAvatar,
+    setSelectedSideBarMenu,
+    setHomeSideBarActive,
+    setSelectedSideBarMenuHome,
+    setAdminSideBarActive,
+    setProfileSideBarActive,
+    setAnchorElHome,
+    setAnchorElAdmin,
+    setAnchorElProfile,
+    setSubMenuItemActiveState,
+    setBookClubMenuItem,
+    setActiveSideBar,
+    setNavBarRoute
+  } = useContext(Context);
 
   const containerRef = useRef(null);
 
@@ -54,7 +76,13 @@ function Header() {
       setErrorMessage(null);
     }
   };
+  const leaveAllRooms = async (data) => {
 
+    await socket.emit("leave_private_room", {
+      roomID: data.roomID,
+      userID: data.userID,
+    });
+  }
   return (
     <Box component="form" onSubmit={(e) => { e.preventDefault(); }}>
       {/* Main Header Container */}
@@ -144,16 +172,17 @@ function Header() {
                     }}
                   >
                     <Chat_Notifications
-                      roomID={roomID}
-                      setRoomID={setRoomID}
-                      currentChat={currentChat}
-                      setCurrentChat={setCurrentChat}
-                      isRoomActive={isRoomActive}
-                      setIsRoomActive={setIsRoomActive}
-                      list={list}
-                      recepient_status={recepient_status}
-                      setNotificationOpen={setNotificationOpen}
-                      setRecepientId={setRecepientId}
+                          roomID={roomID}
+                          setRoomID={setRoomID}
+                          currentChat={currentChat}
+                          setCurrentChat={setCurrentChat}
+                          setCurrentChatAvatar={setCurrentChatAvatar}
+                          isRoomActive={isRoomActive}
+                          setIsRoomActive={setIsRoomActive}
+                          list={list}
+                          recepient_status={recepient_status}
+                          setNotificationOpen={setNotificationOpen}
+                          setRecepientId={setRecepientId}
                     />
                   </Box>
                   {/* Cart */}
@@ -163,7 +192,25 @@ function Header() {
                     justifyContent: { xs: 'start', sm: 'center', md: 'start', lg: 'center', xl: 'start' },
                     width: { xs: '30%', sm: '25%', md: '100%', xl: '50%' },
                   }}>
-                    <Cart />
+                    <Cart 
+                  setSelectedSideBarMenu={setSelectedSideBarMenu}
+                  setHomeSideBarActive={setHomeSideBarActive}
+                  setSelectedSideBarMenuHome={setSelectedSideBarMenuHome}
+                  setAdminSideBarActive={setAdminSideBarActive}
+                  setProfileSideBarActive={setProfileSideBarActive}
+                  setAnchorElHome={setAnchorElHome}
+                  setAnchorElAdmin={setAnchorElAdmin}
+                  setAnchorElProfile={setAnchorElProfile}
+                  setSubMenuItemActiveState={setSubMenuItemActiveState}
+                  setBookClubMenuItem={setBookClubMenuItem}
+                  setNavBarRoute={setNavBarRoute}
+                  setActiveSideBar={setActiveSideBar}
+                  setIsRoomActive={setIsRoomActive}
+                  roomID={roomID}
+                  setCurrentChatAvatar={ setCurrentChatAvatar}
+                  setCurrentChat={ setCurrentChat} 
+                  leaveAllRooms={leaveAllRooms}
+                    />
                   </Box>
                   {/* Profile Menu */}
                   <Box sx={{
@@ -172,7 +219,8 @@ function Header() {
                     // border:'1px solid blue',
                     justifyContent: { xs: 'end', sm: 'center', md: 'start', lg: 'center', xl: 'end' }
                   }}>
-                    <AccountMenu />
+                    <AccountMenu 
+                    profileUpdate={profileUpdate} setProfileUpdate={setProfileUpdate} />
                   </Box>
                 </Box>
               </Grid>

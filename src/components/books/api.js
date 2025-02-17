@@ -2,33 +2,51 @@ import axios from 'axios';
 const url = process.env.REACT_APP_BASE_URL
 const getAllBooks = async (data) => {
     return await axios.request({
-        method: 'get',
+        method: 'post',
         url: `${url}/book/list`,
-        headers: { Authorization: ` ${localStorage.getItem('authorization')}` }
-
+        headers: { Authorization: ` ${localStorage.getItem('authorization')}` },
+        data
     })
 }
-export const fetchAllBookData = async (setAllBooks, setRows, allBooks, setBookListUpdate) => {
+// export const fetchAllBookData = async (setAllBooks, setRows, allBooks, setBookListUpdate) => {
+//     try {
+//         const response = await getAllBooks({filter:{}})
+//         await setAllBooks(response.data);
+//         console.log('allboobs', allBooks)
+//         setRows(allBooks.map((book) => ({
+//             id: book._id,
+//             coverImage: book.image,
+//             price: book.price,
+//             rating: book.rating,
+//             stock: book.stock,
+//             title: book.title,
+//             category: book.category,
+//             author: book.author,
+//             description: book.description
+//         })))
+//         setBookListUpdate(true)
+//     } catch (error) {
+//         console.error("API Error:", error);
+//     }
+// };
+export const fetchAllBookData = async (setAllBooks, setRows, setBookListUpdate, signal) => {
     try {
-        const response = await getAllBooks()
-        await setAllBooks(response.data);
-        setRows(allBooks.map((book) => ({
-            id: book._id,
-            coverImage: book.image,
-            price: book.price,
-            rating: book.rating,
-            stock: book.stock,
-            title: book.title,
-            category: book.category,
-            author: book.author,
-            description: book.description
-        })))
-        setBookListUpdate(true)
+      const response = await getAllBooks({ filter: {} });
+  
+    //  / Prevent updating state if unmounted
+  
+      const books = response.data; // Store response to avoid stale state issues
+  return books
+     
+  
+    //   setBookListUpdate(false); // ✅ Set to false instead of true to avoid unnecessary re-fetch
     } catch (error) {
+      if (error.name !== "AbortError") {
         console.error("API Error:", error);
+      }
     }
-};
-
+  };
+  
 const deleteBook = (bookId) => {
     return axios.request({
         method: 'delete',

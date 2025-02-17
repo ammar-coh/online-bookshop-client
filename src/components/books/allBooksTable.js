@@ -34,20 +34,21 @@ const renderRatingEditCell = (params) => {
 
 function Table() {
   const dispatch = useDispatch()
-  const { alertContent, setAlertContent, setAlertOpen, cover, setCover } = useContext(Context);
+  const { alertContent, setAlertContent, setAlertOpen, cover, setCover,allBooks, setAllBooks } = useContext(Context);
   const classes = useStylesTable()
-  const { allBooks, setAllBooks } = useContext(Context);
-  const initialRows = allBooks.map((book) => ({
-    id: book._id,
-    coverImage: book.image,
-    price: book.price,
-    rating: book.rating,
-    stock: book.stock,
-    title: book.title,
-    category: book.category,
-    author: book.author,
-    description: book.description
-  }))
+  // const { allBooks, setAllBooks } = useContext(Context);
+  console.log('allBooks', allBooks)
+  const initialRows = (allBooks.data || []).map((book) => ({
+    id: book?._id || "",
+    coverImage: book?.image || "",
+    price: book?.price || 0,
+    rating: book?.rating || 0,
+    stock: book?.stock || 0,
+    title: book?.title || "Unknown",
+    category: book?.category || "Uncategorized",
+    author: book?.author || "Unknown",
+    description: book?.description || "No description available"
+  }));
   const [rows, setRows] = React.useState(initialRows);
   const [bookListUpdated, setBookListUpdate] = useState(false)
   const [rowModesModel, setRowModesModel] = React.useState({});
@@ -60,8 +61,34 @@ function Table() {
 
 
   useEffect(() => {
-    fetchAllBookData(setAllBooks, setRows, allBooks, setBookListUpdate)
-  }, [bookListUpdated])
+    const controller = new AbortController();
+    const signal = controller.signal;
+  
+    const fetchData = async () => {
+      const books = await fetchAllBookData(signal);
+      await setAllBooks(books.data || []); // ✅ Ensure it's always an array
+      let array = (allBooks || []).map((book) => ({
+        id: book?._id || "",
+        coverImage: book?.image || "",
+        price: book?.price || 0,
+        rating: book?.rating || 0,
+        stock: book?.stock || 0,
+        title: book?.title || "Unknown",
+        category: book?.category || "Uncategorized",
+        author: book?.author || "Unknown",
+        description: book?.description || "No description available"
+      }));
+      setRows(array || []);
+      setBookListUpdate(false);
+    };
+  
+    fetchData();
+  
+    return () => {
+      controller.abort();
+    };
+  }, [bookListUpdated]);
+  
 
 
   const handleEditClick = (id) => () => {
@@ -394,7 +421,7 @@ function Table() {
             pagination: CustomPagination,
             loadingOverlay: LinearProgress,
           }}
-          loading={allBooks.length > 0 ? false : true}
+          loading={allBooks?.length > 0 ? false : true}
           slotProps={{
             toolbar: { setRows, setRowModesModel },
           }}

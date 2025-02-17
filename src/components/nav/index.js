@@ -37,12 +37,17 @@ import Books from '../books/index';
 import ItemContainer from "../home/ItemContainer"
 import Banner from '../home/banner';
 import { useSelector, useDispatch } from "react-redux";
-
+import libertyBookslogo from '../../Assets/newlogoliberty-250x67 (1)-250x67.png'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    "& .MuiPaper-root":{
+      border:'none'
+    },
+    
+  
   },
   drawer: {
     [theme.breakpoints.up('md')]: {
@@ -54,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#d22129",
     display: 'flex',
     height: '64.5px',
-    // boxShadow:'none',
+    boxShadow:'none',
     [theme.breakpoints.up('xs')]: {
       height: '100px',
       '& .MuiToolbar-root': {
@@ -138,7 +143,17 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
+  // toolbar: theme.mixins.toolbar,
+  toolbar: {
+    ...theme.mixins.toolbar, // Inherit default toolbar styles
+    height: "64.5px", // Default height
+    display:'flex',
+    alignItems:'center',
+    [theme.breakpoints.down("xs")]: {
+      height: "100px",
+
+    },
+  },
   drawerPaper: {
     width: drawerWidth,
 
@@ -146,11 +161,12 @@ const useStyles = makeStyles((theme) => ({
       // border: "1px solid red",
       padding: '0px 0px 0px 10px'
     },
-    overflowY: "auto", // Enable scrolling
+    overflowY: "auto",// Enable scrolling
     "&::-webkit-scrollbar": {
       width: "6px",
       height: "6px",
       backgroundColor: theme.palette.mode === "dark" ? "#262626" : "#F2F2F2",
+        display: "none"
     },
     "&::-webkit-scrollbar-track": {
       WebkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.3)",
@@ -168,6 +184,25 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     // padding: theme.spacing(3),
   },
+  img:{
+    width:'100%',
+    [theme.breakpoints.between('xs', 'sm')]: {
+        width: "100%",
+        // height:"80px"
+
+    },
+    // [theme.breakpoints.between('md', 'lg')]: {
+    //     width: "250px",
+    //     // height:"67px"
+    // },
+    // [theme.breakpoints.between('lg', 'xl')]: {
+    //    width:"250px",
+    // // height:"67px"
+    // },
+    // [theme.breakpoints.up('xl')]: {
+    //     width: "100%"
+    // },
+},
 }));
 
 function ResponsiveDrawer(props) {
@@ -183,38 +218,20 @@ function ResponsiveDrawer(props) {
   const details = useSelector((state) => state.books.details);
 
   const iconsArray = [<RoofingIcon />, <AdminPanelSettingsOutlinedIcon />, <PersonOutlinedIcon />]
-  // const drawer = (
-  //   <div>
-  //     <div className={classes.toolbar} />
-  //     <Divider />
-  //     <List sx={{
-  //       border: "1px solid red",
-  //       '&.MuiListItem-root': {
-  //         border: "1px solid red",
-  //       }
-  //     }}
-  //     >
-  //       {[<Home />, <Admin />, <ProfileSide />, <Requestbook />].map((text, index) => (
-  //         <ListItem key={index} sx={{
-  //           border: "3px solid red",
 
-  //         }}
-  //         >
-  //           <ListItemText sx={{
-  //             border: "1px solid red",
-
-  //           }} primary={text} />
-  //         </ListItem>
-  //           {index !== array.length - 1 && <Divider />}
-  //       ))}
-       
-  //     </List>
-     
-  //   </div>
-  // );
   const drawer = (
-    <div>
-      <div className={classes.toolbar} />
+    <Box>
+      <div className={classes.toolbar} style={{
+    position: "sticky",
+    top: 0,
+    backgroundColor: "#d22129",
+    zIndex: 1100,
+}}><img src={libertyBookslogo} 
+      className={classes.img}
+      /></div>
+      {/* <Box sx={{
+        // border:'1px solid red'
+        }}>Ammar</Box> */}
       <Divider />
       <List
         sx={{
@@ -244,9 +261,9 @@ function ResponsiveDrawer(props) {
           )
         )}
       </List>
-    </div>
+    </Box>
   );
-  
+
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (

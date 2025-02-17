@@ -9,6 +9,8 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useStylesCart } from './cartStyle';
 import Button from "@material-ui/core/Button";
 import { clearChat } from '../../redux/actions/index'
+import PropTypes from 'prop-types';
+
 const theme = createTheme({
   palette: {
     neutral: {
@@ -41,18 +43,18 @@ function Cart({
   const classes = useStylesCart();
   const counts = useSelector((state) => state.checkout);
   const handleChange = () => {
-    setSelectedSideBarMenu(null)
-    setHomeSideBarActive(null)
-    setSelectedSideBarMenuHome(null)
-    setAdminSideBarActive(null)
-    setProfileSideBarActive(null)
-    setAnchorElHome(null)
-    setAnchorElAdmin(null)
-    setAnchorElProfile(null)
-    setSubMenuItemActiveState(null)
-    setBookClubMenuItem(null)
-    setActiveSideBar(null)
-    setNavBarRoute('Cart')
+    setSelectedSideBarMenu?.(null);
+    setHomeSideBarActive?.(null);
+    setSelectedSideBarMenuHome?.(null);
+    setAdminSideBarActive?.(null);
+    setProfileSideBarActive?.(null);
+    setAnchorElHome?.(null);
+    setAnchorElAdmin?.(null);
+    setAnchorElProfile?.(null);
+    setSubMenuItemActiveState?.(null);
+    setBookClubMenuItem?.(null);
+    setActiveSideBar?.(null);
+    setNavBarRoute?.('Cart');
   }
   return (
     <div className={classes.root}>
@@ -60,10 +62,10 @@ function Cart({
         className={classes.cartContainerButton}
         onClick={() => {
           dispatch(clearChat());
-          setIsRoomActive(null);
-          setCurrentChat("");
-          setCurrentChatAvatar("")
-          leaveAllRooms({ roomID: roomID, userID: user?.user?.id })
+          setIsRoomActive?.(null);
+          setCurrentChat?.("");
+          setCurrentChatAvatar?.("")
+          leaveAllRooms?.({ roomID: roomID, userID: user?.user?.id })
         }}>
         <span className={classes.icon}>
           <Link className={classes.checkout_link} to="/checkout" onClick={handleChange}>
@@ -91,5 +93,25 @@ function Cart({
     </div>
   );
 }
+
+Cart.propTypes = {
+  setSelectedSideBarMenu: PropTypes.func,
+  setHomeSideBarActive: PropTypes.func,
+  setSelectedSideBarMenuHome: PropTypes.func,
+  setAdminSideBarActive: PropTypes.func,
+  setProfileSideBarActive: PropTypes.func,
+  setAnchorElHome: PropTypes.func,
+  setAnchorElAdmin: PropTypes.func,
+  setAnchorElProfile: PropTypes.func,
+  setSubMenuItemActiveState: PropTypes.func,
+  setBookClubMenuItem: PropTypes.func,
+  setNavBarRoute: PropTypes.func,
+  setActiveSideBar: PropTypes.func,
+  setIsRoomActive: PropTypes.func.isRequired,
+  roomID: PropTypes.string,
+  setCurrentChatAvatar: PropTypes.func.isRequired,
+  setCurrentChat: PropTypes.func.isRequired,
+  leaveAllRooms: PropTypes.func.isRequired
+};
 
 export default Cart;
