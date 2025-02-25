@@ -2,10 +2,10 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginLeft: "10px",
-    // width: "100%",
+    // marginLeft: "10px",
+    width: "100%",
     zIndex: 1,
-    border:"1px solid black",
+    // border:"1px solid black",
     [theme.breakpoints.up('sm')]: {
       width: "257px",
       height:"195px",
@@ -17,21 +17,23 @@ const useStyles = makeStyles((theme) => ({
       marginLeft:"5px"
     },
     [theme.breakpoints.up('lg')]: {
-      width: "100%",
-      // height:"219px",
-      marginLeft:"150px"
+      width: "300px",
+      height:"219px",
+      // marginLeft:"17px"
     },
     [theme.breakpoints.up('xl')]: {
       width: "401px",
       height:"219px",
-      marginLeft:"110px"
+      // marginLeft:"110px"
     },
 
   },
   mainContainer: {
     display: "flex",
-    padding: "10px 5px",
-   
+    padding: "5px 5px",
+    [theme.breakpoints.between('xs', 'sm')]: {
+      width:"100%"
+    },
     [theme.breakpoints.between('sm', 'md')]: {
       width:"100%"
     },
@@ -49,13 +51,18 @@ const useStyles = makeStyles((theme) => ({
   image_container: {
     padding: "0px 10px 0px 0px",
     // border:"1px solid green",
-    [theme.breakpoints.between('sm', 'md')]: {
+    [theme.breakpoints.between('xs','sm')]: {
       width: "40%",
+      padding: "0px 0px 0px 0px",
+      // height: "200px"
+    },
+    [theme.breakpoints.between('sm', 'md')]: {
+      width: "20%",
       padding: "0px 0px 0px 0px",
       height: "fit-content"
     },
     [theme.breakpoints.between('md', 'lg')]: {
-      width: "40%",
+      width: "30%",
       padding: "0px 0px 0px 0px",
       height: "fit-content"
     },
@@ -74,11 +81,14 @@ const useStyles = makeStyles((theme) => ({
     display: "grid",
     width: "70%",
     // border: "1px solid blue",
-    [theme.breakpoints.between('sm', 'md')]: {
+    [theme.breakpoints.between('xs', 'sm')]: {
       width: "60%",
     },
+    [theme.breakpoints.between('sm', 'md')]: {
+      width: "80%",
+    },
     [theme.breakpoints.between('md', 'lg')]: {
-      width: "60%",
+      width: "70%",
      
     },
     [theme.breakpoints.between('lg', 'xl')]: {
@@ -94,9 +104,13 @@ const useStyles = makeStyles((theme) => ({
   media: {
     width: "100%",
     height: "168px",
+    [theme.breakpoints.between('xs', 'sm')]: {
+      width: "100%",
+      height: "225px",
+    },
     [theme.breakpoints.between('sm', 'md')]: {
       width: "100%",
-      height: "175px",
+      height: "210px",
     },
     [theme.breakpoints.between('md', 'lg')]: {
       width: "100%",
@@ -136,14 +150,15 @@ const useStyles = makeStyles((theme) => ({
     // border:"0.5px solid red",
     height: "35px",
     padding: "10px 0px 0px 0px",
+    width:'100%', 
     [theme.breakpoints.between('sm', 'md')]: {
       padding: "0px 0px 0px 3px",
     },
     [theme.breakpoints.between('md', 'lg')]: {
       padding: "0px 0px 0px 3px",
     },
-    [theme.breakpoints.between('lg', 'xl')]: {
-      padding: "0px 0px 0px 3px",
+    [theme.breakpoints.up('lg')]: {
+      padding: "3px",
     },
     [theme.breakpoints.up('xl')]: {
       padding: "0px 0px 0px 3px",
@@ -164,20 +179,19 @@ const useStyles = makeStyles((theme) => ({
     WebkitBoxOrient: "vertical",
     [theme.breakpoints.between('sm', 'md')]: {
       fontSize: "15px",
-   
     },
     [theme.breakpoints.between('md', 'lg')]: {
       fontSize: "14px"
     },
-    [theme.breakpoints.between('lg', 'xl')]: {
-      fontSize: "16px"
+    [theme.breakpoints.up('lg')]: {
+      fontSize: "14px"
     },
     [theme.breakpoints.up('xl')]: {
       fontSize: "14px"
     },
   },
   author_div: {
-    // border:"1px solid black",
+    // border:"1px solid blue",
     padding: "10px 0px 0px 0px",
     [theme.breakpoints.between('sm', 'md')]: {
       padding: "10px 0px 0px 2px",
@@ -204,8 +218,8 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.between('md', 'lg')]: {
       fontSize: "13px"
     },
-    [theme.breakpoints.between('lg', 'xl')]: {
-      fontSize: "15px"
+    [theme.breakpoints.up('lg')]: {
+      fontSize: "14px"
     },
     [theme.breakpoints.up('xl')]: {
       fontSize: "14px"
@@ -236,7 +250,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
   price_div: {
-    // border: "1px solid black",
+    // border: "1px solid green",
     padding: "10px 0px 10px 0px",
     [theme.breakpoints.between('sm', 'md')]: {
       padding: "5px 0px 5px 5px",
@@ -272,16 +286,26 @@ const useStyles = makeStyles((theme) => ({
   },
   addtoCart_div: {
     // border: "1px solid black",
+    alignItems:'end',
+    display:'flex',
+    width:'100%',
     "& .MuiCardActions-root": {
       padding: "0px 0px 0px 0px"
+    },
+    [theme.breakpoints.between('xs', 'sm')]: {
+      padding: "0px 0px 0px 4px",
+      marginTop:"0px",
+      height:'73px'
     },
     [theme.breakpoints.between('sm', 'md')]: {
       padding: "0px 0px 0px 4px",
       marginTop:"0px",
+        height:'80px',
     },
     [theme.breakpoints.between('md', 'lg')]: {
       padding: "0px 0px 0px 2px",
       marginTop:"0px",
+      height:'30px',
     },
     [theme.breakpoints.between('lg', 'xl')]: {
       padding: "0px 0px 0px 3px",
@@ -307,10 +331,16 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "white"
     },
     padding: "7px 5px",
+    [theme.breakpoints.between('xs', 'sm')]: {
+      fontSize: "16px",
+      padding: "0px 0px",
+      width:"100%",
+      height:"39px",
+    },
     [theme.breakpoints.between('sm', 'md')]: {
       fontSize: "16px",
       padding: "0px 0px",
-      width:"140px",
+      width:"100%",
       height:"39px",
     },
     [theme.breakpoints.between('md', 'lg')]: {

@@ -15,6 +15,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { BsTrash } from "react-icons/bs";
 import { GrUpdate } from "react-icons/gr";
 import { useStyles } from './itemStyle'
+import Grid from "@material-ui/core/Grid";
 
 const colors = {
   orange: "#FFBA5A",
@@ -58,129 +59,139 @@ function Item({ id, image, price, rating, author, title, description }) {
         price: price,
         author: author,
         description: description,
-        rating:rating,
-        title:title
+        rating: rating,
+        title: title
       }
     ]
     localStorage.setItem("bookSearch", JSON.stringify(book))
   }
   return (
-<Box className={classes.root} >
-    <Card >
-      <div className={classes.mainContainer}>
-        <div className={classes.image_container}>
-          <CardActionArea>
-            <CardMedia
-              className={classes.media}
-              image={image}
-              title="Contemplative Reptile"
-            />
-          </CardActionArea>
-        </div>
-        <div className={classes.information_container}>
-          <CardActionArea>
-            <CardContent>
-              <div className={classes.title_div}>
-                <Link to="/book page" onClick={() => { link() }} className={classes.linkTitle} >
-                  <Typography
-                    className={classes.title}
-                    variant="h7"
-                    component="h2"
-                  >
-                    {title ? title.replace(/\b\w/g, (match) => match.toUpperCase()) : "No Title"}
-                  </Typography>
-                </Link>
-              </div>
-              <div className={classes.author_div}>
-                <Typography
-                  className={classes.author}
-                  variant="h7"
-                  component="h2"
-                >
-                  {author ? author : "Unknown"}
-                </Typography>
-              </div>
-              <div className={classes.rating_div}>
-                {rating >= 1
-                  ? ratings.map((_, index) => {
-                    return (
-                      <FaStar
-                        key={index}
-                        style={{ cursor: "cursor", marginRight: 5 }}
-                        color={rating > index ? colors.orange : colors.grey}
-                        onClick={
-                          () =>
-                            dispatchTwo(
-                              updateUserProfile({ ratings: index + 1, id: id })
-                            )
-                        }
-                        onHover={() => handleHover(index + 1)}
-                        onMouseLeave={handleMouseLeave}
-                      />
-                    );
-                  })
-                  : ratings.map((_, index) => {
-                    return (
-                      <FaStar
-                        key={index}
-                        style={{ cursor: "cursor", marginRight: 10 }}
-                        color={
-                          (currentRating || currentHoverValue) > index
-                            ? colors.orange
-                            : colors.grey
-                        }
-                        /*onClick={() => handleClickRat(index + 1)}*/
-                        onClick={() =>
-                          dispatchTwo(updateUserProfile({ ratings: index + 1, id: id }))
-                        }
-                        onHover={() => handleHover(index + 1)}
-                        onMouseLeave={handleMouseLeave}
-                      />
-                    );
-                  })}
-
-              </div>
-
-              <div className={classes.price_div}>
-                <Typography
-                  className={classes.price}
-                  gutterBottom
-                  variant="h7"
-                  component="h2"
-                >
-                  Price $ {price}
-                </Typography>
-              </div>
-            </CardContent>
-
-
-            <div className={classes.addtoCart_div}>
-              <CardActions>
-                <Button
-                  onClick={() =>
-                    dispatch(addToCartSaga({ id: user.user.id, product_id: id }))
-                  }
-                  className={classes.cart}
-                  size="small"
-                >
-                  Add to Cart
-                </Button>
-                {user.role == "admin" ? (
-                  <BsTrash
-                    onClick={() =>
-                      dispatch(deleteDispatch({ id: user.user.id, product_id: id }))
-                    }
-                    className={classes.del}
+    <Box
+    //  className={classes.root}
+    sx={{
+      width: {
+        xs: '100%',
+        lg: '100%',
+        xl: '100%'
+      },
+      // border: '1px solid red'
+    }}
+     >
+          <Card  >
+            <div className={classes.mainContainer}>
+              <div className={classes.image_container}>
+                <CardActionArea>
+                  <CardMedia
+                    className={classes.media}
+                    image={image}
+                    title="Contemplative Reptile"
                   />
-                ) : null}
-              </CardActions>
+                </CardActionArea>
+              </div>
+              <div className={classes.information_container}>
+                <CardActionArea>
+                  <CardContent>
+                    <div className={classes.title_div}>
+                      <Link to="/book page" onClick={() => { link() }} className={classes.linkTitle} >
+                        <Typography
+                          className={classes.title}
+                          variant="h7"
+                          component="h2"
+                        >
+                          {title ? title.replace(/\b\w/g, (match) => match.toUpperCase()) : "No Title"}
+                        </Typography>
+                      </Link>
+                    </div>
+                    <div className={classes.author_div}>
+                      <Typography
+                        className={classes.author}
+                        variant="h7"
+                        component="h2"
+                      >
+                        {author ? author : "Unknown"}
+                      </Typography>
+                    </div>
+                    <div className={classes.rating_div}>
+                      {rating >= 1
+                        ? ratings.map((_, index) => {
+                          return (
+                            <FaStar
+                              key={index}
+                              style={{ cursor: "cursor", marginRight: 5 }}
+                              color={rating > index ? colors.orange : colors.grey}
+                              onClick={
+                                () =>
+                                  dispatchTwo(
+                                    updateUserProfile({ ratings: index + 1, id: id })
+                                  )
+                              }
+                              onHover={() => handleHover(index + 1)}
+                              onMouseLeave={handleMouseLeave}
+                            />
+                          );
+                        })
+                        : ratings.map((_, index) => {
+                          return (
+                            <FaStar
+                              key={index}
+                              style={{ cursor: "cursor", marginRight: 10 }}
+                              color={
+                                (currentRating || currentHoverValue) > index
+                                  ? colors.orange
+                                  : colors.grey
+                              }
+                              /*onClick={() => handleClickRat(index + 1)}*/
+                              onClick={() =>
+                                dispatchTwo(updateUserProfile({ ratings: index + 1, id: id }))
+                              }
+                              onHover={() => handleHover(index + 1)}
+                              onMouseLeave={handleMouseLeave}
+                            />
+                          );
+                        })}
+
+                    </div>
+
+                    <div className={classes.price_div}>
+                      <Typography
+                        className={classes.price}
+                        gutterBottom
+                        variant="h7"
+                        component="h2"
+                      >
+                        Price $ {price}
+                      </Typography>
+                    </div>
+                  </CardContent>
+
+
+                  <div className={classes.addtoCart_div}>
+                    <CardActions style={{width:'100%'}}>
+                      <Button
+                        onClick={() =>
+                          dispatch(addToCartSaga({ id: user.user.id, product_id: id }))
+                        }
+                        className={classes.cart}
+                        size="small"
+                      >
+                        Add to Cart
+                      </Button>
+                      {user.role == "admin" ? (
+                        <BsTrash
+                          onClick={() =>
+                            dispatch(deleteDispatch({ id: user.user.id, product_id: id }))
+                          }
+                          className={classes.del}
+                        />
+                      ) : null}
+                    </CardActions>
+                  </div>
+
+                </CardActionArea>
+
+              </div>
             </div>
-
-          </CardActionArea>
-
-        </div>
-      </div>
-    </Card>
+          </Card>
     </Box>
   );
 }

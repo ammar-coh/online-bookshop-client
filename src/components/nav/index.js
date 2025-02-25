@@ -16,7 +16,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import Header from "../header/index";
 import Home from '../sidebar/home';
 import Admin from '../sidebar/admin'
@@ -95,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 2,
     width: "100%",
     padding: "50px 0px 50px 0px",
+// border:'1px solid red',
 
 
     [theme.breakpoints.between('sm', 'md')]: {
@@ -102,19 +103,19 @@ const useStyles = makeStyles((theme) => ({
       gap: "50px",
       padding: "50px 0px 50px 0px",
     },
-    [theme.breakpoints.between('md', 'lg')]: {
+    [theme.breakpoints.up('md')]: {
       width: "100%",
-      padding: "50px 50px 50px 0px",
-      gap: "10px"
+      padding: "50px 0px 50px 0px",
+
     },
-    [theme.breakpoints.between('lg', 'xl')]: {
+    [theme.breakpoints.up('lg')]: {
       width: "100%",
       gap: "15px",
-      padding: "50px 50px 50px 0px",
+      padding: "50px 0px 50px 0px",
     },
     [theme.breakpoints.up('xl')]: {
       width: "100%",
-      padding: "50px 50px 50px 0px",
+      padding: "50px 0px 50px 0px",
       gap: "30px",
 
     },
@@ -235,7 +236,7 @@ function ResponsiveDrawer(props) {
       <Divider />
       <List
         sx={{
-          border: "1px solid red",
+          // border: "1px solid red",
           "&.MuiListItem-root": {
             border: "1px solid red",
           },
@@ -346,23 +347,27 @@ function ResponsiveDrawer(props) {
             <div>
               <Banner />
             </div>
-            <div className={classes.item} >
-              {details.length > 0 &&
-                details.map((i) => (
-                  <div>
-                    <ItemContainer
-                      image={i?.image}
-                      price={i.price}
-                      year={i.year}
-                      id={i._id}
-                      rating={i.rating}
-                      author={i?.author}
-                      title={i?.title}
-                      description={i?.description}
-                    />
-                  </div>
-                ))}
-
+            <div className={classes.item}>
+              <Grid container spacing={2}>
+                {details.length > 0 &&
+                  details.map((i) => (
+                    <Grid item xs={12} sm={12} 
+                    md={6} 
+                    lg={4} 
+                    xl={3}key={i._id}>
+                      <ItemContainer
+                        image={i?.image}
+                        price={i.price}
+                        year={i.year}
+                        id={i._id}
+                        rating={i.rating}
+                        author={i?.author}
+                        title={i?.title}
+                        description={i?.description}
+                      />
+                    </Grid>
+                  ))}
+              </Grid>
             </div>
 
 
