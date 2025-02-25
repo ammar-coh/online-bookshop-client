@@ -2,27 +2,27 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginLeft: "0px",
-    width: "100%",
+    marginLeft: "10px",
+    // width: "100%",
     zIndex: 1,
-    // border:"1px solid black",
-    [theme.breakpoints.between('sm', 'md')]: {
+    border:"1px solid black",
+    [theme.breakpoints.up('sm')]: {
       width: "257px",
       height:"195px",
       marginLeft:"00px"
     },
-    [theme.breakpoints.between('md', 'lg')]: {
+    [theme.breakpoints.up('md')]: {
       width: "220px",
       height:"175px",
       marginLeft:"5px"
     },
-    [theme.breakpoints.between('lg', 'xl')]: {
-      width: "301px",
-      height:"219px",
-      marginLeft:"50px"
+    [theme.breakpoints.up('lg')]: {
+      width: "100%",
+      // height:"219px",
+      marginLeft:"150px"
     },
     [theme.breakpoints.up('xl')]: {
-      width: "351px",
+      width: "401px",
       height:"219px",
       marginLeft:"110px"
     },
@@ -61,12 +61,12 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.between('lg', 'xl')]: {
       width: "40%",
-      padding: "0px 0px 0px 0px",
-      height: "fit-content"
+      padding: "10px 0px 10px 0px",
+      // height: "fit-content"
     },
     [theme.breakpoints.up('xl')]: {
       width: "40%",
-      padding: "0px 0px 0px 0px",
+      padding: "10px 10px 10px 10px",
     },
   }
   ,
@@ -156,8 +156,15 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Montserrat', sans-se",
     fontWeight: 500,
     fontSize: "14px",
+    textOverflow: "ellipsis",
+    overflow: "hidden",
+    whiteSpace: "normal",
+    WebkitLineClamp: 2,
+    display: "-webkit-box",
+    WebkitBoxOrient: "vertical",
     [theme.breakpoints.between('sm', 'md')]: {
-      fontSize: "15px"
+      fontSize: "15px",
+   
     },
     [theme.breakpoints.between('md', 'lg')]: {
       fontSize: "14px"
@@ -166,7 +173,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "16px"
     },
     [theme.breakpoints.up('xl')]: {
-      fontSize: "16px"
+      fontSize: "14px"
     },
   },
   author_div: {
@@ -201,7 +208,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "15px"
     },
     [theme.breakpoints.up('xl')]: {
-      fontSize: "15px"
+      fontSize: "14px"
     },
 
   },

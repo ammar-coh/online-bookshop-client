@@ -23,7 +23,8 @@ import RatingEditInputCell from './ratingEditInput'
 import Pagination from './customPagination'
 import { updateBookList,deleteBookFromList } from '../../redux/actions/index'
 import LinearProgress from '@mui/material/LinearProgress';
-import Loading from '../loading'
+import Loading from '../loading';
+import CustomNoResultsOverlay from "./customOverlay";
 const renderImageEditInputCell = (params) => {
 
   return <ImageEditInputCell {...params} />;
@@ -384,6 +385,12 @@ console.log(rows)
           display: "block",
           // height: "100%",
           width: '100%',
+          '& .MuiDataGrid-root': {
+            // height:{xl:'450px',lg:'450px',md:''},
+            height:rows.length >0 ?'auto':'450px', // Let the grid adjust height based on content
+            minHeight: '200px', // Set a minimum height
+            maxHeight: 'calc(100vh - 200px)', // 
+          },
           '& .actions': {
             color: 'text.secondary',
           },
@@ -429,8 +436,10 @@ console.log(rows)
           slots={{
             pagination: CustomPagination,
             loadingOverlay: LinearProgress,
+            noRowsOverlay: CustomNoResultsOverlay,
+
           }}
-          loading={allBooks?.length > 0 ? false : true}
+          loading={allBooks?.length > 0 ? false : false}
           slotProps={{
             toolbar: { setRows, setRowModesModel },
           }}

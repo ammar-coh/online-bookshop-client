@@ -5,6 +5,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
+import Box from "@material-ui/core/Box";
 import { Route, Switch, Link } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import CardContent from "@material-ui/core/CardContent";
@@ -64,8 +65,8 @@ function Item({ id, image, price, rating, author, title, description }) {
     localStorage.setItem("bookSearch", JSON.stringify(book))
   }
   return (
-
-    <Card className={classes.root}>
+<Box className={classes.root} >
+    <Card >
       <div className={classes.mainContainer}>
         <div className={classes.image_container}>
           <CardActionArea>
@@ -180,6 +181,7 @@ function Item({ id, image, price, rating, author, title, description }) {
         </div>
       </div>
     </Card>
+    </Box>
   );
 }
 
