@@ -74,10 +74,15 @@ function Item({ id, image, price, rating, author, title, description }) {
         lg: '100%',
         xl: '100%'
       },
-      // border: '1px solid red'
+    
     }}
      >
-          <Card  >
+          <Card style={{ 
+             backgroundColor:'#F0F0F0',
+             border: '1px solid #e0e0e0',
+             borderRadius:'15px',
+             boxShadow: '4px 4px 12px rgba(0, 0, 0, 0.15)'
+          }}  >
             <div className={classes.mainContainer}>
               <div className={classes.image_container}>
                 <CardActionArea>

@@ -96,26 +96,29 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     padding: "50px 0px 50px 0px",
 // border:'1px solid red',
-
+[theme.breakpoints.between('xs', 'sm')]: {
+  width: "100%",
+  gap: "50px",
+  padding: "50px 10px 50px 10px",
+},
 
     [theme.breakpoints.between('sm', 'md')]: {
       width: "100%",
       gap: "50px",
-      padding: "50px 0px 50px 0px",
+      padding: "50px 15px 50px 15px",
     },
     [theme.breakpoints.up('md')]: {
       width: "100%",
-      padding: "50px 0px 50px 0px",
-
+      padding: "50px 20px 50px 20px",
     },
     [theme.breakpoints.up('lg')]: {
       width: "100%",
       gap: "15px",
-      padding: "50px 0px 50px 0px",
+      padding: "50px 25px 50px 25px",
     },
     [theme.breakpoints.up('xl')]: {
       width: "100%",
-      padding: "50px 0px 50px 0px",
+      padding: "50px 25px 50px 25px",
       gap: "30px",
 
     },

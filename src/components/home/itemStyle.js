@@ -50,14 +50,48 @@ const useStyles = makeStyles((theme) => ({
   },
   image_container: {
     padding: "0px 10px 0px 0px",
-    // border:"1px solid green",
-    [theme.breakpoints.between('xs','sm')]: {
+    [theme.breakpoints.up('xs')]: {
       width: "40%",
       padding: "0px 0px 0px 0px",
       // height: "200px"
     },
-    [theme.breakpoints.between('sm', 'md')]: {
+    [theme.breakpoints.up(360)]: {
+      width: "35%",
+      padding: "0px 0px 0px 0px",
+      // height: "200px"
+    },
+    [theme.breakpoints.up(375)]: {
+      width: "30%",
+      padding: "0px 0px 0px 0px",
+      // height: "200px"
+    },
+    [theme.breakpoints.up(425)]: {
+      width: "30%",
+      padding: "0px 0px 0px 0px",
+      // height: "200px"
+    },
+    [theme.breakpoints.up(426)]: {
+      width: "25%",
+      padding: "0px 0px 0px 0px",
+      // height: "200px"
+    },
+    [theme.breakpoints.up(560)]: {
+      width: "18%",
+      padding: "0px 0px 0px 0px",
+      // height: "200px"
+    },
+    [theme.breakpoints.up('sm')]: {
       width: "20%",
+      padding: "0px 0px 0px 0px",
+      height: "fit-content"
+    },
+    [theme.breakpoints.up(820)]: {
+      width: "18%",
+      padding: "0px 0px 0px 0px",
+      height: "fit-content"
+    },
+       [theme.breakpoints.up(912)]: {
+      width: "30%",
       padding: "0px 0px 0px 0px",
       height: "fit-content"
     },
@@ -81,11 +115,34 @@ const useStyles = makeStyles((theme) => ({
     display: "grid",
     width: "70%",
     // border: "1px solid blue",
-    [theme.breakpoints.between('xs', 'sm')]: {
+    [theme.breakpoints.up('xs')]: {
       width: "60%",
     },
-    [theme.breakpoints.between('sm', 'md')]: {
+    [theme.breakpoints.up(360)]: {
+      width: "75%",
+    },
+    [theme.breakpoints.up(375)]: {
+      width: "70%",
+    },
+    [theme.breakpoints.up(425)]: {
       width: "80%",
+    },
+    [theme.breakpoints.up(426)]: {
+      width: "75%",
+    },
+    [theme.breakpoints.up(560)]: {
+      width: "82%",
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: "80%",
+    },
+    [theme.breakpoints.up(820)]: {
+      width: "82%",
+    
+    },
+    [theme.breakpoints.up(912)]: {
+      width: "70%",
+    
     },
     [theme.breakpoints.between('md', 'lg')]: {
       width: "70%",
@@ -103,11 +160,25 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     width: "100%",
-    height: "168px",
-    [theme.breakpoints.between('xs', 'sm')]: {
+    height: "188px",borderTopLeftRadius:'5px',
+    borderBottomLeftRadius:'5px',
+    [theme.breakpoints.up('xs')]: {
       width: "100%",
-      height: "225px",
+      height: "187px",
+      padding: "0px 0px 0px 4px",
+      marginTop: "0px",
     },
+    [theme.breakpoints.up(375)]: {
+      padding: "0px 0px 0px 4px",
+      marginTop:"0px",
+      height:'187px'
+    },
+    
+    [theme.breakpoints.between(425,'sm')]: {
+      width: "100%",
+      height: "187px",
+    },
+    
     [theme.breakpoints.between('sm', 'md')]: {
       width: "100%",
       height: "210px",
@@ -151,6 +222,9 @@ const useStyles = makeStyles((theme) => ({
     height: "35px",
     padding: "10px 0px 0px 0px",
     width:'100%', 
+    [theme.breakpoints.between('xs', 'sm')]: {
+      padding: "0px 0px 0px 3px",
+    },
     [theme.breakpoints.between('sm', 'md')]: {
       padding: "0px 0px 0px 3px",
     },
@@ -193,6 +267,9 @@ const useStyles = makeStyles((theme) => ({
   author_div: {
     // border:"1px solid blue",
     padding: "10px 0px 0px 0px",
+    [theme.breakpoints.between('xs', 'sm')]: {
+      padding: "0px 0px 0px 3px",
+    },
     [theme.breakpoints.between('sm', 'md')]: {
       padding: "10px 0px 0px 2px",
     },
@@ -229,6 +306,9 @@ const useStyles = makeStyles((theme) => ({
   rating_div: {
     // border: "1px solid black",
     padding: "10px 0px 0px 0px",
+    [theme.breakpoints.between('xs', 'sm')]: {
+      padding: "10px 0px 0px 3px",
+    },
     [theme.breakpoints.between('sm', 'md')]: {
       fontSize: "15px",
       padding: "5px 0px 0px 2px",
@@ -252,6 +332,9 @@ const useStyles = makeStyles((theme) => ({
   price_div: {
     // border: "1px solid green",
     padding: "10px 0px 10px 0px",
+    [theme.breakpoints.between('xs', 'sm')]: {
+      padding: "5px 0px 5px 3px",
+    },
     [theme.breakpoints.between('sm', 'md')]: {
       padding: "5px 0px 5px 5px",
     },
@@ -292,11 +375,18 @@ const useStyles = makeStyles((theme) => ({
     "& .MuiCardActions-root": {
       padding: "0px 0px 0px 0px"
     },
-    [theme.breakpoints.between('xs', 'sm')]: {
+    [theme.breakpoints.between('xs', 425)]: {
       padding: "0px 0px 0px 4px",
       marginTop:"0px",
-      height:'73px'
+      height:'61px'
     },
+   
+    [theme.breakpoints.between(425, 'sm')]: {
+      padding: "0px 0px 0px 4px",
+      marginTop:"0px",
+      height:'61px'
+    },
+   
     [theme.breakpoints.between('sm', 'md')]: {
       padding: "0px 0px 0px 4px",
       marginTop:"0px",
@@ -335,7 +425,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "16px",
       padding: "0px 0px",
       width:"100%",
-      height:"39px",
+      height:"29px",
     },
     [theme.breakpoints.between('sm', 'md')]: {
       fontSize: "16px",
